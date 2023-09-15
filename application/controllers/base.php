@@ -231,7 +231,7 @@ class Base extends CI_Controller
 				$caracteresSeguros = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%^&*';
 				// ()_+[]{}|;:,.<>?
 			
-				$longitud = 12; // Cambia la longitud de la contraseña según tus necesidades
+				$longitud = 8; // Cambia la longitud de la contraseña según tus necesidades
 				$contrasena = '';
 			
 				for ($i = 0; $i < $longitud; $i++) {
@@ -339,6 +339,16 @@ $mail->Body = sprintf('<h1>%s</h1><br><p>%s</p><p>Cuenta de usuario: %s</p><p>Co
 					// redirect('base/index');
 					// redirect('base/emple', 'refresh'); // Cambia 'base/index' a la URL deseada en caso de error
 				}
+		
+		$dataUsuario['login'] = $_POST['primerApellido'];
+$dataUsuario['password'] = $_POST['segundoApellido'];
+	
+		
+		
+		
+		
+
+		$this->usuario_model->agregarusuario($dataUsuario);
 		redirect('base/emple', 'refresh');
 	}
 	public function modificar()
