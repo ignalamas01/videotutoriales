@@ -228,7 +228,8 @@ class Base extends CI_Controller
 		
 			// Función para generar una contraseña aleatoria de 8 dígitos
 			function generarContrasenaAleatoria() {
-				$caracteresSeguros = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+[]{}|;:,.<>?';
+				$caracteresSeguros = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%^&*';
+				// ()_+[]{}|;:,.<>?
 			
 				$longitud = 12; // Cambia la longitud de la contraseña según tus necesidades
 				$contrasena = '';
@@ -299,7 +300,7 @@ class Base extends CI_Controller
 					// Configurar el remitente y destinatario
 					$mail->setFrom($email, 'CEPRA');
 					$mail->addReplyTo('bikeracealvaro@gmail.com', 'ALVARO UGARTE');
-					$mail->addAddress($para, 'John Doe');
+					$mail->addAddress($para, 'ALVARO UGARTE');
 			
 					// Asunto del correo
 					$mail->Subject = $asunto;
@@ -308,10 +309,20 @@ class Base extends CI_Controller
 					$mail->IsHTML(true);
 					$mail->CharSet = 'UTF-8';
 					// $mail->Body = sprintf('<h1>El mensaje es:</h1><br><p>%s</p>', $contenido);
-					$mail->Body = sprintf('<h1>El mensaje es:</h1><br><p>%s</p><p>Cuenta de usuario: %s</p><p>Contraseña: %s</p>', $contenido, $usuario, $contrasena);
+					
+$asunto = "Nueva cuenta de usuario en CEPRA";
+
+// Contenido del correo (puedes personalizar esto según tus necesidades):
+$contenido = "Estimado usuario, le informamos que se ha creado una nueva cuenta para usted en el sistema CEPRA.";
+
+// Supongamos que $usuario y $contrasena son las variables donde tienes almacenados el nombre de usuario y la contraseña generados automáticamente.
+
+$mail->Subject = $asunto;
+$mail->Body = sprintf('<h1>%s</h1><br><p>%s</p><p>Cuenta de usuario: %s</p><p>Contraseña: %s</p>', $asunto, $contenido, $usuario, $contrasena);
+					
 			
 					// Texto alternativo
-					$mail->AltBody = 'No olvides suscribirte a nuestro canal.';
+					// $mail->AltBody = 'No olvides suscribirte a nuestro canal.';
 			
 					// Enviar el correo
 					if (!$mail->send()) {
