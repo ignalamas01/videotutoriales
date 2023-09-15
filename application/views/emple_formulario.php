@@ -71,6 +71,18 @@
                                     <label for="exampleInputPassword1">SEGUNDO APELLIDO</label>
                                     <input type="text" name="segundoApellido" placeholder="escriba su segundo apellido" class="form-control"><br>
                                 </div>
+                                <label for="newEmail">Correo Electrónico</label>
+    <input type="email" id="destinatario" name="destinatario" placeholder="Escriba su correo electrónico" class="form-control" required>
+</div>
+<div class="form group">
+                <label class="form-label" for="asunto">Asunto del correo</label>
+                <input type="text" class="form-control" name="asunto" id="asunto" placeholder="El asunto del correo electrónico">
+              </div>
+              <div class="form group">
+                <label class="form-label" for="contenido">Mensaje</label>
+                <input type="text" class="form-control" name="contenido" id="contenido" placeholder="Escribe aquí...">
+              </div>
+
                                 <div class="row">
                                     <div class="col-4">
                                         <div class="form-group">
