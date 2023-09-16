@@ -275,20 +275,36 @@ class Cursos extends CI_Controller
 
 
 	}
-	public function subir_archivo()
+	public function subir_video()
 	{
 		// $this->load->view('inc/cabecera');
 		// $this->load->view('inc/menu');
 		// $this->load->view('inc/menulateral');
-		 $this->load->view('subir_archivo');
+		$this->load->view('subir_video');
 		// $this->load->view('inc/pie');
 	}
-	public function listavideo()
+	public function listar_videos()
 	{
 		// $this->load->view('inc/cabecera');
 		// $this->load->view('inc/menu');
 		// $this->load->view('inc/menulateral');
-		 $this->load->view('listavideo');
+		$this->load->view('listar_videos');
+		// $this->load->view('inc/pie');
+	}
+	public function ver_videos()
+	{
+		// $this->load->view('inc/cabecera');
+		// $this->load->view('inc/menu');
+		// $this->load->view('inc/menulateral');
+		$this->load->view('ver_videos');
+		// $this->load->view('inc/pie');
+	}
+	public function mostrar_video()
+	{
+		// $this->load->view('inc/cabecera');
+		// $this->load->view('inc/menu');
+		// $this->load->view('inc/menulateral');
+		$this->load->view('mostrar_video');
 		// $this->load->view('inc/pie');
 	}
 	

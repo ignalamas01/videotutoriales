@@ -37,7 +37,7 @@
               <div>   
                 <a href="<?php echo base_url(); ?>index.php/cursos/agregar"> <button type="button" class="btn btn-danger">AGREGAR CURSOS</button> </a>
                 <a href="<?php echo base_url(); ?>index.php/cursos/deshabilitados"> <button type="button" class="btn btn-primary">VER LISTA DE CURSOS DESHABILITADOS</button> </a>
-                <a href="<?php echo base_url(); ?>index.php/cursos/subir_archivo"> <button type="button" class="btn btn-danger">LISTA DE VIDEOS</button> </a>
+                <a href="<?php echo base_url(); ?>index.php/cursos/subir_video"> <button type="button" class="btn btn-danger">LISTA DE VIDEOS</button> </a>
                 <!-- <a href="<?php echo base_url(); ?>index.php/usuarios/logout"> <button type="button" class="btn btn-danger">CERRAR SESION</button> </a> -->
               </div>
               

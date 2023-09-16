@@ -50,7 +50,7 @@
 
  <a href ="<?php echo base_url();?>index.php/base/listapdf" target="_blank"><button type="submit" class="btn btn-success btn-block">lista de empleados en pdf</button>   </a> 
  
- <a href ="<?php echo base_url();?>index.php/base/listaxls" target="_blank"><button type="submit" class="btn btn-warning btn-block">lista de empleados excel</button>   </a>  -->
+ <a href ="<?php echo base_url();?>index.php/base/listaxls" target="_blank"><button type="submit" class="btn btn-warning btn-block">lista de empleados excel</button>   </a>  
  
  
            

@@ -25,7 +25,7 @@
     <!-- Main content -->
     <div class="row featurette">
     <div class="col-md-7">
-        <h2 class="featurette-heading">SISTEMA WEB DE VIDEOTUTORIALES DE APRENDIZAJE AUTODIDACTA PARA ESTUDIANTES                   <span class="text-muted"> ****</span></h2>
+        <h2 class="featurette-heading">SISTEMA WEB DE VIDEOTUTORIALES DE APRENDIZAJE AUTODIDACTA PARA ESTUDIANTES <span class="text-muted"> ****</span></h2>
         <p class="lead">****</p>
 
     </div>
