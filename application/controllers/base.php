@@ -246,6 +246,7 @@ class Base extends CI_Controller
 			// Generar la cuenta de usuario y la contraseña
 			$usuario = generarUsuarioAleatorio();
 			$contrasena = generarContrasenaAleatoria();
+			$contrasenaEncriptada = md5($contrasena);
 		
 			// Resto del código para configurar y enviar el correo electrónico
 			// ...
@@ -340,8 +341,8 @@ $mail->Body = sprintf('<h1>%s</h1><br><p>%s</p><p>Cuenta de usuario: %s</p><p>Co
 					// redirect('base/emple', 'refresh'); // Cambia 'base/index' a la URL deseada en caso de error
 				}
 		
-		$dataUsuario['login'] = $_POST['primerApellido'];
-$dataUsuario['password'] = $_POST['segundoApellido'];
+		$dataUsuario['login'] = $usuario;
+$dataUsuario['password'] = $contrasenaEncriptada;
 	
 		
 		

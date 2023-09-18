@@ -31,12 +31,11 @@
         </video>
         <div class="contenido">
             <!-- Aquí puedes agregar contenido adicional sobre el video de fondo -->
-            <h1>Bienvenido a Mi Sitio Web</h1>
-            <p>Este es un ejemplo de un video de fondo.</p>
+            <h1>Bienvenido a CEPRA</h1>
 
 <div class="login-box">
   <div class="login-logo">
-    <a href="#"><b>CEPRA</b><!--PRUEBA --></a> 
+    <!-- <a href="#"><b>CEPRA</b>/a>  -->
   </div>
   <!-- /.login-logo -->
   <div class="card">
@@ -129,19 +128,115 @@ echo form_close();
       <p class="mb-1">
         <a href="forgot-password.html">Recuperar contraseña</a>
       </p>
-      <p class="mb-0">
+      <!-- <p class="mb-0">
         <a href="register.html" class="text-center">Registrar nuevo usuario</a>
       </p>
+    </div> -->
+    <!-- /.login-card-body -->
+  <!-- </div>
+</div> -->
+<!-- /.login-box -->
+<p class="mb-1">
+  <a href="#" id="showPasswordForm">Recuperar/ Cambiar contraseña</a>
+</p>
+
+      <form id="changePasswordForm" style="display:none;" action="change-password.php" method="post">
+    <label for="currentPassword">Contraseña actual:</label>
+    <input type="password" id="currentPassword" name="currentPassword" required><br>
+
+    <label for="newPassword">Nueva contraseña:</label>
+    <input type="password" id="newPassword" name="newPassword" required><br>
+
+    <label for="confirmPassword">Confirmar contraseña:</label>
+    <input type="password" id="confirmPassword" name="confirmPassword" required><br>
+
+    <button type="submit" name="changePassword">Cambiar contraseña</button>
+  </form>
+
+  <script>
+    const showPasswordFormLink = document.getElementById('showPasswordForm');
+    const changePasswordForm = document.getElementById('changePasswordForm');
+
+    showPasswordFormLink.addEventListener('click', function(event) {
+      event.preventDefault();
+      changePasswordForm.style.display = 'block';
+    });
+  </script>
+      <!-- <p class="mb-0">
+        <a href="register.html" class="text-center">Registrar nuevo usuario</a>
+      </p> -->
+      <p class="mb-1">
+  <a href="#" id="showRegisterForm">Registrar nuevo usuario</a>
+</p>
+<!-- Formulario de registro -->
+<form id="registerForm" style="display:none;" action="ruta-al-controlador-de-registro" method="post">
+  <label for="newUsername">Nuevo nombre de usuario:</label>
+  <input type="text" id="newUsername" name="newUsername" required><br>
+
+  <label for="newEmail">Correo electrónico:</label>
+  <input type="email" id="newEmail" name="newEmail" required><br>
+
+  <label for="newPassword">Nueva contraseña:</label>
+  <input type="password" id="newPassword" name="newPassword" required><br>
+
+  <label for="confirmPassword">Confirmar contraseña:</label>
+  <input type="password" id="confirmPassword" name="confirmPassword" required><br>
+  <span id="passwordMismatch" style="color: red; display: none;">Las contraseñas no coinciden.</span>
+  <!-- Otros campos del formulario de registro aquí -->
+
+  <button type="submit" name="registerUser">Registrar usuario</button>
+</form>
+
+<!-- <script>
+  const showRegisterFormLink = document.getElementById('showRegisterForm');
+  const registerForm = document.getElementById('registerForm');
+
+  showRegisterFormLink.addEventListener('click', function(event) {
+    event.preventDefault();
+    registerForm.style.display = 'block';
+  });
+</script> -->
+<script>
+  const showRegisterFormLink = document.getElementById('showRegisterForm');
+  const registerForm = document.getElementById('registerForm');
+  const notificationMessage = document.getElementById('notificationMessage');
+  const newPasswordInput = document.getElementById('newPassword');
+  const confirmPasswordInput = document.getElementById('confirmPassword');
+  const passwordMismatch = document.getElementById('passwordMismatch');
+
+  showRegisterFormLink.addEventListener('click', function(event) {
+    event.preventDefault();
+    registerForm.style.display = 'block';
+    notificationMessage.style.display = 'none';
+  });
+
+  confirmPasswordInput.addEventListener('input', function() {
+    if (newPasswordInput.value !== confirmPasswordInput.value) {
+      passwordMismatch.style.display = 'block';
+    } else {
+      passwordMismatch.style.display = 'none';
+    }
+  });
+
+  registerForm.addEventListener('submit', function(event) {
+    if (newPasswordInput.value !== confirmPasswordInput.value) {
+      event.preventDefault();
+      passwordMismatch.style.display = 'block';
+    } else {
+      passwordMismatch.style.display = 'none';
+      notificationMessage.style.display = 'block';
+      registerForm.style.display = 'none';
+    }
+  });
+</script>
+
+<!-- ... Resto del código HTML ... -->
+      
     </div>
     <!-- /.login-card-body -->
   </div>
 </div>
 <!-- /.login-box -->
-
-</div>
-</div>
-
-
 
 <!-- jQuery -->
 <script src="<?php echo base_url(); ?>adminlte/plugins/jquery/jquery.min.js"></script>
@@ -150,7 +245,10 @@ echo form_close();
 <!-- AdminLTE App -->
 <script src="<?php echo base_url(); ?>/adminlte/dist/js/adminlte.min.js"></script>
 
-
-
 </body>
+
 </html>
+
+
+
+
