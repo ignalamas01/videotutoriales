@@ -277,7 +277,7 @@ class Cursos extends CI_Controller
 	}
 	public function subir_video()
 	{
-		// $this->load->view('inc/cabecera');
+		 $this->load->view('inc/cabecera');
 		// $this->load->view('inc/menu');
 		// $this->load->view('inc/menulateral');
 		$this->load->view('subir_video');
@@ -285,7 +285,7 @@ class Cursos extends CI_Controller
 	}
 	public function listar_videos()
 	{
-		// $this->load->view('inc/cabecera');
+		$this->load->view('inc/cabecera');
 		// $this->load->view('inc/menu');
 		// $this->load->view('inc/menulateral');
 		$this->load->view('listar_videos');
@@ -293,7 +293,7 @@ class Cursos extends CI_Controller
 	}
 	public function ver_videos()
 	{
-		// $this->load->view('inc/cabecera');
+		 $this->load->view('inc/cabecera');
 		// $this->load->view('inc/menu');
 		// $this->load->view('inc/menulateral');
 		$this->load->view('ver_videos');
@@ -301,11 +301,13 @@ class Cursos extends CI_Controller
 	}
 	public function mostrar_video()
 	{
-		// $this->load->view('inc/cabecera');
+        
+		//$this->load->view('inc/cabecera');
 		// $this->load->view('inc/menu');
 		// $this->load->view('inc/menulateral');
-		$this->load->view('mostrar_video');
+		   $this->load->view('mostrar_video');
 		// $this->load->view('inc/pie');
+		
 	}
 	
 

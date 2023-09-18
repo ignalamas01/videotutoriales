@@ -19,9 +19,12 @@
 
   <link rel="stylesheet" href="<?php echo base_url(); ?>adminlte/dist/css/estilos.css">
 
-  
-  
 </head>
+
+<a href="<?php echo base_url(); ?>index.php/system/index" class="brand-link" >
+      <img src="<?php echo base_url(); ?>/adminlte/dist/img/logo_cepra.jpeg" alt="AdminLTE Logo"  class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">CEPRA</span>
+    </a>
 <body class="hold-transition login-page">
   
 <div class="video-container">
@@ -32,7 +35,7 @@
         <div class="contenido">
             <!-- Aquí puedes agregar contenido adicional sobre el video de fondo -->
             <h1>Bienvenido a Mi Sitio Web</h1>
-            <p>Este es un ejemplo de un video de fondo.</p>
+            
 
 <div class="login-box">
   <div class="login-logo">
@@ -153,4 +156,5 @@ echo form_close();
 
 
 </body>
+
 </html>
