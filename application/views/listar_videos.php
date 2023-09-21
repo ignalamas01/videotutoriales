@@ -25,10 +25,12 @@ function eliminarVideo(nombreVideo) {
             if ($video !== "." && $video !== "..") {
                 //echo '<li><a href="mostrar_video.php?nombre=' . urlencode($video) . '">' . $video . '</a></li>';
                 echo '<li><a href="' . base_url('index.php/cursos/mostrar_video') . '?nombre=' . urlencode($video) . '">' . $video . '</a></li>';
+               // echo '<source src="' . base_url('index.php/cursos/mostrar_video') . '?nombre=' . urlencode($video) . '" type="video/mp4">';
                 //echo '<li><a href="' . base_url('index.php/cursos/mostrar_video/') . urlencode($video) . '">' . $video . '</a></li>';
                 //para editar
-                echo '<li><a href="' . base_url('index.php/cursos/editar_video/') . urlencode($video) . '">Renombrar video</a></li>';
-                //echo '<li><a href="' . base_url('index.php/cursos/editar_video') . '?nombre=' . urlencode($video) . '">' . $video . '</a>renombrar video</li>';
+                //echo '<li><a href="' . base_url('index.php/cursos/editar_video/') . urlencode($video) . '">Renombrar video</a></li>';
+                echo '<li><a href="' . base_url('index.php/cursos/editar_video') . '?nombre=' . urlencode($video) . '">Renombrar video</a></li>';
+                
                 
                 // echo '<li><a href="' . base_url() . 'index.php/cursos/mostrar_video.php?nombre=' . urlencode($video) . '">' renombrar video '</a></li>';
                 

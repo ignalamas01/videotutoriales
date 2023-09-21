@@ -1,6 +1,6 @@
 <h2>Listar Videos</h2>
 <br>
-    <a href="<?php echo base_url(); ?>index.php/cursos/listar_videos">Volver a la lista de videos</a>
+    <a href="<?php echo base_url(); ?>index.php/cursos/subir_video">subir otro video</a>
     <ul>
         <?php
         $video_directory = "uploads/video/";

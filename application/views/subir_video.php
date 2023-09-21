@@ -1,11 +1,11 @@
-<body>
-<h2>Subir Video</h2>
+
+<h2>Subir Videos</h2>
 <div>   
-                <a href="<?php echo base_url(); ?>index.php/cursos/cursos"> <button type="button" class="btn btn-danger">VOLVER CURSOS</button> </a>
+    <a href="<?php echo base_url(); ?>index.php/cursos/cursos"> <button type="button" class="btn btn-danger">VOLVER A CURSOS</button> </a>
                 
                 
-                <!-- <a href="<?php echo base_url(); ?>index.php/usuarios/logout"> <button type="button" class="btn btn-danger">CERRAR SESION</button> </a> -->
-              </div>
+     <!-- <a href="<?php echo base_url(); ?>index.php/usuarios/logout"> <button type="button" class="btn btn-danger">CERRAR SESION</button> </a> -->
+</div>
 ---------------------------------------------------------
  <br> 
  <!DOCTYPE html>

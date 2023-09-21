@@ -1,7 +1,11 @@
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>Mostrar Video</title>
+    <a href="<?php echo base_url(); ?>index.php/cursos/listar_videos">Volver a la lista de videos</a>
+    <a href="<?php echo base_url(); ?>index.php/cursos/ver_videos">ver todos los videos</a>
+    <h2>Mostrar Video</h2>
 </head>
 <script>
 function eliminarVideo(nombreVideo) {
@@ -11,8 +15,7 @@ function eliminarVideo(nombreVideo) {
 }
 </script>
 <body>
-<a href="<?php echo base_url(); ?>index.php/cursos/listar_videos">Volver a la lista de videos</a>
-    <h2>Mostrar Video</h2>
+
     
     
     <?php
@@ -26,7 +29,11 @@ function eliminarVideo(nombreVideo) {
             
             echo '<video width="640" height="480" controls>';
             
-            echo '<source src="' . $video_path . '" type="video/mp4">';
+            //echo '<source src="' . $video_path . '" type="video/mp4">';
+            
+            //echo '<source src="' . base_url('index.php/cursos/mostrar_video') . '?nombre=' . urlencode($nombre_video) . '" type="video/mp4">';
+            echo '<source src="' . base_url('uploads/video/' . $nombre_video) . '" type="video/mp4">';
+
             //echo '<source src="' . $video_path . '" type="video/mp4">';
            // echo '<source src="' . $video_path . '" type="video/mp4">'; para agregar otro formato
            
@@ -62,7 +69,8 @@ if (isset($_GET["nombre"])) {
             echo '<br>';
             echo '<a href="#" onclick="eliminarVideo(\'' . urlencode($nombre_video) . '\')"> ELIMINAR VIDEO</a>';
             echo '<br>';
-            echo '<a href="ver_videos.php">ver todos los videos</a>';
+           // echo '<a href="ver_videos.php">ver todos los videos</a>';
+            
         }
     } else {
         echo "El video no existe.";
