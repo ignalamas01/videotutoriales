@@ -84,7 +84,7 @@
      <ol class="breadcrumb float-sm-right" style=" background-color: <?php echo $colorFondo; ?>">
         <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/base/index">Home</a></li>
         <li class="breadcrumb-item active">DataTables</li>
-        <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/usuarios/logout">Registrate</a></li>
+        <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/registro/registrar">Registrate</a></li>
         <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/usuarios/logout">Iniciar sesion</a></li>
            
             

@@ -2,7 +2,9 @@
 <h2>Subir Videos</h2>
 <div>   
     <a href="<?php echo base_url(); ?>index.php/cursos/cursos"> <button type="button" class="btn btn-danger">VOLVER A CURSOS</button> </a>
-                
+    <a href="<?php echo base_url(); ?>index.php/cursos/listar_videos"><button type="button" class="btn btn-danger">ver lista de videos</button></a>
+    <a href="<?php echo base_url(); ?>index.php/cursos/ver_videos"><button type="button" class="btn btn-warning">videos</button>  </a>
+    <br>           
                 
      <!-- <a href="<?php echo base_url(); ?>index.php/usuarios/logout"> <button type="button" class="btn btn-danger">CERRAR SESION</button> </a> -->
 </div>
@@ -15,14 +17,13 @@
 </head>
 <body>
     
-    <form action="<?php echo base_url(); ?>index.php/cursos/subir_video" method="POST" enctype="multipart/form-data">
+    <form id="formularioSubida" action="<?php echo base_url(); ?>index.php/cursos/subir_video" method="POST" enctype="multipart/form-data">
         
         <input type="file" name="video" accept="video/*" required>
         <input type="submit" value="Subir Video">
     </form>
+    
     <br>
-    <a href="<?php echo base_url(); ?>index.php/cursos/listar_videos"><button type="button" class="btn btn-danger">ver lista de videos</button></a>
-    <a href="<?php echo base_url(); ?>index.php/cursos/ver_videos"><button type="button" class="btn btn-warning">videos</button>  </a>
     
 <?php
 $video_directory = "uploads/video/";
@@ -40,32 +41,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["video"])) {
             echo "Hubo un error al subir el video.";
         }
     } else {
-        echo "Solo se permiten archivos MP4.";
+        echo "Solo se permiten archivos MP4";
     }
 }
 ?>
 
 
-   
-
-</body>
-</html>
-
-
-
-
 <br>
-<br>
----------------------------------------------------------------
-<br>
-   
-    
 
-
-    
 
     <h1>Bienvenido a Mi Sitio Web</h1>
-<ul>
+<ul >
     <!-- Inserta aquí el reproductor de video -->
     <video width="640" height="360" controls>
         
@@ -76,19 +62,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["video"])) {
     
 <!-- falta editar y eliminar  -->
     
-     <button onclick="mostrarVideo()">Ver Video</button>
+    <button onclick="mostrarVideo()">Ver Video</button>
 
     <!-- Contenedor oculto para el video -->
     <div id="videoContainer" style="display: none;">
         <video width="640" height="360" controls>
-            <source src="<?php echo base_url(); ?>uploads/video/2.mp4" type="video/mp4">
+             <source src="<?php echo base_url(); ?>uploads/video/2.mp4" type="video/mp4"> 
             Tu navegador no admite la reproducción de video.
+            
         </video>
+        
         
     </div>
     
     
-<div>
 <div>   
     <ul>
       <?php
@@ -104,6 +91,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["video"])) {
                 echo '<video width="320" height="240" controls>';
                
                 echo '<source src="' . $video_url . '" type="video/mp4">';
+                //echo '<source src="' . $video_url . '" type="video/x-ms-wmv">';
+                echo '<source src="' . $video_url . '" type="video/wmv">';
 
             
 
@@ -114,6 +103,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["video"])) {
                 echo "</li>";
             }
         }
+        
     ?>
         
     </ul>
@@ -127,6 +117,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["video"])) {
             var videoContainer = document.getElementById("videoContainer");
             videoContainer.style.display = "block";
         }
+    </script>
+    
+    
+  
+    <script>
+        document.getElementById('formularioSubida').addEventListener('submit', function (event) {
+            var inputFile = document.querySelector('input[type="file"]');
+            if (inputFile && inputFile.files.length > 0) {
+                var fileSize = inputFile.files[0].size; // Tamaño en bytes
+                var maxSize = 41943040; // 40 MB en bytes
+
+                if (fileSize > maxSize) {
+                    alert("El archivo seleccionado es demasiado grande. El tamaño máximo permitido es de 40 MB.");
+                    event.preventDefault(); // Detiene el envío del formulario
+                }
+            }
+        });
     </script>
 
 

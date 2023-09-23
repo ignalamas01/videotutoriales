@@ -15,6 +15,9 @@
                 echo '<video width="320" height="240" controls>';
                
                 echo '<source src="' . $video_url . '" type="video/mp4">';
+               // echo '<source src="' . $video_url . '" type="video/wmv">';
+                echo '<source src="' . $video_url . '" type="video/x-ms-wmv">';
+                
 
                  //echo '<source src="' . $video_directory . $video . '" type="video/mp4">'; RUTA ANTIGUA
                  //RUTA CORRECTA

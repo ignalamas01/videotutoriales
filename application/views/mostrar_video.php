@@ -33,6 +33,9 @@ function eliminarVideo(nombreVideo) {
             
             //echo '<source src="' . base_url('index.php/cursos/mostrar_video') . '?nombre=' . urlencode($nombre_video) . '" type="video/mp4">';
             echo '<source src="' . base_url('uploads/video/' . $nombre_video) . '" type="video/mp4">';
+            
+            echo '<source src="' . base_url('uploads/video/' . $nombre_video) . '" type="video/wmv">';
+            
 
             //echo '<source src="' . $video_path . '" type="video/mp4">';
            // echo '<source src="' . $video_path . '" type="video/mp4">'; para agregar otro formato
