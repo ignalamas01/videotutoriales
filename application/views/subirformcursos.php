@@ -76,27 +76,7 @@
 
 
                         </form>
-                        <form>
-                            <div class="card-body">
-                                <div class="form-group">
-                                    <input type="file" name="idCursos" accept=".mp4, .avi, .mov, .wmv, .mkv, .flv, .webm" value="<?php echo $id; ?>">
-                                    <!-- <input type="file" name="video" accept=".mp4, .avi, .mov, .wmv, .mkv, .flv, .webm"> -->
-                                    
-                                    
-                                </div>
-                                
-                                <div class="form-group">
-                                    
-                                    <input type="file" name="userfile" class="form-control">
-                                </div>
-                                
-         
-
-                            </div>
-                            <!-- /.card-body -->
-
-
-                        </form>
+                        
                     </div>
                     <!-- /.card -->
                     <div class="card-footer">

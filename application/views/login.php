@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,19 +24,21 @@
       <img src="<?php echo base_url(); ?>/adminlte/dist/img/logo_cepra.jpeg" alt="AdminLTE Logo"  class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">CEPRA</span>
     </a>
-<body class="hold-transition login-page">
-  
+<body   class="hold-transition login-page">
+  <!-- stylo para agregar imagen -->
+<!-- style="background-image: url('<?php echo base_url(); ?>uploads/imgenes/fondo.jpg'); background-size: cover;" -->
 <div class="video-container">
         <video autoplay loop muted>
-            <source src="<?php echo base_url(); ?>uploads/video/interfaz.mp4" type="video/mp4">
+            <source src="<?php echo base_url(); ?>uploads/video/video1.mp4" type="video/mp4">
             Tu navegador no admite la reproducción de video.
         </video>
         <div class="contenido">
             <!-- Aquí puedes agregar contenido adicional sobre el video de fondo -->
-            <h1>Bienvenido a Mi Sitio Web</h1>
+            <!-- <h1>Bienvenido a Mi Sitio Web</h1> -->
+            
             
 
-<div class="login-box">
+<div  class="login-box">
   <div class="login-logo">
     <a href="#"><b>CEPRA</b><!--PRUEBA --></a> 
   </div>

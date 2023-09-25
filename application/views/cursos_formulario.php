@@ -71,6 +71,7 @@
                                     <label for="exampleInputPassword1">VIDEO</label>
                                     <input type="text" name="video" placeholder="subir video" class="form-control"><br>
                                 </div>
+                                
                                 <!-- <div class="row">
                                     <div class="col-4">
                                         <div class="form-group">

@@ -29,12 +29,14 @@ function eliminarVideo(nombreVideo) {
                 //echo '<li><a href="' . base_url('index.php/cursos/mostrar_video/') . urlencode($video) . '">' . $video . '</a></li>';
                 //para editar
                 //echo '<li><a href="' . base_url('index.php/cursos/editar_video/') . urlencode($video) . '">Renombrar video</a></li>';
-                echo '<li><a href="' . base_url('index.php/cursos/editar_video') . '?nombre=' . urlencode($video) . '">Renombrar video</a></li>';
+               
+              //  echo '<a href="' . base_url('index.php/cursos/editar_video') . '?nombre=' . urlencode($video) . '">Renombrar video</a>';
                 
                 
                 // echo '<li><a href="' . base_url() . 'index.php/cursos/mostrar_video.php?nombre=' . urlencode($video) . '">' renombrar video '</a></li>';
                 
-                
+                //echo '<a href="' . base_url('index.php/cursos/eliminar_video') . '?nombre=' . urlencode($video) . '" onclick="return confirm(\'¿Seguro que deseas eliminar el video?\')">Eliminar video</a>';
+
                 
                 //echo '<li><a href="editar_video.php?nombre=' . urlencode($video) . '">renombrar video</a></li>';
                 

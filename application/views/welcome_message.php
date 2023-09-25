@@ -106,7 +106,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 		<div id="body">
 			<br>
-			<p>PROYECTO y DISEÑO de PROGRAMCION </p>
+			<p>PROYECTO y DISEÑO de PROGRAMACION </p>
 
 			<p>If you would like to edit this page you'll find it located at:</p>
 			<code>application/views/welcome_message.php</code>

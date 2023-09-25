@@ -1,7 +1,37 @@
-<h2>Listar Videos</h2>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Listado de Videos</title>
+    <style>
+        /* Estilo para la cuadrícula de videos */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+            list-style: none;
+            padding: 0;
+        }
+
+        .video-item {
+            text-align: center;
+        }
+
+        .video-item video {
+            width: 100%;
+            height: auto;
+        }
+
+        .video-item a {
+            display: block;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<h2>Ver Videos</h2>
 <br>
-    <a href="<?php echo base_url(); ?>index.php/cursos/subir_video">subir otro video</a>
-    <ul>
+<a href="<?php echo base_url(); ?>index.php/cursos/subir_video">subir otro video</a>
+    <ul class="video-grid">
         <?php
         $video_directory = "uploads/video/";
 
@@ -16,21 +46,15 @@
                
                 echo '<source src="' . $video_url . '" type="video/mp4">';
                // echo '<source src="' . $video_url . '" type="video/wmv">';
-                echo '<source src="' . $video_url . '" type="video/x-ms-wmv">';
-                
-
-                 //echo '<source src="' . $video_directory . $video . '" type="video/mp4">'; RUTA ANTIGUA
-                 //RUTA CORRECTA
-                // if ($video !== "." && $video !== "..") {
-                //     $video_url = base_url() . $video_directory . $video;
-                //     echo '<source src="' . $video_url . '" type="video/mp4">';
-                // }
+               // echo '<source src="' . $video_url . '" type="video/x-ms-wmv">';
+            
                
 
                 echo 'Tu navegador no soporta la reproducción de video.';
                 echo '</video>';
                 echo '<br>';
-                echo "<a href='eliminar_video.php?nombre=" . urlencode($video) . "'>Eliminar</a>";
+                //echo "<a href='eliminar_video.php?nombre=" . urlencode($video) . "'>Eliminar</a>";
+                
                 echo "</li>";
             }
         }

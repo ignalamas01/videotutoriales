@@ -46,9 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["video"])) {
 }
 ?>
 
-
 <br>
-
 
     <h1>Bienvenido a Mi Sitio Web</h1>
 <ul >
@@ -60,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["video"])) {
     </video>
 </ul>
     
-<!-- falta editar y eliminar  -->
+
     
     <button onclick="mostrarVideo()">Ver Video</button>
 
@@ -99,7 +97,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["video"])) {
                 echo 'Tu navegador no soporta la reproducción de video.';
                 echo '</video>';
                 echo '<br>';
-                echo "<a href='eliminar_video.php?nombre=" . urlencode($video) . "'>Eliminar</a>";
+                //echo "<a href='eliminar_video.php?nombre=" . urlencode($video) . "'>Eliminar</a>";
                 echo "</li>";
             }
         }
