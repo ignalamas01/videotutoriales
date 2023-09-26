@@ -1,7 +1,7 @@
 
 <h2>Subir Videos</h2>
 <div>   
-    <a href="<?php echo base_url(); ?>index.php/cursos/cursos"> <button type="button" class="btn btn-danger">VOLVER A CURSOS</button> </a>
+    <a href="<?php echo base_url(); ?>index.php/cursos/cursos"> <button type="button" class="btn btn-danger"><--VOLVER A CURSOS</button> </a>
     <a href="<?php echo base_url(); ?>index.php/cursos/listar_videos"><button type="button" class="btn btn-danger">ver lista de videos</button></a>
     <a href="<?php echo base_url(); ?>index.php/cursos/ver_videos"><button type="button" class="btn btn-warning">videos</button>  </a>
     <br>           
@@ -10,10 +10,38 @@
 </div>
 ---------------------------------------------------------
  <br> 
- <!DOCTYPE html>
-<html>
+
 <head>
     <title>Subir Video</title>
+    <style>
+        /* Estilo para la cuadrícula de videos */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+            list-style: none;
+            padding: 0;
+        }
+
+        .video-item {
+            text-align: center;
+        }
+
+        .video-item video {
+            width: 100%;
+            height: auto;
+        }
+
+        .video-item a {
+            display: block;
+            margin-top: 10px;
+        }
+    </style>
+      <style>
+        body {
+            background-color: #CCC; /* Aquí puedes especificar el color que desees utilizando el código hexadecimal, nombre de color o RGB */
+        }
+    </style>
 </head>
 <body>
     
@@ -45,7 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["video"])) {
     }
 }
 ?>
-
+<br>
 <br>
 
     <h1>Bienvenido a Mi Sitio Web</h1>
@@ -75,7 +103,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["video"])) {
     
     
 <div>   
-    <ul>
+    <ul class="video-grid">
       <?php
         $video_directory = "uploads/video/";
 

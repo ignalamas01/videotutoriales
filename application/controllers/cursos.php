@@ -278,7 +278,7 @@ class Cursos extends CI_Controller
 	public function subir_video()
 	{
 		 $this->load->view('inc/cabecera');
-		// $this->load->view('inc/menu');
+		 //$this->load->view('inc/menu');
 		// $this->load->view('inc/menulateral');
 		$this->load->view('subir_video');
 		// $this->load->view('inc/pie');

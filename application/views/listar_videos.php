@@ -2,18 +2,16 @@
 <html>
 <head>
     <title>Listar y Mostrar Videos</title>
+    <style>
+        body {
+            background-color: #CCC; /* Aquí puedes especificar el color que desees utilizando el código hexadecimal, nombre de color o RGB */
+        }
+    </style>
 </head>
 
-<!-- <script>
-function eliminarVideo(nombreVideo) {
-    if (confirm("¿Seguro que deseas eliminar el video '" + nombreVideo + "'?")) {
-        window.location.href = 'eliminar_video.php?nombre=' + nombreVideo + '&confirmar=si';
-    }
-}
-</script> -->
-
 <body>
-<a href="<?php echo base_url(); ?>index.php/cursos/subir_video">Subir nuevo Video</a>
+<a href="<?php echo base_url(); ?>index.php/cursos/subir_video"> <button type="button" class="btn btn-danger">subir nuevo video</button> </a>
+
     <h2>Listar y Mostrar Videos</h2>
     <ul>
    
@@ -30,14 +28,11 @@ function eliminarVideo(nombreVideo) {
                 //para editar
                 //echo '<li><a href="' . base_url('index.php/cursos/editar_video/') . urlencode($video) . '">Renombrar video</a></li>';
                
-              //  echo '<a href="' . base_url('index.php/cursos/editar_video') . '?nombre=' . urlencode($video) . '">Renombrar video</a>';
+               echo '<a href="' . base_url('index.php/cursos/editar_video') . '?nombre=' . urlencode($video) . '">Renombrar video</a>';
                 
                 
                 // echo '<li><a href="' . base_url() . 'index.php/cursos/mostrar_video.php?nombre=' . urlencode($video) . '">' renombrar video '</a></li>';
-                
-                //echo '<a href="' . base_url('index.php/cursos/eliminar_video') . '?nombre=' . urlencode($video) . '" onclick="return confirm(\'¿Seguro que deseas eliminar el video?\')">Eliminar video</a>';
-
-                
+               
                 //echo '<li><a href="editar_video.php?nombre=' . urlencode($video) . '">renombrar video</a></li>';
                 
                 
@@ -53,7 +48,6 @@ function eliminarVideo(nombreVideo) {
         
     </ul>
     
-
 </body>
 </html>
 

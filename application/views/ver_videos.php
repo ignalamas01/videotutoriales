@@ -26,11 +26,17 @@
             margin-top: 10px;
         }
     </style>
+      <style>
+        body {
+            background-color: #CCC; /* Aquí puedes especificar el color que desees utilizando el código hexadecimal, nombre de color o RGB */
+        }
+    </style>
 </head>
 <body>
 <h2>Ver Videos</h2>
 <br>
-<a href="<?php echo base_url(); ?>index.php/cursos/subir_video">subir otro video</a>
+
+<a href="<?php echo base_url(); ?>index.php/cursos/subir_video"> <button type="button" class="btn btn-danger">subir otro video</button> </a>
     <ul class="video-grid">
         <?php
         $video_directory = "uploads/video/";
