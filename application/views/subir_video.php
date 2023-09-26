@@ -74,6 +74,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["video"])) {
 }
 ?>
 <br>
+<div class="card-footer">
+    <button type="submit" class="btn btn-success ">subir</button>
+
+   <button type="reset" class="btn btn-success " onClick="history.go(-1);">Cancelar</button>
+</div>
 <br>
 
     <h1>Bienvenido a Mi Sitio Web</h1>

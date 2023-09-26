@@ -230,51 +230,48 @@ class Cursos extends CI_Controller
 		
 		
 	}
-	public function subirfoto()
-	{
-		$data['id']=$_POST['idcursos'];
-		$this->load->view('inc/cabecera');
-		$this->load->view('inc/menu');
-		$this->load->view('inc/menulateral');
-		$this->load->view('subirformcursos',$data);
-		$this->load->view('inc/pie');
-	}
-	public function subir()
-	{
-		$idcurso=$_POST['idCursos'];
-		$nombrearchivo=$idcurso.".jpg";
+	// public function subirfoto()
+	// {
+	// 	$data['id']=$_POST['idcursos'];
+	// 	$this->load->view('inc/cabecera');
+	// 	$this->load->view('inc/menu');
+	// 	$this->load->view('inc/menulateral');
+	// 	$this->load->view('subirformcursos',$data);
+	// 	$this->load->view('inc/pie');
+	// }
+	// // public function subir()
+	// {
+	// 	$idcurso=$_POST['idCursos'];
+	// 	$nombrearchivo=$idcurso.".jpg";
 
-		$config['upload_path']='./uploads/cursos/';
+	// 	$config['upload_path']='./uploads/cursos/';
 		
-		$config['file_name']=$nombrearchivo;
+	// 	$config['file_name']=$nombrearchivo;
 		
-		$direccion="./uploads/cursos/".$nombrearchivo;
+	// 	$direccion="./uploads/cursos/".$nombrearchivo;
 
-		if(file_exists($direccion))
-		{
-		 unlink($direccion);
-		}
+	// 	if(file_exists($direccion))
+	// 	{
+	// 	 unlink($direccion);
+	// 	}
+	// 	$config['allowed_types']='jpg|png';
 
-		$config['allowed_types']='jpg|png';
+	// 	$this->load->library('upload',$config);
 
-		$this->load->library('upload',$config);
-
-		if(!$this->upload->do_upload())
-		{
-		 $data['error']=$this->upload->display_errors();
-		}
-		else
-		{
-		 $data['video']=$nombrearchivo;
-		 $this->cursos_model->modificarcursos($idcurso,$data);
-		 $this->upload->data();
+	// 	if(!$this->upload->do_upload())
+	// 	{
+	// 	 $data['error']=$this->upload->display_errors();
+	// 	}
+	// 	else
+	// 	{
+	// 	 $data['video']=$nombrearchivo;
+	// 	 $this->cursos_model->modificarcursos($idcurso,$data);
+	// 	 $this->upload->data();
 			
-		}
-		redirect('cursos/cursos', 'refresh');
+	// 	}
+	// 	redirect('cursos/cursos', 'refresh');
 
-
-
-	}
+	// }
 	public function subir_video()
 	{
 		 $this->load->view('inc/cabecera');

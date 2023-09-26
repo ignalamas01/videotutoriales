@@ -1,3 +1,4 @@
+
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
@@ -125,7 +126,7 @@
 
                             
                             <td>
-                              <?php
+                              <!-- <?php
                               $video=$row->video;
                               if($video=="")
                                 {
@@ -139,16 +140,18 @@
                               <img width="100" src="<?php echo base_url(); ?>uploads/cursos/<?php echo $video; ?>">
                               <?php
                                 }
-                              ?> 
+                              ?>  -->
                               
                               
                               <?php
-                                echo form_open_multipart('cursos/subirfoto')
+                                echo form_open_multipart('cursos/subir_video')
                                 ?>
                                 <input type="hidden" name="idcursos" value="<?php echo $row->id; ?>">
                                 <button type="submit" class="btn btn-primary">SUBIR</button>
                                 <?php
+                                
                                 echo form_close();
+                                
                               ?>  
                             </td>
                         </tr>
