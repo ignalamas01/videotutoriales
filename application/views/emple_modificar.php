@@ -21,7 +21,7 @@
     <div class="row featurette">
     <div class="col-md-7">
         <br>
-        <h2 class="featurette-heading">MODIFICAR EMPLEADO<span class="text-muted"> ****</span></h2><br>
+        <h2 class="featurette-heading">MODIFICAR <span class="text-muted"> ****</span></h2><br>
 
 
     </div>

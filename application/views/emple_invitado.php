@@ -31,10 +31,12 @@
                 <h3 class="card-title">invitado solo que no estan inscritos en los cursos</h3>
               </div>
               <div>   
-                
+              <a href="<?php echo base_url(); ?>index.php/"><button type="button" class="btn btn-danger">evaluaciones</button>  </a>
                 
                 <a href="<?php echo base_url(); ?>index.php/cursos/ver_videos"><button type="button" class="btn btn-warning">videos</button>  </a>
               </div>
+             
+            
 
 
               
@@ -46,6 +48,10 @@
               <!-- /.card-header -->
               <div class="card-body">
                 
+                
+                
+                
+              
               </div>
               <!-- /.card-body -->
             </div>

@@ -281,11 +281,11 @@ class Base extends CI_Controller
 
 		if($this->session->userdata('login'))
 		{
-			$this->load->view('inc/cabecera');
-			$this->load->view('inc/menu');
-			$this->load->view('inc/menulateral');
+			$this->load->view('incestudiante/cabecera');
+			$this->load->view('incestudiante/menu');
+			$this->load->view('incestudiante/menulateral');
 			$this->load->view('emple_invitado');
-			$this->load->view('inc/pie');
+			$this->load->view('incestudiante/pie');
 		}
 		else
 		{

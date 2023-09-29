@@ -37,7 +37,7 @@
                                     </li>
 
                                     <li class="nav-item">
-                                        <a class="nav-link active" aria-current="page" href="<?php echo base_url(); ?>index.php/base/emple">EMPLEADOS</a>
+                                        <a class="nav-link active" aria-current="page" href="<?php echo base_url(); ?>index.php/base/emple">PROFESORES</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link active" aria-current="page" href="<?php echo base_url(); ?>index.php/cursos/cursos">CURSOS</a>

@@ -95,10 +95,11 @@
                                         <div class="form-group">
                                             <label>FECHA DE NACIMIENTO:</label>
                                             <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                                                <input type="date" name="fechaNac" class="form-control datetimepicker-input" data-target="#reservationdate" placeholder="AAAA-MM-DD" />
-                                                <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                                                <input type="date" name="fechaNac" class="form-control datetimepicker-input" data-target="#reservationdate"  />
+                                                <!-- para calendario de admin -->
+                                                <!-- <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
                                                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                </div>
+                                                </div> -->
                                             </div>
                                         </div>
                                     </div>
