@@ -4,6 +4,7 @@
     <a href="<?php echo base_url(); ?>index.php/cursos/cursos"> <button type="button" class="btn btn-danger"><--VOLVER A CURSOS</button> </a>
     <a href="<?php echo base_url(); ?>index.php/cursos/listar_videos"><button type="button" class="btn btn-danger">ver lista de videos</button></a>
     <a href="<?php echo base_url(); ?>index.php/cursos/ver_videos"><button type="button" class="btn btn-warning">videos</button>  </a>
+    <a href="<?php echo base_url(); ?>index.php/cursos/crear_evaluacion"><button type="button" class="btn btn-warning">crear evaluacion</button>  </a>
     <br>           
                 
      <!-- <a href="<?php echo base_url(); ?>index.php/usuarios/logout"> <button type="button" class="btn btn-danger">CERRAR SESION</button> </a> -->
