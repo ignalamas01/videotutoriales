@@ -27,16 +27,28 @@ class Evaluaciones extends CI_Controller
         $data['fechaFin'] = $this->input->post('deadline');
 
         // Obtener preguntas del formulario
-        $questions = array();
-        $questionCount = count($this->input->post('questions'));
-        for ($i = 0; $i < $questionCount; $i++) {
-            $question = array(
-                'enunciadoPregunta' => $this->input->post("questions[$i]"),
-                'tipoPregunta' => 'multiple_choice', // Ajusta el tipo según tus necesidades
-                'puntajePregunta' => $this->input->post("scores[$i]"),
-            );
-            $questions[] = $question;
-        }
+        // $questions = array();
+        // $questionCount = count($this->input->post('questions'));
+        // for ($i = 0; $i < $questionCount; $i++) {
+        //     $question = array(
+        //         'enunciadoPregunta' => $this->input->post("questions[$i]"),
+        //         'tipoPregunta' => 'multiple_choice', // Ajusta el tipo según tus necesidades
+        //         'puntajePregunta' => $this->input->post("scores[$i]"),
+        //     );
+        //     $questions[] = $question;
+        // }
+            // Obtener preguntas del formulario
+$questions = array();
+$questionCount = count($this->input->post('questions'));
+for ($i = 0; $i < $questionCount; $i++) {
+    $question = array(
+        'enunciadoPregunta' => $this->input->post("questions[$i]"),
+        'tipoPregunta' => 'multiple_choice', // Ajusta el tipo según tus necesidades
+        'puntajePregunra' => $this->input->post("scores[$i]"),
+    );
+    $questions[] = $question;
+}
+
 
         // Agregar datos a la base de datos
         $evaluation_id = $this->evaluaciones_model->agregar_evaluacion($data, $questions);

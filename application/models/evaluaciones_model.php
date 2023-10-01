@@ -12,9 +12,9 @@ class Evaluaciones_model extends CI_Model
         // Agregar preguntas a la evaluación
         foreach ($questions as $question) {
             $question_data = array(
-                'enunciadoPregunta' => $question['tituloPregunta'],  // Ajusta este nombre según tu estructura de base de datos
+                'enunciadoPregunta' => $question['question'],  // Ajustar según el nombre del campo en el formulario
                 'tipoPregunta' => $question['tipoPregunta'],
-                'puntajePregunta' => $question['puntaje'],
+                'puntajePregunta' => $question['score'],
                 'idEvaluacion' => $evaluation_id
             );
 
