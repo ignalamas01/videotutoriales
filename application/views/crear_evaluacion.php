@@ -82,8 +82,8 @@
                 <label for="options1">Opciones de Respuesta (separadas por comas):</label>
                 <input type="text" id="options1" name="options[]" required><br><br>
 
-                <label for="correctOption1">Respuesta Correcta:</label>
-                <input type="text" id="correctOption1" name="correctOptions[]" required><br><br>
+                <label for="correctOptions1">Respuesta Correcta:</label>
+                <input type="text" id="correctOptions1" name="correctOptions[]" required><br><br>
 
                 <label for="score1">Puntaje de la Pregunta:</label>
                 <input type="number" id="score1" name="scores[]" required><br><br>
@@ -107,7 +107,7 @@
             // Borramos los valores existentes en los campos de la nueva pregunta
             clonedQuestion.querySelector('input[id^="question"]').value = '';
             clonedQuestion.querySelector('input[id^="options"]').value = '';
-            clonedQuestion.querySelector('input[id^="correctOption"]').value = '';
+            clonedQuestion.querySelector('input[id^="correctOptions"]').value = '';
             clonedQuestion.querySelector('input[id^="score"]').value = ''; // Limpiamos el campo de puntaje
 
             // Cambiamos los IDs y etiquetas para que sean únicos
@@ -115,8 +115,8 @@
             clonedQuestion.querySelector('input[id^="question"]').id = `question${questionCount}`;
             clonedQuestion.querySelector('label[for^="options"]').textContent = `Opciones de Respuesta (separadas por comas):`;
             clonedQuestion.querySelector('input[id^="options"]').id = `options${questionCount}`;
-            clonedQuestion.querySelector('label[for^="correctOption"]').textContent = `Respuesta Correcta (número de opción, ej. 1, 2, 3, ...)`;
-            clonedQuestion.querySelector('input[id^="correctOption"]').id = `correctOption${questionCount}`;
+            clonedQuestion.querySelector('label[for^="correctOptions"]').textContent = `Respuesta Correcta (número de opción, ej. 1, 2, 3, ...)`;
+            clonedQuestion.querySelector('input[id^="correctOptions"]').id = `correctOptions${questionCount}`;
             clonedQuestion.querySelector('label[for^="score"]').textContent = `Puntaje de la Pregunta:`;
             clonedQuestion.querySelector('input[id^="score"]').id = `score${questionCount}`;
 
