@@ -49,18 +49,20 @@
     <?php echo form_open('evaluaciones_estudiante/procesar_evaluacion'); ?>
     <form id="executionForm">
 
-       
+        <?php if (!empty($preguntas)) : ?>
             <?php foreach ($preguntas as $index => $pregunta): ?>
                 <div class="question">
                     <p>Pregunta <?php echo $index + 1; ?>:</p>
                     <p><?php echo $pregunta['enunciadoPregunta']; ?></p>
 
                     <?php if (!empty($pregunta['opciones'])) : ?>
-                        <?php foreach ($pregunta['opciones'] as $opcionIndex => $opcion): ?>
-                            <label>
-                                <input type="radio" name="respuestas[<?php echo $index; ?>]" value="<?php echo $opcionIndex; ?>" required>
-                                <?php echo $opcion; ?>
-                            </label>
+                        <?php foreach ($pregunta['opciones'] as $opcionIndex => $opciones): ?>
+                            <div>
+                                <label>
+                                    <input type="radio" name="respuestas[<?php echo $index; ?>]" value="<?php echo $opcionIndex; ?>" required>
+                                    <?php echo implode(', ', $opciones); ?>
+                                </label>
+                            </div>
                         <?php endforeach; ?>
                     <?php else: ?>
                         <p>No hay opciones de respuesta disponibles para esta pregunta.</p>
@@ -68,7 +70,9 @@
 
                 </div>
             <?php endforeach; ?>
-        
+        <?php else: ?>
+            <p>No hay preguntas disponibles.</p>
+        <?php endif; ?>
 
         <input type="submit" value="Enviar Respuestas">
     </form>
