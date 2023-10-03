@@ -44,4 +44,48 @@ public function obtener_opciones_respuesta($idPregunta)
 
         return $query->result_array();
     }
+    public function insertar_respuestas($data) {
+        // Verificar que los datos necesarios estén presentes
+        if (!isset($data['idEvaluacion']) || !isset($data['idEstudiante']) || !isset($data['idPregunta']) || !isset($data['respuesta']) || !isset($data['puntajeObtenido'])) {
+            throw new RuntimeException('Faltan datos necesarios para procesar la evaluación.');
+        }
+    
+        // Verificar que la evaluación existe
+        if (!$this->evaluacion_existe($data['idEvaluacion'])) {
+            throw new RuntimeException('La evaluación especificada no existe.');
+        }
+    
+        // Verificar que el estudiante existe
+        if (!$this->estudiante_existe($data['idEstudiante'])) {
+            throw new RuntimeException('El estudiante especificado no existe.');
+        }
+    
+        // Agregar la fecha actual y el estado
+        $data['fechaRespuesta'] = date('Y-m-d H:i:s');
+        $data['estado'] = 'pendiente'; // O el valor que desees asignar
+    
+        // Insertar en la base de datos
+        $this->db->insert('respuestasestudiante', $data);
+    
+        // Devolver el ID de la nueva respuesta (si es necesario)
+        return $this->db->insert_id();
+    }
+    
+    // Verificar si la evaluación existe
+    private function evaluacion_existe($idEvaluacion) {
+        $this->db->from('evaluaciones');
+        $this->db->where('idEvaluacion', $idEvaluacion);
+        $query = $this->db->get();
+        return $query->num_rows() > 0;
+    }
+    
+    // Verificar si el estudiante existe
+    private function estudiante_existe($idEstudiante) {
+        $this->db->from('estudiantes');
+        $this->db->where('idEstudiante', $idEstudiante);
+        $query = $this->db->get();
+        return $query->num_rows() > 0;
+    }
+    
+    
 }
