@@ -19,7 +19,7 @@ class Evaluaciones_estudiante_model extends CI_Model
     public function obtener_preguntas_evaluacion($idEvaluacion)
     {
         // Ajusta la consulta según tu esquema de base de datos
-        $this->db->select('idPregunta, enunciadoPregunta');
+        $this->db->select('idPregunta, enunciadoPregunta,idEvaluacion');
         $this->db->from('preguntas');
         $this->db->where('idEvaluacion', $idEvaluacion);
     

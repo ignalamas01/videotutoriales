@@ -63,18 +63,27 @@
                         </label>
                     <?php endforeach; ?>
 
+                    <!-- Agregar campo oculto para 'idPregunta' -->
+                    <input type="hidden" name="idPregunta[<?php echo $index; ?>]" value="<?php echo $pregunta['idPregunta']; ?>">
                 <?php else : ?>
                     <p>No hay opciones de respuesta disponibles para esta pregunta.</p>
                 <?php endif; ?>
 
             </div>
         <?php endforeach; ?>
+
+        <?php if (isset($preguntas[0]['idEvaluacion'])) : ?>
+            <!-- Agregar campo oculto para 'idEvaluacion' -->
+            <input type="hidden" name="idEvaluacion" value="<?php echo $preguntas[0]['idEvaluacion']; ?>">
+        <?php endif; ?>
+
     <?php else : ?>
         <p>No hay preguntas disponibles.</p>
     <?php endif; ?>
 
+    <!-- Agregar campos ocultos para idEvaluacion e idPregunta -->
     <input type="submit" value="Enviar Respuestas">
     <?php echo form_close(); ?>
 </body>
-
 </html>
+
