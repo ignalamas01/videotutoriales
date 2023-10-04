@@ -42,7 +42,7 @@ public function procesar_evaluacion()
         $idEvaluacion = $this->input->post('idEvaluacion');
         $idEstudiante = $this->input->post('idEstudiante');
         $puntajeObtenido = $this->input->post('puntajeObtenido');
-        
+        $puntajeTotal = $this->input->post('totalScore');
         // Cargar las preguntas nuevamente
         $preguntas = $this->evaluaciones_estudiante_model->obtener_preguntas_evaluacion($idEvaluacion);
 

@@ -74,8 +74,26 @@ class Evaluaciones_model extends CI_Model
             echo 'Error al completar la transacción';
             return false;
         }
+        $evaluation_data = array(
+            'puntajeTotal' => $this->obtener_puntaje_total($evaluation_id)
+        );
+
+        $this->db->where('idEvaluacion', $evaluation_id);
+        $this->db->update('evaluaciones', $evaluation_data);
 
         return $evaluation_id;
     }
+    public function obtener_puntaje_total($evaluation_id)
+    {
+        $this->db->select_sum('puntajePregunta');
+        $this->db->from('preguntas');
+        $this->db->where('idEvaluacion', $evaluation_id);
+
+        $query = $this->db->get();
+        $result = $query->row();
+
+        return $result->puntajePregunta;
+    }
+
 }
 

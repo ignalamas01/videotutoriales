@@ -90,39 +90,63 @@
             </div>
         </div>
         <button type="button" onclick="addQuestion()">Agregar Pregunta</button><br><br>
+<!-- Campo para mostrar el puntaje total -->
+<label for="totalScore">Puntaje Total:</label>
+        <input type="text" id="totalScore" name="totalScore" readonly value="0"><br><br>
 
         <input type="submit" value="Crear Evaluación">
     </form>
-
+   
     <script>
-        let questionCount = 1; // Comenzamos con una pregunta predeterminada
+    let questionCount = 1; // Comenzamos con una pregunta predeterminada
 
-        function addQuestion() {
-            questionCount++; // Incrementamos el contador de preguntas
-            const questionsContainer = document.getElementById('questions');
+    function addQuestion() {
+        questionCount++; // Incrementamos el contador de preguntas
+        const questionsContainer = document.getElementById('questions');
 
-            // Clonamos el campo de pregunta, opciones de respuesta y puntaje predeterminado
-            const clonedQuestion = document.querySelector('.question').cloneNode(true);
+        // Creamos un nuevo campo de pregunta
+        const newQuestion = document.createElement('div');
+        newQuestion.classList.add('question');
 
-            // Borramos los valores existentes en los campos de la nueva pregunta
-            clonedQuestion.querySelector('input[id^="question"]').value = '';
-            clonedQuestion.querySelector('input[id^="options"]').value = '';
-            clonedQuestion.querySelector('input[id^="correctOptions"]').value = '';
-            clonedQuestion.querySelector('input[id^="score"]').value = ''; // Limpiamos el campo de puntaje
+        // Creamos los elementos del nuevo campo
+        newQuestion.innerHTML = `
+            <label for="question${questionCount}">Pregunta ${questionCount}:</label>
+            <input type="text" id="question${questionCount}" name="questions[]" required><br><br>
+            <label for="options${questionCount}">Opciones de Respuesta (separadas por comas):</label>
+            <input type="text" id="options${questionCount}" name="options[]" required><br><br>
+            <label for="correctOptions${questionCount}">Respuesta Correcta (número de opción, ej. 1, 2, 3, ...):</label>
+            <input type="text" id="correctOptions${questionCount}" name="correctOptions[]" required><br><br>
+            <label for="score${questionCount}">Puntaje de la Pregunta:</label>
+            <input type="number" id="score${questionCount}" name="scores[]" required onchange="updateTotalScore()"><br><br>
+        `;
 
-            // Cambiamos los IDs y etiquetas para que sean únicos
-            clonedQuestion.querySelector('label[for^="question"]').textContent = `Pregunta ${questionCount}:`;
-            clonedQuestion.querySelector('input[id^="question"]').id = `question${questionCount}`;
-            clonedQuestion.querySelector('label[for^="options"]').textContent = `Opciones de Respuesta (separadas por comas):`;
-            clonedQuestion.querySelector('input[id^="options"]').id = `options${questionCount}`;
-            clonedQuestion.querySelector('label[for^="correctOptions"]').textContent = `Respuesta Correcta (número de opción, ej. 1, 2, 3, ...)`;
-            clonedQuestion.querySelector('input[id^="correctOptions"]').id = `correctOptions${questionCount}`;
-            clonedQuestion.querySelector('label[for^="score"]').textContent = `Puntaje de la Pregunta:`;
-            clonedQuestion.querySelector('input[id^="score"]').id = `score${questionCount}`;
+        // Agregamos la pregunta al formulario
+        questionsContainer.appendChild(newQuestion);
 
-            // Agregamos la pregunta clonada al formulario
-            questionsContainer.appendChild(clonedQuestion);
+        // Actualizamos el evento de cambio en el nuevo campo de puntaje
+        updateTotalScore();
+    }
+
+    function updateTotalScore() {
+        let totalScore = 0;
+
+        // Recorremos todos los campos de puntaje y sumamos los valores
+        for (let i = 1; i <= questionCount; i++) {
+            const scoreField = document.getElementById(`score${i}`);
+            totalScore += parseInt(scoreField.value) || 0;
         }
-    </script>
+
+        // Actualizamos el valor del campo totalScore
+        document.getElementById('totalScore').value = totalScore;
+    }
+
+    // Asignamos un evento de cambio a cada campo de puntaje inicial
+    for (let i = 1; i <= questionCount; i++) {
+        const scoreField = document.getElementById(`score${i}`);
+        scoreField.addEventListener('change', updateTotalScore);
+    }
+</script>
+
+    
 </body>
 </html>
