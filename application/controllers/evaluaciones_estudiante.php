@@ -89,6 +89,7 @@ public function procesar_evaluacion()
         // Manejar cualquier excepción que ocurra durante la transacción
         echo 'Error: ' . $e->getMessage();
     }
+   
 }
 private function calcular_puntaje_obtenido($idPregunta, $respuestaEstudiante)
     {
