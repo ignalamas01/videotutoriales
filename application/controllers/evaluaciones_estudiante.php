@@ -41,7 +41,8 @@ public function procesar_evaluacion()
         // Obtener datos adicionales del formulario (fuera del bucle)
         $idEvaluacion = $this->input->post('idEvaluacion');
         $idEstudiante = $this->input->post('idEstudiante');
-        $puntajeObtenido = $this->input->post('puntajeObtenido');
+        // $puntajeObtenido = $this->input->post('puntajeObtenido');
+        $puntajeObtenido = 0;
         $puntajeTotal = $this->input->post('totalScore');
         // Cargar las preguntas nuevamente
         $preguntas = $this->evaluaciones_estudiante_model->obtener_preguntas_evaluacion($idEvaluacion);
@@ -89,6 +90,24 @@ public function procesar_evaluacion()
         echo 'Error: ' . $e->getMessage();
     }
 }
+private function calcular_puntaje_obtenido($idPregunta, $respuestaEstudiante)
+    {
+        $respuestaCorrecta = $this->evaluaciones_estudiante_model->obtener_respuesta_correcta($idPregunta);
+
+    // Inicializar el puntaje obtenido
+    $puntajeObtenido = 0;
+
+    // Comparar la respuesta del estudiante con la correcta
+    if ($respuestaCorrecta === $respuestaEstudiante) {
+        // Asignar el puntaje completo si la respuesta es correcta
+        $puntajeObtenido = 1;
+    } else {
+        // Puedes asignar un puntaje parcial o penalizar respuestas incorrectas según tu lógica
+        // En este ejemplo, no se asigna puntaje si la respuesta es incorrecta
+    }
+
+    return $puntajeObtenido;
+    }
 
 
 

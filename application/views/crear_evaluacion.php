@@ -118,6 +118,7 @@
             <input type="text" id="correctOptions${questionCount}" name="correctOptions[]" required><br><br>
             <label for="score${questionCount}">Puntaje de la Pregunta:</label>
             <input type="number" id="score${questionCount}" name="scores[]" required onchange="updateTotalScore()"><br><br>
+            <button type="button" class="deleteButton" onclick="deleteQuestion(this)">Eliminar</button>
         `;
 
         // Agregamos la pregunta al formulario
@@ -126,6 +127,32 @@
         // Actualizamos el evento de cambio en el nuevo campo de puntaje
         updateTotalScore();
     }
+    function deleteQuestion(button) {
+    const questionContainer = button.parentElement;
+    questionContainer.remove();
+
+    updateQuestionNumbers();
+    updateTotalScore();
+}
+
+function updateQuestionNumbers() {
+    const questionsContainer = document.getElementById('questions');
+    const questionElements = questionsContainer.getElementsByClassName('question');
+
+    Array.from(questionElements).forEach((question, i) => {
+        // Actualizamos la etiqueta de la pregunta
+        const label = question.querySelector('label');
+        label.textContent = `Pregunta ${i + 1}:`;
+
+        // Actualizamos los IDs de los campos
+        question.querySelectorAll('input').forEach(input => {
+            const oldId = input.id;
+            const newId = oldId.replace(/\d+$/, i + 1);
+            input.id = newId;
+        });
+    });
+    questionCount = questionElements.length; // Actualizamos la variable global questionCount
+}
 
     function updateTotalScore() {
         let totalScore = 0;
