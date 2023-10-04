@@ -25,6 +25,7 @@ class Evaluaciones extends CI_Controller
         $data['tituloEvaluacion'] = $this->input->post('title');
         $data['descripcionEvaluacion'] = $this->input->post('description');
         $data['fechaFin'] = $this->input->post('deadline');
+        $data['fechaInicio'] = $this->input->post('startDate');
 
         // Obtener preguntas del formulario
         $questions = array();

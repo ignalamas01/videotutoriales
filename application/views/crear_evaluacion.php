@@ -68,9 +68,12 @@
 
         <label for="description">Descripción:</label>
         <textarea id="description" name="description"></textarea><br><br>
-
+        <label for="startDate">Fecha de Habilitacion:</label>
+<input type="date" id="startDate" name="startDate"><br><br>
         <label for="deadline">Fecha de Vencimiento:</label>
         <input type="date" id="deadline" name="deadline"><br><br>
+       
+
 
         <h2>Preguntas de Selección Múltiple</h2>
         <div id="questions">
