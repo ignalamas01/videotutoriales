@@ -1,4 +1,4 @@
-// En RespuestasEstudiante_model.php
+
 <?php
 class RespuestasEstudiante_model extends CI_Model
 {
