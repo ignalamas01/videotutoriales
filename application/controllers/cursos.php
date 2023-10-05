@@ -337,25 +337,54 @@ class Cursos extends CI_Controller
 		// $this->load->view('inc/pie');
 		
 	}
-public function realizar_evaluacion()
-{
-    // Obtener la última evaluación
-    $ultima_evaluacion = $this->evaluaciones_estudiante_model->obtener_ultima_evaluacion();
+	public function realizar_evaluacion()
+	{
+		// Obtener la última evaluación
+		$ultima_evaluacion = $this->evaluaciones_estudiante_model->obtener_ultima_evaluacion();
 
-    // Verificar si hay alguna evaluación
-    if ($ultima_evaluacion) {
-        // Obtener las preguntas de la última evaluación
-        $data['preguntas'] = $this->evaluaciones_estudiante_model->obtener_preguntas_evaluacion($ultima_evaluacion['idEvaluacion']);
+    	// Verificar si hay alguna evaluación
+    	if ($ultima_evaluacion) {
+       	 // Obtener las preguntas de la última evaluación
+       	 $data['preguntas'] = $this->evaluaciones_estudiante_model->obtener_preguntas_evaluacion($ultima_evaluacion['idEvaluacion']);
 
-        // Cargar la vista con la información de la última evaluación
-        $this->load->view('realizar_evaluacion', $data);
-    } else {
+       	 // Cargar la vista con la información de la última evaluación
+        	$this->load->view('realizar_evaluacion', $data);
+    	} else {
         // Manejar el caso en que no haya evaluaciones
         echo 'No hay evaluaciones disponibles.';
-    }
-}
+    	}
+	}
 	
-
+	public function subir_archivos ()
+	{
+        
+		$this->load->view('inc/cabecera');
+		// $this->load->view('inc/menu');
+		// $this->load->view('inc/menulateral');
+		   $this->load->view('subir_archivos');
+		// $this->load->view('inc/pie');
+		
+	}
+	public function listadoc ()
+	{
+        
+		$this->load->view('inc/cabecera');
+		// $this->load->view('inc/menu');
+		// $this->load->view('inc/menulateral');
+		   $this->load->view('lista_documentos');
+		// $this->load->view('inc/pie');
+		
+	}
+	public function eliminardoc ()
+	{
+        
+		$this->load->view('inc/cabecera');
+		// $this->load->view('inc/menu');
+		// $this->load->view('inc/menulateral');
+		   $this->load->view('eliminar_documento');
+		// $this->load->view('inc/pie');
+		
+	}
 	
 
 

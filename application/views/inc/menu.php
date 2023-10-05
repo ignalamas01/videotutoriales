@@ -45,10 +45,10 @@
                                     
 
                                 </ul>
-                                <form class="d-flex">
+                                <!-- <form class="d-flex">
                                     <input class="form-control me-2" type="search" placeholder="buscar" aria-label="buscar">
                                     <button class="btn btn-outline-success" type="submit">buscar</button>
-                                </form>
+                                </form> -->
                             </div>
 
     </ul>

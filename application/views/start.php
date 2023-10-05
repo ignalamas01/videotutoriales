@@ -69,7 +69,7 @@
                             <a class="breadcrumb-item" href="<?php echo base_url(); ?>index.php/base/index">/Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="breadcrumb-item" href="about.html">Datatables</a>
+                            <a class="breadcrumb-item" href="about.html">estadistica</a>
                         </li>
                         <li class="nav-item">
                             <a class="breadcrumb-item" href="<?php echo base_url(); ?>index.php/usuarios/logout">Registrarse</a>

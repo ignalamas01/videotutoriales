@@ -31,7 +31,7 @@
     </div>
 </div>
 
-<body   class="hold-transition login-page" style="background-color: #0b0704;">
+<body   class="hold-transition login-page" style="background-color: #080911;">
   <!-- stylo para agregar imagen -->
 
 <div class="video-container">
@@ -50,14 +50,14 @@
             
             
 
-<div  class="login-box">
-  <div class="login-logo">
+<div  class="login-box" >
+  
+  <!-- /.login-logo -->
+  <div class="card" >
+    <div class="card-body login-card-body" style="background-color: #d5d4d6;">
+    <div class="login-logo" >
     <a href="#"><b>CEPRA</b><!--PRUEBA --></a> 
   </div>
-  <!-- /.login-logo -->
-  <div class="card">
-    <div class="card-body login-card-body">
-
 <?php
 switch($msg) 
 {
@@ -70,8 +70,8 @@ switch($msg)
     $clase="danger";
     break;
     case '3':
-    $mensaje="INGRESE SUS DATOS";
-    $clase="warning";
+    $mensaje="Ingrese sus datos";
+    $clase="danger";
     break;
     default:
     $mensaje="Ingrese su usuario y clave para iniciar sesion";
@@ -136,17 +136,17 @@ echo form_close();
         <!-- <a href="#" class="btn btn-block btn-primary"> -->
           <!-- <i class="fab fa-facebook mr-2"></i>entrar usando Facebook -->
         <!-- </a> -->
-        <a href="#" class="btn btn-block btn-danger">
+        <!-- <a href="#" class="btn btn-block btn-danger">
           <i class="fab fa-google-plus mr-2"></i> Entrar usando Google
-        </a>
+        </a> -->
       </div>
       <!-- /.social-auth-links -->
 
       <p class="mb-1">
-        <a href="forgot-password.html">Recuperar contraseña</a>
+        <a href="<?php echo base_url(); ?>index.php/usuarios/recuperarcontra">Recuperar contraseña</a>
       </p>
       <p class="mb-0">
-        <a href="register.html" class="text-center">Registrar nuevo usuario</a>
+        <a href="#" class="text-center">Registrar nuevo usuario</a>
       </p>
     </div>
     <!-- /.login-card-body -->

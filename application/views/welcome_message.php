@@ -95,7 +95,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		echo base_url();
 		?>
 		<br>
-		<a href="<?php echo base_url(); ?>docs/android-doc.pdf" target="_blank" download>
+		<a href="<?php echo base_url(); ?>documentos/android-doc.pdf" target="_blank" download>
 			<img src="<?php echo base_url(); ?>img/pdflogo.png" width="30">
 
 		</a>

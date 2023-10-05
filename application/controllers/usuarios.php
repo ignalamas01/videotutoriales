@@ -67,128 +67,137 @@ class Usuarios extends CI_Controller
         $this->session->sess_destroy();
         redirect('usuarios/index/3','refresh');
     }
+	public function recuperarcontra()
+	{
+		//$this->load->view('inc/cabecera');
+		//$this->load->view('inc/menu');
+		//$this->load->view('inc/menulateral');
+		$this->load->view('recuperarcont');
+		//$this->load->view('inc/pie');
+	}
 
 
 
 
 	
-	public function res()
-	{
-		$this->load->view('inc/cabecera');
-		$this->load->view('inc/menu');
-		$this->load->view('inc/menulateral');
-		$this->load->view('resumen');
-		$this->load->view('inc/pie');
-	}
-	public function obj()
-	{
-		$this->load->view('inc/cabecera');
-		$this->load->view('inc/menu');
-		$this->load->view('inc/menulateral');
-		$this->load->view('objetivos');
-		$this->load->view('inc/pie');
-	}
-	public function salu()
-	{
-		$this->load->view('inc/cabecera');
-		$this->load->view('inc/menu');
-		$this->load->view('inc/menulateral');
-		$this->load->view('saludo');
-		$this->load->view('inc/pie');
-	}
-	public function emple()
-	{
-		//$lista=$this->empleado_model->listaempleados();
-		$lista = $this->empleado_model->listaempleados();
-		$data['empleado'] = $lista;
-		$this->load->view('inc/cabecera');
-		$this->load->view('inc/menu');
-		$this->load->view('inc/menulateral');
-		$this->load->view('emple_lista', $data);
-		$this->load->view('inc/pie');
-	}
-	public function agregar()
-	{
-		$this->load->view('inc/cabecera');
-		$this->load->view('inc/menu');
-		$this->load->view('inc/menulateral');
-		$this->load->view('emple_formulario');
-		$this->load->view('inc/pie');
-	}
-	public function agregarbd()
-	{
-		$data['nombre'] = $_POST['nombre'];
-		$data['primerApellido'] = $_POST['primerApellido'];
-		$data['segundoApellido'] = $_POST['segundoApellido'];
-		$data['departamento'] = $_POST['departamento'];
-		$data['fechaNacimiento'] = $_POST['fechaNac'];
-		$data['telefono'] = $_POST['telefono'];
-		$data['direccion'] = $_POST['direccion'];
+	// public function res()
+	// {
+	// 	$this->load->view('inc/cabecera');
+	// 	$this->load->view('inc/menu');
+	// 	$this->load->view('inc/menulateral');
+	// 	$this->load->view('resumen');
+	// 	$this->load->view('inc/pie');
+	// }
+	// public function obj()
+	// {
+	// 	$this->load->view('inc/cabecera');
+	// 	$this->load->view('inc/menu');
+	// 	$this->load->view('inc/menulateral');
+	// 	$this->load->view('objetivos');
+	// 	$this->load->view('inc/pie');
+	// }
+	// public function salu()
+	// {
+	// 	$this->load->view('inc/cabecera');
+	// 	$this->load->view('inc/menu');
+	// 	$this->load->view('inc/menulateral');
+	// 	$this->load->view('saludo');
+	// 	$this->load->view('inc/pie');
+	// }
+	// public function emple()
+	// {
+	// 	//$lista=$this->empleado_model->listaempleados();
+	// 	$lista = $this->empleado_model->listaempleados();
+	// 	$data['empleado'] = $lista;
+	// 	$this->load->view('inc/cabecera');
+	// 	$this->load->view('inc/menu');
+	// 	$this->load->view('inc/menulateral');
+	// 	$this->load->view('emple_lista', $data);
+	// 	$this->load->view('inc/pie');
+	// }
+	// public function agregar()
+	// {
+	// 	$this->load->view('inc/cabecera');
+	// 	$this->load->view('inc/menu');
+	// 	$this->load->view('inc/menulateral');
+	// 	$this->load->view('emple_formulario');
+	// 	$this->load->view('inc/pie');
+	// }
+	// public function agregarbd()
+	// {
+	// 	$data['nombre'] = $_POST['nombre'];
+	// 	$data['primerApellido'] = $_POST['primerApellido'];
+	// 	$data['segundoApellido'] = $_POST['segundoApellido'];
+	// 	$data['departamento'] = $_POST['departamento'];
+	// 	$data['fechaNacimiento'] = $_POST['fechaNac'];
+	// 	$data['telefono'] = $_POST['telefono'];
+	// 	$data['direccion'] = $_POST['direccion'];
 
-		$this->empleado_model->agregarempleado($data);
-		redirect('base/emple', 'refresh');
-	}
-	public function modificar()
-	{
-		$idempleado = $_POST['idempleado'];
-		$data['infoempleado'] = $this->empleado_model->recuperarempleado($idempleado);
-		$this->load->view('inc/cabecera');
-		$this->load->view('inc/menu');
-		$this->load->view('inc/menulateral');
-		$this->load->view('emple_modificar', $data);
-		$this->load->view('inc/pie');
-	}
-	public function modificarbd()
-	{
-		$idempleado = $_POST['idempleado'];
-		$data['nombre'] = $_POST['nombre'];
-		$data['primerApellido'] = $_POST['primerApellido'];
-		$data['segundoApellido'] = $_POST['segundoApellido'];
-		$data['departamento'] = $_POST['departamento'];
-		$data['fechaNacimiento'] = $_POST['fechaNac'];
-		$data['telefono'] = $_POST['telefono'];
-		$data['direccion'] = $_POST['direccion'];
-		$this->empleado_model->modificarempleado($idempleado, $data);
-		redirect('base/emple', 'refresh');
-	}
-
-
-	public function eliminarbd()
-	{
-		$idempleado = $_POST['idempleado'];
-		$this->empleado_model->eliminarempleado($idempleado);
-		redirect('base/emple', 'refresh');
-	}
-	public function deshabilitarbd()
-	{
-		$idempleado = $_POST['idempleado'];
-		$data['estado']='0';
+	// 	$this->empleado_model->agregarempleado($data);
+	// 	redirect('base/emple', 'refresh');
+	// }
+	// public function modificar()
+	// {
+	// 	$idempleado = $_POST['idempleado'];
+	// 	$data['infoempleado'] = $this->empleado_model->recuperarempleado($idempleado);
+	// 	$this->load->view('inc/cabecera');
+	// 	$this->load->view('inc/menu');
+	// 	$this->load->view('inc/menulateral');
+	// 	$this->load->view('emple_modificar', $data);
+	// 	$this->load->view('inc/pie');
+	// }
+	// public function modificarbd()
+	// {
+	// 	$idempleado = $_POST['idempleado'];
+	// 	$data['nombre'] = $_POST['nombre'];
+	// 	$data['primerApellido'] = $_POST['primerApellido'];
+	// 	$data['segundoApellido'] = $_POST['segundoApellido'];
+	// 	$data['departamento'] = $_POST['departamento'];
+	// 	$data['fechaNacimiento'] = $_POST['fechaNac'];
+	// 	$data['telefono'] = $_POST['telefono'];
+	// 	$data['direccion'] = $_POST['direccion'];
+	// 	$this->empleado_model->modificarempleado($idempleado, $data);
+	// 	redirect('base/emple', 'refresh');
+	// }
 
 
-		$this->empleado_model->modificarempleado($idempleado, $data);
-		redirect('base/emple', 'refresh');
+	// public function eliminarbd()
+	// {
+	// 	$idempleado = $_POST['idempleado'];
+	// 	$this->empleado_model->eliminarempleado($idempleado);
+	// 	redirect('base/emple', 'refresh');
+	// }
+	// public function deshabilitarbd()
+	// {
+	// 	$idempleado = $_POST['idempleado'];
+	// 	$data['estado']='0';
 
-	}
-	public function habilitarbd()
-	{
-		$idempleado = $_POST['idempleado'];
-		$data['estado']='1';
+
+	// 	$this->empleado_model->modificarempleado($idempleado, $data);
+	// 	redirect('base/emple', 'refresh');
+
+	// }
+	// public function habilitarbd()
+	// {
+	// 	$idempleado = $_POST['idempleado'];
+	// 	$data['estado']='1';
 
 
-		$this->empleado_model->modificarempleado($idempleado, $data);
-		redirect('base/deshabilitados', 'refresh');
+	// 	$this->empleado_model->modificarempleado($idempleado, $data);
+	// 	redirect('base/deshabilitados', 'refresh');
 
-	}
-	public function deshabilitados()
-	{
-		$lista = $this->empleado_model->listaempleadosdes();
-		$data['empleado'] = $lista;
-		$this->load->view('inc/cabecera');
-		$this->load->view('inc/menu');
-		$this->load->view('inc/menulateral');
-		$this->load->view('emple_listades', $data);
-		$this->load->view('inc/pie');
-	}
+	// }
+	// public function deshabilitados()
+	// {
+	// 	$lista = $this->empleado_model->listaempleadosdes();
+	// 	$data['empleado'] = $lista;
+	// 	$this->load->view('inc/cabecera');
+	// 	$this->load->view('inc/menu');
+	// 	$this->load->view('inc/menulateral');
+	// 	$this->load->view('emple_listades', $data);
+	// 	$this->load->view('inc/pie');
+	// }
+
 
 
 	/* PRUEBA DE CONEXION DE BASE DE DATOS///

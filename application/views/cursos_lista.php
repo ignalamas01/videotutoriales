@@ -36,10 +36,11 @@
               // echo date('y/m/d H:i:s'); ?> hora actualizada   </h1>-->
               
               <div>   
-                <a href="<?php echo base_url(); ?>index.php/cursos/agregar"> <button type="button" class="btn btn-danger">AGREGAR CURSOS</button> </a>
-                <a href="<?php echo base_url(); ?>index.php/cursos/deshabilitados"> <button type="button" class="btn btn-primary">VER LISTA DE CURSOS DESHABILITADOS</button> </a>
-                <a href="<?php echo base_url(); ?>index.php/cursos/subir_video"> <button type="button" class="btn btn-danger">LISTA DE VIDEOS</button> </a>
-                <a href="<?php echo base_url(); ?>index.php/cursos/crear_evaluacion"><button type="button" class="btn btn-warning">crear evaluacion</button>  </a>
+                <a href="<?php echo base_url(); ?>index.php/cursos/agregar"> <button type="button" class="btn btn-danger">Agregar curso</button> </a>
+                <a href="<?php echo base_url(); ?>index.php/cursos/deshabilitados"> <button type="button" class="btn btn-primary">Lista de cursos deshabilitados</button> </a>
+                <a href="<?php echo base_url(); ?>index.php/cursos/subir_video"> <button type="button" class="btn btn-danger">Videos</button> </a>
+                <a href="<?php echo base_url(); ?>index.php/cursos/subir_archivos"> <button type="button" class="btn btn-danger">Archivos</button> </a>
+                <a href="<?php echo base_url(); ?>index.php/cursos/crear_evaluacion"><button type="button" class="btn btn-warning">Crear evaluacion</button>  </a>
                 <a href="<?php echo base_url(); ?>index.php/cursos/realizar_evaluacion"><button type="button" class="btn btn-warning">Realizar evaluacion</button>  </a>
                 <!-- <a href="<?php echo base_url(); ?>index.php/usuarios/logout"> <button type="button" class="btn btn-danger">CERRAR SESION</button> </a> -->
               </div>

@@ -125,7 +125,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["video"])) {
                
                 echo '<source src="' . $video_url . '" type="video/mp4">';
                 //echo '<source src="' . $video_url . '" type="video/x-ms-wmv">';
-                echo '<source src="' . $video_url . '" type="video/wmv">';
+                //echo '<source src="' . $video_url . '" type="video/wmv">';
 
             
 
