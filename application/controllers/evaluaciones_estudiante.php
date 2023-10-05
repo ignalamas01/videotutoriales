@@ -14,16 +14,20 @@ class Evaluaciones_estudiante extends CI_Controller
 {
     // Obtener la última evaluación
     $ultima_evaluacion = $this->evaluaciones_estudiante_model->obtener_ultima_evaluacion();
-    // $ultima_evaluacion['idEvaluacion'] = 48;
-    $data['preguntas'] = array();
-
-    // Obtener otros datos necesarios para la vista
-    $data['idEstudiante'] = obtener_id_estudiante(); // Reemplaza esto con la lógica real
-    $data['puntajeObtenido'] = obtener_puntaje_obtenido(); // Reemplaza esto con la lógica real
 
     // Verificar si hay alguna evaluación
     if ($ultima_evaluacion) {
-        
+        // Obtener el título y la descripción de la evaluación
+        $data['tituloEvaluacion'] = $ultima_evaluacion['tituloEvaluacion'];
+        $data['descripcionEvaluacion'] = $ultima_evaluacion['descripcionEvaluacion'];
+
+        // Otros datos necesarios para la vista
+        $data['idEstudiante'] = obtener_id_estudiante(); // Reemplaza esto con la lógica real
+        $data['puntajeObtenido'] = obtener_puntaje_obtenido(); // Reemplaza esto con la lógica real
+
+        // Obtener las preguntas de la última evaluación
+        $data['preguntas'] = $this->evaluaciones_estudiante_model->obtener_preguntas_evaluacion($ultima_evaluacion['idEvaluacion']);
+
         // Cargar la vista con la información de la última evaluación
         $this->load->view('realizar_evaluacion', $data);
     } else {
@@ -31,7 +35,24 @@ class Evaluaciones_estudiante extends CI_Controller
         echo 'No hay evaluaciones disponibles.';
     }
 }
+// public function realizar_evaluacion()
+// {
+//     // Obtener la última evaluación
+//     $ultima_evaluacion = $this->evaluaciones_estudiante_model->obtener_ultima_evaluacion();
 
+//     // Verificar si hay alguna evaluación
+//     if ($ultima_evaluacion) {
+//         // Obtener las preguntas de la última evaluación
+//         $data['preguntas'] = $this->evaluaciones_estudiante_model->obtener_preguntas_evaluacion($ultima_evaluacion['idEvaluacion']);
+// 		$data['tituloEvaluacion'] = $ultima_evaluacion['tituloEvaluacion'];
+// // $data['descripcionEvaluacion'] = $ultima_evaluacion['descripcionEvaluacion'];
+//         // Cargar la vista con la información de la última evaluación
+//         $this->load->view('realizar_evaluacion', $data);
+//     } else {
+//         // Manejar el caso en que no haya evaluaciones
+//         echo 'No hay evaluaciones disponibles.';
+//     }
+// }
 public function procesar_evaluacion()
 {
     try {

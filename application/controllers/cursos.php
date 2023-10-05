@@ -341,13 +341,15 @@ public function realizar_evaluacion()
 {
     // Obtener la última evaluación
     $ultima_evaluacion = $this->evaluaciones_estudiante_model->obtener_ultima_evaluacion();
-
+	// var_dump($ultima_evaluacion);
     // Verificar si hay alguna evaluación
     if ($ultima_evaluacion) {
         // Obtener las preguntas de la última evaluación
         $data['preguntas'] = $this->evaluaciones_estudiante_model->obtener_preguntas_evaluacion($ultima_evaluacion['idEvaluacion']);
-
+		$data['tituloEvaluacion'] = $ultima_evaluacion['tituloEvaluacion'];
+$data['descripcionEvaluacion'] = $ultima_evaluacion['descripcionEvaluacion'];
         // Cargar la vista con la información de la última evaluación
+		// var_dump($ultima_evaluacion);
         $this->load->view('realizar_evaluacion', $data);
     } else {
         // Manejar el caso en que no haya evaluaciones

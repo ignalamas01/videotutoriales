@@ -6,12 +6,18 @@ class Evaluaciones_estudiante_model extends CI_Model
     public function obtener_ultima_evaluacion()
     {
         // Ajusta la consulta según tu esquema de base de datos
-        $this->db->select('idEvaluacion,tituloEvaluacion');
+        $this->db->select('idEvaluacion, tituloEvaluacion, descripcionEvaluacion');
         $this->db->from('evaluaciones');
         $this->db->order_by('fechaRegistro', 'DESC');
         $this->db->limit(1);
 
         $query = $this->db->get();
+        // $sql = $this->db->last_query();  // Obtiene la última consulta SQL ejecutada
+        // echo $sql;  // Imprime la consulta SQL (elimina esto en producción)
+        // $result = $query->row_array();
+    
+        // var_dump($result);  // Imprime el resultado (elimina esto en producción)
+    
 
         return $query->row_array();
     }

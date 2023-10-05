@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Ejecutar Evaluación</title>
+    <title> Evaluación</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -45,7 +45,9 @@
     </style>
 </head>
 <body>
-    <h1>Ejecutar Evaluación</h1>
+
+<h1> <?php echo $tituloEvaluacion; ?></h1>
+<?php echo $descripcionEvaluacion; ?>
 
     <?php echo form_open('evaluaciones_estudiante/procesar_evaluacion', array('id' => 'executionForm')); ?>
 
@@ -54,7 +56,7 @@
             <div class="question">
                 <p>Pregunta <?php echo $index + 1; ?>:</p>
                 <p><?php echo $pregunta['enunciadoPregunta']; ?></p>
-
+                <p> (<?php echo $pregunta['puntajePregunta']; ?> Puntos)</p>
                 <?php if (!empty($pregunta['opciones'])) : ?>
                     <?php foreach ($pregunta['opciones'] as $opcionIndex => $opciones) : ?>
                         <label>
