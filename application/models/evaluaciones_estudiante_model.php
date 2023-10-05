@@ -6,7 +6,7 @@ class Evaluaciones_estudiante_model extends CI_Model
     public function obtener_ultima_evaluacion()
     {
         // Ajusta la consulta según tu esquema de base de datos
-        $this->db->select('idEvaluacion, tituloEvaluacion, descripcionEvaluacion');
+        $this->db->select('idEvaluacion, tituloEvaluacion, descripcionEvaluacion, puntajeTotal');
         $this->db->from('evaluaciones');
         $this->db->order_by('fechaRegistro', 'DESC');
         $this->db->limit(1);
@@ -42,7 +42,7 @@ class Evaluaciones_estudiante_model extends CI_Model
     }
 public function obtener_opciones_respuesta($idPregunta)
     {
-        $this->db->select('textoOpcion');
+        $this->db->select('textoOpcion, idOpcion');
         $this->db->from('opcionesrespuesta');
         $this->db->where('idPregunta', $idPregunta);
 
@@ -52,7 +52,7 @@ public function obtener_opciones_respuesta($idPregunta)
     }
     public function insertar_respuestas($data) {
         // Verificar que los datos necesarios estén presentes
-        if (!isset($data['idEvaluacion']) || !isset($data['idEstudiante']) || !isset($data['idPregunta']) || !isset($data['respuesta']) || !isset($data['puntajeObtenido'])) {
+        if (!isset($data['idEvaluacion']) || !isset($data['idEstudiante']) || !isset($data['idPregunta']) || !isset($data['respuesta']) || !isset($data['puntajeObtenido'])|| !isset($data['idOpcion'])) {
             throw new RuntimeException('Faltan datos necesarios para procesar la evaluación.');
         }
     
@@ -93,5 +93,36 @@ public function obtener_opciones_respuesta($idPregunta)
         return $query->num_rows() > 0;
     }
     
+    
+    
+//     public function obtener_puntaje_total($idEvaluacion, $idEstudiante) {
+//         // Obtener respuestas del estudiante para la evaluación
+//     $$this->db->select('re.idRespuesta, re.idPregunta, re.respuesta, op.esCorrecta');
+//     $this->db->from('respuestasestudiante re');
+//     $this->db->join('opcionesrespuesta op', 're.idOpcion = op.idOpcion', 'left'); // Join con opcionesrespuesta
+//     $this->db->where('re.idEvaluacion', $idEvaluacion);
+//     $this->db->where('re.idEstudiante', $idEstudiante);
+//     $query = $this->db->get();
+//     $respuestas = $query->result_array();
+
+//     // Calcular el puntaje total
+//     $puntajeTotal = 0;
+//     foreach ($respuestas as $respuesta) {
+//         // Verificar si la respuesta es correcta y sumar puntaje
+//         if ($respuesta['respuesta'] == $respuesta['esCorrecta']) {
+//             $puntajeTotal++;
+//         }
+//     }
+
+//     return $puntajeTotal;
+
+// }
+public function es_opcion_correcta($idOpcion)
+{
+    // Tu lógica para determinar si $idOpcion es la opción correcta
+
+    // Devuelve true si es correcta, false si no es correcta
+    return $esCorrecta;
+}
     
 }
