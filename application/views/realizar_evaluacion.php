@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Ejecutar Evaluación</title>
+    <title>Evaluación</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -45,45 +45,47 @@
     </style>
 </head>
 <body>
-    <h1>Ejecutar Evaluación</h1>
 
-    <?php echo form_open('evaluaciones_estudiante/procesar_evaluacion', array('id' => 'executionForm')); ?>
+<h1><?php echo $tituloEvaluacion; ?></h1>
+<p><?php echo $descripcionEvaluacion; ?></p>
+<p>Puntaje Total: <?php echo $puntajeTotal; ?></p>
+<?php echo form_open('evaluaciones_estudiante/procesar_evaluacion', array('id' => 'executionForm')); ?>
 
-    <?php if (!empty($preguntas)) : ?>
-        <?php foreach ($preguntas as $index => $pregunta) : ?>
-            <div class="question">
-                <p>Pregunta <?php echo $index + 1; ?>:</p>
-                <p><?php echo $pregunta['enunciadoPregunta']; ?></p>
+<?php if (!empty($preguntas)) : ?>
+    <?php foreach ($preguntas as $index => $pregunta) : ?>
+        <div class="question">
+            <p>Pregunta <?php echo $index + 1; ?>:</p>
+            <p><?php echo $pregunta['enunciadoPregunta']; ?></p>
+            <p>(<?php echo $pregunta['puntajePregunta']; ?> Puntos)</p>
+            <?php if (!empty($pregunta['opciones'])) : ?>
+                <?php foreach ($pregunta['opciones'] as $opcionIndex => $opciones) : ?>
+                    <label>
+                        <input type="radio" name="respuestas[<?php echo $index; ?>]" value="<?php echo $opcionIndex; ?>" required>
+                        <?php echo is_array($opciones) ? implode(', ', $opciones) : $opciones; ?>
+                    </label>
+                <?php endforeach; ?>
 
-                <?php if (!empty($pregunta['opciones'])) : ?>
-                    <?php foreach ($pregunta['opciones'] as $opcionIndex => $opciones) : ?>
-                        <label>
-                            <input type="radio" name="respuestas[<?php echo $index; ?>]" value="<?php echo $opcionIndex; ?>" required>
-                            <?php echo is_array($opciones) ? implode(', ', $opciones) : $opciones; ?>
-                        </label>
-                    <?php endforeach; ?>
+                <!-- Agregar campo oculto para 'idPregunta' -->
+                <input type="hidden" name="idPregunta[<?php echo $index; ?>]" value="<?php echo $pregunta['idPregunta']; ?>">
+            <?php else : ?>
+                <p>No hay opciones de respuesta disponibles para esta pregunta.</p>
+            <?php endif; ?>
 
-                    <!-- Agregar campo oculto para 'idPregunta' -->
-                    <input type="hidden" name="idPregunta[<?php echo $index; ?>]" value="<?php echo $pregunta['idPregunta']; ?>">
-                <?php else : ?>
-                    <p>No hay opciones de respuesta disponibles para esta pregunta.</p>
-                <?php endif; ?>
+        </div>
+    <?php endforeach; ?>
 
-            </div>
-        <?php endforeach; ?>
-
-        <?php if (isset($preguntas[0]['idEvaluacion'])) : ?>
-            <!-- Agregar campo oculto para 'idEvaluacion' -->
-            <input type="hidden" name="idEvaluacion" value="<?php echo $preguntas[0]['idEvaluacion']; ?>">
-        <?php endif; ?>
-
-    <?php else : ?>
-        <p>No hay preguntas disponibles.</p>
+    <?php if (isset($preguntas[0]['idEvaluacion'])) : ?>
+        <!-- Agregar campo oculto para 'idEvaluacion' -->
+        <input type="hidden" name="idEvaluacion" value="<?php echo $preguntas[0]['idEvaluacion']; ?>">
     <?php endif; ?>
 
-    <!-- Agregar campos ocultos para idEvaluacion e idPregunta -->
-    <input type="submit" value="Enviar Respuestas">
-    <?php echo form_close(); ?>
+<?php else : ?>
+    <p>No hay preguntas disponibles.</p>
+<?php endif; ?>
+
+<!-- Agregar campos ocultos para idEvaluacion e idPregunta -->
+<input type="submit" value="Enviar Respuestas">
+<?php echo form_close(); ?>
 </body>
 </html>
 
