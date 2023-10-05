@@ -1,5 +1,7 @@
 <a href="<?php echo base_url(); ?>index.php/cursos/listar_videos"><button type="button" class="btn btn-danger">ver lista de videos</button></a>
+
 <br>
+
 <?php
 if (isset($_GET["nombre"])) {
     $video_directory = "uploads/video/";

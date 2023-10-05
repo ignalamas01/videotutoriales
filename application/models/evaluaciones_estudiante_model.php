@@ -17,7 +17,7 @@ class Evaluaciones_estudiante_model extends CI_Model
     }
 
     public function obtener_preguntas_evaluacion($idEvaluacion)
-{
+  {
     // Ajusta la consulta según tu esquema de base de datos
     $this->db->select('enunciadoPregunta');
     $this->db->from('preguntas');
@@ -38,5 +38,5 @@ class Evaluaciones_estudiante_model extends CI_Model
         $pregunta['opciones'] = array_column($opciones, 'textoOpcion');
     }
     return $preguntas;
-}
+  }
 }

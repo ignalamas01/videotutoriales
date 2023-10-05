@@ -51,6 +51,14 @@
                     <li>Desarrollar un módulo de gestion de reportes</li>
 
                 </ul>
+                <ul >
+    <!-- Inserta aquí el reproductor de video -->
+    <video width="640" height="360" controls>
+        
+        <source src="<?php echo base_url(); ?>uploads/video/music2.mp4" type="video/mp4">
+        Tu navegador no admite la reproducción de video.
+    </video>
+</ul>
 
                 <p> tambiense añadira los siquientes modulos</p>
 

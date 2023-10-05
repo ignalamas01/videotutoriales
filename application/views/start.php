@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+<head >
     <title>Zay Shop eCommerce HTML CSS Template</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,16 +16,16 @@
     <!-- Load fonts style after rendering the layout styles -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
     <link rel="stylesheet" href="adminlte/dist/css/temp/fontawesome.min.css">
-<!--
+    <!--
     
-TemplateMo 559 Zay Shop
+    TemplateMo 559 Zay Shop
 
-https://templatemo.com/tm-559-zay-shop
+    https://templatemo.com/tm-559-zay-shop
 
--->
+    -->
 </head>
 
-<body>
+<body style="background-color: #919197 ;" >
     <!-- Start Top Nav -->
     <nav class="navbar navbar-expand-lg bg-dark navbar-light d-none d-lg-block" id="templatemo_nav_top">
         <div class="container text-light">
@@ -49,10 +49,10 @@ https://templatemo.com/tm-559-zay-shop
 
 
     <!-- Header -->
-    <nav class="navbar navbar-expand-lg navbar-light shadow">
-    <div class="container d-flex justify-content-between align-items-center">
+    <nav class="navbar navbar-expand-lg navbar-light shadow" style="background-color: #093562 ;" >
+    <div class="container d-flex justify-content-between align-items-center"  >
     <a href="<?php echo base_url(); ?>index.php/system/index" class="navbar-brand" style="color: red;">
-    <img src="<?php echo base_url(); ?>/adminlte/dist/img/logo_cepra.jpeg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8; width: 65px; display: inline-block; vertical-align: middle; margin-left: 10px;">
+    <img  src="<?php echo base_url(); ?>/adminlte/dist/img/logo_cepra.jpeg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8; width: 65px; display: inline-block; vertical-align: middle; margin-left: 10px;">
         <a class="navbar-brand" href="<?php echo base_url(); ?>index.php/system/index" style="color: skyblue;">CEPRA</a>
     </a>
     <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -61,20 +61,21 @@ https://templatemo.com/tm-559-zay-shop
 
 
 
-            <div class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between" id="templatemo_main_nav">
+            <div class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between" id="templatemo_main_nav" >
                 <div class="flex-fill">
-                    <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="<?php echo base_url(); ?>index.php/base/index">Home</a>
+                   
+                <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
+                        <li class="nav-item" >
+                            <a class="breadcrumb-item" href="<?php echo base_url(); ?>index.php/base/index">/Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="about.html">Datatables</a>
+                            <a class="breadcrumb-item" href="about.html">Datatables</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?php echo base_url(); ?>index.php/usuarios/logout">Registrarse</a>
+                            <a class="breadcrumb-item" href="<?php echo base_url(); ?>index.php/usuarios/logout">Registrarse</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?php echo base_url(); ?>index.php/usuarios/logout">Iniciar sesión</a>
+                            <a class="breadcrumb-item" href="<?php echo base_url(); ?>index.php/usuarios/logout">Iniciar sesión</a>
                         </li>
                         
         <!-- <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/base/index">Home</a></li>
@@ -84,11 +85,11 @@ https://templatemo.com/tm-559-zay-shop
         <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/registro/registrar">Registrate</a></li> -->
                     </ul>
                 </div>
-                <div class="navbar align-self-center d-flex">
-                    <div class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="inputMobileSearch" placeholder="Search ...">
-                            <div class="input-group-text">
+                <div class="navbar align-self-center d-flex" >
+                    <div class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3" >
+                        <div class="input-group"  >
+                            <input type="text" class="form-control" id="inputMobileSearch" placeholder="Search ..." >
+                            <div class="input-group-text" >
                                 <i class="fa fa-fw fa-search"></i>
                             </div>
                         </div>
@@ -142,7 +143,7 @@ https://templatemo.com/tm-559-zay-shop
                 <div class="container">
                     <div class="row p-5">
                         <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
-                            <img class="img-fluid" src="<?php echo base_url(); ?>img/logobig_2.jpg" alt="">
+                            <img class="img-fluid" src="<?php echo base_url(); ?>img/logobig.jpg"  alt="">
                         </div>
                         <div class="col-lg-6 mb-0 d-flex align-items-center">
                             <div class="text-align-left align-self-center">

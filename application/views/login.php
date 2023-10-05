@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head >
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>VIDEOWE| Login</title>
@@ -20,19 +20,31 @@
 
 </head>
 
-<a href="<?php echo base_url(); ?>index.php/system/index" class="brand-link" >
-      <img src="<?php echo base_url(); ?>/adminlte/dist/img/logo_cepra.jpeg" alt="AdminLTE Logo"  class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">CEPRA</span>
-    </a>
-<body   class="hold-transition login-page">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <a href="<?php echo base_url(); ?>index.php/system/index" class="brand-link d-flex justify-content-start">
+                <img src="<?php echo base_url(); ?>/adminlte/dist/img/logo_cepra.jpeg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+                <span class="brand-text font-weight-light">CEPRA</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<body   class="hold-transition login-page" style="background-color: #0b0704;">
   <!-- stylo para agregar imagen -->
-<!-- style="background-image: url('<?php echo base_url(); ?>uploads/imgenes/fondo.jpg'); background-size: cover;" -->
+
 <div class="video-container">
         <video autoplay loop muted>
+          
             <source src="<?php echo base_url(); ?>uploads/video/video1.mp4" type="video/mp4">
             Tu navegador no admite la reproducción de video.
+            
+            
         </video>
+        
         <div class="contenido">
+          
             <!-- Aquí puedes agregar contenido adicional sobre el video de fondo -->
             <!-- <h1>Bienvenido a Mi Sitio Web</h1> -->
             
