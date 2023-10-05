@@ -23,23 +23,24 @@ class Evaluaciones_estudiante_model extends CI_Model
     }
 
     public function obtener_preguntas_evaluacion($idEvaluacion)
-    {
-        // Ajusta la consulta según tu esquema de base de datos
-        $this->db->select('idPregunta, enunciadoPregunta,idEvaluacion,puntajePregunta');
-        $this->db->from('preguntas');
-        $this->db->where('idEvaluacion', $idEvaluacion);
-    
-        $query = $this->db->get();
-    
-        $preguntas = $query->result_array();
-    
-        // Obtener opciones de respuesta para cada pregunta
-        foreach ($preguntas as &$pregunta) {
-            $pregunta['opciones'] = $this->obtener_opciones_respuesta($pregunta['idPregunta']);
-        }
-    
-        return $preguntas;
+{
+    $this->db->select('p.idPregunta, p.enunciadoPregunta, p.idEvaluacion, p.puntajePregunta, o.idOpcion as idOpcionCorrecta');
+    $this->db->from('preguntas p');
+    $this->db->join('opcionesrespuesta o', 'p.idPregunta = o.idPregunta AND o.esCorrecta = 1', 'left');
+    $this->db->where('p.idEvaluacion', $idEvaluacion);
+
+    $query = $this->db->get();
+
+    $preguntas = $query->result_array();
+
+    // Obtener opciones de respuesta para cada pregunta
+    foreach ($preguntas as &$pregunta) {
+        $pregunta['opciones'] = $this->obtener_opciones_respuesta($pregunta['idPregunta']);
     }
+
+    return $preguntas;
+}
+
 public function obtener_opciones_respuesta($idPregunta)
     {
         $this->db->select('textoOpcion, idOpcion');
