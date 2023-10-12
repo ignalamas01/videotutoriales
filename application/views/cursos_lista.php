@@ -29,7 +29,7 @@
 
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">cursos</h3>
+                <h3 class="card-title">Cursos</h3>
               </div>
              <!--- <h1><?php
               //date_default_timezone_set('America/la_paz');

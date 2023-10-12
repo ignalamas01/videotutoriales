@@ -22,7 +22,7 @@
     <div class="row featurette">
     <div class="col-md-7">
         <br>
-        <h2 class="featurette-heading">AGREGAR CURSOS<span class="text-muted"> ****</span></h2>
+        <h2 class="featurette-heading">AGREGAR CURSOS<span class="text-muted"> </span></h2>
 
 
     </div>
@@ -68,7 +68,7 @@
                                     <input type="text" name="descripcion" placeholder="escriba la descripcion del video" class="form-control" required><br>
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">VIDEO</label>
+                                    <label for="exampleInputPassword1">PENDIENTE VIDEO</label>
                                     <input type="text" name="video" placeholder="subir video" class="form-control"><br>
                                 </div>
                                 
@@ -109,13 +109,20 @@
 
                             </div>
                             <!-- /.card-body -->
+                        <!-- ... Código anterior ... -->
+
+<!-- Botón para agregar más secciones -->
+<button type="button" class="btn btn-success" id="agregarSeccion">Agregar Sección</button>
+
+<!-- Contenedor para las secciones adicionales -->
+<div id="contenedorSecciones"></div>
 
 
                         </form>
                     </div>
                     <!-- /.card -->
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-success ">agregar</button>
+                        <button type="submit" class="btn btn-success ">Agregar Curso</button>
 
                         <button type="reset" class="btn btn-success " onClick="history.go(-1);">Cancelar</button>
                     </div>
@@ -130,6 +137,136 @@
 
     </section>
 </div><!-- /.container-fluid -->
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    var contadorSecciones = 0;
+
+    function agregarNuevaSeccion() {
+        contadorSecciones++;
+
+        var nuevaSeccionHTML = `
+            <div class="seccion" id="seccion_${contadorSecciones}">
+                <h4>SECCIÓN ${contadorSecciones}</h4>
+
+                <div class="form-group">
+                    <label for="titulo_seccion_${contadorSecciones}">Título de la Sección</label>
+                    <input type="text" name="titulo_seccion_${contadorSecciones}" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="descripcion_seccion_${contadorSecciones}">Descripción de la Sección</label>
+                    <textarea name="descripcion_seccion_${contadorSecciones}" class="form-control"></textarea>
+                </div>
+
+                <!-- Botón para agregar archivos a esta sección -->
+                <button type="button" class="btn btn-info agregarArchivo" data-seccion="${contadorSecciones}">Agregar Archivo</button>
+
+                <!-- Contenedor para los archivos de esta sección -->
+                <div class="contenedorArchivos" id="archivos_seccion_${contadorSecciones}"></div>
+
+                <!-- Botón para agregar videos a esta sección -->
+                <button type="button" class="btn btn-info agregarVideo" data-seccion="${contadorSecciones}">Agregar Video</button>
+
+                <!-- Contenedor para los videos de esta sección -->
+                <div class="contenedorVideos" id="videos_seccion_${contadorSecciones}"></div>
+
+                <!-- Botón para eliminar esta sección -->
+                <button type="button" class="btn btn-danger eliminarSeccion" data-seccion="${contadorSecciones}">Eliminar Sección</button>
+            </div>
+        `;
+
+        document.getElementById("contenedorSecciones").innerHTML += nuevaSeccionHTML;
+
+        // Manejar clic en el botón "Agregar Archivo" para esta sección
+        document.querySelector(`#seccion_${contadorSecciones} .agregarArchivo`).addEventListener("click", function() {
+            agregarNuevoArchivo(contadorSecciones);
+        });
+
+        // Manejar clic en el botón "Agregar Video" para esta sección
+        document.querySelector(`#seccion_${contadorSecciones} .agregarVideo`).addEventListener("click", function() {
+            agregarNuevoVideo(contadorSecciones);
+        });
+
+        // Manejar clic en el botón "Eliminar Sección" para esta sección
+        document.querySelector(`#seccion_${contadorSecciones} .eliminarSeccion`).addEventListener("click", function() {
+            eliminarSeccion(contadorSecciones);
+        });
+    }
+
+    function agregarNuevoArchivo(numeroSeccion) {
+        var nuevoArchivoHTML = `
+            <div class="form-group">
+                <label for="titulo_archivo_${numeroSeccion}">Título del Archivo</label>
+                <input type="text" name="titulo_archivo_${numeroSeccion}[]" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="ruta_archivo_${numeroSeccion}">Ruta del Archivo</label>
+                <input type="text" name="ruta_archivo_${numeroSeccion}[]" class="form-control" required>
+            </div>
+        `;
+
+        document.getElementById(`archivos_seccion_${numeroSeccion}`).innerHTML += nuevoArchivoHTML;
+    }
+
+    function agregarNuevoVideo(numeroSeccion) {
+        var nuevoVideoHTML = `
+            <div class="form-group">
+                <label for="titulo_video_${numeroSeccion}">Título del Video</label>
+                <input type="text" name="titulo_video_${numeroSeccion}[]" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="ruta_video_${numeroSeccion}">Ruta del Video</label>
+                <input type="text" name="ruta_video_${numeroSeccion}[]" class="form-control" required>
+            </div>
+        `;
+
+        document.getElementById(`videos_seccion_${numeroSeccion}`).innerHTML += nuevoVideoHTML;
+    }
+
+    function eliminarSeccion(numeroSeccion) {
+        // Eliminar la sección y sus contenidos
+        var seccion = document.getElementById(`seccion_${numeroSeccion}`);
+        seccion.parentNode.removeChild(seccion);
+
+        // Verificar si se eliminaron todas las secciones
+        var secciones = document.getElementsByClassName("seccion");
+        if (secciones.length === 0) {
+            // Si no hay secciones, reiniciar el contador
+            contadorSecciones = 0;
+        }
+    }
+
+    // Asignar eventos a todos los botones "Agregar Archivo"
+    document.getElementById("contenedorSecciones").addEventListener("click", function(event) {
+        if (event.target.classList.contains("agregarArchivo")) {
+            var numeroSeccion = event.target.getAttribute("data-seccion");
+            agregarNuevoArchivo(numeroSeccion);
+        }
+    });
+
+    // Asignar eventos a todos los botones "Agregar Video"
+    document.getElementById("contenedorSecciones").addEventListener("click", function(event) {
+        if (event.target.classList.contains("agregarVideo")) {
+            var numeroSeccion = event.target.getAttribute("data-seccion");
+            agregarNuevoVideo(numeroSeccion);
+        }
+    });
+
+    // Asignar evento a todos los botones "Eliminar Sección"
+    document.getElementById("contenedorSecciones").addEventListener("click", function(event) {
+        if (event.target.classList.contains("eliminarSeccion")) {
+            var numeroSeccion = event.target.getAttribute("data-seccion");
+            eliminarSeccion(numeroSeccion);
+        }
+    });
+
+    document.getElementById("agregarSeccion").addEventListener("click", function() {
+        agregarNuevaSeccion();
+    });
+});
+</script>
+
+
 
 
 <?php
