@@ -110,15 +110,21 @@
                             </div>
                             <!-- /.card-body -->
                         <!-- ... Código anterior ... -->
-
+                        <?php
+echo form_close();
+?>
+<?php
+    echo form_open_multipart('cursos/agregar_seccion_bd')
+    ?>
 <!-- Botón para agregar más secciones -->
 <button type="button" class="btn btn-success" id="agregarSeccion">Agregar Sección</button>
 
 <!-- Contenedor para las secciones adicionales -->
 <div id="contenedorSecciones"></div>
+<!-- Agregar un campo oculto para almacenar el número total de secciones -->
+<input type="hidden" name="numeroSecciones" id="numeroSecciones" value="0">
 
-
-                        </form>
+                        <!-- </form> -->
                     </div>
                     <!-- /.card -->
                     <div class="card-footer">

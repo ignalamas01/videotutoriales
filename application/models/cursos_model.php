@@ -39,6 +39,23 @@ class cursos_model extends CI_Model
         $this->db->where('id', $idcursos);
         $this->db->delete('cursos');
     }
-
-   
+    public function agregar_seccion($data)
+    {
+        $this->db->insert('secciones', $data);
+        if ($this->db->affected_rows() > 0) {
+            // Inserción exitosa
+            echo 'Inserción exitosa';
+        } else {
+            // Error en la inserción
+            echo $this->db->error();
+        }
+    }
+    public function agregarArchivo($data)
+    {
+        $this->db->insert('archivos', $data);
+    }
+    public function agregarVideo($data)
+{
+    $this->db->insert('videos', $data);
+}
 }

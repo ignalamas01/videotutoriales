@@ -150,7 +150,7 @@ class Cursos extends CI_Controller
 		
 
 		$this->cursos_model->agregarcursos($data);
-		redirect('cursos/cursos', 'refresh');
+		// redirect('cursos/cursos', 'refresh');
 	}
 	public function modificar()
 	{
@@ -397,7 +397,16 @@ $data['puntajeTotal'] = $ultima_evaluacion['puntajeTotal'];
 		// $this->load->view('inc/pie');
 		
 	}
-
+	public function agregar_seccion_bd()
+	{
+		var_dump($this->input->post()); // Agrega esta línea para depurar
+		$data['nombre'] = $this->input->post('titulo_seccion_1');
+$data['descripcion'] = $this->input->post('descripcion_seccion_1');
+		
+		$this->cursos_model->agregar_seccion($data);
+		var_dump($this->input->post());
+		// redirect('cursos/cursos', 'refresh');
+	}
 
 
 
