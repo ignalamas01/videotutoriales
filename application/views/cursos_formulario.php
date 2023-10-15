@@ -139,7 +139,7 @@
 </div><!-- /.container-fluid -->
 
 <script>
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     var contadorSecciones = 0;
 
     function agregarNuevaSeccion() {
@@ -160,12 +160,16 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 <!-- Botón para agregar archivos a esta sección -->
                 <button type="button" class="btn btn-info agregarArchivo" data-seccion="${contadorSecciones}">Agregar Archivo</button>
+                <!-- Botón para eliminar archivos de esta sección -->
+                <button type="button" class="btn btn-danger eliminarArchivo" data-seccion="${contadorSecciones}">Eliminar Archivo</button>
 
                 <!-- Contenedor para los archivos de esta sección -->
                 <div class="contenedorArchivos" id="archivos_seccion_${contadorSecciones}"></div>
 
                 <!-- Botón para agregar videos a esta sección -->
                 <button type="button" class="btn btn-info agregarVideo" data-seccion="${contadorSecciones}">Agregar Video</button>
+                <!-- Botón para eliminar videos de esta sección -->
+                <button type="button" class="btn btn-danger eliminarVideo" data-seccion="${contadorSecciones}">Eliminar Video</button>
 
                 <!-- Contenedor para los videos de esta sección -->
                 <div class="contenedorVideos" id="videos_seccion_${contadorSecciones}"></div>
@@ -175,21 +179,34 @@ document.addEventListener("DOMContentLoaded", function() {
             </div>
         `;
 
-        document.getElementById("contenedorSecciones").innerHTML += nuevaSeccionHTML;
+        document.getElementById("contenedorSecciones").insertAdjacentHTML("beforeend", nuevaSeccionHTML);
 
+        // Asignar eventos a los botones de esta sección
+        asignarEventosSeccion(contadorSecciones);
+    }
+
+    function asignarEventosSeccion(numeroSeccion) {
         // Manejar clic en el botón "Agregar Archivo" para esta sección
-        document.querySelector(`#seccion_${contadorSecciones} .agregarArchivo`).addEventListener("click", function() {
-            agregarNuevoArchivo(contadorSecciones);
+        document.querySelector(`#seccion_${numeroSeccion} .agregarArchivo`).addEventListener("click", function () {
+            agregarNuevoArchivo(numeroSeccion);
+        });
+        // Manejar clic en el botón "Eliminar Archivo" para esta sección
+        document.querySelector(`#seccion_${numeroSeccion} .eliminarArchivo`).addEventListener("click", function () {
+            eliminarUltimoArchivo(numeroSeccion);
         });
 
         // Manejar clic en el botón "Agregar Video" para esta sección
-        document.querySelector(`#seccion_${contadorSecciones} .agregarVideo`).addEventListener("click", function() {
-            agregarNuevoVideo(contadorSecciones);
+        document.querySelector(`#seccion_${numeroSeccion} .agregarVideo`).addEventListener("click", function () {
+            agregarNuevoVideo(numeroSeccion);
+        });
+        // Manejar clic en el botón "Eliminar Video" para esta sección
+        document.querySelector(`#seccion_${numeroSeccion} .eliminarVideo`).addEventListener("click", function () {
+            eliminarUltimoVideo(numeroSeccion);
         });
 
         // Manejar clic en el botón "Eliminar Sección" para esta sección
-        document.querySelector(`#seccion_${contadorSecciones} .eliminarSeccion`).addEventListener("click", function() {
-            eliminarSeccion(contadorSecciones);
+        document.querySelector(`#seccion_${numeroSeccion} .eliminarSeccion`).addEventListener("click", function () {
+            eliminarSeccion(numeroSeccion);
         });
     }
 
@@ -205,7 +222,15 @@ document.addEventListener("DOMContentLoaded", function() {
             </div>
         `;
 
-        document.getElementById(`archivos_seccion_${numeroSeccion}`).innerHTML += nuevoArchivoHTML;
+        document.getElementById(`archivos_seccion_${numeroSeccion}`).insertAdjacentHTML("beforeend", nuevoArchivoHTML);
+    }
+
+    function eliminarUltimoArchivo(numeroSeccion) {
+        var contenedorArchivos = document.getElementById(`archivos_seccion_${numeroSeccion}`);
+        var ultimoArchivo = contenedorArchivos.lastElementChild;
+        if (ultimoArchivo) {
+            contenedorArchivos.removeChild(ultimoArchivo);
+        }
     }
 
     function agregarNuevoVideo(numeroSeccion) {
@@ -220,7 +245,15 @@ document.addEventListener("DOMContentLoaded", function() {
             </div>
         `;
 
-        document.getElementById(`videos_seccion_${numeroSeccion}`).innerHTML += nuevoVideoHTML;
+        document.getElementById(`videos_seccion_${numeroSeccion}`).insertAdjacentHTML("beforeend", nuevoVideoHTML);
+    }
+
+    function eliminarUltimoVideo(numeroSeccion) {
+        var contenedorVideos = document.getElementById(`videos_seccion_${numeroSeccion}`);
+        var ultimoVideo = contenedorVideos.lastElementChild;
+        if (ultimoVideo) {
+            contenedorVideos.removeChild(ultimoVideo);
+        }
     }
 
     function eliminarSeccion(numeroSeccion) {
@@ -237,33 +270,39 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     // Asignar eventos a todos los botones "Agregar Archivo"
-    document.getElementById("contenedorSecciones").addEventListener("click", function(event) {
+    document.getElementById("contenedorSecciones").addEventListener("click", function (event) {
         if (event.target.classList.contains("agregarArchivo")) {
             var numeroSeccion = event.target.getAttribute("data-seccion");
             agregarNuevoArchivo(numeroSeccion);
+        } else if (event.target.classList.contains("eliminarArchivo")) {
+            var numeroSeccion = event.target.getAttribute("data-seccion");
+            eliminarUltimoArchivo(numeroSeccion);
         }
     });
 
     // Asignar eventos a todos los botones "Agregar Video"
-    document.getElementById("contenedorSecciones").addEventListener("click", function(event) {
-        if (event.target.classList.contains("agregarVideo")) {
-            var numeroSeccion = event.target.getAttribute("data-seccion");
-            agregarNuevoVideo(numeroSeccion);
-        }
-    });
-
-    // Asignar evento a todos los botones "Eliminar Sección"
-    document.getElementById("contenedorSecciones").addEventListener("click", function(event) {
-        if (event.target.classList.contains("eliminarSeccion")) {
-            var numeroSeccion = event.target.getAttribute("data-seccion");
-            eliminarSeccion(numeroSeccion);
-        }
-    });
-
-    document.getElementById("agregarSeccion").addEventListener("click", function() {
-        agregarNuevaSeccion();
-    });
+    document.getElementById("contenedorSecciones").addEventListener("click", function (event) {
+if (event.target.classList.contains("agregarVideo")) {
+var numeroSeccion = event.target.getAttribute("data-seccion");
+agregarNuevoVideo(numeroSeccion);
+} else if (event.target.classList.contains("eliminarVideo")) {
+var numeroSeccion = event.target.getAttribute("data-seccion");
+eliminarUltimoVideo(numeroSeccion);
+}
 });
+// Asignar evento a todos los botones "Eliminar Sección"
+document.getElementById("contenedorSecciones").addEventListener("click", function (event) {
+    if (event.target.classList.contains("eliminarSeccion")) {
+        var numeroSeccion = event.target.getAttribute("data-seccion");
+        eliminarSeccion(numeroSeccion);
+    }
+});
+
+document.getElementById("agregarSeccion").addEventListener("click", function () {
+    agregarNuevaSeccion();
+});
+});
+
 </script>
 
 
