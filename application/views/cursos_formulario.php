@@ -120,6 +120,8 @@
 <div id="contenedorSecciones"></div>
 <!-- Agregar un campo oculto para almacenar el número total de secciones -->
 <input type="hidden" name="numeroSecciones" id="numeroSecciones" value="0">
+<input type="hidden" name="numeroArchivos" id="numeroArchivos" value="0">
+<input type="hidden" name="numeroVideos" id="numeroVideos" value="0">
 
                         <!-- </form> -->
                     </div>
@@ -213,6 +215,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function agregarNuevoArchivo(numeroSeccion) {
+        
     // Obtener el contador de archivos actual de la sección
     var contadorArchivos = 1;
     var contenedorArchivos = document.getElementById(`archivos_seccion_${numeroSeccion}`);
@@ -226,15 +229,16 @@ document.addEventListener("DOMContentLoaded", function () {
     var nuevoArchivoHTML = `
         <div class="form-group">
             <label for="titulo_archivo_${numeroSeccion}_${contadorArchivos}">Título del Archivo ${contadorArchivos}</label>
-            <input type="text" name="titulo_archivo_${numeroSeccion}[]" class="form-control" required>
+            <input type="text" name="titulo_archivo_${contadorArchivos}" class="form-control" required>
         </div>
         <div class="form-group">
             <label for="ruta_archivo_${numeroSeccion}_${contadorArchivos}">Ruta del Archivo ${contadorArchivos}</label>
-            <input type="text" name="ruta_archivo_${numeroSeccion}[]" class="form-control" required>
+            <input type="text" name="ruta_archivo_${contadorArchivos}" class="form-control" required>
         </div>
     `;
 
     contenedorArchivos.insertAdjacentHTML("beforeend", nuevoArchivoHTML);
+    document.getElementById('numeroArchivos').value = contadorArchivos;
 }
 
 function agregarNuevoVideo(numeroSeccion) {
@@ -251,15 +255,16 @@ function agregarNuevoVideo(numeroSeccion) {
     var nuevoVideoHTML = `
         <div class="form-group">
             <label for="titulo_video_${numeroSeccion}_${contadorVideos}">Título del Video ${contadorVideos}</label>
-            <input type="text" name="titulo_video_${numeroSeccion}[]" class="form-control" required>
+            <input type="text" name="titulo_video_${contadorVideos}" class="form-control" required>
         </div>
         <div class="form-group">
             <label for="ruta_video_${numeroSeccion}_${contadorVideos}">Ruta del Video ${contadorVideos}</label>
-            <input type="text" name="ruta_video_${numeroSeccion}[]" class="form-control" required>
+            <input type="text" name="ruta_video_${contadorVideos}" class="form-control" required>
         </div>
     `;
 
     contenedorVideos.insertAdjacentHTML("beforeend", nuevoVideoHTML);
+    document.getElementById('numeroVideos').value = contadorVideos;
 }
 
 

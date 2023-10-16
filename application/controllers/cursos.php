@@ -173,8 +173,26 @@ class Cursos extends CI_Controller
         
         // Procesar datos de los videos de la sección
         // ... Lógica para procesar videos ...
-    }
-
+    
+	$numero_archivos = $this->input->post("numeroArchivos");
+	for ($j = 1; $j <= $numero_archivos; $j++) {
+		$data = array(
+			'nombreArchivo' => $this->input->post("titulo_archivo_$j"),
+        'rutaArchivo' => $this->input->post("ruta_archivo_$j"),
+			'idSeccion' => $seccion_id,
+		);
+		$this->cursos_model->agregarArchivo($data);
+	}
+	$numero_videos = $this->input->post("numeroVideos");
+for ($k = 1; $k <= $numero_videos; $k++) {
+    $data_video = array(
+        'tituloVideo' => $this->input->post("titulo_video_$k"),
+        'enlaceVideo' => $this->input->post("ruta_video_$k"),
+        'idSeccion' => $seccion_id,
+    );
+    $this->cursos_model->agregarVideo($data_video);
+}
+}
     // Redireccionar o mostrar un mensaje de éxito
 	// redirect('cursos/cursos', 'refresh');
 	var_dump($data);
