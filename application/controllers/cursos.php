@@ -189,6 +189,7 @@ for ($k = 1 ; $k <= $numero_videos ; $k++) {
 	
     $data_video = array(
 		'tituloVideo' => $this->input->post("titulo_video_{$i}_{$k}"),
+		'descripcionVideo' => $this->input->post("descripcion_video_{$i}_{$k}"),
 		'enlaceVideo' => $this->input->post("ruta_video_{$i}_{$k}"),
         'idSeccion' => $seccion_id,
     );

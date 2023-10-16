@@ -68,7 +68,7 @@
                                     <input type="text" name="descripcion" placeholder="escriba la descripcion del video" class="form-control" required><br>
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">PENDIENTE VIDEO</label>
+                                    <label for="exampleInputPassword1">LINK DE PORTADA DE CURSO</label>
                                     <input type="text" name="video" placeholder="subir video" class="form-control"><br>
                                 </div>
                                 
@@ -256,6 +256,10 @@ function agregarNuevoVideo(numeroSeccion) {
         <div class="form-group">
             <label for="titulo_video_${numeroSeccion}_${contadorVideos}">Título del Video ${contadorVideos}</label>
             <input type="text" name="titulo_video_${numeroSeccion}_${contadorVideos}" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="descripcion_video_${numeroSeccion}_${contadorVideos}">Descripcion del Video ${contadorVideos}</label>
+            <input type="text" name="descripcion_video_${numeroSeccion}_${contadorVideos}" class="form-control" required>
         </div>
         <div class="form-group">
             <label for="ruta_video_${numeroSeccion}_${contadorVideos}">Ruta del Video ${contadorVideos}</label>
