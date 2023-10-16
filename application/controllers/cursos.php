@@ -164,7 +164,7 @@ class Cursos extends CI_Controller
 			'idCurso' => $curso_id,
             // Otros campos de la seccións
         );
-
+		
         // Insertar datos de la sección en la tabla secciones
         $seccion_id =$this->cursos_model->agregar_seccion($data);
 
@@ -176,18 +176,20 @@ class Cursos extends CI_Controller
     
 	$numero_archivos = $this->input->post("numeroArchivos");
 	for ($j = 1; $j <= $numero_archivos; $j++) {
-		$data = array(
-			'nombreArchivo' => $this->input->post("titulo_archivo_$j"),
-        'rutaArchivo' => $this->input->post("ruta_archivo_$j"),
+		
+		$data_archivo = array(
+			'nombreArchivo' => $this->input->post("titulo_archivo_{$i}_{$j}"),
+            'rutaArchivo' => $this->input->post("ruta_archivo_{$i}_{$j}"),
 			'idSeccion' => $seccion_id,
 		);
-		$this->cursos_model->agregarArchivo($data);
+		$this->cursos_model->agregarArchivo($data_archivo);
 	}
 	$numero_videos = $this->input->post("numeroVideos");
-for ($k = 1; $k <= $numero_videos; $k++) {
+for ($k = 1 ; $k <= $numero_videos ; $k++) {
+	
     $data_video = array(
-        'tituloVideo' => $this->input->post("titulo_video_$k"),
-        'enlaceVideo' => $this->input->post("ruta_video_$k"),
+		'tituloVideo' => $this->input->post("titulo_video_{$i}_{$k}"),
+		'enlaceVideo' => $this->input->post("ruta_video_{$i}_{$k}"),
         'idSeccion' => $seccion_id,
     );
     $this->cursos_model->agregarVideo($data_video);

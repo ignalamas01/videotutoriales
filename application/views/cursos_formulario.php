@@ -229,11 +229,11 @@ document.addEventListener("DOMContentLoaded", function () {
     var nuevoArchivoHTML = `
         <div class="form-group">
             <label for="titulo_archivo_${numeroSeccion}_${contadorArchivos}">Título del Archivo ${contadorArchivos}</label>
-            <input type="text" name="titulo_archivo_${contadorArchivos}" class="form-control" required>
+            <input type="text" name="titulo_archivo_${numeroSeccion}_${contadorArchivos}" class="form-control" required>
         </div>
         <div class="form-group">
             <label for="ruta_archivo_${numeroSeccion}_${contadorArchivos}">Ruta del Archivo ${contadorArchivos}</label>
-            <input type="text" name="ruta_archivo_${contadorArchivos}" class="form-control" required>
+            <input type="text" name="ruta_archivo_${numeroSeccion}_${contadorArchivos}" class="form-control" required>
         </div>
     `;
 
@@ -255,11 +255,11 @@ function agregarNuevoVideo(numeroSeccion) {
     var nuevoVideoHTML = `
         <div class="form-group">
             <label for="titulo_video_${numeroSeccion}_${contadorVideos}">Título del Video ${contadorVideos}</label>
-            <input type="text" name="titulo_video_${contadorVideos}" class="form-control" required>
+            <input type="text" name="titulo_video_${numeroSeccion}_${contadorVideos}" class="form-control" required>
         </div>
         <div class="form-group">
             <label for="ruta_video_${numeroSeccion}_${contadorVideos}">Ruta del Video ${contadorVideos}</label>
-            <input type="text" name="ruta_video_${contadorVideos}" class="form-control" required>
+            <input type="text" name="ruta_video_${numeroSeccion}_${contadorVideos}" class="form-control" required>
         </div>
     `;
 

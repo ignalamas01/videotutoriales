@@ -56,12 +56,12 @@ class cursos_model extends CI_Model
         return false;  // o maneja de alguna manera según tus necesidades
     }
 }
-    public function agregarArchivo($data)
+    public function agregarArchivo($data_archivo)
     {
-        $this->db->insert('archivos', $data);
+        $this->db->insert('archivos', $data_archivo);
     }
-    public function agregarVideo($data)
+    public function agregarVideo($data_video)
 {
-    $this->db->insert('videos', $data);
+    $this->db->insert('videos', $data_video);
 }
 }
