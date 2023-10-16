@@ -108,15 +108,12 @@
 
 
                             </div>
+                            
                             <!-- /.card-body -->
                         <!-- ... Código anterior ... -->
-                        <?php
-echo form_close();
-?>
-<?php
-    echo form_open_multipart('cursos/agregar_seccion_bd')
-    ?>
+                        
 <!-- Botón para agregar más secciones -->
+
 <button type="button" class="btn btn-success" id="agregarSeccion">Agregar Sección</button>
 
 <!-- Contenedor para las secciones adicionales -->
@@ -150,7 +147,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function agregarNuevaSeccion() {
         contadorSecciones++;
-
+        // var contadorArchivos = 0;
+        // var contadorVideos = 0;
+        
         var nuevaSeccionHTML = `
             <div class="seccion" id="seccion_${contadorSecciones}">
                 <h4>SECCIÓN ${contadorSecciones}</h4>
@@ -184,27 +183,24 @@ document.addEventListener("DOMContentLoaded", function () {
                 <button type="button" class="btn btn-danger eliminarSeccion" data-seccion="${contadorSecciones}">Eliminar Sección</button>
             </div>
         `;
-
+        
         document.getElementById("contenedorSecciones").insertAdjacentHTML("beforeend", nuevaSeccionHTML);
-
+        document.getElementById('numeroSecciones').value = contadorSecciones;
         // Asignar eventos a los botones de esta sección
-        asignarEventosSeccion(contadorSecciones);
+        asignarEventosSeccion(contadorSecciones, 'archivo');
+        
     }
 
     function asignarEventosSeccion(numeroSeccion) {
         // Manejar clic en el botón "Agregar Archivo" para esta sección
-        document.querySelector(`#seccion_${numeroSeccion} .agregarArchivo`).addEventListener("click", function () {
-            agregarNuevoArchivo(numeroSeccion);
-        });
+        
         // Manejar clic en el botón "Eliminar Archivo" para esta sección
         document.querySelector(`#seccion_${numeroSeccion} .eliminarArchivo`).addEventListener("click", function () {
             eliminarUltimoArchivo(numeroSeccion);
         });
 
         // Manejar clic en el botón "Agregar Video" para esta sección
-        document.querySelector(`#seccion_${numeroSeccion} .agregarVideo`).addEventListener("click", function () {
-            agregarNuevoVideo(numeroSeccion);
-        });
+       
         // Manejar clic en el botón "Eliminar Video" para esta sección
         document.querySelector(`#seccion_${numeroSeccion} .eliminarVideo`).addEventListener("click", function () {
             eliminarUltimoVideo(numeroSeccion);
@@ -217,19 +213,56 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function agregarNuevoArchivo(numeroSeccion) {
-        var nuevoArchivoHTML = `
-            <div class="form-group">
-                <label for="titulo_archivo_${numeroSeccion}">Título del Archivo</label>
-                <input type="text" name="titulo_archivo_${numeroSeccion}[]" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="ruta_archivo_${numeroSeccion}">Ruta del Archivo</label>
-                <input type="text" name="ruta_archivo_${numeroSeccion}[]" class="form-control" required>
-            </div>
-        `;
+    // Obtener el contador de archivos actual de la sección
+    var contadorArchivos = 1;
+    var contenedorArchivos = document.getElementById(`archivos_seccion_${numeroSeccion}`);
+    var archivosExistentes = contenedorArchivos.querySelectorAll('.form-group').length / 2; // Dividido por 2 porque hay dos campos por archivo
 
-        document.getElementById(`archivos_seccion_${numeroSeccion}`).insertAdjacentHTML("beforeend", nuevoArchivoHTML);
+    if (archivosExistentes > 0) {
+        // Si ya hay archivos, incrementar el contador al último número utilizado
+        contadorArchivos = archivosExistentes + 1;
     }
+
+    var nuevoArchivoHTML = `
+        <div class="form-group">
+            <label for="titulo_archivo_${numeroSeccion}_${contadorArchivos}">Título del Archivo ${contadorArchivos}</label>
+            <input type="text" name="titulo_archivo_${numeroSeccion}[]" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="ruta_archivo_${numeroSeccion}_${contadorArchivos}">Ruta del Archivo ${contadorArchivos}</label>
+            <input type="text" name="ruta_archivo_${numeroSeccion}[]" class="form-control" required>
+        </div>
+    `;
+
+    contenedorArchivos.insertAdjacentHTML("beforeend", nuevoArchivoHTML);
+}
+
+function agregarNuevoVideo(numeroSeccion) {
+    // Obtener el contador de videos actual de la sección
+    var contadorVideos = 1;
+    var contenedorVideos = document.getElementById(`videos_seccion_${numeroSeccion}`);
+    var videosExistentes = contenedorVideos.querySelectorAll('.form-group').length / 2; // Dividido por 2 porque hay dos campos por video
+
+    if (videosExistentes > 0) {
+        // Si ya hay videos, incrementar el contador al último número utilizado
+        contadorVideos = videosExistentes + 1;
+    }
+
+    var nuevoVideoHTML = `
+        <div class="form-group">
+            <label for="titulo_video_${numeroSeccion}_${contadorVideos}">Título del Video ${contadorVideos}</label>
+            <input type="text" name="titulo_video_${numeroSeccion}[]" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="ruta_video_${numeroSeccion}_${contadorVideos}">Ruta del Video ${contadorVideos}</label>
+            <input type="text" name="ruta_video_${numeroSeccion}[]" class="form-control" required>
+        </div>
+    `;
+
+    contenedorVideos.insertAdjacentHTML("beforeend", nuevoVideoHTML);
+}
+
+
 
     function eliminarUltimoArchivo(numeroSeccion) {
         var contenedorArchivos = document.getElementById(`archivos_seccion_${numeroSeccion}`);
@@ -239,20 +272,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    function agregarNuevoVideo(numeroSeccion) {
-        var nuevoVideoHTML = `
-            <div class="form-group">
-                <label for="titulo_video_${numeroSeccion}">Título del Video</label>
-                <input type="text" name="titulo_video_${numeroSeccion}[]" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="ruta_video_${numeroSeccion}">Ruta del Video</label>
-                <input type="text" name="ruta_video_${numeroSeccion}[]" class="form-control" required>
-            </div>
-        `;
-
-        document.getElementById(`videos_seccion_${numeroSeccion}`).insertAdjacentHTML("beforeend", nuevoVideoHTML);
-    }
+    
 
     function eliminarUltimoVideo(numeroSeccion) {
         var contenedorVideos = document.getElementById(`videos_seccion_${numeroSeccion}`);
@@ -266,7 +286,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Eliminar la sección y sus contenidos
         var seccion = document.getElementById(`seccion_${numeroSeccion}`);
         seccion.parentNode.removeChild(seccion);
-
+        contadorSecciones--;
         // Verificar si se eliminaron todas las secciones
         var secciones = document.getElementsByClassName("seccion");
         if (secciones.length === 0) {
@@ -314,10 +334,10 @@ document.getElementById("agregarSeccion").addEventListener("click", function () 
 
 
 
-<?php
+
+                        <?php
 echo form_close();
 ?>
-
 
 
 <!--        </form>*/ -->

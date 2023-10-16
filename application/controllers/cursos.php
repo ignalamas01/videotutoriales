@@ -150,7 +150,45 @@ class Cursos extends CI_Controller
 		
 
 		$this->cursos_model->agregarcursos($data);
-		// redirect('cursos/cursos', 'refresh');
+		$curso_id = $this->db->insert_id();
+		
+
+
+    // Procesar datos de las secciones
+    $numero_secciones = $this->input->post('numeroSecciones');
+    for ($i = 1; $i <= $numero_secciones; $i++) {
+        $data = array(
+            
+            'nombre' => $this->input->post("titulo_seccion_$i"),
+            'descripcion' => $this->input->post("descripcion_seccion_$i"),
+			'idCurso' => $curso_id,
+            // Otros campos de la seccións
+        );
+
+        // Insertar datos de la sección en la tabla secciones
+        $seccion_id =$this->cursos_model->agregar_seccion($data);
+
+        // Procesar datos de los archivos de la sección
+        // ... Lógica para procesar archivos ...
+        
+        // Procesar datos de los videos de la sección
+        // ... Lógica para procesar videos ...
+    }
+
+    // Redireccionar o mostrar un mensaje de éxito
+	// redirect('cursos/cursos', 'refresh');
+	var_dump($data);
+	$numero_secciones = $this->input->post('numeroSecciones');
+echo 'Número de secciones: ' . $numero_secciones;
+
+for ($i = 1; $i <= $numero_secciones; $i++) {
+    echo "Datos de la sección $i:";
+    echo $this->input->post("titulo_seccion_$i");
+    echo $this->input->post("descripcion_seccion_$i");
+    // Otros campos de la sección
+}
+
+		
 	}
 	public function modificar()
 	{
@@ -398,15 +436,29 @@ $data['puntajeTotal'] = $ultima_evaluacion['puntajeTotal'];
 		
 	}
 	public function agregar_seccion_bd()
-	{
-		var_dump($this->input->post()); // Agrega esta línea para depurar
-		$data['nombre'] = $this->input->post('titulo_seccion_1');
-$data['descripcion'] = $this->input->post('descripcion_seccion_1');
-		
-		$this->cursos_model->agregar_seccion($data);
-		var_dump($this->input->post());
-		// redirect('cursos/cursos', 'refresh');
-	}
+{
+    // Imprimir contenido de $this->input->post() para depuración
+    echo "Datos del formulario (POST):";
+    echo '<pre>';
+    print_r($this->input->post());
+    echo '</pre>';
+
+    // Crear arreglo de datos para la sección
+    $data['nombre'] = $this->input->post('titulo_seccion_1');
+    $data['descripcion'] = $this->input->post('descripcion_seccion_1');
+
+    // Imprimir contenido de $data para depuración
+    echo "Datos para la sección (data):";
+    echo '<pre>';
+    print_r($data);
+    echo '</pre>';
+
+    // Agregar la sección a la base de datos
+    $this->cursos_model->agregar_seccion($data);
+
+    // Redirigir o mostrar un mensaje de éxito
+    // redirect('cursos/cursos', 'refresh');
+}
 
 
 

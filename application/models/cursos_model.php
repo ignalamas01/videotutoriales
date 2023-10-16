@@ -40,16 +40,22 @@ class cursos_model extends CI_Model
         $this->db->delete('cursos');
     }
     public function agregar_seccion($data)
-    {
+{
+    try {
         $this->db->insert('secciones', $data);
         if ($this->db->affected_rows() > 0) {
             // Inserción exitosa
-            echo 'Inserción exitosa';
+            return $this->db->insert_id();  // Devuelve el ID de la última inserción
         } else {
             // Error en la inserción
-            echo $this->db->error();
+            throw new Exception('Error en la inserción');
         }
+    } catch (Exception $e) {
+        // Captura de excepciones
+        log_message('error', $e->getMessage());
+        return false;  // o maneja de alguna manera según tus necesidades
     }
+}
     public function agregarArchivo($data)
     {
         $this->db->insert('archivos', $data);
