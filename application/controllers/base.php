@@ -1,6 +1,8 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 require FCPATH.'vendor/autoload.php';
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
@@ -208,10 +210,154 @@ class Base extends CI_Controller
 		$data['departamento'] = $_POST['departamento'];
 		$data['fechaNacimiento'] = $_POST['fechaNac'];
 		$data['telefono'] = $_POST['telefono'];
+		
+		
 		$data['direccion'] = $_POST['direccion'];
+		
 
 		$this->empleado_model->agregarempleado($data);
-		redirect('base/emple', 'refresh');
+		// redirect('base/emple', 'refresh');
+		$this->load->view('success_message');
+		try {
+			function generarUsuarioAleatorio() {
+				// Generar un usuario aleatorio (personaliza esta lógica según tus necesidades)
+				$usuario = 'usuario' . rand(1000, 9999);
+				return $usuario;
+			}
+		
+			// Función para generar una contraseña aleatoria de 8 dígitos
+			function generarContrasenaAleatoria() {
+				$contrasena = str_pad(mt_rand(1, 99999999), 8, '0', STR_PAD_LEFT);
+				return $contrasena;
+			}
+		
+			// Generar la cuenta de usuario y la contraseña
+			$usuario = generarUsuarioAleatorio();
+			$contrasena = generarContrasenaAleatoria();
+		
+			// Resto del código para configurar y enviar el correo electrónico
+			// ...
+		
+			// Incluir la cuenta de usuario y la contraseña en el cuerpo del correo
+			
+		
+			// Resto del código para enviar el correo electrónico
+			// ...
+
+
+					// Contenido del correo
+					// print("Esta parte se está ejecutando.");
+					$asunto    = $this->input->post("asunto");
+					// $data['asunto'] = $_POST['asunto'];
+					// $data['contenido'] = $_POST['contenido'];
+					// $data['destinatario'] = $_POST['destinatario'];
+					$contenido = $this->input->post("contenido");
+					$para      = $this->input->post("destinatario");
+			
+					if (!filter_var($para, FILTER_VALIDATE_EMAIL)) {
+						throw new Exception('Dirección de correo electrónico no válida.');
+					}
+					// error_log("La función post_gmail se está ejecutando.");
+					// Cargar la librería PHPMailer
+					// $this->load->library('phpmailer_lib');
+					require 'vendor/autoload.php';
+					$mail                = new PHPMailer(true);
+			        $mail->SMTPOptions = [
+						'ssl' => [
+							'verify_peer' => false,
+							'verify_peer_name' => false,
+							'allow_self_signed' => true,
+						],
+					];
+					// Crear una instancia de PHPMailer
+					// $mail = $this->phpmailer_lib->load();
+					// error_log("La función post_gmail se está ejecutando.");
+					// Configurar el servidor SMTP
+					// $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+					$mail->isSMTP();
+					$mail->Host = 'smtp.gmail.com';
+					$mail->Port = 587; // o 465 si prefieres SSL
+					$mail->SMTPSecure = 'tls'; // o 'ssl' para SSL
+					$mail->SMTPAuth = true;
+			
+					// Credenciales de la cuenta de Gmail
+					$email = 'bikeracealvaro@gmail.com';
+					$mail->Username = $email;
+					$mail->Password = 'gzncuwbkwelnxwys';
+			
+					// Configurar el remitente y destinatario
+					$mail->setFrom($email, 'Roberto Orozco');
+					$mail->addReplyTo('replyto@panchos.com', 'Pancho Doe');
+					$mail->addAddress($para, 'John Doe');
+			
+					// Asunto del correo
+					$mail->Subject = $asunto;
+			
+					// Contenido HTML del correo
+					$mail->IsHTML(true);
+					$mail->CharSet = 'UTF-8';
+					// $mail->Body = sprintf('<h1>El mensaje es:</h1><br><p>%s</p>', $contenido);
+					$mail->Body = sprintf('<h1>El mensaje es:</h1><br><p>%s</p><p>Cuenta de usuario: %s</p><p>Contraseña: %s</p>', $contenido, $usuario, $contrasena);
+			
+					// Texto alternativo
+					$mail->AltBody = 'No olvides suscribirte a nuestro canal.';
+			
+					// Enviar el correo
+					if (!$mail->send()) {
+						throw new Exception($mail->ErrorInfo);
+					}
+			
+					// Redireccionar con un mensaje de éxito
+					$this->session->set_flashdata('success', 'Mensaje enviado con éxito a ' . $para);
+					// redirect('base/emple', 'refresh'); // Cambia 'base/index' a la URL deseada después del envío exitoso
+			
+				} catch (Exception $e) {
+					// Manejar errores y redireccionar con un mensaje de error
+					$this->session->set_flashdata('error', $e->getMessage());
+					// redirect('base/index');
+					// redirect('base/emple', 'refresh'); // Cambia 'base/index' a la URL deseada en caso de error
+				}
+
+
+		// print("Esta parte se está ejecutando.");
+		
+			// require 'vendor/autoload.php';
+
+			// $mail = new PHPMailer(true);
+			// // Desactiva temporalmente la verificación de certificados SSL/TLS (no recomendado para producción)
+			// $mail->SMTPOptions = [
+			// 	'ssl' => [
+			// 		'verify_peer' => false,
+			// 		'verify_peer_name' => false,
+			// 		'allow_self_signed' => true,
+			// 	],
+			// ];
+			// try {
+			// 	// Configuración de PHPMailer
+			// 	$mail->SMTPDebug = SMTP::DEBUG_SERVER; // Habilita la depuración
+			// 	$mail->isSMTP();
+			// 	$mail->Host = 'smtp.gmail.com';
+			// 	$mail->Port = 587; // o 587
+			// 	$mail->SMTPSecure = 'tls'; // o 'ssl'
+			// 	$mail->SMTPAuth = true;
+			// 	$mail->Username = 'bikeracealvaro@gmail.com';
+			// 	$mail->Password = 'gzncuwbkwelnxwys';
+			
+			// 	// Detalles del mensaje
+			// 	$mail->setFrom('bikeracealvaro@gmail.com', 'Tu Nombre');
+			// 	$mail->addAddress('lasolucion234@gmail.com', 'Destinatario');
+			// 	$mail->Subject = 'Asunto del Correo';
+			// 	$mail->Body = 'Prueba envios';
+			
+			// 	// Enviar el correo
+			// 	$mail->send();
+			// 	echo 'El correo se ha enviado correctamente';
+			// } catch (Exception $e) {
+			// 	echo 'El correo no se pudo enviar. Error: ', $mail->ErrorInfo;
+			// }
+			redirect('base/emple', 'refresh');
+			
+		
 	}
 	public function modificar()
 	{

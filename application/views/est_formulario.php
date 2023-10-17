@@ -71,6 +71,10 @@
                                     <label for="exampleInputPassword1">SEGUNDO APELLIDO</label>
                                     <input type="text" name="segundoApellido" placeholder="escriba su segundo apellido" class="form-control"><br>
                                 </div>
+                                <div class="form-group">
+    <label for="newEmail">Correo Electrónico</label>
+    <input type="email" id="destinatario" name="destinatario" placeholder="Escriba su correo electrónico" class="form-control" required>
+</div>
                                 <div class="row">
                                     <div class="col-4">
                                         <div class="form-group">
