@@ -245,7 +245,7 @@ function agregarNuevoVideo(numeroSeccion) {
     // Obtener el contador de videos actual de la sección
     var contadorVideos = 1;
     var contenedorVideos = document.getElementById(`videos_seccion_${numeroSeccion}`);
-    var videosExistentes = contenedorVideos.querySelectorAll('.form-group').length / 2; // Dividido por 2 porque hay dos campos por video
+    var videosExistentes = contenedorVideos.querySelectorAll('.form-group').length / 3; // Dividido por 2 porque hay dos campos por video
 
     if (videosExistentes > 0) {
         // Si ya hay videos, incrementar el contador al último número utilizado
