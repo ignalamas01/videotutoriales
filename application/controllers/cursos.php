@@ -150,7 +150,66 @@ class Cursos extends CI_Controller
 		
 
 		$this->cursos_model->agregarcursos($data);
-		redirect('cursos/cursos', 'refresh');
+		$curso_id = $this->db->insert_id();
+		
+
+
+    // Procesar datos de las secciones
+    $numero_secciones = $this->input->post('numeroSecciones');
+    for ($i = 1; $i <= $numero_secciones; $i++) {
+        $data = array(
+            
+            'nombre' => $this->input->post("titulo_seccion_$i"),
+            'descripcion' => $this->input->post("descripcion_seccion_$i"),
+			'idCurso' => $curso_id,
+            // Otros campos de la seccións
+        );
+		
+        // Insertar datos de la sección en la tabla secciones
+        $seccion_id =$this->cursos_model->agregar_seccion($data);
+
+        // Procesar datos de los archivos de la sección
+        // ... Lógica para procesar archivos ...
+        
+        // Procesar datos de los videos de la sección
+        // ... Lógica para procesar videos ...
+    
+	$numero_archivos = $this->input->post("numeroArchivos");
+	for ($j = 1; $j <= $numero_archivos; $j++) {
+		
+		$data_archivo = array(
+			'nombreArchivo' => $this->input->post("titulo_archivo_{$i}_{$j}"),
+            'rutaArchivo' => $this->input->post("ruta_archivo_{$i}_{$j}"),
+			'idSeccion' => $seccion_id,
+		);
+		$this->cursos_model->agregarArchivo($data_archivo);
+	}
+	$numero_videos = $this->input->post("numeroVideos");
+for ($k = 1 ; $k <= $numero_videos ; $k++) {
+	
+    $data_video = array(
+		'tituloVideo' => $this->input->post("titulo_video_{$i}_{$k}"),
+		'descripcionVideo' => $this->input->post("descripcion_video_{$i}_{$k}"),
+		'enlaceVideo' => $this->input->post("ruta_video_{$i}_{$k}"),
+        'idSeccion' => $seccion_id,
+    );
+    $this->cursos_model->agregarVideo($data_video);
+}
+}
+    // Redireccionar o mostrar un mensaje de éxito
+	// redirect('cursos/cursos', 'refresh');
+	var_dump($data);
+	$numero_secciones = $this->input->post('numeroSecciones');
+echo 'Número de secciones: ' . $numero_secciones;
+
+for ($i = 1; $i <= $numero_secciones; $i++) {
+    echo "Datos de la sección $i:";
+    echo $this->input->post("titulo_seccion_$i");
+    echo $this->input->post("descripcion_seccion_$i");
+    // Otros campos de la sección
+}
+
+		
 	}
 	public function modificar()
 	{
@@ -230,52 +289,48 @@ class Cursos extends CI_Controller
 		
 		
 	}
+	public function subirfoto()
+	{
+		$data['id']=$_POST['idcursos'];
+		$this->load->view('inc/cabecera');
+		$this->load->view('inc/menu');
+		$this->load->view('inc/menulateral');
+		$this->load->view('subirformcursos',$data);
+		$this->load->view('inc/pie');
+	}
+	public function subir()
+	{
+		$idcurso=$_POST['idCursos'];
+		$nombrearchivo=$idcurso.".jpg";
 
-	
-	 public function subirfoto()
-	 {
-	 	$data['id']=$_POST['idcursos'];
-	 	$this->load->view('inc/cabecera');
-	 	$this->load->view('inc/menu');
-	 	$this->load->view('inc/menulateral');
-	 	$this->load->view('subirformcursos',$data);
-	 	$this->load->view('inc/pie');
-	 }
-	  public function subir()
-	 {
-	 	$idcurso=$_POST['idCursos'];
-	 	$nombrearchivo=$idcurso.".jpg";
-
-	 	$config['upload_path']='./uploads/cursos/';
+		$config['upload_path']='./uploads/cursos/';
 		
-	 	$config['file_name']=$nombrearchivo;
+		$config['file_name']=$nombrearchivo;
 		
 		$direccion="./uploads/cursos/".$nombrearchivo;
 
-	 	if(file_exists($direccion))
-	 	{
-	 	 unlink($direccion);
+		if(file_exists($direccion))
+		{
+		 unlink($direccion);
 		}
-	 	$config['allowed_types']='jpg|png';
+		$config['allowed_types']='jpg|png';
 
-	 	$this->load->library('upload',$config);
+		$this->load->library('upload',$config);
 
-	 	if(!$this->upload->do_upload())
-	 	{
-	 	 $data['error']=$this->upload->display_errors();
-	 	}
-	 	else
-	 	{
-	 	 $data['foto']=$nombrearchivo;
-	 	 $this->cursos_model->modificarcursos($idcurso,$data);
-	 	 $this->upload->data();
+		if(!$this->upload->do_upload())
+		{
+		 $data['error']=$this->upload->display_errors();
+		}
+		else
+		{
+		 $data['foto']=$nombrearchivo;
+		 $this->cursos_model->modificarcursos($idcurso,$data);
+		 $this->upload->data();
 			
-	 	}
-	 	redirect('cursos/cursos', 'refresh');
+		}
+		redirect('cursos/cursos', 'refresh');
 
-	 }
-
-
+	}
 	public function subir_video()
 	{
 		 $this->load->view('inc/cabecera');
@@ -409,8 +464,31 @@ $data['puntajeTotal'] = $ultima_evaluacion['puntajeTotal'];
 		// $this->load->view('inc/pie');
 		
 	}
+	public function agregar_seccion_bd()
+{
+    // Imprimir contenido de $this->input->post() para depuración
+    echo "Datos del formulario (POST):";
+    echo '<pre>';
+    print_r($this->input->post());
+    echo '</pre>';
 
-	//
+    // Crear arreglo de datos para la sección
+    $data['nombre'] = $this->input->post('titulo_seccion_1');
+    $data['descripcion'] = $this->input->post('descripcion_seccion_1');
+
+    // Imprimir contenido de $data para depuración
+    echo "Datos para la sección (data):";
+    echo '<pre>';
+    print_r($data);
+    echo '</pre>';
+
+    // Agregar la sección a la base de datos
+    $this->cursos_model->agregar_seccion($data);
+
+    // Redirigir o mostrar un mensaje de éxito
+    // redirect('cursos/cursos', 'refresh');
+}
+
 
 
 	/* PRUEBA DE CONEXION DE BASE DE DATOS///
