@@ -100,7 +100,7 @@
                                 echo form_open_multipart('base/modificar')
                               ?>
                                 <input type="hidden" name="idempleado" value="<?php echo $row->id; ?> ">
-                                <button type="submit" class="btn btn-success">MODIFICAR</button>
+                                <button type="submit" class="btn btn-success" ><i class="fas fa-pencil-alt"></i></button>
                               <?php
                                 echo form_close();
                               ?>
@@ -112,7 +112,7 @@
                                 echo form_open_multipart('base/eliminarbd')
                                 ?>
                                 <input type="hidden" name="idempleado" value="<?php echo $row->id; ?> ">
-                                <button type="submit" class="btn btn-danger">ELIMINAR</button>
+                                <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
                                 <?php
                                 echo form_close();
                                 ?>

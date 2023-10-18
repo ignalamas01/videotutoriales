@@ -98,7 +98,7 @@
                                 echo form_open_multipart('estudiante/modificar')
                               ?>
                                 <input type="hidden" name="idestudiante" value="<?php echo $row->id; ?> ">
-                                <button type="submit" class="btn btn-success">MODIFICAR</button>
+                                <button type="submit" class="btn btn-success"><i class="fas fa-pencil-alt"></i></button>
                               <?php
                                 echo form_close();
                               ?>
@@ -110,7 +110,7 @@
                                 echo form_open_multipart('estudiante/eliminarbd')
                                 ?>
                                 <input type="hidden" name="idestudiante" value="<?php echo $row->id; ?> ">
-                                <button type="submit" class="btn btn-danger">ELIMINAR</button>
+                                <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
                                 <?php
                                 echo form_close();
                                 ?>

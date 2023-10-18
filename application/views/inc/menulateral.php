@@ -78,40 +78,42 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
               <p>
-                Layout Options
+                secciones
                 <i class="fas fa-angle-left right"></i>
                 <span class="badge badge-info right">6</span>
               </p>
             </a>
+            
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="../layout/top-nav.html" class="nav-link">
+                <a href="<?php echo base_url(); ?>index.php/secciones/seccion" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Top Navigation</p>
+                  <p>curso de programacion</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="../layout/top-nav-sidebar.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Top Navigation + Sidebar</p>
+                  <p>curso de albegra</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="../layout/boxed.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Boxed</p>
+                  <p>curso de calculo</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="../layout/fixed-sidebar.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Fixed Sidebar</p>
+                  <p>curso de redes</p>
                 </a>
               </li>
+              
               <li class="nav-item">
                 <a href="../layout/fixed-sidebar-custom.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Fixed Sidebar <small>+ Custom Area</small></p>
+                  <p>Fixed <small>+ Custom Area</small></p>
                 </a>
               </li>
               <li class="nav-item">

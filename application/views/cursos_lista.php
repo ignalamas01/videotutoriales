@@ -19,6 +19,9 @@
       </div><!-- /.container-fluid -->
     </section>
 
+
+    
+
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
@@ -59,20 +62,29 @@
            
               <!-- /.card-header -->
               <div class="card-body">
+            
                 <table id="example"  class="table table-bordered table-striped">
-                  <thead>
+                <?php
+                foreach($cursos as $curso){
+                  ?>
+                    
+
+                  <?php
+                }
+              ?>  
+                <thead>
                     <tr>
                       <td>no</td>
                       <td>TITULO</td>
                   
                       <td>DESCRIPCION</td>
-                      <td>VIDEO</td>
+                      <td>FOTO</td>
                       <td>FECHA DE REGISTRO</td>
                       
                       <td>MODIFICAR</td>
                       <td>ELIMINAR</td>
                       <td>DESHABILITAR</td>
-                      <td>VIDEO</td>
+                      <td>SUBIR VIDEO/FOTO</td>
                               
                     </tr>
                   </thead>
@@ -87,8 +99,33 @@
                             <td> <?php echo $indice; ?> </td>
                             <td> <?php echo $row->titulo; ?> </td>
                             <td> <?php echo $row->descripcion; ?> </td>
-                            <td> <?php echo $row->video; ?> </td>
+                            
+                            <td>
+                            <?php
+                              $foto=$row->foto;
+                              if($foto=="")
+                                {
+                              ?>
+                              <img width="100" src="<?php echo base_url(); ?>uploads/cursos/per.jpg">
+                              <?php
+                                }
+                              else
+                                {
+                              ?>
+                              <img width="100" src="<?php echo base_url(); ?>uploads/cursos/<?php echo $foto; ?>">
+                              <?php
+                                }
+                              ?> 
+                              <?php
+                                echo form_open_multipart('cursos/subirfoto')
+                                ?>
+                                <input type="hidden" name="idcursos" value="<?php echo $row->id; ?>">
+                                <button type="submit" class="btn btn-primary">SUBIRfoto</button>
+                                <?php
+                                echo form_close();
+                              ?>  
 
+                            </td>
                              <td> <?php echo formatearFecha($row->fechaRegistro); ?> </td> 
                            
                           
@@ -98,7 +135,7 @@
                                 echo form_open_multipart('cursos/modificar')
                               ?>
                                 <input type="hidden" name="idcursos" value="<?php echo $row->id; ?> ">
-                                <button type="submit" class="btn btn-success">MODIFICAR</button>
+                                <button type="submit" class="btn btn-success"><i class="fas fa-pencil-alt"></i></button>
                               <?php
                                 echo form_close();
                               ?>
@@ -110,7 +147,7 @@
                                 echo form_open_multipart('cursos/eliminarbd')
                                 ?>
                                 <input type="hidden" name="idcursos" value="<?php echo $row->id; ?> ">
-                                <button type="submit" class="btn btn-danger">ELIMINAR</button>
+                                <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
                                 <?php
                                 echo form_close();
                                 ?>
@@ -129,28 +166,13 @@
 
                             
                             <td>
-                              <!-- <?php
-                              $video=$row->video;
-                              if($video=="")
-                                {
-                              ?>
-                              <img width="100" src="<?php echo base_url(); ?>uploads/cursos/per.jpg">
-                              <?php
-                                }
-                              else
-                                {
-                              ?>
-                              <img width="100" src="<?php echo base_url(); ?>uploads/cursos/<?php echo $video; ?>">
-                              <?php
-                                }
-                              ?>  -->
                               
                               
                               <?php
                                 echo form_open_multipart('cursos/subir_video')
                                 ?>
                                 <input type="hidden" name="idcursos" value="<?php echo $row->id; ?>">
-                                <button type="submit" class="btn btn-primary">SUBIR</button>
+                                <button type="submit" class="btn btn-danger">SUBIRvideo</button>
                                 <?php
                                 
                                 echo form_close();
@@ -171,13 +193,13 @@
                   <td>TITULO</td>
                   
                   <td>DESCRIPCION</td>
-                  <td>VIDEO</td>
+                  <td>FOTO</td>
 
                   <td>FECHA DE REGISTRO</td>
                   <td>MODIFICAR</td>
                   <td>ELIMINAR</td>
                   <td>DESHABILITAR</td>
-                  <td>FOTO</td>
+                  <td>SUBIR VIDEO/FOTO</td>
                   </tr>
                   </tfoot>
                 </table>
@@ -193,5 +215,301 @@
       <!-- /.container-fluid -->
     </section>
   <!-- /.content -->
+ 
+  <div  class="container" >
+    <div class="row" >
+      
+        <?php
+        foreach ($cursos->result() as $row) {
+        ?>
+            <div class="col-12 col-md-4 mb-4">
+                <div class="card h-100">
+                    <a href="shop-single.html">
+                        <img src="./assets/img/feature_prod_01.jpg" class="card-img-top" alt="...">
+                    </a>
+                    <div class="card-body">
+                        <ul class="list-unstyled d-flex justify-content-between">
+                            <li>
+                                <i class="text-warning fa fa-star"></i>
+                                <i class="text-warning fa fa-star"></i>
+                                <i class="text-warning fa fa-star"></i>
+                                <i class="text-warning fa fa-star"></i>
+                                <i class="text-muted fa fa-star"></i>
+                            </li>
+                            <li class="text-muted text-right"></li>
+                        </ul>
+                        <a href="shop-single.html" class="h2 text-decoration-none text-dark"><?php echo $row->titulo; ?></a>
+                        <p class="card-text">
+                            <?php echo $row->descripcion; ?>
+                        </p>
+                        <p>
+                        <?php
+                              $foto=$row->foto;
+                              if($foto=="")
+                                {
+                              ?>
+                              <!-- <img width="100" src="<?php echo base_url(); ?>uploads/cursos/per.jpg"> -->
+                              <?php
+                                }
+                              else
+                                {
+                              ?>
+                              <img width="140" src="<?php echo base_url(); ?>uploads/cursos/<?php echo $foto; ?>">
+                              <?php
+                                }
+                              ?>
+                        </p>
+                        <p class="text-muted">Reviews (24)</p>
+                    </div>
+                </div>
+            </div>
+        <?php
+        }
+        ?>
+    </div>
 </div>
+
+
+
+<head >
+    <title>Zay Shop eCommerce HTML CSS Template</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="assets/img/apple-icon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+
+    <link rel="stylesheet" href="adminlte/dist/css/temp/bootstrap.min.css">
+    <link rel="stylesheet" href="adminlte/dist/css/temp/templatemo.css">
+    <link rel="stylesheet" href="adminlte/dist/css/temp/custom.css">
+
+    <!-- Load fonts style after rendering the layout styles -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
+    <link rel="stylesheet" href="adminlte/dist/css/temp/fontawesome.min.css">
+    <!--
+    
+    TemplateMo 559 Zay Shop
+
+    https://templatemo.com/tm-559-zay-shop
+
+    -->
+</head>
+
+<body style="background-color: #919197 ;" >
+    
+
+    <!-- Start Categories of The Month -->
+    <section class="container py-5">
+        <div class="row text-center pt-3">
+            <div class="col-lg-6 m-auto">
+                <h1 class="h1">Algunos de nuestros cursos</h1>
+                <!-- <p>
+                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                    deserunt mollit anim id est laborum.
+                </p> -->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-4 p-5 mt-3">
+                <a href="#"><img src="<?php echo base_url(); ?>img/large_IA.jpg" class="rounded-circle img-fluid border"></a>
+                <h5 class="text-center mt-3 mb-3">Inteligencia artificial</h5>
+                <p class="text-center"><a class="btn btn-success">ir al Curso</a></p>
+                
+            </div>
+            <div class="col-12 col-md-4 p-5 mt-3">
+                <a href="#"><img src="<?php echo base_url(); ?>img/diseno-3d.png" class="rounded-circle img-fluid border"></a>
+                <h2 class="h5 text-center mt-3 mb-3">Diseño 3D</h2>
+                <p class="text-center"><a class="btn btn-success">ir al Curso</a></p>
+            </div>
+            <div class="col-12 col-md-4 p-5 mt-3">
+                <a href="#"><img src="<?php echo base_url(); ?>img/programacion_cero.jpeg" class="rounded-circle img-fluid border"></a>
+                <h2 class="h5 text-center mt-3 mb-3">Programación</h2>
+                <p class="text-center"><a class="btn btn-success">ir al Curso</a></p>
+            </div>
+        </div>
+    </section>
+    <!-- End Categories of The Month -->
+
+
+    <!-- Start Featured Product -->
+    <section class="bg-light">
+        <div class="container py-5">
+            <div class="row text-center py-3">
+                <div class="col-lg-6 m-auto">
+                    <h1 class="h1">Valoraciones y testimonios</h1>
+                    <p>
+                    ¡La voz de nuestros estudiantes importa! En esta sección. Vea las calificaciones y reseñas honestas de nuestros alumnos para obtener una idea clara de lo que puedes esperar. Nos enorgullece compartir sus comentarios y estamos comprometidos a brindarte una experiencia educativa excepcional."
+                    </p>
+                </div>
+            </div>
+                  
+
+            <!-- <div class="row">
+           
+                <div class="col-12 col-md-4 mb-4">
+                
+                    <div class="card h-100">
+                        <a href="shop-single.html">
+                            <img src="./assets/img/feature_prod_01.jpg" class="card-img-top" alt="...">
+                        </a>
+                        <div class="card-body">
+                            <ul class="list-unstyled d-flex justify-content-between">
+                                <li>
+                                    <i class="text-warning fa fa-star"></i>
+                                    <i class="text-warning fa fa-star"></i>
+                                    <i class="text-warning fa fa-star"></i>
+                                    <i class="text-warning fa fa-star"></i>
+                                    <i class="text-muted fa fa-star"></i>
+                                </li>
+                                <li class="text-muted text-right"></li>
+                            </ul>
+                            <a href="shop-single.html" class="h2 text-decoration-none text-dark"><?php echo $row->titulo; ?></a>
+                            <p class="card-text">
+                                El curso fue satisfactorio, pero falto mas carga horaria - Anonimo
+                            </p>
+                            <tbody>
+<?php
+$indice = 1;
+foreach ($cursos->result() as  $row) {
+?>
+    <tr>
+        <td> <?php echo $indice; ?> </td>
+        <td> <?php echo $row->titulo; ?> </td>
+        <td> <?php echo $row->descripcion; ?> </td>
+        <td> <?php echo $row->foto; ?> </td>
+        <td> <?php echo formatearFecha($row->fechaRegistro); ?> </td> 
+        <td>
+            <?php echo form_open_multipart('cursos/modificar') ?>
+            <input type="hidden" name="idcursos" value="<?php echo $row->id; ?> ">
+            <button type="submit" class="btn btn-success"><i class="fas fa-pencil-alt"></i></button>
+            <?php echo form_close(); ?>
+        </td>
+        <td>
+            <?php echo form_open_multipart('cursos/eliminarbd') ?>
+            <input type="hidden" name="idcursos" value="<?php echo $row->id; ?> ">
+            <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+            <?php echo form_close(); ?>
+        </td>
+        <td>
+            <?php echo form_open_multipart('cursos/deshabilitarbd') ?>
+            <input type="hidden" name="idcursos" value="<?php echo $row->id; ?> ">
+            <button type="submit" class="btn btn-warning">DESHABILITAR</button>
+            <?php echo form_close(); ?>
+        </td>
+        <td>
+            <?php echo form_open_multipart('cursos/subir_video') ?>
+            <input type="hidden" name="idcursos" value="<?php echo $row->id; ?>">
+            <button type="submit" class="btn btn-primary">SUBIR</button>
+            <?php echo form_close(); ?>
+        </td>
+        <td>
+            <?php echo form_open('pagina_de_curso') // Reemplaza 'pagina_de_curso' con la URL real de la página del curso ?>
+            <input type="hidden" name="idcursos" value="<?php echo $row->id; ?>">
+            <button type="submit" class="btn btn-primary">Ver Curso</button>
+            <?php echo form_close(); ?>
+        </td>
+    </tr>
+<?php
+$indice++;
+}
+?>
+</tbody>
+
+                            
+                            <p class="text-muted">Reviews (24)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4 mb-4">
+                    <div class="card h-100">
+                        <a href="shop-single.html">
+                            <img src="./assets/img/feature_prod_02.jpg" class="card-img-top" alt="...">
+                        </a>
+                        <div class="card-body">
+                            <ul class="list-unstyled d-flex justify-content-between">
+                                <li>
+                                    <i class="text-warning fa fa-star"></i>
+                                    <i class="text-warning fa fa-star"></i>
+                                    <i class="text-warning fa fa-star"></i>
+                                    <i class="text-muted fa fa-star"></i>
+                                    <i class="text-muted fa fa-star"></i>
+                                </li>
+                                <li class="text-muted text-right"></li>
+                            </ul>
+                            <a href="shop-single.html" class="h2 text-decoration-none text-dark">Programación en Python: Desde Principiante hasta Avanzado</a>
+                            <p class="card-text">
+                                Buen curso pero ya se nota un poco de desactualizacion - Anonimo
+                            </p>
+                            <p class="text-muted">Reviews (48)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4 mb-4">
+                    <div class="card h-100">
+                        <a href="shop-single.html">
+                            <img src="./assets/img/feature_prod_03.jpg" class="card-img-top" alt="...">
+                        </a>
+                        <div class="card-body">
+                            <ul class="list-unstyled d-flex justify-content-between">
+                                <li>
+                                    <i class="text-warning fa fa-star"></i>
+                                    <i class="text-warning fa fa-star"></i>
+                                    <i class="text-warning fa fa-star"></i>
+                                    <i class="text-warning fa fa-star"></i>
+                                    <i class="text-warning fa fa-star"></i>
+                                </li>
+                                <li class="text-muted text-right"></li>
+                            </ul>
+                            <a href="shop-single.html" class="h2 text-decoration-none text-dark">Diseño de Experiencia de Usuario (UX) para Aplicaciones Móviles</a>
+                            <p class="card-text">
+                                Excelente curso - Anonimo
+                            </p>
+                            <p class="text-muted">Reviews (74)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+    <!-- End Featured Product -->
+
+
+    
+
+    <!-- Start Script -->
+    <script src="<?php echo base_url(); ?>adminlte/plugins/jquery-1.11.0.min.js"></script>
+    <script src="<?php echo base_url(); ?>adminlte/plugins/jquery-migrate-1.2.1.min.js"></script>
+    <!-- <script src="<?php echo base_url(); ?>adminlte/plugins/bootstrapTEMP.bundle.min.js"></script> -->
+    <!-- <script src="assets/js/bootstrap.bundle.min.js"></script> -->
+    <script src="<?php echo base_url(); ?>adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="<?php echo base_url(); ?>adminlte/plugins/templatemo.js"></script>
+    <script src="<?php echo base_url(); ?>adminlte/plugins/custom.js"></script>
+    <!-- End Script -->
+</body>
+
+
+
+
+
+
+
+<!-- jQuery -->
+<script src="<?php echo base_url(); ?>adminlte/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="<?php echo base_url(); ?>adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="<?php echo base_url(); ?>/adminlte/dist/js/adminlte.min.js"></script>
+    
+
+</html>
+
+
+</div>
+</div>
+
+
+
 <!-- /.content-wrapper -->
+
+
+

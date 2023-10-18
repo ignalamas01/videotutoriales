@@ -17,6 +17,7 @@
         <input type="file" name="documento" accept=".pdf, .docx, .xlsx" required>
         <button type="submit">Cargar Documento</button>
     </form>
+    
 
     <!-- Enlace para ver el documento cargado -->
     <?php

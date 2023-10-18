@@ -31,13 +31,13 @@
     </div>
 </div>
 
-<body   class="hold-transition login-page" style="background-color: #080911;">
+<body   class="hold-transition login-page" style="background-color: #080911;"  >
   <!-- stylo para agregar imagen -->
 
-<div class="video-container">
-        <video autoplay loop muted>
+<div class="video-container" >
+        <video autoplay loop muted >
           
-            <source src="<?php echo base_url(); ?>uploads/video/video1.mp4" type="video/mp4">
+            <source src="<?php echo base_url(); ?>uploads/video/v7.mp4" type="video/mp4">
             Tu navegador no admite la reproducción de video.
             
             

@@ -44,6 +44,19 @@
             background-color: #CCC; /* Aquí puedes especificar el color que desees utilizando el código hexadecimal, nombre de color o RGB */
         }
     </style>
+    <style >
+        .zoomP{
+    /* Aumentamos la anchura y altura durante 1 segundos */
+    transition: width 1.1s, height 1.1s, transform 1.1s;
+    -moz-transition: width 1.1s, height 1.1s, -moz-transform 1.1s;
+    -webkit-transition: width 1.1s, height 1.1s, -webkit-transform 1.1s;
+    -o-transition: width 1.1s, height 1.1s,-o-transform 1.1s;
+}
+        .zoomP:hover{
+    transform: scale(1.05);
+    -webkit-transform:scale(1.05);transform:scale(1.05)
+}
+    </style>
 </head>
 <body>
     

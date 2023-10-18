@@ -16,6 +16,8 @@
     <!-- Load fonts style after rendering the layout styles -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
     <link rel="stylesheet" href="adminlte/dist/css/temp/fontawesome.min.css">
+    <link rel="stylesheet" href="adminlte/dist/css/estilos.css">
+
     <!--
     
     TemplateMo 559 Zay Shop
@@ -221,11 +223,11 @@
                 </p> -->
             </div>
         </div>
-        <div class="row">
-            <div class="col-12 col-md-4 p-5 mt-3">
+        <div class="row" >
+            <div class="col-12 col-md-4 p-5 mt-3 ">
                 <a href="#"><img src="<?php echo base_url(); ?>img/large_IA.jpg" class="rounded-circle img-fluid border"></a>
                 <h5 class="text-center mt-3 mb-3">Inteligencia artificial</h5>
-                <p class="text-center"><a class="btn btn-success">ir al Curso</a></p>
+                <p class="text-center"><a class="btn btn-success ">ir al Curso</a></p>
             </div>
             <div class="col-12 col-md-4 p-5 mt-3">
                 <a href="#"><img src="<?php echo base_url(); ?>img/diseno-3d.png" class="rounded-circle img-fluid border"></a>

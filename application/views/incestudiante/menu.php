@@ -32,6 +32,15 @@
                                     <li class="nav-item">
                                         <a class="nav-link active" aria-current="page" href="<?php echo base_url(); ?>index.php/base/obj">OBJETIVOS</a>
                                     </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link active" aria-current="page" href="<?php echo base_url(); ?>index.php/cursos/ver_videosest">VIDEOS</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link active" aria-current="page" href="<?php echo base_url(); ?>index.php/cursos/subir_archivos">ARCHIVOS</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link active" aria-current="page" href="<?php echo base_url(); ?>index.php/cursos/realizar_evaluacion">EVALUACIONES</a>
+                                    </li>
                                    
 
                                    

@@ -1,7 +1,7 @@
 
 
 <!-- Navbar -->
-<nav class="main-header navbar navbar-expand navbar-white navbar-light">
+<nav class="main-header navbar navbar-expand navbar-white navbar-light" style="background-color: #1234;">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
@@ -21,9 +21,7 @@
         <a href="<?php echo base_url(); ?>index.php/base/index" class="nav-link">Home</a>
       </li>
       
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Contact</a>
-      </li>
+    
       <div class="collapse navbar-collapse" id="navbarCollapse">
                                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
                                     <li class="nav-item">
@@ -41,6 +39,9 @@
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link active" aria-current="page" href="<?php echo base_url(); ?>index.php/cursos/cursos">CURSOS</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link active" aria-current="page" href="<?php echo base_url(); ?>index.php/foros/for">foros</a>
                                     </li>
                                     
 

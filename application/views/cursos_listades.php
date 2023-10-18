@@ -36,7 +36,7 @@
             <td>no</td>
             <td>TITULO</td>
             <td>DESCRIPCION</td>
-            <td>VIDEO</td>
+            <td>FOTO</td>
            
             
             <td>HABILITAR</td>
@@ -52,7 +52,7 @@
                 <td> <?php echo $indice; ?> </td>
                 <td> <?php echo $row->titulo;?> </td>
                 <td> <?php echo $row->descripcion; ?> </td>
-                <td> <?php echo $row->video; ?> </td>
+                <td> <?php echo $row->foto; ?> </td>
                 
                
                 <td>

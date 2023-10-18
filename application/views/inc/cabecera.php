@@ -30,6 +30,7 @@
   <link rel="stylesheet" href="<?php echo base_url(); ?>/adminlte/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>/adminlte/dist/css/adminlte.min.css">
+ 
   
 
 </head>

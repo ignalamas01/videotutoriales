@@ -26,10 +26,10 @@
 
 
     </div>
-    <div class="col-md-5">
+    <!-- <div class="col-md-5">
         <center><img src="<?php echo base_url(); ?>img/imgvt.png" width="120"></center>
 
-    </div>
+    </div> -->
 
     <!--<div col-md-12> -->
 
@@ -68,8 +68,8 @@
                                     <input type="text" name="descripcion" placeholder="escriba la descripcion del video" class="form-control" required><br>
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">VIDEO</label>
-                                    <input type="text" name="video" placeholder="subir video" class="form-control"><br>
+                                    <label for="exampleInputPassword1">foto</label>
+                                    <input type="text" name="foto" placeholder="subir" class="form-control"><br>
                                 </div>
                                 
                                 <!-- <div class="row">

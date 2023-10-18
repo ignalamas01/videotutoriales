@@ -294,6 +294,8 @@ class Base extends CI_Controller
 		
 		
 	}
+	
+	
 	public function subirfoto()
 	{
 		$data['id']=$_POST['idempleado'];
