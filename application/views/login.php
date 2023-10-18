@@ -60,7 +60,7 @@
   </div>
 <?php
 switch($msg) 
-{
+{                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
   case '1':
     $mensaje="error de ingreso";
     $clase="primary";

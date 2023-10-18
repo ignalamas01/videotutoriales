@@ -63,8 +63,8 @@
                                         <input type="text" name="descripcion" placeholder="escriba la descripcion" class="form-control" value="<?php echo $row->descripcion; ?>"><br>
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputPassword1">VIDEO</label>
-                                        <input type="text" name="video" placeholder="escriba su segundo apellido" class="form-control" value="<?php echo $row->video; ?>"><br>
+                                        <label for="exampleInputPassword1">FOTO</label>
+                                        <input type="text" name="foto" placeholder="escriba su segundo apellido" class="form-control" value="<?php echo $row->foto; ?>"><br>
                                     </div>
                                     <!-- <div class="row">
                                         <div class="col-4">

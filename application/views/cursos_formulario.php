@@ -69,7 +69,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">LINK DE PORTADA DE CURSO</label>
-                                    <input type="text" name="video" placeholder="subir video" class="form-control"><br>
+                                    <input type="text" name="foto" placeholder="subir" class="form-control"><br>
                                 </div>
                                 
                                 <!-- <div class="row">
