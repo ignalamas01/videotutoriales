@@ -34,6 +34,7 @@ class Cursos extends CI_Controller
 			$this->load->view('inc/menu');
 			$this->load->view('inc/menulateral');
 			$this->load->view('cursos_lista',$data);
+			$this->load->view('cursos_lista2',$data);
 			$this->load->view('inc/pie');
         }
         else
@@ -43,6 +44,31 @@ class Cursos extends CI_Controller
 		
 		
 	}
+	public function cursos2()
+	{
+		
+		if($this->session->userdata('login'))
+        {
+			//$lista=$this->empleado_model->listaempleados();
+			$lista = $this->cursos_model->listacursos();
+
+
+			$data['cursos'] = $lista;
+			$this->load->view('incestudiante/cabecera');
+			$this->load->view('incestudiante/menu');
+			$this->load->view('incestudiante/menulateral');
+			//$this->load->view('cursos_lista',$data);
+			$this->load->view('cursos_lista2',$data);
+			$this->load->view('incestudiante/pie');
+        }
+        else
+        {
+            redirect('usuarios/index/2','refresh');
+        }
+		
+		
+	}
+	
 	public function listapdf()
 	{
 		if($this->session->userdata('login'))

@@ -12,6 +12,7 @@
               <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/base/index">Home</a></li>
               <li class="breadcrumb-item active">politicas</li>
               <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/usuarios/logout">cerrar sesion</a></li>
+              <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/cursos/cursos2">cursos</a></li>
             </ol>
           </div>
         </div>
@@ -127,6 +128,7 @@
                         </div>
                     </div>
                 </div>
+                
             </div>
         </div>
     </section>
@@ -144,6 +146,7 @@
       </div>
       <!-- /.container-fluid -->
     </section>
+    
   <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->

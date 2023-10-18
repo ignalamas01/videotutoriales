@@ -1,21 +1,25 @@
 <?php
-if (isset($_POST['nombreDocumento'])) {
-    $nombreDocumento = $_POST['nombreDocumento'];
-    $directorioDocumentos = "documentos/";
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST["nombreDocumento"])) {
+        $nombreDocumento = $_POST["nombreDocumento"];
+        $directorioDocumentos = "documentos/"; // Directorio donde se almacenan los documentos
 
-    // Verificar si el archivo existe antes de eliminarlo
-    if (file_exists($directorioDocumentos . $nombreDocumento)) {
-        // Intentar eliminar el archivo
-        if (unlink($directorioDocumentos . $nombreDocumento)) {
-            echo 'El documento "' . $nombreDocumento . '" ha sido eliminado correctamente.';
+        // Verifica que el nombre del documento sea seguro para evitar posibles ataques
+        if (is_file($directorioDocumentos . $nombreDocumento)) {
+            // Intenta eliminar el documento
+            if (unlink($directorioDocumentos . $nombreDocumento)) {
+                echo "El documento se ha eliminado correctamente.";
+                // Puedes personalizar la respuesta si es necesario
+            } else {
+                echo "Hubo un error al eliminar el documento.";
+            }
         } else {
-            echo 'Error al eliminar el documento "' . $nombreDocumento . '".';
+            echo "El documento no existe.";
         }
     } else {
-        echo 'El documento "' . $nombreDocumento . '" no existe.';
+        echo "Nombre de documento no proporcionado.";
     }
 } else {
-    echo 'No se proporcionó un nombre de documento para eliminar.';
+    echo "Solicitud no válida.";
 }
 ?>
-

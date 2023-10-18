@@ -24,12 +24,13 @@
                 <a href="' . $urlDocumento . '" target="_blank">
                     <img src="' . base_url() . 'img/pdflogo.png" width="30" alt="PDF">' . $archivo . '
                 </a>
-                <button class="eliminar-btn" data-nombre="' . $archivo . '">Eliminar</button>
+                 <button class="eliminar-btn" data-nombre="' . $archivo . '">Eliminar</button>
+                
             </li>';
         }
     }
     ?>
-</ul>
+    </ul>
 
 <script>
     // Función para eliminar un documento

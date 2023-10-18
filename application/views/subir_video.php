@@ -6,15 +6,33 @@
     <a href="<?php echo base_url(); ?>index.php/cursos/ver_videos"><button type="button" class="btn btn-warning">videos</button>  </a>
     <a href="<?php echo base_url(); ?>index.php/cursos/crear_evaluacion"><button type="button" class="btn btn-warning">crear evaluacion</button>  </a>
     <a href="<?php echo base_url(); ?>index.php/cursos/realizar_evaluacion"><button type="button" class="btn btn-warning">Realizar evaluacion</button>  </a>
+    
     <br>           
-                
+    <p><ul>
+<form method="post" target="_blank" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+    <input type="submit" name="redireccionar" value="Ir al Enlace del video">
+</form>
+
+<?php
+if (isset($_POST['redireccionar'])) {
+    // URL de la página a la que quieres redirigir al usuario
+    $url = "https://www.youtube.com/watch?v=uAYG46w1SCA&ab_channel=dojacatVEVO";
+
+    // Realizar la redirección utilizando la función header()
+    header("Location: $url");
+    exit; // Asegúrate de que el script se detenga después de redirigir
+}
+?> 
+</ul></p>           
      <!-- <a href="<?php echo base_url(); ?>index.php/usuarios/logout"> <button type="button" class="btn btn-danger">CERRAR SESION</button> </a> -->
 </div>
+
 ---------------------------------------------------------
  <br> 
 
 <head>
     <title>Subir Video</title>
+    
     <style>
         /* Estilo para la cuadrícula de videos */
         .video-grid {
@@ -105,6 +123,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["video"])) {
         Tu navegador no admite la reproducción de video.
     </video>
 </ul>
+
     
 
     
