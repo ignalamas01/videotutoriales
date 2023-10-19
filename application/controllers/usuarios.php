@@ -52,7 +52,7 @@ class Usuarios extends CI_Controller
 			}
 			else
 			{
-				redirect('base/invitado','refresh');	
+				redirect('estudiante/invitado','refresh');	
 			}
            
         }

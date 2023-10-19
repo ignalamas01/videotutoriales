@@ -43,7 +43,7 @@ class Evaluaciones_estudiante_model extends CI_Model
 
 public function obtener_opciones_respuesta($idPregunta)
     {
-        $this->db->select('textoOpcion, idOpcion');
+        $this->db->select('textoOpcion, idOpcion');//quitar el id opcion  o ocultarlo
         $this->db->from('opcionesrespuesta');
         $this->db->where('idPregunta', $idPregunta);
 

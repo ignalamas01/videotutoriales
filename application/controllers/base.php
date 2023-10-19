@@ -421,25 +421,25 @@ class Base extends CI_Controller
 		$this->load->view('inc/pie');
 	}
 
-	public function invitado()
-	{
+	// public function invitado()
+	// {
 		
 
-		if($this->session->userdata('login'))
-		{
-			$this->load->view('incestudiante/cabecera');
-			$this->load->view('incestudiante/menu');
-			$this->load->view('incestudiante/menulateral');
-			$this->load->view('emple_invitado');
-			$this->load->view('incestudiante/pie');
-		}
-		else
-		{
-			redirect('usuarios/index/2', 'refresh');
-		}
+	// 	if($this->session->userdata('login'))
+	// 	{
+	// 		$this->load->view('incestudiante/cabecera');
+	// 		$this->load->view('incestudiante/menu');
+	// 		$this->load->view('incestudiante/menulateral');
+	// 		$this->load->view('emple_invitado');
+	// 		$this->load->view('incestudiante/pie');
+	// 	}
+	// 	else
+	// 	{
+	// 		redirect('usuarios/index/2', 'refresh');
+	// 	}
 		
 		
-	}
+	// }
 	
 	
 	public function subirfoto()
