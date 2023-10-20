@@ -40,5 +40,8 @@ class empleado_model extends CI_Model
         $this->db->delete('empleado');
     }
 
-   
+    public function agregarUsuario($data)
+    {
+        $this->db->insert('usuario', $data);
+    }
 }

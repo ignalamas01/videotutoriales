@@ -218,17 +218,34 @@ class Base extends CI_Controller
 		$this->empleado_model->agregarempleado($data);
 		// redirect('base/emple', 'refresh');
 		$this->load->view('success_message');
+		$idEmpleado = $this->db->insert_id();
+
+    // Crear datos para la tabla 'usuario'
+    $usuarioData = array(
+        'login' => 'usuario_' . $idEmpleado, // Puedes personalizar la lógica aquí
+        'password' => password_hash('contrasena', PASSWORD_DEFAULT), // Cambia 'contrasena' por la contraseña deseada
+        'tipo' => 'empleado',
+        'estado' => 1, // Puedes personalizar según tu lógica de activación
+        'fechaRegistro' => date('Y-m-d H:i:s'),
+        'fechaActualizacion' => date('Y-m-d H:i:s'),
+        'email' => $_POST['destinatario'], // Usar el correo proporcionado en el formulario
+        // 'idUsuario' => $idEmpleado, // Asignar el ID del empleado como ID de usuario
+    );
+
+    // Agregar usuario
+    $this->empleado_model->agregarUsuario($usuarioData);
 		try {
 			function generarUsuarioAleatorio() {
 				// Generar un usuario aleatorio (personaliza esta lógica según tus necesidades)
-				$usuario = 'usuario' . rand(1000, 9999);
+				$usuario = 'usuariocepra' . rand(1000, 9999);
 				return $usuario;
 			}
 		
 			// Función para generar una contraseña aleatoria de 8 dígitos
 			function generarContrasenaAleatoria() {
-				$contrasena = str_pad(mt_rand(1, 99999999), 8, '0', STR_PAD_LEFT);
-				return $contrasena;
+				$caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ@#$%&*';
+    $contrasena = substr(str_shuffle($caracteres), 0, 8);
+    return $contrasena;
 			}
 		
 			// Generar la cuenta de usuario y la contraseña
