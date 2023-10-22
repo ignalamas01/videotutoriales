@@ -1,6 +1,8 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 require FCPATH.'vendor/autoload.php';
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
@@ -173,20 +175,173 @@ class Estudiante extends CI_Controller
 		$this->load->view('est_formulario');
 		$this->load->view('inc/pie');
 	}
+	// public function agregarbd()
+	// {
+		// $data['nombre'] = $_POST['nombre'];
+		// $data['primerApellido'] = $_POST['primerApellido'];
+		// $data['segundoApellido'] = $_POST['segundoApellido'];
+		// $data['carrera'] = $_POST['carrera'];
+		// $data['fechaNacimiento'] = $_POST['fechaNac'];
+		
+		// $data['direccion'] = $_POST['direccion'];
+		
+
+		// $this->estudiante_model->agregarestudiante($data);
+		// redirect('estudiante/est', 'refresh');
 	public function agregarbd()
 	{
-		$data['nombre'] = $_POST['nombre'];
+		$correo = $this->input->post("destinatario");
+
+    // Verificar si el correo ya existe en la base de datos
+    if ($this->estudiante_model->correoExiste($correo)) {
+        // Mostrar mensaje de error o redirigir a una página de error
+        // echo "El correo electrónico ya existe en la base de datos";
+		$this->session->set_flashdata('error_correo', 'El correo electrónico ya está registrado en la base de datos');
+        redirect('estudiante/agregar', 'refresh');
+		return;
+    }
+		// redirect('base/emple', 'refresh');
+		// $this->load->view('success_message');
+	
+
+    // Crear datos para la tabla 'usuario'
+    
+		try {
+			function generarUsuarioAleatorio() {
+				// Generar un usuario aleatorio (personaliza esta lógica según tus necesidades)
+				$usuario = 'usuariocepra' . rand(1000, 9999);
+				return $usuario;
+			}
+		
+			// Función para generar una contraseña aleatoria de 8 dígitos
+			function generarContrasenaAleatoria() {
+				$caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ@#$%&*';
+    $contrasena = substr(str_shuffle($caracteres), 0, 8);
+    return $contrasena;
+			}
+		
+			// Generar la cuenta de usuario y la contraseña
+			$usuario = generarUsuarioAleatorio();
+			$contrasena = generarContrasenaAleatoria();
+			$contrasena_cifrada = md5($contrasena);
+		
+			// Resto del código para configurar y enviar el correo electrónico
+			// ...
+		
+			// Incluir la cuenta de usuario y la contraseña en el cuerpo del correo
+			
+		
+			// Resto del código para enviar el correo electrónico
+			// ...
+
+
+					// Contenido del correo
+					// print("Esta parte se está ejecutando.");
+					$asunto    = $this->input->post("asunto");
+					// $data['asunto'] = $_POST['asunto'];
+					// $data['contenido'] = $_POST['contenido'];
+					// $data['destinatario'] = $_POST['destinatario'];
+					$contenido = $this->input->post("contenido");
+					$para      = $this->input->post("destinatario");
+			
+					if (!filter_var($para, FILTER_VALIDATE_EMAIL)) {
+						throw new Exception('Dirección de correo electrónico no válida.');
+					}
+					// error_log("La función post_gmail se está ejecutando.");
+					// Cargar la librería PHPMailer
+					// $this->load->library('phpmailer_lib');
+					require 'vendor/autoload.php';
+					$mail                = new PHPMailer(true);
+			        $mail->SMTPOptions = [
+						'ssl' => [
+							'verify_peer' => false,
+							'verify_peer_name' => false,
+							'allow_self_signed' => true,
+						],
+					];
+					// Crear una instancia de PHPMailer
+					// $mail = $this->phpmailer_lib->load();
+					// error_log("La función post_gmail se está ejecutando.");
+					// Configurar el servidor SMTP
+					// $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+					$mail->isSMTP();
+					$mail->Host = 'smtp.gmail.com';
+					$mail->Port = 587; // o 465 si prefieres SSL
+					$mail->SMTPSecure = 'tls'; // o 'ssl' para SSL
+					$mail->SMTPAuth = true;
+			
+					// Credenciales de la cuenta de Gmail
+					$email = 'bikeracealvaro@gmail.com';
+					$mail->Username = $email;
+					$mail->Password = 'gzncuwbkwelnxwys';
+			
+					// Configurar el remitente y destinatario
+					$mail->setFrom($email, 'Roberto Orozco');
+					$mail->addReplyTo('replyto@panchos.com', 'Pancho Doe');
+					$mail->addAddress($para, 'John Doe');
+			
+					// Asunto del correo
+					$mail->Subject = $asunto;
+			
+					// Contenido HTML del correo
+					$mail->IsHTML(true);
+					$mail->CharSet = 'UTF-8';
+					// $mail->Body = sprintf('<h1>El mensaje es:</h1><br><p>%s</p>', $contenido);
+					$mail->Body = sprintf('<h1>El mensaje es:</h1><br><p>%s</p><p>Cuenta de usuario: %s</p><p>Contraseña: %s</p>', $contenido, $usuario, $contrasena);
+			
+					// Texto alternativo
+					$mail->AltBody = 'No olvides suscribirte a nuestro canal.';
+			
+					// Enviar el correo
+					if (!$mail->send()) {
+						throw new Exception($mail->ErrorInfo);
+					}
+			
+					// Redireccionar con un mensaje de éxito
+					$this->session->set_flashdata('success', 'Mensaje enviado con éxito a ' . $para);
+					// redirect('base/emple', 'refresh'); // Cambia 'base/index' a la URL deseada después del envío exitoso
+			
+				} catch (Exception $e) {
+					// Manejar errores y redireccionar con un mensaje de error
+					$this->session->set_flashdata('error', $e->getMessage());
+					// redirect('base/index');
+					// redirect('base/emple', 'refresh'); // Cambia 'base/index' a la URL deseada en caso de error
+				}
+
+
+			$usuarioData = array(
+				'login' => $usuario, // Puedes personalizar la lógica aquí
+				'password' => $contrasena_cifrada,// Cambia 'contrasena' por la contraseña deseada
+				'tipo' => 'invitado',
+				'estado' => 1, // Puedes personalizar según tu lógica de activación
+				'fechaRegistro' => date('Y-m-d H:i:s'),
+				'fechaActualizacion' => date('Y-m-d H:i:s'),
+				'email' => $_POST['destinatario'], // Usar el correo proporcionado en el formulario
+				// 'idUsuario' => $idEmpleado, // Asignar el ID del empleado como ID de usuario
+			);
+		
+			// Agregar usuario
+			$this->estudiante_model->agregarUsuario($usuarioData);
+			$idUsuario = $this->db->insert_id();
+			$data['nombre'] = $_POST['nombre'];
 		$data['primerApellido'] = $_POST['primerApellido'];
 		$data['segundoApellido'] = $_POST['segundoApellido'];
 		$data['carrera'] = $_POST['carrera'];
+		$data['departamento'] = $_POST['departamento'];
 		$data['fechaNacimiento'] = $_POST['fechaNac'];
+		$data['telefono'] = $_POST['telefono'];
+		
 		
 		$data['direccion'] = $_POST['direccion'];
+		$data['idUsuario'] = $idUsuario;
 		
 
 		$this->estudiante_model->agregarestudiante($data);
-		redirect('estudiante/est', 'refresh');
+			redirect('estudiante/est', 'refresh');
+			
+		
 	}
+	
 	public function modificar()
 	{
 		$idestudiante = $_POST['idestudiante'];

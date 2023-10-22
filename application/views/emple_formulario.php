@@ -44,7 +44,12 @@
     ?>
 
 
-
+<span id="error-correo" style="color: red;">
+    <?php
+    // Muestra mensajes de error específicos desde la sesión aquí
+    echo $this->session->flashdata('error_correo');
+    ?>
+</span>
     <section class="content">
         <div class="container-fluid">
             <div class="row">
@@ -73,8 +78,12 @@
                                 </div>
                                 <div class="form-group">
     <label for="newEmail">Correo Electrónico</label>
-    <input type="email" id="destinatario" name="destinatario" placeholder="Escriba su correo electrónico" class="form-control" required>
+    <input type="email" id="destinatario" name="destinatario" placeholder="Escriba su correo electrónico" class="form-control" required onkeyup="verificarCorreoExistente()">
+
+    <span id="error-correo" style="color: red;"></span>
 </div>
+
+
                                 <div class="row">
                                     <div class="col-4">
                                         <div class="form-group">
@@ -155,7 +164,59 @@
 
     </section>
 </div><!-- /.container-fluid -->
+<!-- ... (código anterior) ... -->
 
+
+
+<!-- ... (código posterior) ... -->
+
+<script>
+var csrf_token = '<?php echo $this->security->get_csrf_hash(); ?>';
+
+// Función para verificar si el correo ya existe
+// function verificarCorreoExistente() {
+//     console.log('Función llamada'); 
+//     var destinatario = document.getElementById('destinatario').value;
+
+//     // Realiza una solicitud AJAX para verificar el correo en el servidor
+//     // Debes crear una ruta en tu controlador para manejar esta solicitud
+//     // Aquí se muestra un ejemplo básico
+//     $.ajax({
+//         url: '<?php echo base_url('base/verificar_correo_existente'); ?>',
+//         type: 'POST',
+//         data: { destinatario: destinatario },
+//         success: function(response) {
+//             if (response == 'existe') {
+//                 // El correo ya existe, muestra un mensaje de error
+//                 document.getElementById('error-correo').innerHTML = 'El correo ya existe';
+//             } else {
+//                 // El correo no existe, limpia el mensaje de error si lo hay
+//                 document.getElementById('error-correo').innerHTML = '';
+//             }
+//         },
+//         error: function(xhr, status, error) {
+//             console.error('Error en la solicitud AJAX:', error);
+//         }
+//     });
+// }
+
+// Manejar el evento de envío del formulario
+// $(document).ready(function() {
+//     $('#miFormulario').submit(function(event) {
+//         // Evitar el envío predeterminado del formulario
+//         event.preventDefault();
+        
+//         // Realizar la verificación antes de enviar los datos al servidor
+//         verificarCorreoExistente();
+
+//         // Aquí puedes agregar lógica adicional antes de enviar el formulario al servidor
+//         // Por ejemplo, podrías verificar otros campos o realizar otras validaciones.
+
+//         // Finalmente, si todo está bien, puedes enviar el formulario al servidor
+//         this.submit();
+//     });
+// });
+</script>
 
 <?php
 echo form_close();
@@ -172,4 +233,5 @@ echo form_close();
 </div>
   <!-- /.content -->
 </div>
+
 <!-- /.content-wrapper -->

@@ -204,36 +204,22 @@ class Base extends CI_Controller
 	}
 	public function agregarbd()
 	{
-		$data['nombre'] = $_POST['nombre'];
-		$data['primerApellido'] = $_POST['primerApellido'];
-		$data['segundoApellido'] = $_POST['segundoApellido'];
-		$data['departamento'] = $_POST['departamento'];
-		$data['fechaNacimiento'] = $_POST['fechaNac'];
-		$data['telefono'] = $_POST['telefono'];
-		
-		
-		$data['direccion'] = $_POST['direccion'];
-		
+		$correo = $this->input->post("destinatario");
 
-		$this->empleado_model->agregarempleado($data);
+    // Verificar si el correo ya existe en la base de datos
+    if ($this->empleado_model->correoExiste($correo)) {
+        // Mostrar mensaje de error o redirigir a una página de error
+        // echo "El correo electrónico ya existe en la base de datos";
+		$this->session->set_flashdata('error_correo', 'El correo electrónico ya está registrado en la base de datos');
+        redirect('base/agregar', 'refresh');
+		return;
+    }
 		// redirect('base/emple', 'refresh');
-		$this->load->view('success_message');
-		$idEmpleado = $this->db->insert_id();
+		// $this->load->view('success_message');
+	
 
     // Crear datos para la tabla 'usuario'
-    $usuarioData = array(
-        'login' => 'usuario_' . $idEmpleado, // Puedes personalizar la lógica aquí
-        'password' => password_hash('contrasena', PASSWORD_DEFAULT), // Cambia 'contrasena' por la contraseña deseada
-        'tipo' => 'empleado',
-        'estado' => 1, // Puedes personalizar según tu lógica de activación
-        'fechaRegistro' => date('Y-m-d H:i:s'),
-        'fechaActualizacion' => date('Y-m-d H:i:s'),
-        'email' => $_POST['destinatario'], // Usar el correo proporcionado en el formulario
-        // 'idUsuario' => $idEmpleado, // Asignar el ID del empleado como ID de usuario
-    );
-
-    // Agregar usuario
-    $this->empleado_model->agregarUsuario($usuarioData);
+    
 		try {
 			function generarUsuarioAleatorio() {
 				// Generar un usuario aleatorio (personaliza esta lógica según tus necesidades)
@@ -251,6 +237,7 @@ class Base extends CI_Controller
 			// Generar la cuenta de usuario y la contraseña
 			$usuario = generarUsuarioAleatorio();
 			$contrasena = generarContrasenaAleatoria();
+			$contrasena_cifrada = md5($contrasena);
 		
 			// Resto del código para configurar y enviar el correo electrónico
 			// ...
@@ -336,42 +323,33 @@ class Base extends CI_Controller
 				}
 
 
-		// print("Esta parte se está ejecutando.");
+			$usuarioData = array(
+				'login' => $usuario, // Puedes personalizar la lógica aquí
+				'password' => $contrasena_cifrada,// Cambia 'contrasena' por la contraseña deseada
+				'tipo' => 'empleado',
+				'estado' => 1, // Puedes personalizar según tu lógica de activación
+				'fechaRegistro' => date('Y-m-d H:i:s'),
+				'fechaActualizacion' => date('Y-m-d H:i:s'),
+				'email' => $_POST['destinatario'], // Usar el correo proporcionado en el formulario
+				// 'idUsuario' => $idEmpleado, // Asignar el ID del empleado como ID de usuario
+			);
 		
-			// require 'vendor/autoload.php';
+			// Agregar usuario
+			$this->empleado_model->agregarUsuario($usuarioData);
+			$idUsuario = $this->db->insert_id();
+			$data['nombre'] = $_POST['nombre'];
+		$data['primerApellido'] = $_POST['primerApellido'];
+		$data['segundoApellido'] = $_POST['segundoApellido'];
+		$data['departamento'] = $_POST['departamento'];
+		$data['fechaNacimiento'] = $_POST['fechaNac'];
+		$data['telefono'] = $_POST['telefono'];
+		
+		
+		$data['direccion'] = $_POST['direccion'];
+		$data['idUsuario'] = $idUsuario;
+		
 
-			// $mail = new PHPMailer(true);
-			// // Desactiva temporalmente la verificación de certificados SSL/TLS (no recomendado para producción)
-			// $mail->SMTPOptions = [
-			// 	'ssl' => [
-			// 		'verify_peer' => false,
-			// 		'verify_peer_name' => false,
-			// 		'allow_self_signed' => true,
-			// 	],
-			// ];
-			// try {
-			// 	// Configuración de PHPMailer
-			// 	$mail->SMTPDebug = SMTP::DEBUG_SERVER; // Habilita la depuración
-			// 	$mail->isSMTP();
-			// 	$mail->Host = 'smtp.gmail.com';
-			// 	$mail->Port = 587; // o 587
-			// 	$mail->SMTPSecure = 'tls'; // o 'ssl'
-			// 	$mail->SMTPAuth = true;
-			// 	$mail->Username = 'bikeracealvaro@gmail.com';
-			// 	$mail->Password = 'gzncuwbkwelnxwys';
-			
-			// 	// Detalles del mensaje
-			// 	$mail->setFrom('bikeracealvaro@gmail.com', 'Tu Nombre');
-			// 	$mail->addAddress('lasolucion234@gmail.com', 'Destinatario');
-			// 	$mail->Subject = 'Asunto del Correo';
-			// 	$mail->Body = 'Prueba envios';
-			
-			// 	// Enviar el correo
-			// 	$mail->send();
-			// 	echo 'El correo se ha enviado correctamente';
-			// } catch (Exception $e) {
-			// 	echo 'El correo no se pudo enviar. Error: ', $mail->ErrorInfo;
-			// }
+		$this->empleado_model->agregarempleado($data);
 			redirect('base/emple', 'refresh');
 			
 		
@@ -403,9 +381,21 @@ class Base extends CI_Controller
 
 	public function eliminarbd()
 	{
+		// $idempleado = $_POST['idempleado'];
+		// $this->empleado_model->eliminarempleado($idempleado);
+		// redirect('base/emple', 'refresh');
 		$idempleado = $_POST['idempleado'];
-		$this->empleado_model->eliminarempleado($idempleado);
-		redirect('base/emple', 'refresh');
+
+    // Llamada al modelo para eliminar en ambas tablas
+    if ($this->empleado_model->eliminarempleado($idempleado)) {
+        // La eliminación se realizó con éxito
+        $this->session->set_flashdata('success', 'Empleado y usuario eliminados con éxito');
+    } else {
+        // Ocurrió un error
+        $this->session->set_flashdata('error', 'Error al eliminar el empleado y usuario');
+    }
+
+    redirect('base/emple', 'refresh');
 	}
 	public function deshabilitarbd()
 	{
@@ -436,6 +426,14 @@ class Base extends CI_Controller
 		$this->load->view('inc/menulateral');
 		$this->load->view('emple_listades',$data);
 		$this->load->view('inc/pie');
+	}
+	public function verificar_correo_existente() {
+		$destinatario = $this->input->post('destinatario');
+	
+		$this->load->model('empleado_model');
+		$existe = $this->empleado_model->correoExiste($destinatario);
+	
+		echo ($existe) ? 'existe' : 'no_existe';
 	}
 
 	// public function invitado()

@@ -36,12 +36,41 @@ class empleado_model extends CI_Model
     }
     public function eliminarempleado($idempleado)
     {
+        // $this->db->where('id', $idempleado);
+        // $this->db->delete('empleado');
+        $this->db->trans_start(); // Iniciar transacción
+
+        // Obtener el ID de usuario asociado al empleado
+        $this->db->select('idUsuario');
         $this->db->where('id', $idempleado);
-        $this->db->delete('empleado');
+        $query = $this->db->get('empleado');
+        $result = $query->row();
+
+        if ($result) {
+            // Eliminar de la tabla 'empleado'
+            $this->db->where('id', $idempleado);
+            $this->db->delete('empleado');
+
+            // Eliminar de la tabla 'usuario'
+            $this->db->where('idUsuario', $result->idUsuario);
+            $this->db->delete('usuario');
+        }
+
+        $this->db->trans_complete(); // Finalizar transacción
+
+        return $this->db->trans_status(); // Devolver el estado de la transacción
     }
+    
 
     public function agregarUsuario($data)
     {
         $this->db->insert('usuario', $data);
+    }
+    public function correoExiste($correo)
+    {
+        $this->db->where('email', $correo);
+        $query = $this->db->get('usuario');
+
+        return $query->num_rows() > 0;
     }
 }
