@@ -43,7 +43,7 @@
     echo form_open_multipart('cursos/agregarbd')
     ?>
 
-
+<input type="hidden" name="idUsuario" value="<?php echo $this->session->userdata('idusuario'); ?>">
 
     <section class="content">
         <div class="container-fluid">
