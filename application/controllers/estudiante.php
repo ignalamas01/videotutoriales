@@ -486,5 +486,6 @@ class Estudiante extends CI_Controller
 		$execonsulta = $query->result();
 		print_r($execonsulta);
 	}
-*/
+	*/
+	
 }

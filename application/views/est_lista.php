@@ -37,6 +37,7 @@
               <div>   
                 <a href="<?php echo base_url(); ?>index.php/estudiante/agregar"> <button type="button" class="btn btn-primary">AGREGAR ESTUDIANTES</button> </a>
                 <a href="<?php echo base_url(); ?>index.php/estudiante/deshabilitados"> <button type="button" class="btn btn-warning">VER LISTA DE ESTUDIANTES DESHABILITADOS</button> </a>
+                
                 <!-- <a href="<?php echo base_url(); ?>index.php/usuarios/logout"> <button type="button" class="btn btn-danger">CERRAR SESION</button> </a> -->
               </div>
               
@@ -193,6 +194,7 @@
       </div>
       <!-- /.container-fluid -->
     </section>
+    
   <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->

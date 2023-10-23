@@ -34,7 +34,7 @@ class Cursos extends CI_Controller
 			$this->load->view('inc/menu');
 			$this->load->view('inc/menulateral');
 			$this->load->view('cursos_lista',$data);
-			$this->load->view('cursos_lista2',$data);
+			
 			$this->load->view('inc/pie');
         }
         else
@@ -525,4 +525,26 @@ $data['puntajeTotal'] = $ultima_evaluacion['puntajeTotal'];
 		print_r($execonsulta);
 	}
 */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

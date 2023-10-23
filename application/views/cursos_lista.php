@@ -45,6 +45,8 @@
                 <a href="<?php echo base_url(); ?>index.php/cursos/subir_archivos"> <button type="button" class="btn btn-danger">Archivos</button> </a>
                 <a href="<?php echo base_url(); ?>index.php/cursos/crear_evaluacion"><button type="button" class="btn btn-warning">Crear evaluacion</button>  </a>
                 <a href="<?php echo base_url(); ?>index.php/cursos/realizar_evaluacion"><button type="button" class="btn btn-warning">Realizar evaluacion</button>  </a>
+               
+                
                 <!-- <a href="<?php echo base_url(); ?>index.php/usuarios/logout"> <button type="button" class="btn btn-danger">CERRAR SESION</button> </a> -->
               </div>
               
@@ -64,14 +66,16 @@
               <div class="card-body">
             
                 <table id="example"  class="table table-bordered table-striped">
-                <?php
+                <!--comentado no me acuerdo we <?php
                 foreach($cursos as $curso){
                   ?>
                     
 
                   <?php
                 }
-              ?>  
+              ?>   -->
+
+
                 <thead>
                     <tr>
                       <td>no</td>
@@ -262,7 +266,7 @@
                                 }
                               ?>
                         </p>
-                        <p class="text-muted">Reviews (24)</p>
+                        <p class="text-muted">Reviewsss (24)</p>
                     </div>
                 </div>
             </div>
@@ -271,6 +275,7 @@
         ?>
     </div>
 </div>
+
 
 
 
@@ -299,7 +304,7 @@
             </div>
             <div class="col-12 col-md-4 p-5 mt-3">
                 <a href="#"><img src="<?php echo base_url(); ?>img/diseno-3d.png" class="rounded-circle img-fluid border"></a>
-                <h2 class="h5 text-center mt-3 mb-3">Diseño 3D</h2>
+                <h2 class="h5 text-center mt-3 mb-3">Diseño 3DDD</h2>
                 <p class="text-center"><a class="btn btn-success">ir al Curso</a></p>
             </div>
             <div class="col-12 col-md-4 p-5 mt-3">
@@ -309,6 +314,28 @@
             </div>
         </div>
     </section>
+    <section>
+      <div class="row">
+        <div class="col-4">
+            <div class="form-group">
+                 <label>CURSOS</label>
+                                            
+                        <select name="id" class="form-control form-select form-select-lg required" style="width: 100%">
+                        <option value="" disabled selected>Seleccione un curso</option>
+                        <?php
+                          foreach ($cursos->result() as $row) {
+                          echo '<option value="' . $row->id . '">' . $row->titulo . '</option>';
+                      }
+                          ?>
+                      </select>
+            </div>
+        </div>
+                                        
+      </div>
+      
+                                    
+    </section>
+    
     <!-- End Categories of The Month -->
 
 

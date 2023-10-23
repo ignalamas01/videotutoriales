@@ -9,6 +9,7 @@ class cursos_model extends CI_Model
         $this->db->where('estado','1');
         return $this->db->get();
     }
+   
     public function listacursosdes()
     {
         $this->db->select('*');
@@ -40,7 +41,7 @@ class cursos_model extends CI_Model
         $this->db->delete('cursos');
     }
     public function agregar_seccion($data)
-{
+    {
     try {
         $this->db->insert('secciones', $data);
         if ($this->db->affected_rows() > 0) {
@@ -55,13 +56,80 @@ class cursos_model extends CI_Model
         log_message('error', $e->getMessage());
         return false;  // o maneja de alguna manera según tus necesidades
     }
-}
+    }
     public function agregarArchivo($data_archivo)
     {
         $this->db->insert('archivos', $data_archivo);
     }
     public function agregarVideo($data_video)
-{
+    {
     $this->db->insert('videos', $data_video);
-}
-}
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}    
+
+
+
+
+
+
+
+
+
+
+
+
+
+

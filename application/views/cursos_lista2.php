@@ -106,7 +106,27 @@
     </div>
 </div>
 
-
+<section>
+      <div class="row">
+        <div class="col-4">
+            <div class="form-group">
+                 <label>CURSOS</label>
+                                            
+                        <select name="id" class="form-control form-select form-select-lg required" style="width: 100%">
+                        <option value="" disabled selected>Seleccione un curso</option>
+                        <?php
+                          foreach ($cursos->result() as $row) {
+                          echo '<option value="' . $row->id . '">' . $row->titulo . '</option>';
+                      }
+                          ?>
+                      </select>
+            </div>
+        </div>
+                                        
+      </div>
+      
+                                    
+    </section>
 
 
 
@@ -133,7 +153,7 @@
             </div>
             <div class="col-12 col-md-4 p-5 mt-3">
                 <a href="#"><img src="<?php echo base_url(); ?>img/diseno-3d.png" class="rounded-circle img-fluid border"></a>
-                <h2 class="h5 text-center mt-3 mb-3">Diseño 3D</h2>
+                <h2 class="h5 text-center mt-3 mb-3">Diseño 3</h2>
                 <p class="text-center"><a class="btn btn-success">ir al Curso</a></p>
             </div>
             <div class="col-12 col-md-4 p-5 mt-3">
