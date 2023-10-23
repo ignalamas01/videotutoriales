@@ -47,6 +47,28 @@ class Evaluaciones extends CI_Controller
             $question['options'] = $options;
             $question['correctOptions'] = $correctOptions;
 
+             // Subir imagen de la pregunta
+        $imageFieldName = "questionImages[$i]";
+
+        // Configuración para subir la imagen
+        $config['upload_path'] = './uploads/cursos/';
+        $config['allowed_types'] = 'gif|jpg|png';
+        $config['max_size'] = 1024; // Tamaño máximo en kilobytes
+
+        $this->load->library('upload', $config);
+
+        if ($this->upload->do_upload($imageFieldName)) {
+            $uploadData = $this->upload->data();
+            $imagePath = './uploads/cursos/' . $uploadData['file_name'];
+
+            // Agregar la ruta de la imagen a la pregunta
+            $question['imagen'] = $imagePath;
+        } else {
+            // Manejar errores si la subida falla
+            $error = array('error' => $this->upload->display_errors());
+            print_r($error);
+        }
+
             // Agregar la pregunta al array de preguntas
             $questions[] = $question;
 
@@ -58,7 +80,7 @@ class Evaluaciones extends CI_Controller
         $evaluation_id = $this->evaluaciones_model->agregar_evaluacion($data, $questions, $puntajeTotal);
 
         // Puedes redirigir a una página de éxito o mostrar un mensaje aquí
-        redirect('evaluaciones/crear_evaluacion', 'refresh');
+        // redirect('evaluaciones/crear_evaluacion', 'refresh');
     }
 }
 
