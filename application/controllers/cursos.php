@@ -169,11 +169,11 @@ class Cursos extends CI_Controller
 	}
 	public function agregarbd()
 	{
-        
+        $idUsuario = $this->session->userdata('idusuario');
 		$data['titulo'] = $_POST['titulo'];
 		$data['descripcion'] = $_POST['descripcion'];
 		$data['foto'] = $_POST['foto'];
-		
+		$data['idUsuario'] = $idUsuario;
 
 		$this->cursos_model->agregarcursos($data);
 		$curso_id = $this->db->insert_id();
