@@ -28,7 +28,7 @@ class Evaluaciones_model extends CI_Model
                 'tipoPregunta' => $question['tipoPregunta'],
                 'puntajePregunta' => $question['puntajePregunta'],
                 'idEvaluacion' => $evaluation_id,
-                'imagen' => $question['imagen'], // Asegúrate de que la clave sea 'imagen'
+                'imagen' => $question['imageQuestion'], // Asegúrate de que la clave sea 'imagen'
             );
 
             $this->db->insert('preguntas', $question_data);

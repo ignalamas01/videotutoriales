@@ -81,8 +81,9 @@
             <div class="question">
                 <label for="question1">Pregunta 1:</label>
                 <input type="text" id="question1" name="questions[]" required><br><br>
-                <label for="imageQuestion1">Imagen de la Pregunta:</label>
-                <input type="file" id="imageQuestion1" name="questionImages[]" accept="image/*"multiple><br><br>
+                <label for="imageQuestion${questionCount}">Imagen de la Pregunta:</label>
+<input type="file" id="imageQuestion1" name="imageQuestion[]" accept="image/*" multiple><br><br>
+
 
 
                 <label for="options1">Opciones de Respuesta (separadas por comas):</label>
@@ -119,7 +120,7 @@
             <label for="question${questionCount}">Pregunta ${questionCount}:</label>
             <input type="text" id="question${questionCount}" name="questions[]" required><br><br>
             <label for="imageQuestion${questionCount}">Imagen de la Pregunta:</label>
-            <input type="file" id="imageQuestion${questionCount}" name="questionImages[]" accept="image/*"><br><br>
+            <input type="file" id="imageQuestion${questionCount}" name="imageQuestion[]" accept="image/*" multiple><br><br>
             <label for="options${questionCount}">Opciones de Respuesta (separadas por comas):</label>
             <input type="text" id="options${questionCount}" name="options[]" required><br><br>
             <label for="correctOptions${questionCount}">Respuesta Correcta (número de opción, ej. 1, 2, 3, ...):</label>
@@ -179,6 +180,9 @@ function updateQuestionNumbers() {
     for (let i = 1; i <= questionCount; i++) {
         const scoreField = document.getElementById(`score${i}`);
         scoreField.addEventListener('change', updateTotalScore);
+        
+        const fileInput = document.getElementById(`imageQuestion${i}`);
+    fileInput.addEventListener('change', updateTotalScore);
     }
 </script>
 

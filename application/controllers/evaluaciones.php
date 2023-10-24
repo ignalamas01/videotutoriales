@@ -31,12 +31,16 @@ class Evaluaciones extends CI_Controller
         $questions = array();
         $questionCount = count($this->input->post('questions'));
         $puntajeTotal = 0; // Inicializar puntaje total
-
+        $config['upload_path'] = './uploads/evaluaciones/';
+        $config['allowed_types'] = 'gif|jpg|png';
+        $this->load->library('upload', $config);
+        $imageFiles = $_FILES['imageQuestion'];
         for ($i = 0; $i < $questionCount; $i++) {
             $question = array(
                 'enunciadoPregunta' => $this->input->post("questions[$i]"),
                 'tipoPregunta' => 'multiple_choice', // Ajusta el tipo según tus necesidades
                 'puntajePregunta' => $this->input->post("scores[$i]"),
+                'imageQuestion' => null,
             );
 
             // Obtener opciones de respuesta y respuestas correctas
@@ -48,27 +52,40 @@ class Evaluaciones extends CI_Controller
             $question['correctOptions'] = $correctOptions;
 
              // Subir imagen de la pregunta
-        $imageFieldName = "questionImages[$i]";
+        // $imageFieldName = "imageQuestion";
 
         // Configuración para subir la imagen
-        $config['upload_path'] = './uploads/cursos/';
-        $config['allowed_types'] = 'gif|jpg|png';
-        $config['max_size'] = 1024; // Tamaño máximo en kilobytes
+        
+        // $config['max_size'] = 1024; // Tamaño máximo en kilobytes
 
-        $this->load->library('upload', $config);
+        // $this->load->library('upload', $config);
+        
+        echo "DEBUG: ";
+        print_r($imageFiles);
+        print_r("questions[$i] pregunta $i");
+        
+       
+        
+        $_FILES['imageQuestion']['name'] = $imageFiles['name'][$i] ?? null;
+    $_FILES['imageQuestion']['type'] = $imageFiles['type'][$i] ?? null;
+    $_FILES['imageQuestion']['tmp_name'] = $imageFiles['tmp_name'][$i] ?? null;
+    $_FILES['imageQuestion']['error'] = $imageFiles['error'][$i] ?? null;
+    $_FILES['imageQuestion']['size'] = $imageFiles['size'][$i] ?? null;
 
-        if ($this->upload->do_upload($imageFieldName)) {
-            $uploadData = $this->upload->data();
-            $imagePath = './uploads/cursos/' . $uploadData['file_name'];
+    
+            if ($this->upload->do_upload('imageQuestion')) {
+                $uploadData = $this->upload->data();
+                $imagePath = './uploads/evaluaciones/' . $uploadData['file_name'];
 
             // Agregar la ruta de la imagen a la pregunta
-            $question['imagen'] = $imagePath;
+            $question['imageQuestion'] = $imagePath;
         } else {
+            echo "No se seleccionó una imagen para la pregunta $i.";
             // Manejar errores si la subida falla
             $error = array('error' => $this->upload->display_errors());
             print_r($error);
         }
-
+        
             // Agregar la pregunta al array de preguntas
             $questions[] = $question;
 
@@ -82,5 +99,6 @@ class Evaluaciones extends CI_Controller
         // Puedes redirigir a una página de éxito o mostrar un mensaje aquí
         // redirect('evaluaciones/crear_evaluacion', 'refresh');
     }
+   
 }
 

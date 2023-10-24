@@ -53,7 +53,7 @@
                     <!-- general form elements -->
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">adujunte el video</h3>
+                            <h3 class="card-title">Adjunte foto de portada</h3>
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
@@ -80,7 +80,7 @@
                     </div>
                     <!-- /.card -->
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-success ">subir</button>
+                        <button type="submit" class="btn btn-success ">Subir</button>
 
                         <button type="reset" class="btn btn-success " onClick="history.go(-1);">Cancelar</button>
                     </div>
