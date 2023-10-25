@@ -8,6 +8,7 @@ class Evaluaciones_model extends CI_Model
         $data['idCurso'] = $idCurso;
         $data['idSeccion'] = $idSeccion;
         // Iniciar transacción
+        
         $this->db->trans_start();
 
         // Agregar datos de la evaluación
@@ -96,6 +97,13 @@ class Evaluaciones_model extends CI_Model
         $result = $query->row();
 
         return $result->puntajePregunta;
+    }
+    public function verificar_curso_existente($idCurso)
+    {
+        $this->db->where('id', $idCurso);
+        $query = $this->db->get('cursos');
+
+        return $query->num_rows() > 0;
     }
 
 }

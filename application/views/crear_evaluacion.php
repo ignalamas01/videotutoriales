@@ -73,17 +73,20 @@
         <label for="deadline">Fecha de Vencimiento:</label>
         <input type="date" id="deadline" name="deadline"><br><br>
        <!-- Nueva casilla de selección para cursos -->
-<label for="curso">Seleccionar Curso:</label>
-<select id="curso" name="curso">
-<option value="">Seleccionar Curso</option> <!-- Opción en blanco -->
+       
+<!-- Nueva casilla de selección para cursos -->
+
+<label for="curso">Curso en general:</label>
+<select id="curso" name="curso" onchange="handleSelection('curso')">
+    <option value="">Seleccionar Curso</option> <!-- Opción en blanco -->
     <?php foreach ($cursos as $curso) : ?>
         <option value="<?php echo $curso->id; ?>"><?php echo $curso->titulo; ?></option>
     <?php endforeach; ?>
 </select><br><br>
 
 <!-- Nueva casilla de selección para secciones -->
-<label for="seccion">Seleccionar Sección:</label>
-<select id="seccion" name="seccion">
+<label for="seccion">Curso y sección en especifico:</label>
+<select id="seccion" name="seccion"onchange="handleSelection('seccion')">
     <option value="">Seleccionar Sección</option> <!-- Opción en blanco -->
     <?php foreach ($secciones as $seccion) : ?>
         <option value="<?php echo $seccion->idSeccion; ?>">
@@ -201,6 +204,14 @@ function updateQuestionNumbers() {
         const fileInput = document.getElementById(`imageQuestion${i}`);
     fileInput.addEventListener('change', updateTotalScore);
     }
+    function handleSelection(selected) {
+    // Desactivar la otra casilla según la selección
+    if (selected === 'curso') {
+        document.getElementById('seccion').disabled = true;
+    } else {
+        document.getElementById('curso').disabled = true;
+    }
+}
 </script>
 
     

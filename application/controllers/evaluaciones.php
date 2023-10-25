@@ -21,10 +21,10 @@ class Evaluaciones extends CI_Controller
     // Obtener todos los cursos y secciones disponibles
     $data['cursos'] = $this->cursos_model->listacursos()->result();
     $data['secciones'] = $this->cursos_model->listasecciones()->result();
-    echo '<pre>';
-print_r($data['cursos']);
-print_r($data['secciones']);
-echo '</pre>';
+//     echo '<pre>';
+// print_r($data['cursos']);
+// print_r($data['secciones']);
+// echo '</pre>';
     
         $this->load->view('inc/cabecera');
         $this->load->view('inc/menu');
@@ -37,6 +37,13 @@ echo '</pre>';
     {
         $idCurso = $this->input->post('curso');
     $idSeccion = $this->input->post('seccion');
+    echo "ID del Curso: $idCurso<br>";
+echo "ID de la Sección: $idSeccion";
+    // Verificar que el ID del curso existe en la tabla cursos
+    // if (!$this->evaluaciones_model->verificar_curso_existente($idCurso)) {
+    //     echo "Error: El ID del curso no existe.";
+    //     return;
+    // }
         // Obtener datos del formulario
         $data['tituloEvaluacion'] = $this->input->post('title');
         $data['descripcionEvaluacion'] = $this->input->post('description');
@@ -124,10 +131,10 @@ echo '</pre>';
         }
 
         // Llamar al modelo para agregar la evaluación y preguntas
-        $evaluation_id = $this->evaluaciones_model->agregar_evaluacion($data, $questions, $puntajeTotal, $idCurso, $idSeccion);
+        $evaluation_id = $this->evaluaciones_model->agregar_evaluacion($data, $questions, $idCurso, $idSeccion, $puntajeTotal);
 
         // Puedes redirigir a una página de éxito o mostrar un mensaje aquí
-        redirect('evaluaciones/crear_evaluacion', 'refresh');
+        // redirect('evaluaciones/crear_evaluacion', 'refresh');
     }
 
     private function obtener_id_empleado($idUsuario)
