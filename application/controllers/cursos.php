@@ -422,11 +422,36 @@ for ($i = 1; $i <= $numero_secciones; $i++) {
 	
 	public function crear_evaluacion()
 	{
-        
-		//$this->load->view('inc/cabecera');
+	// 	$this->load->model('evaluaciones_model');
+    //     $this->load->model('cursos_model');
+    //     $this->load->model('Secciones_model');
+    // // Asegúrate de cargar el modelo de secciones
+
+    // // Obtener todos los cursos y secciones disponibles
+    // $data['cursos'] = $this->cursos_model->listacursos()->result();
+    // $data['secciones'] = $this->Secciones_model->listasecciones()->result();
+	// Cargar el modelo de evaluaciones
+    $this->load->model('evaluaciones_model');
+    $this->load->model('cursos_model');
+    $this->load->model('Secciones_model');
+
+    // Obtener todos los cursos
+    $data['cursos'] = $this->cursos_model->listacursos()->result();
+
+    // Obtener el ID del curso seleccionado (supongamos que viene del formulario)
+    $idCursoSeleccionado = $this->input->post('curso'); // Ajusta esto según tu formulario
+
+    // Obtener las secciones correspondientes al curso seleccionado
+    $data['secciones'] = $this->Secciones_model->obtener_secciones_por_curso($idCursoSeleccionado);
+
+    
+    // Cargar la vista con los datos
+    
+    
+		// $this->load->view('inc/cabecera');
 		// $this->load->view('inc/menu');
 		// $this->load->view('inc/menulateral');
-		   $this->load->view('crear_evaluacion');
+		$this->load->view('crear_evaluacion', $data);
 		// $this->load->view('inc/pie');
 		
 	}

@@ -3,8 +3,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Evaluaciones_model extends CI_Model
 {
-    public function agregar_evaluacion($data, $questions)
+    public function agregar_evaluacion($data, $questions, $idCurso, $idSeccion)
     {
+        $data['idCurso'] = $idCurso;
+        $data['idSeccion'] = $idSeccion;
         // Iniciar transacción
         $this->db->trans_start();
 

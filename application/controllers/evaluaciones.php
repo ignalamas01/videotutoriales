@@ -11,16 +11,32 @@ class Evaluaciones extends CI_Controller
     }
 
     public function crear_evaluacion()
+    
     {
+        $this->load->model('evaluaciones_model');
+        $this->load->model('cursos_model');
+        // $this->load->model('secciones_model');
+    // Asegúrate de cargar el modelo de secciones
+
+    // Obtener todos los cursos y secciones disponibles
+    $data['cursos'] = $this->cursos_model->listacursos()->result();
+    $data['secciones'] = $this->cursos_model->listasecciones()->result();
+    echo '<pre>';
+print_r($data['cursos']);
+print_r($data['secciones']);
+echo '</pre>';
+    
         $this->load->view('inc/cabecera');
         $this->load->view('inc/menu');
         $this->load->view('inc/menulateral');
-        $this->load->view('crear_evaluacion');
+        $this->load->view('crear_evaluacion', $data);
         $this->load->view('inc/pie');
     }
 
     public function agregarbd()
     {
+        $idCurso = $this->input->post('curso');
+    $idSeccion = $this->input->post('seccion');
         // Obtener datos del formulario
         $data['tituloEvaluacion'] = $this->input->post('title');
         $data['descripcionEvaluacion'] = $this->input->post('description');
@@ -108,7 +124,7 @@ class Evaluaciones extends CI_Controller
         }
 
         // Llamar al modelo para agregar la evaluación y preguntas
-        $evaluation_id = $this->evaluaciones_model->agregar_evaluacion($data, $questions, $puntajeTotal);
+        $evaluation_id = $this->evaluaciones_model->agregar_evaluacion($data, $questions, $puntajeTotal, $idCurso, $idSeccion);
 
         // Puedes redirigir a una página de éxito o mostrar un mensaje aquí
         redirect('evaluaciones/crear_evaluacion', 'refresh');

@@ -66,7 +66,22 @@ class cursos_model extends CI_Model
     $this->db->insert('videos', $data_video);
     }
 
+    public function obtener_secciones_por_curso($idCurso= null)
+    {
+        $this->db->select('*');
+    $this->db->from('secciones');
 
+    // Si se proporciona un $idCurso, filtramos por ese curso
+    if ($idCurso !== null) {
+        $this->db->where('idCurso', $idCurso);
+    }
+    //  else {
+    //     // Si no se proporciona $idCurso, obtenemos todas las secciones
+    //     $this->db->where('idCurso IS NULL OR idCurso = 0');
+    // }
+
+    return $this->db->get()->result();
+    }
 
 
 

@@ -72,8 +72,25 @@
 <input type="date" id="startDate" name="startDate"><br><br>
         <label for="deadline">Fecha de Vencimiento:</label>
         <input type="date" id="deadline" name="deadline"><br><br>
-       
+       <!-- Nueva casilla de selección para cursos -->
+<label for="curso">Seleccionar Curso:</label>
+<select id="curso" name="curso">
+<option value="">Seleccionar Curso</option> <!-- Opción en blanco -->
+    <?php foreach ($cursos as $curso) : ?>
+        <option value="<?php echo $curso->id; ?>"><?php echo $curso->titulo; ?></option>
+    <?php endforeach; ?>
+</select><br><br>
 
+<!-- Nueva casilla de selección para secciones -->
+<label for="seccion">Seleccionar Sección:</label>
+<select id="seccion" name="seccion">
+    <option value="">Seleccionar Sección</option> <!-- Opción en blanco -->
+    <?php foreach ($secciones as $seccion) : ?>
+        <option value="<?php echo $seccion->idSeccion; ?>">
+            <?php echo $seccion->nombre; ?> - <?php echo $seccion->tituloCurso; ?>
+        </option>
+    <?php endforeach; ?>
+</select><br><br>
 
         <h2>Preguntas de Selección Múltiple</h2>
         <div id="questions">
