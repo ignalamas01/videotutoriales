@@ -27,12 +27,26 @@ class Evaluaciones extends CI_Controller
         $data['fechaFin'] = $this->input->post('deadline');
         $data['fechaInicio'] = $this->input->post('startDate');
 
+        $idUsuario = $this->session->userdata('idusuario'); // Necesitarás implementar esta función
+
+    // Obtener el idEmpleado usando el idUsuario
+    $idEmpleado = $this->obtener_id_empleado($idUsuario);
+
+    if ($idEmpleado !== null) {
+        // Agregar el idEmpleado al array de datos
+        $data['idEmpleado'] = $idEmpleado;
+
+        // Resto de la lógica para agregar la evaluación...
+    } else {
+        // Manejar el caso en el que el usuario no es un empleado
+        echo "El usuario actual no es un empleado.";
+    }
         // Obtener preguntas del formulario
         $questions = array();
         $questionCount = count($this->input->post('questions'));
         $puntajeTotal = 0; // Inicializar puntaje total
         $config['upload_path'] = './uploads/evaluaciones/';
-        $config['allowed_types'] = 'gif|jpg|png';
+        $config['allowed_types'] = 'gif|jpg|jpeg|png';
         $this->load->library('upload', $config);
         $imageFiles = $_FILES['imageQuestion'];
         for ($i = 0; $i < $questionCount; $i++) {
@@ -97,8 +111,15 @@ class Evaluaciones extends CI_Controller
         $evaluation_id = $this->evaluaciones_model->agregar_evaluacion($data, $questions, $puntajeTotal);
 
         // Puedes redirigir a una página de éxito o mostrar un mensaje aquí
-        // redirect('evaluaciones/crear_evaluacion', 'refresh');
+        redirect('evaluaciones/crear_evaluacion', 'refresh');
     }
+
+    private function obtener_id_empleado($idUsuario)
+{
+    $this->load->model('empleado_model');
+    $idEmpleado = $this->empleado_model->obtener_id_empleado_por_usuario($idUsuario);
+    return $idEmpleado;
+}
    
 }
 

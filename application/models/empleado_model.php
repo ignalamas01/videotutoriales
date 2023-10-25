@@ -73,4 +73,17 @@ class empleado_model extends CI_Model
 
         return $query->num_rows() > 0;
     }
+    public function obtener_id_empleado_por_usuario($idUsuario)
+    {
+        $this->db->select('id');
+        $this->db->where('idUsuario', $idUsuario);
+        $query = $this->db->get('empleado');
+
+        if ($query->num_rows() > 0) {
+            $row = $query->row();
+            return $row->id;
+        } else {
+            return null; // Retorna null si no se encuentra ningún empleado con ese idUsuario
+        }
+    }
 }
