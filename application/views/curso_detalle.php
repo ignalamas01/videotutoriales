@@ -54,33 +54,68 @@
 <body>
     <div class="container">
         <?php if ($curso) : ?>
-        <div class="curso-container">
-            <h1 class="text-center"><?php echo $curso->titulo; ?></h1>
-            <p><?php echo $curso->descripcion; ?></p>
+            <div class="curso-container">
+                <h1 class="text-center"><?php echo $curso->titulo; ?></h1>
+                <p><?php echo $curso->descripcion; ?></p>
 
-            <!-- Secciones del Curso -->
-            <h2 class="text-center">Secciones del Curso</h2>
-            <?php if ($secciones) : ?>
-            <?php foreach ($secciones as $seccion) : ?>
-            <div class="seccion-container">
-                <span class="seccion-titulo" data-target="#seccion-<?php echo $seccion->idSeccion; ?>">
-                    Sección <?php echo $seccion->idSeccion; ?>: <?php echo $seccion->nombre; ?>
-                </span>
-                <div id="seccion-<?php echo $seccion->idSeccion; ?>" class="seccion-contenido">
-                    <?php echo $seccion->descripcion; ?>
-                    <!-- Puedes agregar más detalles de sección aquí -->
-                </div>
+                <!-- Secciones del Curso -->
+                <h2 class="text-center">Secciones del Curso</h2>
+                <?php
+                $contadorSecciones = 0; // Inicializar el contador de secciones para este curso
+                if ($secciones) :
+                    foreach ($secciones as $seccion) : 
+                        $contadorSecciones++; // Incrementar el contador para cada sección
+                ?>
+                        <div class="seccion-container">
+                            <span class="seccion-titulo" data-target="#seccion-<?php echo $seccion->idSeccion; ?>">
+                                Sección <?php echo $contadorSecciones; ?>: <?php echo $seccion->nombre; ?>
+                            </span>
+                            <div id="seccion-<?php echo $seccion->idSeccion; ?>" class="seccion-contenido">
+                                <?php echo $seccion->descripcion; ?>
+                    
+                                <!-- Mostrar videos de la sección -->
+                                <?php $videos = $this->vercurso_model->obtener_videos_por_seccion($seccion->idSeccion); ?>
+                                <?php if ($videos) : ?>
+                                    <h4>Videos de la Sección</h4>
+                                    <ul>
+                                        <?php foreach ($videos as $video) : ?>
+                                            <li>
+                                            <strong><?php echo $video->tituloVideo; ?></strong>
+                                            <p><?php echo $video->descripcionVideo; ?></p>
+                                            <iframe width="560" height="315" src="<?php echo $video->enlaceVideo; ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    
+                                            </li>
+                                        <?php endforeach; ?>
+                                    </ul>
+                                <?php else : ?>
+                                    <p>No hay videos disponibles para esta sección.</p>
+                                <?php endif; ?>
+                    
+                                <!-- Mostrar archivos de la sección -->
+                                <?php $archivos = $this->vercurso_model->obtener_archivos_por_seccion($seccion->idSeccion); ?>
+                                <?php if ($archivos) : ?>
+                                    <h4>Archivos de la Sección</h4>
+                                    <ul>
+                                        <?php foreach ($archivos as $archivo) : ?>
+                                            <li><?php echo $archivo->nombreArchivo; ?>: <?php echo $archivo->rutaArchivo; ?></li>
+                                        <?php endforeach; ?>
+                                    </ul>
+                                <?php else : ?>
+                                    <p>No hay archivos disponibles para esta sección.</p>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                        
+                    <?php endforeach; ?>
+                    <?php else : ?>
+    <p class="text-center">No hay secciones disponibles.</p>
+                <?php endif; ?>
+
+                <!-- Puedes agregar más secciones, archivos, videos, etc. aquí -->
+
             </div>
-            <?php endforeach; ?>
-            <?php else : ?>
-            <p class="text-center">No hay secciones disponibles.</p>
-            <?php endif; ?>
-
-            <!-- Puedes agregar más secciones, archivos, videos, etc. aquí -->
-
-        </div>
         <?php else : ?>
-        <p class="text-center">Curso no encontrado.</p>
+            <p class="text-center">Curso no encontrado.</p>
         <?php endif; ?>
 
     </div>
@@ -105,4 +140,6 @@
     </script>
 </body>
 
+
 </html>
+
