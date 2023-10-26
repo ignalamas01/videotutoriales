@@ -30,7 +30,7 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">invitado solo que no estan inscritos en los cursos</h3>
-                <a href="<?php echo base_url(); ?>index.php/suscripciones/inscribir"><button type="button" class="btn btn-danger">suscripcion</button>  </a>
+                
               </div>
               
              

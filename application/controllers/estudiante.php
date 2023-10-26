@@ -324,16 +324,16 @@ class Estudiante extends CI_Controller
 			$this->estudiante_model->agregarUsuario($usuarioData);
 			$idUsuario = $this->db->insert_id();
 			$data['nombre'] = $_POST['nombre'];
-		$data['primerApellido'] = $_POST['primerApellido'];
-		$data['segundoApellido'] = $_POST['segundoApellido'];
-		$data['carrera'] = $_POST['carrera'];
-		$data['departamento'] = $_POST['departamento'];
-		$data['fechaNacimiento'] = $_POST['fechaNac'];
-		$data['telefono'] = $_POST['telefono'];
+			$data['primerApellido'] = $_POST['primerApellido'];
+			$data['segundoApellido'] = $_POST['segundoApellido'];
+			$data['carrera'] = $_POST['carrera'];
+			$data['departamento'] = $_POST['departamento'];
+			$data['fechaNacimiento'] = $_POST['fechaNac'];
+			$data['telefono'] = $_POST['telefono'];
 		
 		
-		$data['direccion'] = $_POST['direccion'];
-		$data['idUsuario'] = $idUsuario;
+			$data['direccion'] = $_POST['direccion'];
+			$data['idUsuario'] = $idUsuario;
 		
 
 		$this->estudiante_model->agregarestudiante($data);

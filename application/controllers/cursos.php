@@ -465,8 +465,8 @@ public function realizar_evaluacion()
         // Obtener las preguntas de la última evaluación
         $data['preguntas'] = $this->evaluaciones_estudiante_model->obtener_preguntas_evaluacion($ultima_evaluacion['idEvaluacion']);
 		$data['tituloEvaluacion'] = $ultima_evaluacion['tituloEvaluacion'];
-$data['descripcionEvaluacion'] = $ultima_evaluacion['descripcionEvaluacion'];
-$data['puntajeTotal'] = $ultima_evaluacion['puntajeTotal'];
+		$data['descripcionEvaluacion'] = $ultima_evaluacion['descripcionEvaluacion'];
+		$data['puntajeTotal'] = $ultima_evaluacion['puntajeTotal'];
         // Cargar la vista con la información de la última evaluación
 		// var_dump($ultima_evaluacion);
         $this->load->view('realizar_evaluacion', $data);

@@ -45,6 +45,8 @@
                 <a href="<?php echo base_url(); ?>index.php/cursos/subir_archivos"> <button type="button" class="btn btn-danger">Archivos</button> </a>
                 <a href="<?php echo base_url(); ?>index.php/cursos/crear_evaluacion"><button type="button" class="btn btn-warning">Crear evaluacion</button>  </a>
                 <a href="<?php echo base_url(); ?>index.php/cursos/realizar_evaluacion"><button type="button" class="btn btn-warning">Realizar evaluacion</button>  </a>
+                
+                <a href="<?php echo base_url(); ?>index.php/suscripciones/agregarEstudiante"><button type="button" class="btn btn-danger">inscribir estudiante a un curso</button>  </a>
                
                 
                 <!-- <a href="<?php echo base_url(); ?>index.php/usuarios/logout"> <button type="button" class="btn btn-danger">CERRAR SESION</button> </a> -->
@@ -314,7 +316,7 @@
             </div>
         </div>
     </section>
-    <section>
+    <!-- <section>
       <div class="row">
         <div class="col-4">
             <div class="form-group">
@@ -334,7 +336,7 @@
       </div>
       
                                     
-    </section>
+    </section> -->
     
     <!-- End Categories of The Month -->
 
