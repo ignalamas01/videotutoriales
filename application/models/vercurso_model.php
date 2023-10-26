@@ -14,6 +14,17 @@ class vercurso_model extends CI_Model
                 return null;
             }
         }
+        public function obtener_secciones_por_curso($idCurso) {
+            $this->db->where('idCurso', $idCurso);
+            $query = $this->db->get('secciones');
+    
+            if ($query->num_rows() > 0) {
+                return $query->result(); // Devuelve todas las filas de secciones para el curso
+            } else {
+                return null;
+            }
+        }
+    
     }
 
 ?>
