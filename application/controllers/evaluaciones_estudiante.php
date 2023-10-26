@@ -144,6 +144,10 @@ if (!empty($respuestas)) {
         // Éxito
         echo 'Evaluación procesada correctamente. Puntaje obtenido: ' . $puntajeObtenido . ' de ' . $puntajeTotal . ' (Porcentaje: ' . number_format($porcentajeObtenido, 2) . '%)';
         // También puedes almacenar $puntajeObtenido en la base de datos si es necesario
+        echo 'ID de la Evaluación: ' . $idEvaluacion;
+
+        // Insertar el puntaje en la tabla puntajesevaluacion
+        $idPuntaje = $this->evaluaciones_estudiante_model->insertar_puntaje($idEvaluacion, $idEstudiante, $porcentajeObtenido);
     }
 } else {
     // Manejar el caso en que no haya respuestas

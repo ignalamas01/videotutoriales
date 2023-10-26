@@ -89,32 +89,7 @@ class cursos_model extends CI_Model
         return $query;
     }
 
-    public function obtener_evaluacion_por_curso_seccion($idCurso, $idSeccion = null, $idEvaluacion = null)
-    {
-        // Agrega la condición para idCurso y idSeccion
-        $this->db->select('idEvaluacion, tituloEvaluacion, descripcionEvaluacion, puntajeTotal');
-        $this->db->from('evaluaciones');
-        $this->db->where('idCurso', $idCurso);
-    
-        if ($idSeccion !== null) {
-            $this->db->where('idSeccion', $idSeccion);
-        } else {
-            $this->db->where('idSeccion', null);
-        }
-    
-        // Agrega la condición para idEvaluacion si se proporciona
-        if ($idEvaluacion !== null) {
-            $this->db->where('idEvaluacion', $idEvaluacion);
-        }
-    
-        $query = $this->db->get();
-    
-        if ($query->num_rows() > 0) {
-            return $query->row_array();
-        }
-    
-        return null;
-    }
+
 
 }    
 

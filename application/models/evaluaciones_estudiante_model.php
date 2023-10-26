@@ -151,5 +151,33 @@ public function es_opcion_correcta($idOpcion)
     // Devuelve true si es correcta, false si no es correcta
     return $esCorrecta;
 }
-    
+public function obtener_id_estudiante($idUsuario) {
+    // Realiza la consulta para obtener el idEstudiante asociado al idUsuario
+    $this->db->select('id');
+    $this->db->where('idUsuario', $idUsuario);
+    $query = $this->db->get('estudiante');
+
+    // Verifica si se encontraron resultados
+    if ($query->num_rows() > 0) {
+        // Retorna el idEstudiante encontrado
+        $row = $query->row();
+        return $row->id;
+    } else {
+        // Retorna un valor indicando que no se encontró el idEstudiante
+        return null;
+    }
+}
+public function insertar_puntaje($idEvaluacion, $idEstudiante, $puntajeTotal) {
+    $idEstudiante = $this->input->post('idEstudiante');
+    $data = array(
+        'idEvaluacion' => $idEvaluacion,
+        'idEstudiante' => $idEstudiante,
+        'puntajeTotal' => $puntajeTotal,
+        'fechaRegistro' => date('Y-m-d H:i:s')
+    );
+    // var_dump($idEstudiante);
+    $this->db->insert('puntajesevaluacion', $data);
+    return $this->db->insert_id(); // Devuelve el ID del puntaje recién insertado
+}
+
 }

@@ -485,6 +485,20 @@ $idCurso = $this->input->post('idCurso');
 	} else {
         echo 'No hay evaluaciones disponibles.';
     }
+	// Obtener el idUsuario del usuario actual
+$idUsuarioActual = $this->session->userdata('idusuario');
+
+// Realizar la consulta para obtener el idEstudiante
+$idEstudiante = $this->evaluaciones_estudiante_model->obtener_id_estudiante($idUsuarioActual);
+
+// Verificar si se encontró el idEstudiante
+if ($idEstudiante !== null) {
+    // echo 'El idEstudiante asociado al idUsuario ' . $idUsuarioActual . ' es: ' . $idEstudiante;
+	
+} else {
+    echo 'No se encontró el idEstudiante para el idUsuario ' . $idUsuarioActual;
+}
+
 }
 // public function realizar_evaluacion()
 // {
