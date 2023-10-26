@@ -137,7 +137,7 @@ echo "ID de la Sección: $idSeccion";
         $evaluation_id = $this->evaluaciones_model->agregar_evaluacion($data, $questions, $idCurso, $idSeccion, $puntajeTotal);
 
         // Puedes redirigir a una página de éxito o mostrar un mensaje aquí
-        // redirect('evaluaciones/crear_evaluacion', 'refresh');
+        redirect('evaluaciones/crear_evaluacion', 'refresh');
     }
 
     private function obtener_id_empleado($idUsuario)
