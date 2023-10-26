@@ -86,9 +86,7 @@
                                         <div class="form-group">
                                             <label> CARRERA</label>
                                             <select name="carrera" class="form-control select2" style="width: 100%;">
-                                                <option>
-                                                    <<<'SELECIONA CARRERA'>>>
-                                                </option>
+                                                <option value="" disabled selected>Seleccione su carrera </option>
                                                 <option value="sistemas informaticos">SISTEMAS INFORMATICOS</option>
                                                 <option value="contabilidad">CONTABILIDAD</option>
                                                 

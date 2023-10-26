@@ -73,25 +73,30 @@
         <label for="deadline">Fecha de Vencimiento:</label>
         <input type="date" id="deadline" name="deadline"><br><br>
        <!-- Nueva casilla de selección para cursos -->
-<label for="curso">Seleccionar Curso:</label>
-<select id="curso" name="curso">
-<option value="">Seleccionar Curso</option> <!-- Opción en blanco -->
+       
+<!-- Nueva casilla de selección para cursos -->
+<label for="curso">Curso en general:</label>
+<select id="curso" name="curso" onchange="handleSelection('curso')">
+    <option value="">Seleccionar Curso</option> <!-- Opción en blanco -->
     <?php foreach ($cursos as $curso) : ?>
-        <option value="<?php echo $curso->id; ?>"><?php echo $curso->titulo; ?></option>
+        <option value="<?php echo $curso->id; ?>" data-curso-id="<?php echo $curso->id; ?>"><?php echo $curso->titulo; ?></option>
     <?php endforeach; ?>
 </select><br><br>
 
 <!-- Nueva casilla de selección para secciones -->
-<label for="seccion">Seleccionar Sección:</label>
-<select id="seccion" name="seccion">
+<label for="seccion">Curso y sección en específico:</label>
+<select id="seccion" name="seccion" onchange="handleSelection('seccion')">
     <option value="">Seleccionar Sección</option> <!-- Opción en blanco -->
     <?php foreach ($secciones as $seccion) : ?>
-        <option value="<?php echo $seccion->idSeccion; ?>">
+        <option value="<?php echo $seccion->idSeccion; ?>" data-curso-id="<?php echo $seccion->idCurso; ?>">
             <?php echo $seccion->nombre; ?> - <?php echo $seccion->tituloCurso; ?>
         </option>
     <?php endforeach; ?>
+   
 </select><br><br>
-
+<input type="hidden" id="hiddenCursoId" name="hiddenCursoId" value="">
+<!-- Campo oculto para el ID de la sección -->
+<input type="hidden" id="hiddenSeccionId" name="hiddenSeccionId" value="">
         <h2>Preguntas de Selección Múltiple</h2>
         <div id="questions">
             <!-- Campo de pregunta, opciones de respuesta y puntaje predeterminado -->
@@ -201,6 +206,41 @@ function updateQuestionNumbers() {
         const fileInput = document.getElementById(`imageQuestion${i}`);
     fileInput.addEventListener('change', updateTotalScore);
     }
+    function handleSelection(selected) {
+    // Habilitar ambas casillas
+    document.getElementById('curso').disabled = false;
+    document.getElementById('seccion').disabled = false;
+
+    // Obtener el elemento seleccionado
+    const selectedElement = document.getElementById(selected);
+
+    // Desactivar la otra casilla según la selección
+    if (selected === 'curso') {
+        document.getElementById('seccion').disabled = true;
+
+        // Obtener el valor del campo oculto para el ID del curso
+        const cursoId = selectedElement.options[selectedElement.selectedIndex].dataset.cursoId;
+
+        console.log('Curso ID seleccionado:', cursoId);
+
+        // Establecer el valor del campo oculto para el ID del curso
+        document.getElementById('hiddenCursoId').value = cursoId;
+    } else {
+        document.getElementById('curso').disabled = true;
+
+        // Obtener el valor del campo oculto para el ID de la sección y el ID del curso
+        const seccionId = selectedElement.value;
+        const cursoId = selectedElement.options[selectedElement.selectedIndex].dataset.cursoId;
+
+        console.log('Curso ID seleccionado en la sección:', cursoId);
+        console.log('Sección ID seleccionado:', seccionId);
+
+        // Establecer el valor del campo oculto para el ID de la sección y el ID del curso
+        document.getElementById('hiddenSeccionId').value = seccionId;
+        document.getElementById('hiddenCursoId').value = cursoId;
+    }
+}
+
 </script>
 
     

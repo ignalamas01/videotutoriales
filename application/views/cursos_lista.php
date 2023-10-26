@@ -233,7 +233,8 @@
         ?>
             <div class="col-12 col-md-4 mb-4">
                 <div class="card h-100">
-                    <a href="shop-single.html">
+                
+                <a href="<?php echo base_url('index.php/vercurso/ver/' . $row->id); ?>">
                         <img src="./assets/img/feature_prod_01.jpg" class="card-img-top" alt="...">
                     </a>
                     <div class="card-body">
@@ -247,7 +248,8 @@
                             </li>
                             <li class="text-muted text-right"></li>
                         </ul>
-                        <a href="shop-single.html" class="h2 text-decoration-none text-dark"><?php echo $row->titulo; ?></a>
+                        <a href="<?php echo base_url('index.php/vercurso/ver/' . $row->id); ?>" class="h2 text-decoration-none text-dark"><?php echo $row->titulo; ?></a>
+                <p class="card-text">
                         <p class="card-text">
                             <?php echo $row->descripcion; ?>
                         </p>

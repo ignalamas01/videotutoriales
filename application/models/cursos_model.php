@@ -83,6 +83,11 @@ class cursos_model extends CI_Model
     return $this->db->get()->result();
     }
 
+    public function listasecciones() {
+        // Lógica para obtener las secciones
+        $query = $this->db->get('secciones');
+        return $query;
+    }
 
 
 
