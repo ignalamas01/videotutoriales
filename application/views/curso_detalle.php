@@ -48,6 +48,20 @@
         .btn-agregar-seccion {
             margin-top: 10px;
         }
+        .btn-dar-evaluacion-curso {
+        font-size: 18px;  /* Ajusta el tamaño del texto */
+        padding: 12px 20px;  /* Ajusta el padding para controlar el tamaño del botón */
+        border-radius: 10px;  /* Añade esquinas redondeadas */
+        background-color: #4CAF50;  /* Cambia el color de fondo a verde */
+        color: white;  /* Cambia el color del texto a blanco */
+    }
+    .btn-dar-evaluacion-seccion {
+        font-size: 18px;  /* Ajusta el tamaño del texto */
+        padding: 12px 20px;  /* Ajusta el padding para controlar el tamaño del botón */
+        border-radius: 10px;  /* Añade esquinas redondeadas */
+        background-color: #4CAF50;  /* Cambia el color de fondo a verde */
+        color: white;  /* Cambia el color del texto a blanco */
+    }
     </style>
 </head>
 
@@ -85,6 +99,8 @@
                                             <iframe width="560" height="315" src="<?php echo $video->enlaceVideo; ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
     
                                             </li>
+                                            <!-- Agrega el botón de evaluación para cada video -->
+                            
                                         <?php endforeach; ?>
                                     </ul>
                                 <?php else : ?>
@@ -97,9 +113,11 @@
                                     <h4>Archivos de la Sección</h4>
                                     <ul>
                                         <?php foreach ($archivos as $archivo) : ?>
-                                            <li><?php echo $archivo->nombreArchivo; ?>: <?php echo $archivo->rutaArchivo; ?></li>
+                                            <li><?php echo $archivo->nombreArchivo; ?>: <a href="https://drive.google.com/uc?export=download&id=<?php echo $archivo->rutaArchivo; ?>" target="_blank">Descargar Archivo</a></li>
+
                                         <?php endforeach; ?>
                                     </ul>
+                                    <button class="btn-dar-evaluacion-seccion" data-seccion-id="<?php echo $seccion->idSeccion; ?>" data-video-id="<?php echo $video->idVideo; ?>">Dar Evaluación</button>
                                 <?php else : ?>
                                     <p>No hay archivos disponibles para esta sección.</p>
                                 <?php endif; ?>
@@ -107,6 +125,7 @@
                         </div>
                         
                     <?php endforeach; ?>
+                    
                     <?php else : ?>
     <p class="text-center">No hay secciones disponibles.</p>
                 <?php endif; ?>
@@ -114,11 +133,15 @@
                 <!-- Puedes agregar más secciones, archivos, videos, etc. aquí -->
 
             </div>
+            <button class="btn-dar-evaluacion-curso" data-curso-id="<?php echo $curso->id; ?>">Dar Evaluación Final</button>
+
+
         <?php else : ?>
             <p class="text-center">Curso no encontrado.</p>
         <?php endif; ?>
 
     </div>
+    
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
@@ -131,7 +154,19 @@
             $('.btn-agregar-seccion').click(function () {
                 agregarNuevaSeccion();
             });
+            $('.btn-dar-evaluacion-seccion').click(function () {
+            var seccionId = $(this).data('seccion-id');
+            // Lógica para dar evaluación a la sección con ID seccionId
+            // Puedes redirigir a una página de evaluación o mostrar un formulario, etc.
+            window.location.href = '<?php echo base_url(); ?>index.php/cursos/realizar_evaluacion';
+        });
 
+        $('.btn-dar-evaluacion-curso').click(function () {
+            var cursoId = $(this).data('curso-id');
+            // Lógica para dar evaluación al curso con ID cursoId
+            // Puedes redirigir a una página de evaluación general, mostrar un formulario, etc.
+            window.location.href = '<?php echo base_url(); ?>index.php/cursos/realizar_evaluacion';
+        });
             function agregarNuevaSeccion() {
                 // Lógica para agregar una nueva sección (similar a tu implementación)
                 // Puedes adaptar el código según tus necesidades
