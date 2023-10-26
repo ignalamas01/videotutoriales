@@ -35,9 +35,12 @@ class Evaluaciones extends CI_Controller
 
     public function agregarbd()
     {
-        $idCurso = $this->input->post('curso');
+        // $curso_seccion = $this->input->post('curso_seccion');
+        // $idCurso = $this->input->post('curso');
     $idSeccion = $this->input->post('seccion');
-    echo "ID del Curso: $idCurso<br>";
+    $idCurso = $this->input->post('hiddenCursoId');
+    
+    echo "ID del Curso: $idCurso";
 echo "ID de la Sección: $idSeccion";
     // Verificar que el ID del curso existe en la tabla cursos
     // if (!$this->evaluaciones_model->verificar_curso_existente($idCurso)) {
