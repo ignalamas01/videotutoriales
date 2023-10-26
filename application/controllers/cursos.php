@@ -457,24 +457,56 @@ for ($i = 1; $i <= $numero_secciones; $i++) {
 	}
 public function realizar_evaluacion()
 {
+//      $idCurso = 1; // Reemplaza con el valor deseado
+// $idSeccion = null; // Reemplaza con el valor deseado
+$idSeccion = $this->input->post('idSeccion');
+$idCurso = $this->input->post('idCurso');
+    
     // Obtener la última evaluación
-    $ultima_evaluacion = $this->evaluaciones_estudiante_model->obtener_ultima_evaluacion();
-	// var_dump($ultima_evaluacion);
-    // Verificar si hay alguna evaluación
-    if ($ultima_evaluacion) {
-        // Obtener las preguntas de la última evaluación
-        $data['preguntas'] = $this->evaluaciones_estudiante_model->obtener_preguntas_evaluacion($ultima_evaluacion['idEvaluacion']);
-		$data['tituloEvaluacion'] = $ultima_evaluacion['tituloEvaluacion'];
-		$data['descripcionEvaluacion'] = $ultima_evaluacion['descripcionEvaluacion'];
-		$data['puntajeTotal'] = $ultima_evaluacion['puntajeTotal'];
-        // Cargar la vista con la información de la última evaluación
-		// var_dump($ultima_evaluacion);
+    // $ultima_evaluacion = $this->evaluaciones_estudiante_model->obtener_ultima_evaluacion();
+    $evaluacion = $this->evaluaciones_estudiante_model->obtener_evaluacion_por_curso_seccion($idCurso, $idSeccion);
+
+    // Verificar si la evaluación existe
+    if ($evaluacion) {
+        // Obtener el título y la descripción de la evaluación
+        $data['tituloEvaluacion'] = $evaluacion['tituloEvaluacion'];
+        $data['descripcionEvaluacion'] = $evaluacion['descripcionEvaluacion'];
+		$data['puntajeTotal'] = $evaluacion['puntajeTotal'];
+        // Otros datos necesarios para la vista
+        // $data['idEstudiante'] = obtener_id_estudiante(); // Reemplaza esto con la lógica real
+        // $data['puntajeObtenido'] = obtener_puntaje_obtenido(); // Reemplaza esto con la lógica real
+
+        // Obtener las preguntas de la evaluación específica
+        $data['preguntas'] = $this->evaluaciones_estudiante_model->obtener_preguntas_evaluacion($evaluacion['idEvaluacion']);
+
+        // Cargar la vista con la información de la evaluación específica
         $this->load->view('realizar_evaluacion', $data);
-    } else {
         // Manejar el caso en que no haya evaluaciones
+	} else {
         echo 'No hay evaluaciones disponibles.';
-    	}
-	}
+    }
+}
+// public function realizar_evaluacion()
+// {
+//     // Obtener la última evaluación
+//     $ultima_evaluacion = $this->evaluaciones_estudiante_model->obtener_ultima_evaluacion();
+// 	// var_dump($ultima_evaluacion);
+//     // Verificar si hay alguna evaluación
+//     if ($ultima_evaluacion) {
+//         // Obtener las preguntas de la última evaluación
+//         $data['preguntas'] = $this->evaluaciones_estudiante_model->obtener_preguntas_evaluacion($ultima_evaluacion['idEvaluacion']);
+// 		$data['tituloEvaluacion'] = $ultima_evaluacion['tituloEvaluacion'];
+// 		$data['descripcionEvaluacion'] = $ultima_evaluacion['descripcionEvaluacion'];
+// 		$data['puntajeTotal'] = $ultima_evaluacion['puntajeTotal'];
+//         // Cargar la vista con la información de la última evaluación
+// 		// var_dump($ultima_evaluacion);
+//         $this->load->view('realizar_evaluacion', $data);
+//     } else {
+//         // Manejar el caso en que no haya evaluaciones
+//         echo 'No hay evaluaciones disponibles.';
+//     	}
+// 	}
+	
 	
 
 		public function obtener_puntaje_total($idEvaluacion, $idEstudiante) {

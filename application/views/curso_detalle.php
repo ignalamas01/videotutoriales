@@ -66,6 +66,7 @@
 </head>
 
 <body>
+
     <div class="container">
         <?php if ($curso) : ?>
             <div class="curso-container">
@@ -117,7 +118,14 @@
 
                                         <?php endforeach; ?>
                                     </ul>
-                                    <button class="btn-dar-evaluacion-seccion" data-seccion-id="<?php echo $seccion->idSeccion; ?>" data-video-id="<?php echo $video->idVideo; ?>">Dar Evaluación</button>
+                                    <form action="<?php echo base_url(); ?>index.php/cursos/realizar_evaluacion" method="post">
+        <!-- Agregar el campo oculto idSeccion -->
+        <input type="hidden" name="idSeccion" value="<?php echo $seccion->idSeccion; ?>">
+        <input type="hidden" name="idCurso" value="<?php echo $curso->id; ?>">
+
+        <!-- Botón de evaluación para la sección -->
+        <button type="submit" class="btn-dar-evaluacion-seccion" data-seccion-id="<?php echo $seccion->idSeccion; ?>" data-video-id="<?php echo $video->idVideo; ?>">Dar Evaluación</button>
+    </form>
                                 <?php else : ?>
                                     <p>No hay archivos disponibles para esta sección.</p>
                                 <?php endif; ?>
@@ -133,7 +141,14 @@
                 <!-- Puedes agregar más secciones, archivos, videos, etc. aquí -->
 
             </div>
-            <button class="btn-dar-evaluacion-curso" data-curso-id="<?php echo $curso->id; ?>">Dar Evaluación Final</button>
+            
+            <form action="<?php echo base_url(); ?>index.php/cursos/realizar_evaluacion" method="post">
+    <!-- Agregar el campo oculto idCurso -->
+    <input type="hidden" name="idCurso" value="<?php echo $curso->id; ?>">
+
+    <!-- Botón de evaluación final -->
+    <button type="submit" class="btn-dar-evaluacion-curso" data-curso-id="<?php echo $curso->id; ?>">Dar Evaluación Final</button>
+</form>
 
 
         <?php else : ?>

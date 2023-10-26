@@ -12,26 +12,29 @@ class Evaluaciones_estudiante extends CI_Controller
 
     public function ejecutar_ultima_evaluacion()
 {
+    $idCurso = 1; // Reemplaza con el valor deseado
+$idSeccion = 1; // Reemplaza con el valor deseado
     // Obtener la última evaluación
-    $ultima_evaluacion = $this->evaluaciones_estudiante_model->obtener_ultima_evaluacion();
+    // $ultima_evaluacion = $this->evaluaciones_estudiante_model->obtener_ultima_evaluacion();
+    $evaluacion = $this->evaluaciones_estudiante_model->obtener_evaluacion_por_curso_y_evaluacion($idCurso, $idEvaluacion);
 
-    // Verificar si hay alguna evaluación
-    if ($ultima_evaluacion) {
+    // Verificar si la evaluación existe
+    if ($evaluacion) {
         // Obtener el título y la descripción de la evaluación
-        $data['tituloEvaluacion'] = $ultima_evaluacion['tituloEvaluacion'];
-        $data['descripcionEvaluacion'] = $ultima_evaluacion['descripcionEvaluacion'];
+        $data['tituloEvaluacion'] = $evaluacion['tituloEvaluacion'];
+        $data['descripcionEvaluacion'] = $evaluacion['descripcionEvaluacion'];
 
         // Otros datos necesarios para la vista
         $data['idEstudiante'] = obtener_id_estudiante(); // Reemplaza esto con la lógica real
         $data['puntajeObtenido'] = obtener_puntaje_obtenido(); // Reemplaza esto con la lógica real
 
-        // Obtener las preguntas de la última evaluación
-        $data['preguntas'] = $this->evaluaciones_estudiante_model->obtener_preguntas_evaluacion($ultima_evaluacion['idEvaluacion']);
+        // Obtener las preguntas de la evaluación específica
+        $data['preguntas'] = $this->evaluaciones_estudiante_model->obtener_preguntas_evaluacion($idEvaluacion);
 
-        // Cargar la vista con la información de la última evaluación
+        // Cargar la vista con la información de la evaluación específica
         $this->load->view('realizar_evaluacion', $data);
-    } else {
         // Manejar el caso en que no haya evaluaciones
+    } else {
         echo 'No hay evaluaciones disponibles.';
     }
 }
