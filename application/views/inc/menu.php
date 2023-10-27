@@ -24,9 +24,9 @@
     
       <div class="collapse navbar-collapse" id="navbarCollapse">
                                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                                    <li class="nav-item">
+                                    <!-- <li class="nav-item">
                                         <a class="nav-link active" aria-current="page" href="<?php echo base_url(); ?>index.php/base/res">RESUMEN</a>
-                                    </li>
+                                    </li> -->
                                     <li class="nav-item">
                                         <a class="nav-link active" aria-current="page" href="<?php echo base_url(); ?>index.php/base/obj">OBJETIVOS</a>
                                     </li>
@@ -42,6 +42,9 @@
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link active" aria-current="page" href="<?php echo base_url(); ?>index.php/foros/for">foros</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link active" aria-current="page" href="<?php echo base_url(); ?>index.php/suscripciones/lista">inscritos</a>
                                     </li>
                                     
 

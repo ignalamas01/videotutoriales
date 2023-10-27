@@ -86,6 +86,7 @@
                                         <div class="form-group">
                                             <label> CARRERA</label>
                                             <select name="carrera" class="form-control select2" style="width: 100%;">
+                                                
                                                 <option value="" disabled selected>Seleccione su carrera </option>
                                                 <option value="sistemas informaticos">SISTEMAS INFORMATICOS</option>
                                                 <option value="contabilidad">CONTABILIDAD</option>
@@ -101,7 +102,7 @@
                                         <div class="form-group">
                                             <label>DEPARTAMENTO</label>
                                             <select name="departamento" class="form-control select2" style="width: 100%;">
-                                              
+                                                <option value="" disabled selected>Seleccione... </option>
                                                 <option value="Beni">Beni</option>
                                                 <option value="Cochabamba">cochabamba</option>
                                                 <option value="Chuquisaca">Chuquisaca</option>

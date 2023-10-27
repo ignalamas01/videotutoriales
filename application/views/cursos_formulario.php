@@ -12,6 +12,7 @@
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/base/index">Home</a></li>
               <li class="breadcrumb-item active">DataTables</li>
+
             </ol>
           </div>
         </div>
@@ -22,7 +23,9 @@
     <div class="row featurette">
     <div class="col-md-7">
         <br>
-        <h2 class="featurette-heading">AGREGAR CURSOS<span class="text-muted"> </span></h2>
+        <h2 class="featurette-heading">AGREGAR CURSOS<span class="text-muted" > </span></h2>
+        
+        <div id="alerta" style="display: none;"></div>
 
 
     </div>
@@ -30,9 +33,10 @@
         <center><img src="<?php echo base_url(); ?>img/imgvt.png" width="120"></center>
 
     </div> -->
+    
 
-    <!--<div col-md-12> -->
 
+    
 
 
     <?php
@@ -42,6 +46,8 @@
     <?php
     echo form_open_multipart('cursos/agregarbd')
     ?>
+    
+    
 
 <input type="hidden" name="idUsuario" value="<?php echo $this->session->userdata('idusuario'); ?>">
 
@@ -55,6 +61,16 @@
                         <div class="card-header">
                             <h3 class="card-title">Datos </h3>
                         </div>
+                        <?php
+$alerta = $this->session->flashdata('alerta');
+if ($alerta) {
+    echo '<div class="alert alert-success">' . $alerta . '</div>';
+} else {
+    echo '<div class="alert alert-danger">No se agregó ningún curso y sección.</div>';
+}
+?>
+                        
+
                         <!-- /.card-header -->
                         <!-- form start -->
                         <form>
@@ -212,6 +228,7 @@ document.addEventListener("DOMContentLoaded", function () {
         document.querySelector(`#seccion_${numeroSeccion} .eliminarSeccion`).addEventListener("click", function () {
             eliminarSeccion(numeroSeccion);
         });
+        
     }
 
     function agregarNuevoArchivo(numeroSeccion) {
@@ -336,7 +353,34 @@ document.getElementById("contenedorSecciones").addEventListener("click", functio
 document.getElementById("agregarSeccion").addEventListener("click", function () {
     agregarNuevaSeccion();
 });
+
+    // Agregar evento para el formulario
+    document.querySelector('form').addEventListener('submit', function (e) {
+        e.preventDefault(); // Evita que el formulario se envíe automáticamente
+
+        // Aquí puedes realizar la lógica para enviar el formulario y procesar la respuesta
+        // Por simplicidad, supongamos que se ha agregado correctamente
+        var exito = true; // Cambia esto en función de tu lógica real
+
+        // Muestra la alerta
+        var alerta = document.getElementById("alerta");
+        if (exito) {
+            alerta.textContent = "El curso y la sección se han agregado correctamente.";
+            alerta.className = "alert alert-success";
+        } else {
+            alerta.textContent = "Error al agregar el curso y la sección.";
+            alerta.className = "alert alert-danger";
+        }
+        alerta.style.display = "block";
+
+        
+    });
+    
+        
+
 });
+
+
 
 </script>
 
@@ -344,7 +388,7 @@ document.getElementById("agregarSeccion").addEventListener("click", function () 
 
 
 
-                        <?php
+<?php
 echo form_close();
 ?>
 

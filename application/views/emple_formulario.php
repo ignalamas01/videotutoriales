@@ -91,7 +91,7 @@
                                             <select name="departamento" class="form-control select2" style="width: 100%;">
                                             <option value="" disabled selected>Seleccione... </option>
                                                 <option value="Beni">Beni</option>
-                                                <option value="Cochabamba">cochabamba</option>
+                                                <option value="Cochabamba">Cochabamba</option>
                                                 <option value="Chuquisaca">Chuquisaca</option>
                                                 <option value="La Paz">La Paz</option>
                                                 <option value="Oruro">Oruro</option>

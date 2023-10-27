@@ -180,9 +180,9 @@ class Cursos extends CI_Controller
 		
 
 
-    // Procesar datos de las secciones
-    $numero_secciones = $this->input->post('numeroSecciones');
-    for ($i = 1; $i <= $numero_secciones; $i++) {
+    	// Procesar datos de las secciones
+    	$numero_secciones = $this->input->post('numeroSecciones');
+    	for ($i = 1; $i <= $numero_secciones; $i++) {
         $data = array(
             
             'nombre' => $this->input->post("titulo_seccion_$i"),
@@ -200,8 +200,8 @@ class Cursos extends CI_Controller
         // Procesar datos de los videos de la sección
         // ... Lógica para procesar videos ...
     
-	$numero_archivos = $this->input->post("numeroArchivos");
-	for ($j = 1; $j <= $numero_archivos; $j++) {
+		$numero_archivos = $this->input->post("numeroArchivos");
+		for ($j = 1; $j <= $numero_archivos; $j++) {
 		
 		$data_archivo = array(
 			'nombreArchivo' => $this->input->post("titulo_archivo_{$i}_{$j}"),
@@ -209,31 +209,42 @@ class Cursos extends CI_Controller
 			'idSeccion' => $seccion_id,
 		);
 		$this->cursos_model->agregarArchivo($data_archivo);
-	}
-	$numero_videos = $this->input->post("numeroVideos");
-for ($k = 1 ; $k <= $numero_videos ; $k++) {
+		}
+		$numero_videos = $this->input->post("numeroVideos");
+		for ($k = 1 ; $k <= $numero_videos ; $k++) {
 	
-    $data_video = array(
+    	$data_video = array(
 		'tituloVideo' => $this->input->post("titulo_video_{$i}_{$k}"),
 		'descripcionVideo' => $this->input->post("descripcion_video_{$i}_{$k}"),
 		'enlaceVideo' => $this->input->post("ruta_video_{$i}_{$k}"),
         'idSeccion' => $seccion_id,
-    );
-    $this->cursos_model->agregarVideo($data_video);
-}
-}
+    	);
+    	$this->cursos_model->agregarVideo($data_video);
+		}
+		
+	}
+	
     // Redireccionar o mostrar un mensaje de éxito
-	// redirect('cursos/cursos', 'refresh');
+	 //redirect('cursos/agregar', 'refresh');
 	var_dump($data);
 	$numero_secciones = $this->input->post('numeroSecciones');
-echo 'Número de secciones: ' . $numero_secciones;
+	echo 'Número de secciones: ' . $numero_secciones;
 
-for ($i = 1; $i <= $numero_secciones; $i++) {
+	for ($i = 1; $i <= $numero_secciones; $i++) {
     echo "Datos de la sección $i:";
     echo $this->input->post("titulo_seccion_$i");
     echo $this->input->post("descripcion_seccion_$i");
     // Otros campos de la sección
 }
+
+// Obtener los títulos del curso y de la sección
+$tituloCurso = $this->input->post('titulo');
+$tituloSeccion = $this->input->post("titulo_seccion_1"); // Puedes usar el número de sección que desees
+
+// Establecer la variable de sesión 'alerta' con los títulos
+
+$this->session->set_flashdata('alerta', 'El curso "' . $tituloCurso . '" y la sección "' . $tituloSeccion . '" se han agregado correctamente.');
+
 
 		
 	}
