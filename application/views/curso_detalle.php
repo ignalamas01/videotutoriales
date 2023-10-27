@@ -14,6 +14,7 @@
     <style>
         body {
             background-color: #f8f9fa;
+            font-family: 'Open Sans', sans-serif;
         }
 
         .content {
@@ -27,7 +28,10 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             margin-bottom: 20px;
         }
-
+        h1, h2, h4, p {
+            color: #333; /* Color del texto */
+            text-align: center;
+        }
         .seccion-container {
             margin-top: 15px;
             border: 1px solid #ddd;
@@ -38,6 +42,7 @@
         .seccion-titulo {
             font-weight: bold;
             cursor: pointer;
+            color: #333;
         }
 
         .seccion-contenido {
@@ -47,6 +52,8 @@
 
         .btn-agregar-seccion {
             margin-top: 10px;
+            
+            
         }
         .btn-dar-evaluacion-curso {
         font-size: 18px;  /* Ajusta el tamaño del texto */
@@ -62,6 +69,14 @@
         background-color: #4CAF50;  /* Cambia el color de fondo a verde */
         color: white;  /* Cambia el color del texto a blanco */
     }
+    .btn-warning123 {
+    font-size: 18px;         /* Ajusta el tamaño del texto */
+    padding: 12px 20px;      /* Ajusta el padding para controlar el tamaño del botón */
+    border-radius: 10px;     /* Añade esquinas redondeadas */
+    background-color: #5BC0EB;  /* Cambia el color de fondo a celeste */
+    color: white;            /* Cambia el color del texto a blanco */
+   
+}
     </style>
 </head>
 
@@ -74,7 +89,7 @@
                 <p><?php echo $curso->descripcion; ?></p>
 
                 <!-- Secciones del Curso -->
-                <h2 class="text-center">Secciones del Curso</h2>
+                <!-- <h2 class="text-center">Secciones del Curso</h2> -->
                 <?php
                 $contadorSecciones = 0; // Inicializar el contador de secciones para este curso
                 if ($secciones) :
@@ -156,7 +171,12 @@
         <?php endif; ?>
 
     </div>
-    
+   <!-- Descripción para obtener el certificado -->
+<p class="text-center mx-auto mt-4">Una vez terminado el curso y haber aprobado todas las pruebas, puedes reclamar tu certificado.</p>
+<div class="text-center">
+<!-- Botón para obtener el certificado -->
+<button type="button" class="btn-warning123">Obten tu Certificado del Curso</button> 
+</div>
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
@@ -182,11 +202,21 @@
             // Puedes redirigir a una página de evaluación general, mostrar un formulario, etc.
             window.location.href = '<?php echo base_url(); ?>index.php/cursos/realizar_evaluacion';
         });
+        
             function agregarNuevaSeccion() {
                 // Lógica para agregar una nueva sección (similar a tu implementación)
                 // Puedes adaptar el código según tus necesidades
             }
         });
+        
+        // ...
+        // Agrega el siguiente código donde sea apropiado en tu lógica de visualización del curso
+       
+
+        // Llama a la función para actualizar la última visita
+        
+        // ...
+    
     </script>
 </body>
 

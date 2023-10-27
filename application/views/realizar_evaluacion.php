@@ -49,8 +49,9 @@
 <h1><?php echo $tituloEvaluacion; ?></h1>
 <p><?php echo $descripcionEvaluacion; ?></p>
 <p>Puntaje Total: <?php echo $puntajeTotal; ?></p>
-<?php echo form_open('evaluaciones_estudiante/procesar_evaluacion', array('id' => 'executionForm')); ?>
 
+<?php echo form_open('evaluaciones_estudiante/procesar_evaluacion', array('id' => 'executionForm')); ?>
+<input type="hidden" name="idCurso" value="<?php echo $idCurso; ?>">
 <?php if (!empty($preguntas)) : ?>
     <?php foreach ($preguntas as $index => $pregunta) : ?>
         <div class="question">
@@ -87,7 +88,8 @@
 <input type="submit" value="Enviar Respuestas">
 <?php echo form_close(); ?>
 <input type="hidden" name="idEstudiante" value="<?php echo isset($idEstudiante) ? $idEstudiante : ''; ?>">
-<p>El idEstudiante es: <?php echo $idEstudiante; ?></p>
+
+
 
 </body>
 </html>
