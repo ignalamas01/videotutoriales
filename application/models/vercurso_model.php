@@ -24,6 +24,17 @@ class vercurso_model extends CI_Model
             return null;
         }
     }
+    public function obtener_videos_por_seccion($idSeccion)
+    {
+        $this->db->where('idSeccion', $idSeccion);
+        return $this->db->get('videos')->result();
+    }
+
+    public function obtener_archivos_por_seccion($idSeccion)
+    {
+        $this->db->where('idSeccion', $idSeccion);
+        return $this->db->get('archivos')->result();
+    }
 
     }
 

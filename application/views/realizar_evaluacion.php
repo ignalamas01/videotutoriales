@@ -86,6 +86,8 @@
 <!-- Agregar campos ocultos para idEvaluacion e idPregunta -->
 <input type="submit" value="Enviar Respuestas">
 <?php echo form_close(); ?>
+
+
 </body>
 </html>
 
