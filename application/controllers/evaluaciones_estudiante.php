@@ -61,10 +61,10 @@ public function procesar_evaluacion()
     try {
         // Iniciar la transacción
         $this->db->trans_start();
-
+        $idUsuarioActual = $this->session->userdata('idusuario');
         // Obtener datos adicionales del formulario (fuera del bucle)
         $idEvaluacion = $this->input->post('idEvaluacion');
-        $idEstudiante = $this->input->post('idEstudiante');
+        $idEstudiante = $this->evaluaciones_estudiante_model->obtener_id_estudiante($idUsuarioActual);
         $puntajeTotal = $this->input->post('totalScore');
 
         // Cargar las preguntas nuevamente

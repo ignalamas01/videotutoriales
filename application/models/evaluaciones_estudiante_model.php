@@ -168,7 +168,7 @@ public function obtener_id_estudiante($idUsuario) {
     }
 }
 public function insertar_puntaje($idEvaluacion, $idEstudiante, $puntajeTotal) {
-    $idEstudiante = $this->input->post('idEstudiante');
+    
     $data = array(
         'idEvaluacion' => $idEvaluacion,
         'idEstudiante' => $idEstudiante,

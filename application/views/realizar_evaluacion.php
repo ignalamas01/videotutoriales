@@ -86,7 +86,8 @@
 <!-- Agregar campos ocultos para idEvaluacion e idPregunta -->
 <input type="submit" value="Enviar Respuestas">
 <?php echo form_close(); ?>
-
+<input type="hidden" name="idEstudiante" value="<?php echo isset($idEstudiante) ? $idEstudiante : ''; ?>">
+<p>El idEstudiante es: <?php echo $idEstudiante; ?></p>
 
 </body>
 </html>
