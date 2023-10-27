@@ -175,7 +175,14 @@
 <p class="text-center mx-auto mt-4">Una vez terminado el curso y haber aprobado todas las pruebas, puedes reclamar tu certificado.</p>
 <div class="text-center">
 <!-- Botón para obtener el certificado -->
-<button type="button" class="btn-warning123">Obten tu Certificado del Curso</button> 
+<form action="<?php echo base_url(); ?>index.php/certificados/emitir_certificado" method="post">
+    <!-- Agregar el campo oculto idCurso -->
+    <input type="hidden" name="idCurso" value="<?php echo $curso->id; ?>">
+
+    <!-- Botón de evaluación final -->
+    <button type="submit" class="btn-warning123"data-curso-id="<?php echo $curso->id; ?>">Obten tu Certificado del Curso</button> 
+</form>
+
 </div>
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>

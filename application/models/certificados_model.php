@@ -1,0 +1,44 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class certificados_model extends CI_Model {
+
+    public function verificar_aprobacion_curso($idEvaluacion, $idEstudiante) {
+        // Consulta para verificar si el estudiante ha obtenido al menos una nota mayor a 60
+        $this->db->select('COUNT(*) as total_evaluaciones');
+        $this->db->from('puntajesevaluacion');
+        $this->db->where('idEvaluacion', $idEvaluacion);
+        $this->db->where('idEstudiante', $idEstudiante);
+        $this->db->where('puntajeTotal >', 60); // Agregar condición para puntaje mayor a 60
+    
+        // Ejecutar la consulta
+        $result = $this->db->get()->row();
+    
+        // Verificar si se obtuvo al menos un resultado
+        return ($result && $result->total_evaluaciones > 0);
+    }
+    
+
+    public function emitir_certificado($idCurso, $idEstudiante) {
+        // Lógica para emitir el certificado (puedes almacenar en la base de datos, generar un archivo PDF, etc.)
+        // Aquí puedes agregar acciones específicas según tus necesidades
+        $data = array(
+            'idEstudiante' => $idEstudiante,
+            'idCurso' => $idCurso,
+            
+            'fechaEmision' => date('Y-m-d H:i:s')
+            // Puedes agregar más campos según tus requisitos
+        );
+
+        // Insertar datos en una tabla de certificados (ajusta según tu modelo de datos)
+        $this->db->insert('certificados', $data);
+    }
+    public function obtener_evaluaciones_curso($idCurso) {
+        $this->db->select('*');
+        $this->db->from('evaluaciones');
+        $this->db->where('idCurso', $idCurso);
+        $query = $this->db->get();
+
+        return $query->result();
+    }
+}
