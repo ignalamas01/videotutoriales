@@ -37,8 +37,28 @@ class certificados_model extends CI_Model {
         $this->db->select('*');
         $this->db->from('evaluaciones');
         $this->db->where('idCurso', $idCurso);
-        $query = $this->db->get();
-
-        return $query->result();
+    
+        return $this->db->get()->result();
+    }
+    public function obtener_puntaje_total($idCurso, $idEvaluacion, $idEstudiante) {
+        echo 'idCurso: ' . $idCurso . ', idEvaluacion: ' . $idEvaluacion . ', idEstudiante: ' . $idEstudiante . '<br>';
+        $this->db->select('puntajeTotal');
+        $this->db->from('puntajesevaluacion');
+        $this->db->where('idCurso', $idCurso);
+        $this->db->where('idEvaluacion', $idEvaluacion);
+        $this->db->where('idEstudiante', $idEstudiante);
+     
+        echo $this->db->last_query();
+        $result = $this->db->get()->row();
+    
+        // Verificar si se obtuvo un resultado
+        if ($result !== null) {
+            echo 'PuntajeTotal obtenido: ' . $result->puntajeTotal . '<br>';
+            return $result->puntajeTotal;
+        } else {
+            echo 'No se encontró puntajeTotal en la evaluación.<br>';
+        }
+    
+        return 0; // Otra opción es devolver un valor predeterminado si no se encuentra el puntaje
     }
 }
