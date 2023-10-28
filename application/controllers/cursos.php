@@ -245,7 +245,7 @@ $tituloSeccion = $this->input->post("titulo_seccion_1"); // Puedes usar el núme
 
 $this->session->set_flashdata('alerta', 'El curso "' . $tituloCurso . '" y la sección "' . $tituloSeccion . '" se han agregado correctamente.');
 
-
+redirect('cursos/agregar', 'refresh');
 		
 	}
 	public function modificar()

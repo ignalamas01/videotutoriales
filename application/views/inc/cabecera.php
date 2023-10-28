@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proyecto videotutoriales</title>
+    <title>sistema</title>
 
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>boostrap/css/bootstrap.css">
     <script src="<?php echo base_url(); ?>boostrap/js/bootstrap.js"></script>
@@ -18,7 +18,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Admin | DataTables WE</title>
+  <title>web | INSTITUTO CEPRA</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
