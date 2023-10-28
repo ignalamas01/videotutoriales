@@ -37,7 +37,7 @@ if ($estudiante) {
             $puntajeTotal = $this->certificados_model->obtener_puntaje_total($idCurso, $evaluacion->idEvaluacion, $idEstudiante);
     
             // Imprimir puntaje total
-            echo 'ID Evaluación: ' . $evaluacion->idEvaluacion . ' - Puntaje Total (puntajesevaluacion): ' . $puntajeTotal . '<br>';
+            // echo 'ID Evaluación: ' . $evaluacion->idEvaluacion . ' - Puntaje Total (puntajesevaluacion): ' . $puntajeTotal . '<br>';
     
             // Verificar si el estudiante ha obtenido al menos una nota mayor a 60 en esta evaluación
             $evaluacionAprobada = $puntajeTotal > 60;
@@ -52,6 +52,7 @@ if ($estudiante) {
         // Si se encontró una evaluación aprobada, emitir el certificado
         if ($evaluacionAprobadaEncontrada) {
             $this->certificados_model->emitir_certificado($idCurso, $idEstudiante);
+            $this->certificados_model->generar_certificado_pdf($idCurso, $idEstudiante);
             echo '¡Certificado emitido!';
         } else {
             echo 'No cumples con los requisitos para obtener el certificado.';

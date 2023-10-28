@@ -41,24 +41,39 @@ class certificados_model extends CI_Model {
         return $this->db->get()->result();
     }
     public function obtener_puntaje_total($idCurso, $idEvaluacion, $idEstudiante) {
-        echo 'idCurso: ' . $idCurso . ', idEvaluacion: ' . $idEvaluacion . ', idEstudiante: ' . $idEstudiante . '<br>';
+        // echo 'idCurso: ' . $idCurso . ', idEvaluacion: ' . $idEvaluacion . ', idEstudiante: ' . $idEstudiante . '<br>';
         $this->db->select('puntajeTotal');
         $this->db->from('puntajesevaluacion');
         $this->db->where('idCurso', $idCurso);
         $this->db->where('idEvaluacion', $idEvaluacion);
         $this->db->where('idEstudiante', $idEstudiante);
      
-        echo $this->db->last_query();
+        // echo $this->db->last_query();
         $result = $this->db->get()->row();
     
         // Verificar si se obtuvo un resultado
         if ($result !== null) {
-            echo 'PuntajeTotal obtenido: ' . $result->puntajeTotal . '<br>';
+            // echo 'PuntajeTotal obtenido: ' . $result->puntajeTotal . '<br>';
             return $result->puntajeTotal;
         } else {
-            echo 'No se encontró puntajeTotal en la evaluación.<br>';
+            // echo 'No se encontró puntajeTotal en la evaluación.<br>';
+            echo 'No se encontró alguna evaluacion realizada.<br>';
         }
     
         return 0; // Otra opción es devolver un valor predeterminado si no se encuentra el puntaje
+    }
+    public function generar_certificado_pdf($idCurso, $idEstudiante) {
+       
+        
+        // Configura el encabezado y pie de página si es necesario
+        $pdf = new FPDF();
+        $pdf->AddPage();
+        $pdf->SetFont('Arial', 'B', 16);
+        $pdf->Cell(40, 10, '¡Certificado Emitido!');
+
+        // Puedes personalizar el contenido del certificado según tus necesidades
+
+        // Guardar el PDF en un archivo o mostrarlo en el navegador
+        $pdf->Output('certificado.pdf', 'D'); // Descargar el PDF
     }
 }
