@@ -472,7 +472,7 @@ public function realizar_evaluacion()
 // $idSeccion = null; // Reemplaza con el valor deseado
 $idSeccion = $this->input->post('idSeccion');
 $idCurso = $this->input->post('idCurso');
-    
+
     // Obtener la última evaluación
     // $ultima_evaluacion = $this->evaluaciones_estudiante_model->obtener_ultima_evaluacion();
     $evaluacion = $this->evaluaciones_estudiante_model->obtener_evaluacion_por_curso_seccion($idCurso, $idSeccion);
@@ -483,13 +483,18 @@ $idCurso = $this->input->post('idCurso');
         $data['tituloEvaluacion'] = $evaluacion['tituloEvaluacion'];
         $data['descripcionEvaluacion'] = $evaluacion['descripcionEvaluacion'];
 		$data['puntajeTotal'] = $evaluacion['puntajeTotal'];
+		$data['idCurso'] = $evaluacion['idCurso'];
         // Otros datos necesarios para la vista
         // $data['idEstudiante'] = obtener_id_estudiante(); // Reemplaza esto con la lógica real
         // $data['puntajeObtenido'] = obtener_puntaje_obtenido(); // Reemplaza esto con la lógica real
 
         // Obtener las preguntas de la evaluación específica
         $data['preguntas'] = $this->evaluaciones_estudiante_model->obtener_preguntas_evaluacion($evaluacion['idEvaluacion']);
-
+		$idUsuarioActual = $this->session->userdata('idusuario');
+		
+		// Realizar la consulta para obtener el idEstudiante
+		$idEstudiante = $this->evaluaciones_estudiante_model->obtener_id_estudiante($idUsuarioActual);
+		$data['idEstudiante'] = $idEstudiante;
         // Cargar la vista con la información de la evaluación específica
         $this->load->view('realizar_evaluacion', $data);
         // Manejar el caso en que no haya evaluaciones
@@ -497,18 +502,17 @@ $idCurso = $this->input->post('idCurso');
         echo 'No hay evaluaciones disponibles.';
     }
 	// Obtener el idUsuario del usuario actual
-$idUsuarioActual = $this->session->userdata('idusuario');
 
-// Realizar la consulta para obtener el idEstudiante
-$idEstudiante = $this->evaluaciones_estudiante_model->obtener_id_estudiante($idUsuarioActual);
 
+   
 // Verificar si se encontró el idEstudiante
-if ($idEstudiante !== null) {
-    // echo 'El idEstudiante asociado al idUsuario ' . $idUsuarioActual . ' es: ' . $idEstudiante;
+// if ($idEstudiante !== null) {
+//     // echo 'El idEstudiante asociado al idUsuario ' . $idUsuarioActual . ' es: ' . $idEstudiante;
 	
-} else {
-    echo 'No se encontró el idEstudiante para el idUsuario ' . $idUsuarioActual;
-}
+	
+// } else {
+//     echo 'No se encontró el idEstudiante para el idUsuario ' . $idUsuarioActual;
+// }
 
 }
 // public function realizar_evaluacion()

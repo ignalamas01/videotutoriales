@@ -61,15 +61,20 @@ public function procesar_evaluacion()
     try {
         // Iniciar la transacción
         $this->db->trans_start();
-
+        
+        $idUsuarioActual = $this->session->userdata('idusuario');
         // Obtener datos adicionales del formulario (fuera del bucle)
         $idEvaluacion = $this->input->post('idEvaluacion');
-        $idEstudiante = $this->input->post('idEstudiante');
+        $idEstudiante = $this->evaluaciones_estudiante_model->obtener_id_estudiante($idUsuarioActual);
+        $idCurso = $this->input->post('idCurso');
         $puntajeTotal = $this->input->post('totalScore');
+        
+        
 
+        // $idCurso = $this->evaluaciones_estudiante_model->obtener_id_estudiante($idCursoActual);
         // Cargar las preguntas nuevamente
         $preguntas = $this->evaluaciones_estudiante_model->obtener_preguntas_evaluacion($idEvaluacion);
-
+        
         // Verificar que las respuestas no estén vacías
         $puntajeObtenido = 0;
 $puntajeTotal = 0;
@@ -147,7 +152,9 @@ if (!empty($respuestas)) {
         echo 'ID de la Evaluación: ' . $idEvaluacion;
 
         // Insertar el puntaje en la tabla puntajesevaluacion
-        $idPuntaje = $this->evaluaciones_estudiante_model->insertar_puntaje($idEvaluacion, $idEstudiante, $porcentajeObtenido);
+        $idPuntaje = $this->evaluaciones_estudiante_model->insertar_puntaje($idEvaluacion, $idEstudiante, $porcentajeObtenido, $idCurso);
+        echo 'ID del Curso: ' . $idCurso;
+        
     }
 } else {
     // Manejar el caso en que no haya respuestas
@@ -159,6 +166,7 @@ if (!empty($respuestas)) {
         // Manejar cualquier excepción que ocurra durante la transacción
         echo 'Error: ' . $e->getMessage();
     }
+    var_dump($_POST);
 }
 
 // Función para calcular el puntaje total

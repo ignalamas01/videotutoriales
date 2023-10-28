@@ -6,7 +6,7 @@ class Evaluaciones_estudiante_model extends CI_Model
     public function obtener_evaluacion_por_curso_seccion($idCurso, $idSeccion = null, $idEvaluacion = null)
     {
         // Agrega la condición para idCurso y idSeccion
-        $this->db->select('idEvaluacion, tituloEvaluacion, descripcionEvaluacion, puntajeTotal');
+        $this->db->select('idEvaluacion, idCurso, tituloEvaluacion, descripcionEvaluacion, puntajeTotal');
         $this->db->from('evaluaciones');
         $this->db->where('idCurso', $idCurso);
     
@@ -167,13 +167,15 @@ public function obtener_id_estudiante($idUsuario) {
         return null;
     }
 }
-public function insertar_puntaje($idEvaluacion, $idEstudiante, $puntajeTotal) {
-    $idEstudiante = $this->input->post('idEstudiante');
+
+public function insertar_puntaje($idEvaluacion, $idEstudiante, $puntajeTotal, $idCurso) {
+    
     $data = array(
         'idEvaluacion' => $idEvaluacion,
         'idEstudiante' => $idEstudiante,
         'puntajeTotal' => $puntajeTotal,
-        'fechaRegistro' => date('Y-m-d H:i:s')
+        'fechaRegistro' => date('Y-m-d H:i:s'),
+        'idCurso' => $idCurso
     );
     // var_dump($idEstudiante);
     $this->db->insert('puntajesevaluacion', $data);
