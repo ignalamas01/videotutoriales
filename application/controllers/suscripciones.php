@@ -33,6 +33,10 @@ class Suscripciones extends CI_Controller
 	} 
 	public function inscribirbd() {
 		$this->load->model('Inscripciones_model');
+
+		// Iniciar la transacción
+		$this->db->trans_start();
+
 		if ($this->input->post()) {
 			$data = array(
 				'idEstudiante' => $this->input->post('id_estudiante'),
@@ -55,6 +59,14 @@ class Suscripciones extends CI_Controller
 			} else {
 				// Error en la inscripción
 				$mensaje = "Hubo un error al inscribir al estudiante en el curso.";
+			}
+
+			// Finalizar la transacción
+			$this->db->trans_complete();
+
+			if ($this->db->trans_status() === FALSE) {
+				// Ocurrió un error en la transacción
+				$mensaje = "Error en la transacción. La inscripción no se completó.";
 			}
 	
 			// Carga la vista con el mensaje de inscripción
@@ -94,6 +106,7 @@ class Suscripciones extends CI_Controller
 		
 		
 	}
+	
 	
 	
 	
