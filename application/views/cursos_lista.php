@@ -10,9 +10,12 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/base/index">Home</a></li>
-              <li class="breadcrumb-item active">DataTables</li>
-              <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/usuarios/logout">cerrar sesion</a></li>
+              <!-- <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/base/index">Home</a></li>
+              <li class="breadcrumb-item active">DataTables</li> -->
+              <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/cursos/agregar">agregar curso</a></li>
+              <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/cursos/deshabilitados">deshabilitados</a></li>
+              <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/suscripciones/agregarEstudiante">inscribir a un curso</a></li>
+              <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/usuarios/logout">Cerrar sesión</a></li>
             </ol>
           </div>
         </div>
@@ -39,14 +42,14 @@
               // echo date('y/m/d H:i:s'); ?> hora actualizada   </h1>-->
               
               <div>   
-                <a href="<?php echo base_url(); ?>index.php/cursos/agregar"> <button type="button" class="btn btn-danger">Agregar curso</button> </a>
-                <a href="<?php echo base_url(); ?>index.php/cursos/deshabilitados"> <button type="button" class="btn btn-primary">Lista de cursos deshabilitados</button> </a>
+                <!-- <a href="<?php echo base_url(); ?>index.php/cursos/agregar"> <button type="button" class="btn btn-danger">Agregar curso</button> </a>
+                <a href="<?php echo base_url(); ?>index.php/cursos/deshabilitados"> <button type="button" class="btn btn-primary">Lista de cursos deshabilitados</button> </a> -->
                 <a href="<?php echo base_url(); ?>index.php/cursos/subir_video"> <button type="button" class="btn btn-danger">Videos</button> </a>
                 <a href="<?php echo base_url(); ?>index.php/cursos/subir_archivos"> <button type="button" class="btn btn-danger">Archivos</button> </a>
                 <a href="<?php echo base_url(); ?>index.php/cursos/crear_evaluacion"><button type="button" class="btn btn-warning">Crear evaluacion</button>  </a>
-                <a href="<?php echo base_url(); ?>index.php/cursos/realizar_evaluacion"><button type="button" class="btn btn-warning">Realizar evaluacion</button>  </a>
+                <!-- <a href="<?php echo base_url(); ?>index.php/cursos/realizar_evaluacion"><button type="button" class="btn btn-warning">Realizar evaluacion</button>  </a> -->
                 
-                <a href="<?php echo base_url(); ?>index.php/suscripciones/agregarEstudiante"><button type="button" class="btn btn-danger">inscribir estudiante a un curso</button>  </a>
+                <!-- <a href="<?php echo base_url(); ?>index.php/suscripciones/agregarEstudiante"><button type="button" class="btn btn-danger">inscribir estudiante a un curso</button>  </a> -->
                
                 
                 <!-- <a href="<?php echo base_url(); ?>index.php/usuarios/logout"> <button type="button" class="btn btn-danger">CERRAR SESION</button> </a> -->

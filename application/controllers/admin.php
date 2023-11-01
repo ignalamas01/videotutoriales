@@ -7,17 +7,17 @@ require FCPATH.'vendor/autoload.php';
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
-class Estudiante extends CI_Controller
+class Admin extends CI_Controller
 {
 	public function index()
 	{
 		if($this->session->userdata('login'))
         {
-			$this->load->view('inc/cabecera');
-			$this->load->view('inc/menu');
-			$this->load->view('inc/menulateral');
+			$this->load->view('incadmin/cabecera');
+			$this->load->view('incadmin/menu');
+			$this->load->view('incadmin/menulateral');
 			$this->load->view('inicio');
-			$this->load->view('inc/pie');
+			$this->load->view('incadmin/pie');
         }
         else
         {
@@ -25,22 +25,38 @@ class Estudiante extends CI_Controller
         }
 		
 	}
+	public function res()
+	{
+
+		$this->load->view('incadmin/cabecera');
+		$this->load->view('incadmin/menu');
+		$this->load->view('incadmin/menulateral');
+		$this->load->view('resumen');
+		$this->load->view('incadmin/pie');
+	}
+	public function obj()
+	{
+		$this->load->view('incadmin/cabecera');
+		$this->load->view('incadmin/menu');
+		$this->load->view('incadmin/menulateral');
+		$this->load->view('objetivos');
+		$this->load->view('incadmin/pie');
+	}
 	
-	
-	public function est()
+	public function emple()
 	{
 		
 		if($this->session->userdata('login'))
         {
-			
-			$lista = $this->estudiante_model->listaestudiante();
+			//$lista=$this->empleado_model->listaempleados();
+			$lista = $this->empleado_model->listaempleados();
 
 
-			$data['estudiante'] = $lista;
+			$data['empleado'] = $lista;
 			$this->load->view('incadmin/cabecera');
 			$this->load->view('incadmin/menu');
 			$this->load->view('incadmin/menulateral');
-			$this->load->view('est_lista',$data);
+			$this->load->view('emple_lista',$data);
 			$this->load->view('incadmin/pie');
         }
         else
@@ -51,31 +67,42 @@ class Estudiante extends CI_Controller
 		
 	}
 	public function listaxls()
- {
- $lista=$this->estudiante_model->listaestudiante();
- $lista=$lista->result();
+	{
+	  $lista=$this->empleado_model->listaempleados();
+	  $lista=$lista->result();
+   
+	  header('Content-Type: application/vnd.ms-excel');
+	  header('Content-Disposition: attachment;filename="empleados.xlsx"');
+	  $spreadsheet = new Spreadsheet();
+	  $sheet = $spreadsheet->getActiveSheet();
+	  $sheet->setCellValue('A1', 'ID');
+	  $sheet->setCellValue('B1', 'Nombre');
+	  $sheet->setCellValue('C1', 'Primer apellido');
+	  $sheet->setCellValue('D1', 'Segundo apellido');
+	  $sheet->setCellValue('E1', 'departamento');
+	  $sheet->setCellValue('F1', 'fechaNacimiento');
+	  $sheet->setCellValue('G1', 'telefono');
+	  $sheet->setCellValue('H1', 'direccion');
+	  $sheet->setCellValue('I1', 'fecha de registro');
+	  
+	  $sn=2;
+	  foreach ($lista as $row) {
+	  $sheet->setCellValue('A'.$sn,$row->id);
+	  $sheet->setCellValue('B'.$sn,$row->nombre);
+	  $sheet->setCellValue('C'.$sn,$row->primerApellido);
+	  $sheet->setCellValue('D'.$sn,$row->segundoApellido);
+	  $sheet->setCellValue('E'.$sn,$row->departamento);
+	  $sheet->setCellValue('F'.$sn,$row->fechaNacimiento);
+	  $sheet->setCellValue('G'.$sn,$row->telefono);
+	  $sheet->setCellValue('H'.$sn,$row->direccion);
+	  $sheet->setCellValue('I'.$sn,$row->fechaRegistro);
+	 
+	  $sn++;
+	  }
+	  $writer = new Xlsx($spreadsheet);
+	  $writer->save("php://output");
+	}
 
- header('Content-Type: application/vnd.ms-excel');
- header('Content-Disposition: attachment;filename="estudiante.xlsx"');
- $spreadsheet = new Spreadsheet();
- $sheet = $spreadsheet->getActiveSheet();
- $sheet->setCellValue('A1', 'ID');
- $sheet->setCellValue('B1', 'Nombre');
- $sheet->setCellValue('C1', 'Primer apellido');
- $sheet->setCellValue('D1', 'Segundo apellido');
- $sheet->setCellValue('E1', 'carrera');
- $sn=2;
- foreach ($lista as $row) {
- $sheet->setCellValue('A'.$sn,$row->id);
- $sheet->setCellValue('B'.$sn,$row->nombre);
- $sheet->setCellValue('C'.$sn,$row->primerApellido);
- $sheet->setCellValue('D'.$sn,$row->segundoApellido);
- $sheet->setCellValue('E'.$sn,$row->carrera);
- $sn++;
- }
- $writer = new Xlsx($spreadsheet);
- $writer->save("php://output");
- }
 
 
 	public function listapdf()
@@ -83,13 +110,13 @@ class Estudiante extends CI_Controller
 		if($this->session->userdata('login'))
         {
 			
-			$lista = $this->estudiante_model->listaestudiante();
+			$lista = $this->empleado_model->listaempleados();
 			$lista =$lista->result();
 
 			$this->pdf=new pdf();
 			$this->pdf->AddPage();
 			$this->pdf->AliasNbPages();
-			$this->pdf->SetTitle("lista de estudiantes");
+			$this->pdf->SetTitle("lista de empleados");
 			
 			$this->pdf->SetLeftMargin(15);
 			$this->pdf->SetRightMargin(15);
@@ -98,7 +125,7 @@ class Estudiante extends CI_Controller
 
 			$this->pdf->Ln(5);
 			$this->pdf->Cell(30);
-			$this->pdf->Cell(120,10,'LISTA DE ESTUDIANTES',0,0,'C',1);
+			$this->pdf->Cell(120,10,'LISTA DE EMPLEADOS',0,0,'C',1);
 
 			//ANCHO,ALTO,TEXT,BORDE GENERACION DE LA SIQUIENTE CELDA
 			//0 DERECHA ,1 SIGUIENTE LINESA, 2 DEBAJO
@@ -106,19 +133,19 @@ class Estudiante extends CI_Controller
 
 
 
-			$this->pdf->Ln(15);
+			$this->pdf->Ln(10);
 			$this->pdf->SetFont('Arial','',9);
 
 
-			$this->pdf->Cell(3);
+			$this->pdf->Cell(30);
 			$this->pdf->Cell(7,5,'No','TBLR',0,'L',0);
 			$this->pdf->Cell(50,5,'NOMBRE','TBLR',0,'L',0);
 			$this->pdf->Cell(30,5,'PRIMER APELLIDO','TBLR',0,'L',0);
 			$this->pdf->Cell(35,5,'SEGUNDO APELLIDO','TBLR',0,'L',0);
-			$this->pdf->Cell(30,5,'CARRERA','TBLR',0,'L',0);
+			$this->pdf->Cell(30,5,'DEPARTAMENTO','TBLR',0,'L',0);
 			$this->pdf->Cell(35,5,'FECHA DE NACIMIENTO','TBLR',0,'L',0);
+			$this->pdf->Cell(30,5,'TELEFONO','TBLR',0,'L',0);
 			$this->pdf->Cell(30,5,'DIRECCION','TBLR',0,'L',0);
-			//$this->pdf->Cell(30,5,'DIRECCION','TBLR',0,'L',0);
 			$this->pdf->Ln(5);
 
 			$num=1;
@@ -128,37 +155,37 @@ class Estudiante extends CI_Controller
 				$nombre=$row->nombre;
 				$primerApellido=$row->primerApellido;
 				$segundoApellido=$row->segundoApellido;
-				$carrera=$row->carrera;
+				$departamento=$row->departamento;
 				$fechaNacimiento=$row->fechaNacimiento;
+				$telefono=$row->telefono;
 				$direccion=$row->direccion;
-				
 
 
-				$this->pdf->Cell(3);
+				$this->pdf->Cell(30);
 				$this->pdf->Cell(7,5,$num,'TBLR',0,'L',0);
 				$this->pdf->Cell(50,5,$nombre,'TBLR',0,'L',0);
 				$this->pdf->Cell(30,5,$primerApellido,'TBLR',0,'L',0);
 				$this->pdf->Cell(35,5,$segundoApellido,'TBLR',0,'L',0);
-				$this->pdf->Cell(30,5,$carrera,'TBLR',0,'L',0);
+				$this->pdf->Cell(30,5,$departamento,'TBLR',0,'L',0);
 				$this->pdf->Cell(35,5,$fechaNacimiento,'TBLR',0,'L',0);
+				$this->pdf->Cell(30,5,$telefono,'TBLR',0,'L',0);
 				$this->pdf->Cell(30,5,$direccion,'TBLR',0,'L',0);
-				//$this->pdf->Cell(30,5,$direccion,'TBLR',0,'L',0);
 				$this->pdf->Ln(5);
 				$num++;
 			}
 
 
-			$this->pdf->Output("lista estudiantes.pdf","I");
+			$this->pdf->Output("lista empleados.pdf","I");
 
 
 
 
-			$data['estudiante'] = $lista;
-			$this->load->view('inc/cabecera');
-			$this->load->view('inc/menu');
-			$this->load->view('inc/menulateral');
-			$this->load->view('est_lista',$data);
-			$this->load->view('inc/pie');
+			$data['empleado'] = $lista;
+			$this->load->view('incadmin/cabecera');
+			$this->load->view('incadmin/menu');
+			$this->load->view('incadmin/menulateral');
+			$this->load->view('emple_lista',$data);
+			$this->load->view('incadmin/pie');
         }
         else
         {
@@ -172,32 +199,19 @@ class Estudiante extends CI_Controller
 		$this->load->view('incadmin/cabecera');
 		$this->load->view('incadmin/menu');
 		$this->load->view('incadmin/menulateral');
-		$this->load->view('est_formulario');
+		$this->load->view('emple_formulario');
 		$this->load->view('incadmin/pie');
 	}
-	// public function agregarbd()
-	// {
-		// $data['nombre'] = $_POST['nombre'];
-		// $data['primerApellido'] = $_POST['primerApellido'];
-		// $data['segundoApellido'] = $_POST['segundoApellido'];
-		// $data['carrera'] = $_POST['carrera'];
-		// $data['fechaNacimiento'] = $_POST['fechaNac'];
-		
-		// $data['direccion'] = $_POST['direccion'];
-		
-
-		// $this->estudiante_model->agregarestudiante($data);
-		// redirect('estudiante/est', 'refresh');
 	public function agregarbd()
 	{
 		$correo = $this->input->post("destinatario");
 
     // Verificar si el correo ya existe en la base de datos
-    if ($this->estudiante_model->correoExiste($correo)) {
+    if ($this->empleado_model->correoExiste($correo)) {
         // Mostrar mensaje de error o redirigir a una página de error
         // echo "El correo electrónico ya existe en la base de datos";
 		$this->session->set_flashdata('error_correo', 'El correo electrónico ya está registrado en la base de datos');
-        redirect('estudiante/agregar', 'refresh');
+        redirect('base/agregar', 'refresh');
 		return;
     }
 		// redirect('base/emple', 'refresh');
@@ -312,7 +326,7 @@ class Estudiante extends CI_Controller
 			$usuarioData = array(
 				'login' => $usuario, // Puedes personalizar la lógica aquí
 				'password' => $contrasena_cifrada,// Cambia 'contrasena' por la contraseña deseada
-				'tipo' => 'invitado',
+				'tipo' => 'empleado',
 				'estado' => 1, // Puedes personalizar según tu lógica de activación
 				'fechaRegistro' => date('Y-m-d H:i:s'),
 				'fechaActualizacion' => date('Y-m-d H:i:s'),
@@ -321,138 +335,154 @@ class Estudiante extends CI_Controller
 			);
 		
 			// Agregar usuario
-			$this->estudiante_model->agregarUsuario($usuarioData);
+			$this->empleado_model->agregarUsuario($usuarioData);
 			$idUsuario = $this->db->insert_id();
 			$data['nombre'] = $_POST['nombre'];
-			$data['primerApellido'] = $_POST['primerApellido'];
-			$data['segundoApellido'] = $_POST['segundoApellido'];
-			$data['carrera'] = $_POST['carrera'];
-			
-			$data['fechaNacimiento'] = $_POST['fechaNac'];
-			$data['direccion'] = $_POST['direccion'];
-			$data['telefono'] = $_POST['telefono'];
+		$data['primerApellido'] = $_POST['primerApellido'];
+		$data['segundoApellido'] = $_POST['segundoApellido'];
+		$data['departamento'] = $_POST['departamento'];
+		$data['fechaNacimiento'] = $_POST['fechaNac'];
+		$data['telefono'] = $_POST['telefono'];
 		
 		
-			
-			$data['idUsuario'] = $idUsuario;
-			$data['departamento'] = $_POST['departamento'];
+		$data['direccion'] = $_POST['direccion'];
+		$data['idUsuario'] = $idUsuario;
 		
 
-		$this->estudiante_model->agregarestudiante($data);
-			redirect('estudiante/est', 'refresh');
+		$this->empleado_model->agregarempleado($data);
+			redirect('base/emple', 'refresh');
 			
 		
 	}
-	
 	public function modificar()
 	{
-		$idestudiante = $_POST['idestudiante'];
-		$data['infoestudiante'] = $this->estudiante_model->recuperarestudiante($idestudiante);
+		$idempleado = $_POST['idempleado'];
+		$data['infoempleado'] = $this->empleado_model->recuperarempleado($idempleado);
 		$this->load->view('incadmin/cabecera');
 		$this->load->view('incadmin/menu');
 		$this->load->view('incadmin/menulateral');
-		$this->load->view('est_modificar',$data);
+		$this->load->view('emple_modificar',$data);
 		$this->load->view('incadmin/pie');
 	}
 	public function modificarbd()
 	{
-		$idestudiante = $_POST['idestudiante'];
-        $data['nombre'] = $_POST['nombre'];
+		$idempleado = $_POST['idempleado'];
+		$data['nombre'] = $_POST['nombre'];
 		$data['primerApellido'] = $_POST['primerApellido'];
 		$data['segundoApellido'] = $_POST['segundoApellido'];
-		$data['carrera'] = $_POST['carrera'];
+		$data['departamento'] = $_POST['departamento'];
 		$data['fechaNacimiento'] = $_POST['fechaNac'];
+		$data['telefono'] = $_POST['telefono'];
 		$data['direccion'] = $_POST['direccion'];
-
-		$this->estudiante_model->modificarestudiante($idestudiante,$data);
-		redirect('estudiante/est', 'refresh');
+		$this->empleado_model->modificarempleado($idempleado,$data);
+		redirect('base/emple', 'refresh');
 	}
 
 
 	public function eliminarbd()
 	{
-		$idestudiante = $_POST['idestudiante'];
-		$this->estudiante_model->eliminarestudiante($idestudiante);
-		redirect('estudiante/est', 'refresh');
+		// $idempleado = $_POST['idempleado'];
+		// $this->empleado_model->eliminarempleado($idempleado);
+		// redirect('base/emple', 'refresh');
+		$idempleado = $_POST['idempleado'];
+
+    // Llamada al modelo para eliminar en ambas tablas
+    if ($this->empleado_model->eliminarempleado($idempleado)) {
+        // La eliminación se realizó con éxito
+        $this->session->set_flashdata('success', 'Empleado y usuario eliminados con éxito');
+    } else {
+        // Ocurrió un error
+        $this->session->set_flashdata('error', 'Error al eliminar el empleado y usuario');
+    }
+
+    redirect('base/emple', 'refresh');
 	}
 	public function deshabilitarbd()
 	{
-		$idestudiante = $_POST['idestudiante'];
+		$idempleado = $_POST['idempleado'];
 		$data['estado']='0';
 
 
-		$this->estudiante_model->modificarestudiante($idestudiante,$data);
-		redirect('estudiante/est', 'refresh');
+		$this->empleado_model->modificarempleado($idempleado,$data);
+		redirect('base/emple', 'refresh');
 
 	}
 	public function habilitarbd()
 	{
-		$idestudiante = $_POST['idestudiante'];
+		$idempleado = $_POST['idempleado'];
 		$data['estado']='1';
 
 
-		$this->estudiante_model->modificarestudiante($idestudiante,$data);
-		redirect('estudiante/deshabilitados', 'refresh');
+		$this->empleado_model->modificarempleado($idempleado,$data);
+		redirect('base/deshabilitados', 'refresh');
 
 	}
 	public function deshabilitados()
 	{
-		$lista = $this->estudiante_model->listaestudiantedes();
-		$data['estudiante'] = $lista;
+		$lista = $this->empleado_model->listaempleadosdes();
+		$data['empleado'] = $lista;
 		$this->load->view('incadmin/cabecera');
 		$this->load->view('incadmin/menu');
 		$this->load->view('incadmin/menulateral');
-		$this->load->view('est_listades',$data);
+		$this->load->view('emple_listades',$data);
 		$this->load->view('incadmin/pie');
 	}
-
+	public function verificar_correo_existente() {
+		$destinatario = $this->input->post('destinatario');
 	
-	public function invitado()
-	{
+		$this->load->model('empleado_model');
+		$existe = $this->empleado_model->correoExiste($destinatario);
+	
+		echo ($existe) ? 'existe' : 'no_existe';
+	}
+
+	// public function invitado()
+	// {
 		
 
-		if($this->session->userdata('login'))
-		{
-			$this->load->view('incestudiante/cabecera');
-			// $this->load->view('incestudiante/menu');
-			$this->load->view('inc/menu');
-			$this->load->view('incestudiante/menulateral');
-			$this->load->view('est_invitado');
-			$this->load->view('incestudiante/pie');
-		}
-		else
-		{
-			redirect('usuarios/index/2', 'refresh');
-		}
+	// 	if($this->session->userdata('login'))
+	// 	{
+	// 		$this->load->view('incestudiante/cabecera');
+	// 		$this->load->view('incestudiante/menu');
+	// 		$this->load->view('incestudiante/menulateral');
+	// 		$this->load->view('emple_invitado');
+	// 		$this->load->view('incestudiante/pie');
+	// 	}
+	// 	else
+	// 	{
+	// 		redirect('usuarios/index/2', 'refresh');
+	// 	}
 		
 		
-	}
+	// }
+	
+	
 	public function subirfoto()
 	{
-		$data['id']=$_POST['idestudiante'];
-		$this->load->view('inc/cabecera');
-		$this->load->view('inc/menu');
-		$this->load->view('inc/menulateral');
-		$this->load->view('subirformest',$data);
-		$this->load->view('inc/pie');
+		$data['id']=$_POST['idempleado'];
+		$this->load->view('incadmin/cabecera');
+		$this->load->view('incadmin/menu');
+		$this->load->view('incadmin/menulateral');
+		$this->load->view('subirform',$data);
+		$this->load->view('incadmin/pie');
 	}
 	public function subir()
 	{
-		$idestud=$_POST['idEstudiante'];
-		$nombrearchivo=$idestud.".jpg";
+		$idemple=$_POST['idEmpleado'];
+		$nombrearchivo=$idemple.".jpg";
 
-		$config['upload_path']='./uploads/estudiantes/';
+		$config['upload_path']='./uploads/empleados/';
 		
 		$config['file_name']=$nombrearchivo;
 		
-		$direccion="./uploads/estudiantes/".$nombrearchivo;
+		$direccion="./uploads/empleados/".$nombrearchivo;
 
 		if(file_exists($direccion))
 		{
 		 unlink($direccion);
 		}
 
-		$config['allowed_types']='jpg|png|mp4';
+		$config['allowed_types']='jpg|png';
 
 		$this->load->library('upload',$config);
 
@@ -463,11 +493,11 @@ class Estudiante extends CI_Controller
 		else
 		{
 		 $data['foto']=$nombrearchivo;
-		 $this->estudiante_model->modificarestudiante($idestud,$data);
+		 $this->empleado_model->modificarempleado($idemple,$data);
 		 $this->upload->data();
 			
 		}
-		redirect('estudiante/est', 'refresh');
+		redirect('base/emple', 'refresh');
 
 
 
@@ -489,6 +519,5 @@ class Estudiante extends CI_Controller
 		$execonsulta = $query->result();
 		print_r($execonsulta);
 	}
-	*/
-	
+*/
 }

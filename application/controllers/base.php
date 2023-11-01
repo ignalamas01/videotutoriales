@@ -13,11 +13,35 @@ class Base extends CI_Controller
 	{
 		if($this->session->userdata('login'))
         {
-			$this->load->view('inc/cabecera');
-			$this->load->view('inc/menu');
-			$this->load->view('inc/menulateral');
-			$this->load->view('inicio');
-			$this->load->view('inc/pie');
+			// $this->load->view('inc/cabecera');
+			// $this->load->view('inc/menu');
+			// $this->load->view('inc/menulateral');
+			// $this->load->view('inicio');
+			// $this->load->view('inc/pie');
+			$tipo = $this->session->userdata('tipo');
+			if ($tipo == 'admin') {
+				// Cargar la vista para el administrador
+				$this->load->view('inc/cabecera');
+						$this->load->view('incadmin/menu');
+						$this->load->view('incadmin/menulateral');
+						$this->load->view('inicio');
+						$this->load->view('incadmin/pie');
+			} if ($tipo == 'empleado') {
+				// Cargar la vista para el empleado
+				$this->load->view('inc/cabecera');
+				$this->load->view('inc/menu');
+				$this->load->view('inc/menulateral');
+				$this->load->view('inicio');
+				$this->load->view('inc/pie');
+			}
+			if ($tipo == 'invitado') {
+				// Cargar la vista para el empleado
+				$this->load->view('incestudiante/cabecera');
+				$this->load->view('incestudiante/menu');
+				$this->load->view('incestudiante/menulateral');
+				$this->load->view('inicio');
+				$this->load->view('incestudiante/pie');
+			}
         }
         else
         {
@@ -36,11 +60,42 @@ class Base extends CI_Controller
 	}
 	public function obj()
 	{
-		$this->load->view('inc/cabecera');
-		$this->load->view('inc/menu');
-		$this->load->view('inc/menulateral');
-		$this->load->view('objetivos');
-		$this->load->view('inc/pie');
+		// $this->load->view('inc/cabecera');
+		// $this->load->view('inc/menu');
+		// $this->load->view('inc/menulateral');
+		// $this->load->view('objetivos');
+		// $this->load->view('inc/pie');
+		$tipo = $this->session->userdata('tipo');
+			if ($tipo == 'admin') {
+				// Cargar la vista para el administrador
+				$this->load->view('incadmin/cabecera');
+						$this->load->view('incadmin/menu');
+						$this->load->view('incadmin/menulateral');
+						$this->load->view('objetivos');
+						$this->load->view('incadmin/pie');
+			} if ($tipo == 'empleado') {
+				// Cargar la vista para el empleado
+				$this->load->view('inc/cabecera');
+				$this->load->view('inc/menu');
+				$this->load->view('inc/menulateral');
+				$this->load->view('objetivos');
+				$this->load->view('inc/pie');
+			}
+			if ($tipo == 'invitado') {
+				// Cargar la vista para el empleado
+				$this->load->view('incestudiante/cabecera');
+				$this->load->view('incestudiante/menu');
+				$this->load->view('incestudiante/menulateral');
+				$this->load->view('objetivos');
+				$this->load->view('incestudiante/pie');
+				
+			}
+        
+			// else
+			// {
+			// 	redirect('usuarios/index/2','refresh');
+			// }
+		
 	}
 	
 	public function emple()
@@ -53,11 +108,11 @@ class Base extends CI_Controller
 
 
 			$data['empleado'] = $lista;
-			$this->load->view('inc/cabecera');
-			$this->load->view('inc/menu');
-			$this->load->view('inc/menulateral');
+			$this->load->view('incadmin/cabecera');
+			$this->load->view('incadmin/menu');
+			$this->load->view('incadmin/menulateral');
 			$this->load->view('emple_lista',$data);
-			$this->load->view('inc/pie');
+			$this->load->view('incadmin/pie');
         }
         else
         {
@@ -196,11 +251,11 @@ class Base extends CI_Controller
 	
 	public function agregar()
 	{
-		$this->load->view('inc/cabecera');
-		$this->load->view('inc/menu');
-		$this->load->view('inc/menulateral');
+		$this->load->view('incadmin/cabecera');
+		$this->load->view('incadmin/menu');
+		$this->load->view('incadmin/menulateral');
 		$this->load->view('emple_formulario');
-		$this->load->view('inc/pie');
+		$this->load->view('incadmin/pie');
 	}
 	public function agregarbd()
 	{
@@ -358,11 +413,11 @@ class Base extends CI_Controller
 	{
 		$idempleado = $_POST['idempleado'];
 		$data['infoempleado'] = $this->empleado_model->recuperarempleado($idempleado);
-		$this->load->view('inc/cabecera');
-		$this->load->view('inc/menu');
-		$this->load->view('inc/menulateral');
+		$this->load->view('incadmin/cabecera');
+		$this->load->view('incadmin/menu');
+		$this->load->view('incadmin/menulateral');
 		$this->load->view('emple_modificar',$data);
-		$this->load->view('inc/pie');
+		$this->load->view('incadmin/pie');
 	}
 	public function modificarbd()
 	{
@@ -421,11 +476,11 @@ class Base extends CI_Controller
 	{
 		$lista = $this->empleado_model->listaempleadosdes();
 		$data['empleado'] = $lista;
-		$this->load->view('inc/cabecera');
-		$this->load->view('inc/menu');
-		$this->load->view('inc/menulateral');
+		$this->load->view('incadmin/cabecera');
+		$this->load->view('incadmin/menu');
+		$this->load->view('incadmin/menulateral');
 		$this->load->view('emple_listades',$data);
-		$this->load->view('inc/pie');
+		$this->load->view('incadmin/pie');
 	}
 	public function verificar_correo_existente() {
 		$destinatario = $this->input->post('destinatario');

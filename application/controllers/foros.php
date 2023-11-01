@@ -15,13 +15,38 @@ class Foros extends CI_Controller {
     
         if ($this->form_validation->run() === FALSE) {
             // Mostrar el formulario si no se ha enviado o hay errores de validación
-            $this->load->view('inc/cabecera');
-            $this->load->view('inc/menu');
-            $this->load->view('inc/menulateral');
-            $this->load->view('foros');
+            // $this->load->view('inc/cabecera');
+            // $this->load->view('inc/menu');
+            // $this->load->view('inc/menulateral');
+            // $this->load->view('foros');
             
             
-            $this->load->view('inc/pie');
+            // $this->load->view('inc/pie');
+            $tipo = $this->session->userdata('tipo');
+			if ($tipo == 'admin') {
+				// Cargar la vista para el administrador
+				$this->load->view('incadmin/cabecera');
+						$this->load->view('incadmin/menu');
+						$this->load->view('incadmin/menulateral');
+						$this->load->view('foros');
+						
+			} if ($tipo == 'empleado') {
+				// Cargar la vista para el empleado
+				$this->load->view('inc/cabecera');
+				$this->load->view('inc/menu');
+				$this->load->view('inc/menulateral');
+				$this->load->view('foros');
+				
+			}
+			if ($tipo == 'invitado') {
+				// Cargar la vista para el empleado
+				$this->load->view('incestudiante/cabecera');
+				$this->load->view('incestudiante/menu');
+				$this->load->view('incestudiante/menulateral');
+				$this->load->view('foros');
+				
+				
+			}
         } else {
             // Obtener datos del formulario
             $titulo = $this->input->post('titulo');

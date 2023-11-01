@@ -46,9 +46,13 @@ class Usuarios extends CI_Controller
         if($this->session->userdata('login'))
         {
 			$tipo=$this->session->userdata('tipo');
-			if($tipo=='admin')
+			if($tipo=='empleado')
 			{
 			 redirect('base/index','refresh');
+			}
+			if($tipo=='admin')
+			{
+			 redirect('admin/index','refresh');
 			}
 			else
 			{

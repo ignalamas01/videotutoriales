@@ -39,12 +39,12 @@
                                     <!-- <li class="nav-item">
                                         <a class="nav-link active" aria-current="page" href="<?php echo base_url(); ?>index.php/estudiante/est">ESTUDIANTES</a>
                                     </li> -->
-                                    <!-- <button><li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/estudiante/est">ESTUDIANTES</a></li></button> -->
+                                    <button><li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/estudiante/est">ESTUDIANTES</a></li></button>
 
                                     <!-- <li class="nav-item">
                                         <a class="nav-link active" aria-current="page" href="<?php echo base_url(); ?>index.php/base/emple">PROFESORES</a>
                                     </li> -->
-                                    <!-- <button><li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/base/emple">PROFESORES</a></li></button> -->
+                                    <button><li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/base/emple">PROFESORES</a></li></button>
                                     <!-- <li class="nav-item">
                                         <a class="nav-link active" aria-current="page" href="<?php echo base_url(); ?>index.php/cursos/cursos">CURSOS</a>
                                     </li> -->
@@ -52,11 +52,13 @@
                                     <!-- <li class="nav-item">
                                         <a class="nav-link active" aria-current="page" href="<?php echo base_url(); ?>index.php/foros/for">foros</a>
                                     </li> -->
+                                    <button><li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/suscripciones/lista">EVALUACIONES</a></li></button>
                                     <button><li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/foros/for">FOROS</a></li></button>
                                     <!-- <li class="nav-item">
                                         <a class="nav-link active" aria-current="page" href="<?php echo base_url(); ?>index.php/suscripciones/lista">inscritos</a>
                                     </li> -->
-                                    <!-- <button><li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/suscripciones/lista">INSCRITOS</a></li></button> -->
+                                    
+                                    <button><li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/suscripciones/lista">INSCRITOS</a></li></button>
                                     <!-- <button><li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/foros/index">Home</a></li></button> -->
                                     
 

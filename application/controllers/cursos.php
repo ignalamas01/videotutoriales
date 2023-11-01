@@ -20,30 +20,65 @@ class Cursos extends CI_Controller
 		
 	}
 	
-	public function cursos()
-	{
+	// public function cursos()
+	// {
 		
-		if($this->session->userdata('login'))
-        {
-			//$lista=$this->empleado_model->listaempleados();
-			$lista = $this->cursos_model->listacursos();
+	// 	if($this->session->userdata('login'))
+    //     {
+	// 		//$lista=$this->empleado_model->listaempleados();
+	// 		$lista = $this->cursos_model->listacursos();
 
 
-			$data['cursos'] = $lista;
+	// 		$data['cursos'] = $lista;
+	// 		$this->load->view('inc/cabecera');
+	// 		$this->load->view('inc/menu');
+	// 		$this->load->view('inc/menulateral');
+	// 		$this->load->view('cursos_lista',$data);
+			
+	// 		$this->load->view('inc/pie');
+    //     }
+    //     else
+    //     {
+    //         redirect('usuarios/index/2','refresh');
+    //     }
+		
+		
+	// }
+	public function cursos()
+{
+    if ($this->session->userdata('login')) {
+        $tipo = $this->session->userdata('tipo');
+
+        $lista = $this->cursos_model->listacursos();
+        $data['cursos'] = $lista;
+
+      
+
+        if ($tipo == 'admin') {
+            // Cargar la vista para el administrador
 			$this->load->view('inc/cabecera');
+					$this->load->view('incadmin/menu');
+					$this->load->view('incadmin/menulateral');
+					$this->load->view('cursos_lista',$data);
+					$this->load->view('incadmin/pie');
+        } elseif ($tipo == 'empleado') {
+            // Cargar la vista para el empleado
+            $this->load->view('inc/cabecera');
 			$this->load->view('inc/menu');
 			$this->load->view('inc/menulateral');
 			$this->load->view('cursos_lista',$data);
-			
 			$this->load->view('inc/pie');
+        } else {
+            // Rol no reconocido, puedes manejar esto según tus necesidades
+            echo "Rol no reconocido";
         }
-        else
-        {
-            redirect('usuarios/index/2','refresh');
-        }
-		
-		
-	}
+
+        $this->load->view('inc/pie');
+    } else {
+        redirect('usuarios/index/2', 'refresh');
+    }
+}
+
 	public function cursos2()
 	{
 		

@@ -9,9 +9,9 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/base/index">Home</a></li>
-              <li class="breadcrumb-item active">DataTables</li>
-              <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/usuarios/logout">cerrar sesion</a></li>
+            <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/base/agregar">Agregar profesor</a></li> 
+            <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/base/deshabilitados">Deshabilitados</a></li> 
+            <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/usuarios/logout">Cerrar sesión</a></li>
             </ol>
           </div>
         </div>
@@ -28,15 +28,15 @@
 
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">habilitados</h3>
+                <!-- <h3 class="card-title">habilitados</h3> -->
               </div>
              <!--- <h1><?php
               //date_default_timezone_set('America/la_paz');
               // echo date('y/m/d H:i:s'); ?> hora actualizada   </h1>-->
               
               <div>   
-                <a href="<?php echo base_url(); ?>index.php/base/agregar"> <button type="button" class="btn btn-primary">AGREGAR EMPLEADO</button> </a>
-                <a href="<?php echo base_url(); ?>index.php/base/deshabilitados"> <button type="button" class="btn btn-warning">VER LISTA DE EMPLEADOS DESHABILITADOS</button> </a>
+                <!-- <a href="<?php echo base_url(); ?>index.php/base/agregar"> <button type="button" class="btn btn-primary">AGREGAR EMPLEADO</button> </a>
+                <a href="<?php echo base_url(); ?>index.php/base/deshabilitados"> <button type="button" class="btn btn-warning">VER LISTA DE EMPLEADOS DESHABILITADOS</button> </a> -->
                 
                 <!-- <a href="<?php echo base_url(); ?>index.php/usuarios/logout"> <button type="button" class="btn btn-danger">CERRAR SESION</button> </a> -->
               </div>
