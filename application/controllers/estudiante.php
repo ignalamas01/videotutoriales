@@ -327,13 +327,15 @@ class Estudiante extends CI_Controller
 			$data['primerApellido'] = $_POST['primerApellido'];
 			$data['segundoApellido'] = $_POST['segundoApellido'];
 			$data['carrera'] = $_POST['carrera'];
-			$data['departamento'] = $_POST['departamento'];
+			
 			$data['fechaNacimiento'] = $_POST['fechaNac'];
+			$data['direccion'] = $_POST['direccion'];
 			$data['telefono'] = $_POST['telefono'];
 		
 		
-			$data['direccion'] = $_POST['direccion'];
+			
 			$data['idUsuario'] = $idUsuario;
+			$data['departamento'] = $_POST['departamento'];
 		
 
 		$this->estudiante_model->agregarestudiante($data);
