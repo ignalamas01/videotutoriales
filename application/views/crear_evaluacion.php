@@ -122,6 +122,9 @@
 <!-- Campo para mostrar el puntaje total -->
 <label for="totalScore">Puntaje Total:</label>
         <input type="text" id="totalScore" name="totalScore" readonly value="0"><br><br>
+        <label for="numeroIntentos">Número de Intentos Permitidos:</label>
+<input type="number" id="numeroIntentos" name="numeroIntentos" value="1" min="1" required><br><br>
+
 
         <input type="submit" value="Crear Evaluación">
     </form>

@@ -119,7 +119,17 @@ public function obtener_opciones_respuesta($idPregunta)
         $query = $this->db->get();
         return $query->num_rows() > 0;
     }
+    public function obtener_evaluacion_activa($idCurso, $idSeccion) {
+        $this->db->select('*');
+        $this->db->from('evaluaciones');
+        $this->db->where('idCurso', $idCurso);
+        $this->db->where('idSeccion', $idSeccion);
+        $this->db->where('estado', 'activo');
+        $this->db->order_by('fechaInicio', 'desc'); // Ordenar por fechaInicio descendente para obtener la última evaluación activa
+        $this->db->limit(1);
     
+        return $this->db->get()->row_array();
+    }
     
     
 //     public function obtener_puntaje_total($idEvaluacion, $idEstudiante) {

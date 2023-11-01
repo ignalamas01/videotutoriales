@@ -475,7 +475,9 @@ $idCurso = $this->input->post('idCurso');
 
     // Obtener la última evaluación
     // $ultima_evaluacion = $this->evaluaciones_estudiante_model->obtener_ultima_evaluacion();
-    $evaluacion = $this->evaluaciones_estudiante_model->obtener_evaluacion_por_curso_seccion($idCurso, $idSeccion);
+   
+	// Obtener la evaluación activa
+    $evaluacion = $this->evaluaciones_estudiante_model->obtener_evaluacion_activa($idCurso, $idSeccion);
 
     // Verificar si la evaluación existe
     if ($evaluacion) {
