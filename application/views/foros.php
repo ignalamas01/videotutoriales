@@ -79,7 +79,7 @@
                             <!-- general form elements -->
                             <div class="card card-primary">
                                 <div class="card-header">
-                                    <h3 class="card-title">foros</h3>
+                                    <h3 class="card-title">FOROSSS</h3>
                                 </div>
 
                             
