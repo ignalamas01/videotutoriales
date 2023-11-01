@@ -113,15 +113,7 @@
 <!-- Agrega esto en tu vista después del formulario de creación de foros -->
 <!-- Muestra la lista de foros -->
 <!-- Muestra la lista de foros -->
-<h3>Foros Creados</h3>
-<ul>
-    <?php foreach ($foros as $foro): ?>
-        <li>
-            <h4><?php echo $foro->titulo; ?></h4>
-            <p><?php echo $foro->descripcion; ?></p>
-        </li>
-    <?php endforeach; ?>
-</ul>
+
 
 
    
