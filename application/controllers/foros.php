@@ -1,6 +1,5 @@
 <?php
 class Foros extends CI_Controller {
-
     public function __construct() {
         parent::__construct();
         $this->load->model('Foros_model');
@@ -20,15 +19,19 @@ class Foros extends CI_Controller {
             $this->load->view('inc/menu');
             $this->load->view('inc/menulateral');
             $this->load->view('foros');
+            
+            
             $this->load->view('inc/pie');
         } else {
             // Obtener datos del formulario
             $titulo = $this->input->post('titulo');
             $descripcion = $this->input->post('descripcion');
-            // Aquí puedes obtener estudiante_id y empleado_id de alguna manera, como a través de la sesión del usuario.
+
+            // Autenticación y obtención del ID de usuario
+            $idUsuario = $this->session->userdata('idusuario');
     
             // Llamar al método del modelo para crear el foro
-            $idForoCreado = $this->Foros_model->crearForo($titulo, $descripcion, $estudiante_id, $empleado_id);
+            $idForoCreado = $this->Foros_model->crearForo($idUsuario, $titulo, $descripcion);
     
             if ($idForoCreado) {
                 // Establecer un mensaje de éxito en flashdata
@@ -41,19 +44,25 @@ class Foros extends CI_Controller {
                 echo "Error al crear el foro.";
             }
         }
+        
+    }
+    public function index() {
+        $this->load->model('Foros_model');
+    
+        // Obtener la lista de foros desde el modelo
+        $data['foros'] = $this->Foros_model->obtenerForos();
+    
+        // Cargar la vista y pasar los datos
+        $this->load->view('inc/cabecera');
+        $this->load->view('inc/menu');
+        $this->load->view('inc/menulateral');
+        $this->load->view('listaforo', $data);
     }
     
+
     
-    // En tu controlador
-    public function mostrar_foros() {
-    // Obtén la lista de foros desde tu modelo
-    $data['foros'] = $this->Foros_model->obtener_foros();
-
-    // Carga la vista y pasa los datos
-    $this->load->view('foros', $data);
+    
 }
 
 
-    // Otros métodos del controlador, como listar_foros, pueden ir aquí.
-
-}
+    

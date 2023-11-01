@@ -1,4 +1,3 @@
-<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -19,42 +18,10 @@
         </div><!-- /.container-fluid -->
         
     </section>
-
     
-    <!-- Botón para mostrar el modal -->
-    
-
-    <!-- Modal -->
-    <div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel" >Alerta</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <!-- Mostrar la alerta aquí -->
-                <div id="modalAlertContent">
-                    <?php
-                    $alerta = $this->session->flashdata('alerta');
-                    if ($alerta) {
-                        echo '<div class="alert alert-success">' . $alerta . '</div>';
-                    } else {
-                        echo '<div class="alert alert-danger">No se agregó ningún foro.</div>';
-                    }
-                    ?>
-                </div>
-            </div>
-            
-        </div>
-    </div>
-    
-</div>
+<!-- Muestra la lista de foros -->
 
 <button id="toggleFormButton" class="btn btn-primary">agregar foro de conocimiento</button>
-<button><li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/foros/index">Home</a></li></button>
 
 
 
@@ -106,34 +73,23 @@
            
 
     </div>
-    <!-- Resto del contenido de la vista -->
-
-<!-- Agrega esto en tu vista después del formulario de creación de foros -->
-<!-- Muestra la lista de foros -->
-<!-- Muestra la lista de foros -->
-<h3>Foros Creados</h3>
 <ul>
     <?php foreach ($foros as $foro): ?>
         <li>
             <h4><?php echo $foro->titulo; ?></h4>
             <p><?php echo $foro->descripcion; ?></p>
+
+            <!-- Formulario para agregar comentario -->
+            <?php echo form_open('foros/agregar_comentario/' . $foro->idForo); ?>
+            <label for="comentario">Agregar Comentario:</label>
+            <textarea name="comentario" ></textarea>
+            <input type="submit" value="Agregar Comentario">
+            <?php echo form_close(); ?>
         </li>
     <?php endforeach; ?>
 </ul>
 
 
-   
-    
-
-</div>
- <!-- Agrega esto en tu vista después del formulario de creación de foros -->
-
-
-<div>   
-    
-</div>
-
-</div>
 
 </div>
 <script>
