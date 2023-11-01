@@ -105,6 +105,16 @@ class Evaluaciones_model extends CI_Model
 
         return $query->num_rows() > 0;
     }
+    public function verificar_evaluacion_activa($idCurso, $idSeccion) {
+        $this->db->select('idEvaluacion');
+        $this->db->from('evaluaciones');
+        $this->db->where('idCurso', $idCurso);
+        $this->db->where('idSeccion', $idSeccion);
+        $this->db->where('estado', 'activo');
+        $result = $this->db->get()->row();
+    
+        return ($result !== null);
+    }
 
 }
 

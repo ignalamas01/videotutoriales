@@ -39,7 +39,10 @@ class Evaluaciones extends CI_Controller
         // $idCurso = $this->input->post('curso');
     $idSeccion = $this->input->post('seccion');
     $idCurso = $this->input->post('hiddenCursoId');
-    
+    if ($this->evaluaciones_model->verificar_evaluacion_activa($idCurso, $idSeccion)) {
+        echo 'Ya hay una evaluación activa en esta sección del curso.';
+        return;
+    }
     echo "ID del Curso: $idCurso";
 echo "ID de la Sección: $idSeccion";
     // Verificar que el ID del curso existe en la tabla cursos
@@ -52,7 +55,7 @@ echo "ID de la Sección: $idSeccion";
         $data['descripcionEvaluacion'] = $this->input->post('description');
         $data['fechaFin'] = $this->input->post('deadline');
         $data['fechaInicio'] = $this->input->post('startDate');
-
+        $data['numeroIntentos'] = $this->input->post('numeroIntentos');
         $idUsuario = $this->session->userdata('idusuario'); // Necesitarás implementar esta función
 
     // Obtener el idEmpleado usando el idUsuario
@@ -132,7 +135,7 @@ echo "ID de la Sección: $idSeccion";
             // Calcular puntaje total
             $puntajeTotal += $question['puntajePregunta'];
         }
-
+        $data['estado'] = 'activo';
         // Llamar al modelo para agregar la evaluación y preguntas
         $evaluation_id = $this->evaluaciones_model->agregar_evaluacion($data, $questions, $idCurso, $idSeccion, $puntajeTotal);
 
