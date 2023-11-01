@@ -61,17 +61,29 @@ class Cursos extends CI_Controller
 					$this->load->view('incadmin/menulateral');
 					$this->load->view('cursos_lista',$data);
 					$this->load->view('incadmin/pie');
-        } elseif ($tipo == 'empleado') {
+        } if ($tipo == 'empleado') {
             // Cargar la vista para el empleado
             $this->load->view('inc/cabecera');
 			$this->load->view('inc/menu');
 			$this->load->view('inc/menulateral');
 			$this->load->view('cursos_lista',$data);
 			$this->load->view('inc/pie');
-        } else {
-            // Rol no reconocido, puedes manejar esto según tus necesidades
-            echo "Rol no reconocido";
-        }
+
+        } 
+		if ($tipo == 'invitado') {
+			// Cargar la vista para el empleado
+			$this->load->view('incestudiante/cabecera');
+			$this->load->view('incestudiante/menu');
+			$this->load->view('incestudiante/menulateral');
+			$this->load->view('cursos_lista',$data);
+			$this->load->view('inc/pie');
+			
+			
+		}
+		// else {
+        //     // Rol no reconocido, puedes manejar esto según tus necesidades
+        //     echo "Rol no reconocido";
+        // }
 
         $this->load->view('inc/pie');
     } else {
@@ -405,11 +417,11 @@ redirect('cursos/agregar', 'refresh');
 	}
 	public function subir_video()
 	{
-		 $this->load->view('inc/cabecera');
-		 //$this->load->view('inc/menu');
-		// $this->load->view('inc/menulateral');
-		$this->load->view('subir_video');
-		// $this->load->view('inc/pie');
+		 $this->load->view('incadmin/cabecera');
+		 $this->load->view('incadmin/menu');
+		 $this->load->view('incadmin/menulateral');
+		 $this->load->view('subir_video');
+		 $this->load->view('incadmin/pie');
 	}
 	public function listar_videos()
 	{
@@ -586,11 +598,11 @@ $idCurso = $this->input->post('idCurso');
 	public function subir_archivos ()
 	{
         
-		$this->load->view('inc/cabecera');
-		// $this->load->view('inc/menu');
-		// $this->load->view('inc/menulateral');
-		   $this->load->view('subir_archivos');
-		// $this->load->view('inc/pie');
+		$this->load->view('incadmin/cabecera');
+		$this->load->view('incadmin/menu');
+		$this->load->view('incadmin/menulateral');
+		$this->load->view('subir_archivos');
+		$this->load->view('incadmin/pie');
 		
 	}
 	public function listadoc ()

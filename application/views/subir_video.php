@@ -1,4 +1,21 @@
-
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>video</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <!-- <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/base/index">Home</a></li> -->
+                        <li class="breadcrumb-item active"> video</li>
+                        <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/usuarios/logout">Cerrar sesión</a></li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
 <h2>Subir Videos</h2>
 <div>   
     <a href="<?php echo base_url(); ?>index.php/cursos/cursos"> <button type="button" class="btn btn-danger"><--VOLVER A CURSOS</button> </a>

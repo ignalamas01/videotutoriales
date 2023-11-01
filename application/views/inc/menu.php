@@ -1,6 +1,7 @@
 
 
 <!-- Navbar -->
+<link rel="stylesheet" href="<?php echo base_url(); ?>/adminlte/dist/css/stylemenu.css">
 <nav class="main-header navbar navbar-expand navbar-white navbar-light" style="background-color: #093562;">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
@@ -25,7 +26,7 @@
     
       <div class="collapse navbar-collapse" id="navbarCollapse">
                                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                                <button><li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/base/index">INICIO</a></li></button>
+                                <button><li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/base/index"style="color: white;">INICIO</a></li></button>
                                     <!-- <li class="nav-item">
                                         <a class="nav-link active" aria-current="page" href="<?php echo base_url(); ?>index.php/base/res">RESUMEN</a>
                                     </li> -->
@@ -34,7 +35,7 @@
                                     </li> -->
 
                                     
-                                    <button><li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/base/obj">ACERCA DE CEPRA</a></li></button>
+                                    <button><li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/base/obj"style="color: white;">ACERCA DE CEPRA</a></li></button>
                                     
                                     <!-- <li class="nav-item">
                                         <a class="nav-link active" aria-current="page" href="<?php echo base_url(); ?>index.php/estudiante/est">ESTUDIANTES</a>
@@ -48,11 +49,11 @@
                                     <!-- <li class="nav-item">
                                         <a class="nav-link active" aria-current="page" href="<?php echo base_url(); ?>index.php/cursos/cursos">CURSOS</a>
                                     </li> -->
-                                    <button><li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/cursos/cursos">CURSOS</a></li></button>
+                                    <button><li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/cursos/cursos"style="color: white;">CURSOS</a></li></button>
                                     <!-- <li class="nav-item">
                                         <a class="nav-link active" aria-current="page" href="<?php echo base_url(); ?>index.php/foros/for">foros</a>
                                     </li> -->
-                                    <button><li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/foros/for">FOROS</a></li></button>
+                                    <button><li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/foros/for"style="color: white;">FOROS</a></li></button>
                                     <!-- <li class="nav-item">
                                         <a class="nav-link active" aria-current="page" href="<?php echo base_url(); ?>index.php/suscripciones/lista">inscritos</a>
                                     </li> -->

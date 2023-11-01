@@ -57,7 +57,7 @@
 
 <button id="toggleFormButton" class="btn btn-primary">agregar foro de conocimiento</button>
 <button><li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/foros/index">Home</a></li></button>
-<button><li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/foros/index">Home</a></li></button>
+
 
 
 

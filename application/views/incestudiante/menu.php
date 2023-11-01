@@ -1,7 +1,8 @@
 
 
 <!-- Navbar -->
-<nav class="main-header navbar navbar-expand navbar-white navbar-light">
+<link rel="stylesheet" href="<?php echo base_url(); ?>/adminlte/dist/css/stylemenu.css">
+<nav class="main-header navbar navbar-expand navbar-white navbar-light" style="background-color: #093562;">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
@@ -9,7 +10,8 @@
       </li>
       <li class="nav-item">
       <div class="container-fluid">
-                            <a class="navbar-brand" href="<?php echo base_url(); ?>index.php/base/index">INICIO</a>
+                            <!-- <a class="navbar-brand" href="<?php echo base_url(); ?>index.php/base/index">INICIO</a> -->
+                            <!-- <button><li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/base/index">INICIO</a></li></button> -->
                             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="sera buscar?">
                                 <span class="navbar-toggler-icon"></span>
                             </button>
@@ -17,41 +19,55 @@
                         </div>
       </li>
 
-      <li class="nav-item d-none d-sm-inline-block">
+      <!-- <li class="nav-item d-none d-sm-inline-block">
         <a href="<?php echo base_url(); ?>index.php/base/index" class="nav-link">Home</a>
-      </li>
+      </li> -->
       
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Contact</a>
-      </li>
+    
       <div class="collapse navbar-collapse" id="navbarCollapse">
-                                <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                                    <li class="nav-item">
+                                <ul class="navbar-nav me-auto mb-2 mb-md-0" >
+                                <button class="navbar-btn"><li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/base/index"style="color: white;">INICIO</a></li></button>
+                                    <!-- <li class="nav-item">
                                         <a class="nav-link active" aria-current="page" href="<?php echo base_url(); ?>index.php/base/res">RESUMEN</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link active" aria-current="page" href="<?php echo base_url(); ?>index.php/base/obj">OBJETIVOS</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link active" aria-current="page" href="<?php echo base_url(); ?>index.php/cursos/ver_videosest">VIDEOS</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link active" aria-current="page" href="<?php echo base_url(); ?>index.php/cursos/subir_archivos">ARCHIVOS</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link active" aria-current="page" href="<?php echo base_url(); ?>index.php/cursos/realizar_evaluacion">EVALUACIONES</a>
-                                    </li>
-                                   
+                                    </li> -->
+                                    <!-- <li class="nav-item">
+                                        <a class="navbar-brand" aria-current="page" href="<?php echo base_url(); ?>index.php/base/obj">ACERCA DE CEPRA</a>
+                                    </li> -->
 
-                                   
                                     
+                                    <button class="navbar-btn" ><li class="breadcrumb-item; c"><a href="<?php echo base_url(); ?>index.php/base/obj"style="color: white;">ACERCA DE CEPRA</a></li></button>
+                                    
+                                    <!-- <li class="nav-item">
+                                        <a class="nav-link active" aria-current="page" href="<?php echo base_url(); ?>index.php/estudiante/est">ESTUDIANTES</a>
+                                    </li> -->
+                                    <!-- <button><li class="breadcrumb-item "><a href="<?php echo base_url(); ?>index.php/estudiante/est"style="color: white;">ESTUDIANTES</a></li></button> -->
+
+                                    <!-- <li class="nav-item">
+                                        <a class="nav-link active" aria-current="page" href="<?php echo base_url(); ?>index.php/base/emple">PROFESORES</a>
+                                    </li> -->
+                                    <!-- <button><li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/base/emple"style="color: white;">PROFESORES</a></li></button> -->
+                                    <!-- <li class="nav-item">
+                                        <a class="nav-link active" aria-current="page" href="<?php echo base_url(); ?>index.php/cursos/cursos">CURSOS</a>
+                                    </li> -->
+                                    <button><li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/cursos/cursos2"style="color: white;">MIS CURSOS</a></li></button>
+                                    <!-- <li class="nav-item">
+                                        <a class="nav-link active" aria-current="page" href="<?php echo base_url(); ?>index.php/foros/for">foros</a>
+                                    </li> -->
+                                    <button><li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/suscripciones/lista"style="color: white;">MIS EVALUACIONES</a></li></button>
+                                    <button><li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/foros/for"style="color: white;">FOROS</a></li></button>
+                                    <!-- <li class="nav-item">
+                                        <a class="nav-link active" aria-current="page" href="<?php echo base_url(); ?>index.php/suscripciones/lista">inscritos</a>
+                                    </li> -->
+                                    
+                                    <button><li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/suscripciones/lista"style="color: white;">MIS CERTIFICADOS</a></li></button>
+                                    <!-- <button><li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/foros/index">Home</a></li></button> -->
                                     
 
                                 </ul>
-                                <form class="d-flex">
+                                <!-- <form class="d-flex">
                                     <input class="form-control me-2" type="search" placeholder="buscar" aria-label="buscar">
                                     <button class="btn btn-outline-success" type="submit">buscar</button>
-                                </form>
+                                </form> -->
                             </div>
 
     </ul>
