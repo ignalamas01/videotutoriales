@@ -1,6 +1,6 @@
 
 <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: #093562 ;" >
     <!-- Brand Logo -->
     <a href="<?php echo base_url(); ?>index.php/base/index" class="brand-link">
       <img src="<?php echo base_url(); ?>/adminlte/dist/img/logo_cepra.jpeg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
@@ -34,9 +34,9 @@
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          
-
-          <li class="nav-item">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+          <!-- <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
@@ -73,45 +73,47 @@
                 <span class="right badge badge-danger">New</span>
               </p>
             </a>
-          </li>
+          </li> -->
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
               <p>
-                Layout Options
+                Reportes
                 <i class="fas fa-angle-left right"></i>
                 <span class="badge badge-info right">6</span>
               </p>
             </a>
+            
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="../layout/top-nav.html" class="nav-link">
+                <a href="<?php echo base_url(); ?>index.php/secciones/seccion" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Top Navigation</p>
+                  <p>curso de programacion</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="../layout/top-nav-sidebar.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Top Navigation + Sidebar</p>
+                  <p>curso de albegra</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="../layout/boxed.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Boxed</p>
+                  <p>curso de calculo</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="../layout/fixed-sidebar.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Fixed Sidebar</p>
+                  <p>curso de redes</p>
                 </a>
               </li>
+              
               <li class="nav-item">
                 <a href="../layout/fixed-sidebar-custom.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Fixed Sidebar <small>+ Custom Area</small></p>
+                  <p>Fixed <small>+ Custom Area</small></p>
                 </a>
               </li>
               <li class="nav-item">
@@ -138,7 +140,7 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-chart-pie"></i>
               <p>
-                Charts
+                Gráficas
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -169,7 +171,7 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-tree"></i>
               <p>
@@ -227,8 +229,8 @@
                 </a>
               </li>
             </ul>
-          </li>
-          <li class="nav-item">
+          </li> -->
+          <!-- <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
               <p>
@@ -262,8 +264,8 @@
                 </a>
               </li>
             </ul>
-          </li>
-          <li class="nav-item menu-open">
+          </li> -->
+          <!-- <li class="nav-item menu-open">
             <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-table"></i>
               <p>
@@ -289,10 +291,10 @@
                   <i class="far fa-circle nav-icon"></i>
                   <p>jsGrid</p>
                 </a>
-              </li>
+              </li>forms
             </ul>
-          </li>
-          <li class="nav-header">EXAMPLES</li>
+          </li> -->
+          <!-- <li class="nav-header">EXAMPLES</li>
           <li class="nav-item">
             <a href="../calendar.html" class="nav-link">
               <i class="nav-icon far fa-calendar-alt"></i>
@@ -301,16 +303,18 @@
                 <span class="badge badge-info right">2</span>
               </p>
             </a>
-          </li>
+          </li> -->
           <li class="nav-item">
-            <a href="../gallery.html" class="nav-link">
-              <i class="nav-icon far fa-image"></i>
+            <a href="<?php echo base_url(); ?>index.php/foros/index" class="nav-link">
+              <!-- <i class="nav-icon far fa-image"></i> -->
+              <i class="nav-icon fas fa-edit"></i>
               <p>
-                Gallery
+                Foros
+                
               </p>
             </a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a href="../kanban.html" class="nav-link">
               <i class="nav-icon fas fa-columns"></i>
               <p>
@@ -417,7 +421,7 @@
                 </a>
               </li>
             </ul>
-          </li>
+          </li> -->
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon far fa-plus-square"></i>
@@ -497,7 +501,7 @@
                   </li>
                 </ul>
               </li>
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a href="../examples/lockscreen.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Lockscreen</p>
@@ -508,14 +512,14 @@
                   <i class="far fa-circle nav-icon"></i>
                   <p>Legacy User Menu</p>
                 </a>
-              </li>
-              <li class="nav-item">
+              </li> -->
+              <!-- <li class="nav-item">
                 <a href="../examples/language-menu.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Language Menu</p>
                 </a>
-              </li>
-              <li class="nav-item">
+              </li> -->
+              <!-- <li class="nav-item">
                 <a href="../examples/404.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Error 404</p>
@@ -532,8 +536,8 @@
                   <i class="far fa-circle nav-icon"></i>
                   <p>Pace</p>
                 </a>
-              </li>
-              <li class="nav-item">
+              </li> -->
+              <!-- <li class="nav-item">
                 <a href="../examples/blank.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Blank Page</p>
@@ -544,10 +548,10 @@
                   <i class="far fa-circle nav-icon"></i>
                   <p>Starter Page</p>
                 </a>
-              </li>
+              </li> -->
             </ul>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-search"></i>
               <p>
@@ -569,21 +573,21 @@
                 </a>
               </li>
             </ul>
-          </li>
-          <li class="nav-header">MISCELLANEOUS</li>
+          </li> -->
+          <!-- <li class="nav-header">MISCELLANEOUS</li>
           <li class="nav-item">
             <a href="../../iframe.html" class="nav-link">
               <i class="nav-icon fas fa-ellipsis-h"></i>
               <p>Tabbed IFrame Plugin</p>
             </a>
-          </li>
+          </li> -->
           <li class="nav-item">
-            <a href="https://adminlte.io/docs/3.1/" class="nav-link">
+            <a href="<?php echo base_url(); ?>index.php/cursos/subir_archivos" class="nav-link">
               <i class="nav-icon fas fa-file"></i>
-              <p>Documentation</p>
+              <p>Documentacion</p>
             </a>
           </li>
-          <li class="nav-header">MULTI LEVEL EXAMPLE</li>
+          <!-- <li class="nav-header">MULTI LEVEL EXAMPLE</li>
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="fas fa-circle nav-icon"></i>
@@ -623,7 +627,7 @@
                   <li class="nav-item">
                     <a href="#" class="nav-link">
                       <i class="far fa-dot-circle nav-icon"></i>
-                      <p>Level 3</p>
+                      <p>LTILevel 3</p>
                     </a>
                   </li>
                   <li class="nav-item">
@@ -647,8 +651,8 @@
               <i class="fas fa-circle nav-icon"></i>
               <p>Level 1</p>
             </a>
-          </li>
-          <li class="nav-header">LABELS</li>
+          </li> -->
+          <!-- <li class="nav-header">LABELS</li>
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon far fa-circle text-danger"></i>
@@ -666,7 +670,7 @@
               <i class="nav-icon far fa-circle text-info"></i>
               <p>Informational</p>
             </a>
-          </li>
+          </li> -->
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

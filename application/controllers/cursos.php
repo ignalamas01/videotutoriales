@@ -76,7 +76,7 @@ class Cursos extends CI_Controller
 			$this->load->view('incestudiante/menu');
 			$this->load->view('incestudiante/menulateral');
 			$this->load->view('cursos_lista',$data);
-			$this->load->view('inc/pie');
+			$this->load->view('incestudiante/pie');
 			
 			
 		}
@@ -85,7 +85,7 @@ class Cursos extends CI_Controller
         //     echo "Rol no reconocido";
         // }
 
-        $this->load->view('inc/pie');
+        
     } else {
         redirect('usuarios/index/2', 'refresh');
     }

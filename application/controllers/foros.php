@@ -25,10 +25,11 @@ class Foros extends CI_Controller {
             $tipo = $this->session->userdata('tipo');
 			if ($tipo == 'admin') {
 				// Cargar la vista para el administrador
-				$this->load->view('incadmin/cabecera');
+				        $this->load->view('incadmin/cabecera');
 						$this->load->view('incadmin/menu');
 						$this->load->view('incadmin/menulateral');
 						$this->load->view('foros');
+                        $this->load->view('inc/pie');
 						
 			} if ($tipo == 'empleado') {
 				// Cargar la vista para el empleado
@@ -36,6 +37,7 @@ class Foros extends CI_Controller {
 				$this->load->view('inc/menu');
 				$this->load->view('inc/menulateral');
 				$this->load->view('foros');
+                $this->load->view('inc/pie');
 				
 			}
 			if ($tipo == 'invitado') {
@@ -44,6 +46,7 @@ class Foros extends CI_Controller {
 				$this->load->view('incestudiante/menu');
 				$this->load->view('incestudiante/menulateral');
 				$this->load->view('foros');
+                $this->load->view('incestudiante/pie');
 				
 				
 			}
@@ -82,6 +85,7 @@ class Foros extends CI_Controller {
         $this->load->view('inc/menu');
         $this->load->view('inc/menulateral');
         $this->load->view('listaforo', $data);
+        $this->load->view('inc/pie');
     }
     
 

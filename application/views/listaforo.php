@@ -79,6 +79,8 @@
             <h4><?php echo $foro->titulo; ?></h4>
             <p><?php echo $foro->descripcion; ?></p>
             <p><?php echo $foro->fechaHora; ?></p>
+            <p><?php echo $foro->idUsuario; ?></p>
+            
 
             <!-- Formulario para agregar comentario -->
             <?php echo form_open('foros/agregar_comentario/' . $foro->idForo); ?>
@@ -87,9 +89,8 @@
             <input type="submit" value="Agregar Comentario">
             <?php echo form_close(); ?>
         </li>
-    <?php endforeach; ?>
-</ul>
-<section class="content">
+    
+    <section class="content">
       <div class="container-fluid">
 
         <!-- Timelime example  -->
@@ -99,7 +100,7 @@
             <div class="timeline">
               <!-- timeline time label -->
               <div class="time-label">
-                <span class="bg-red">10 Feb. 2014</span>
+                <span class="bg-red"><?php echo $foro->fechaHora; ?></span>
               </div>
               <!-- /.timeline-label -->
               <!-- timeline item -->
@@ -108,14 +109,14 @@
                 <i class="fas fa-envelope bg-blue"></i>
                 <div class="timeline-item">
                   <span class="time"><i class="fas fa-clock"></i> 12:05</span>
-                  <h3 class="timeline-header"><a href="#"><?php echo $foro->titulo; ?></a> sent you an email</h3>
+                  <h3 class="timeline-header"><a href="#"><?php echo $foro->titulo; ?></a> Te envié un correo electrónico</h3>
 
                   <div class="timeline-body">
                     <?php echo $foro->descripcion; ?>
                   </div>
                   <div class="timeline-footer">
-                    <a class="btn btn-primary btn-sm">Read more</a>
-                    <a class="btn btn-danger btn-sm">Delete</a>
+                    <a class="btn btn-primary btn-sm">leer mas</a>
+                    <a class="btn btn-danger btn-sm">Eliminar</a>
                   </div>
                 </div>
               </div>
@@ -152,7 +153,7 @@
               </div>
               <!-- /.timeline-label -->
               <!-- timeline item -->
-              <div>
+              <!-- <div>
                 <i class="fa fa-camera bg-purple"></i>
                 <div class="timeline-item">
                   <span class="time"><i class="fas fa-clock"></i> 2 days ago</span>
@@ -165,10 +166,10 @@
                     <img src="https://placehold.it/150x100" alt="...">
                   </div>
                 </div>
-              </div>
+              </div> -->
               <!-- END timeline item -->
               <!-- timeline item -->
-              <div>
+              <!-- <div>
                 <i class="fas fa-video bg-maroon"></i>
 
                 <div class="timeline-item">
@@ -182,10 +183,10 @@
                     </div>
                   </div>
                   <div class="timeline-footer">
-                    <a href="#" class="btn btn-sm bg-maroon">See comments</a>
+                    <a href="#" class="btn btn-sm bg-maroon">ver comentarios</a>
                   </div>
                 </div>
-              </div>
+              </div> -->
               <!-- END timeline item -->
               <div>
                 <i class="fas fa-clock bg-gray"></i>
@@ -197,11 +198,14 @@
       </div>
       <!-- /.timeline -->
 
-    </section>
+</section>
+<?php endforeach; ?>                      
+</ul>
 
 
 
 </div>
+
 <script>
     // Agregar el botón "OK" al modal si se crea el foro con éxito
 document.addEventListener("DOMContentLoaded", function() {

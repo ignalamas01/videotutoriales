@@ -415,7 +415,7 @@ class Estudiante extends CI_Controller
 		{
 			$this->load->view('incestudiante/cabecera');
 			// $this->load->view('incestudiante/menu');
-			$this->load->view('inc/menu');
+			$this->load->view('incestudiante/menu');
 			$this->load->view('incestudiante/menulateral');
 			$this->load->view('est_invitado');
 			$this->load->view('incestudiante/pie');

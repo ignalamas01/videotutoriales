@@ -26,6 +26,10 @@ class Foros_model extends CI_Model {
         } else {
             return array(); // Devuelve un arreglo vacío si no hay resultados
         }
+        
+
+
     }
+    
     
 }

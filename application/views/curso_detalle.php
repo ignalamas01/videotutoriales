@@ -1,5 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1></h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/base/index">Home</a></li>
+              <li class="breadcrumb-item active">DataTables</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
 
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
@@ -140,7 +155,7 @@
 
         <!-- Botón de evaluación para la sección -->
         <button type="submit" class="btn-dar-evaluacion-seccion" data-seccion-id="<?php echo $seccion->idSeccion; ?>" data-video-id="<?php echo $video->idVideo; ?>">Dar Evaluación</button>
-    </form>
+        </form>
                                 <?php else : ?>
                                     <p>No hay archivos disponibles para esta sección.</p>
                                 <?php endif; ?>
@@ -150,7 +165,7 @@
                     <?php endforeach; ?>
                     
                     <?php else : ?>
-    <p class="text-center">No hay secciones disponibles.</p>
+        <p class="text-center">No hay secciones disponibles.</p>
                 <?php endif; ?>
 
                 <!-- Puedes agregar más secciones, archivos, videos, etc. aquí -->
@@ -158,12 +173,12 @@
             </div>
             
             <form action="<?php echo base_url(); ?>index.php/cursos/realizar_evaluacion" method="post">
-    <!-- Agregar el campo oculto idCurso -->
-    <input type="hidden" name="idCurso" value="<?php echo $curso->id; ?>">
+        <!-- Agregar el campo oculto idCurso -->
+        <input type="hidden" name="idCurso" value="<?php echo $curso->id; ?>">
 
-    <!-- Botón de evaluación final -->
-    <button type="submit" class="btn-dar-evaluacion-curso" data-curso-id="<?php echo $curso->id; ?>">Dar Evaluación Final</button>
-</form>
+        <!-- Botón de evaluación final -->
+        <button type="submit" class="btn-dar-evaluacion-curso" data-curso-id="<?php echo $curso->id; ?>">Dar Evaluación Final</button>
+        </form>
 
 
         <?php else : ?>
@@ -227,6 +242,4 @@
     </script>
 </body>
 
-
-</html>
-
+   

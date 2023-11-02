@@ -7,7 +7,32 @@ class Vercurso extends CI_Controller
 {
     public function ver($id)
 {
-    $this->load->model('vercurso_model');
+    $tipo = $this->session->userdata('tipo');
+			if ($tipo == 'admin') {
+				// Cargar la vista para el administrador
+				$this->load->view('incadmin/cabecera');
+						$this->load->view('incadmin/menu');
+						$this->load->view('incadmin/menulateral');
+						$this->load->model('vercurso_model');
+						// $this->load->view('incadmin/pie');
+			} if ($tipo == 'empleado') {
+				// Cargar la vista para el empleado
+				$this->load->view('inc/cabecera');
+				$this->load->view('inc/menu');
+				$this->load->view('inc/menulateral');
+				$this->load->model('vercurso_model');
+				// $this->load->view('inc/pie');
+			}
+			if ($tipo == 'invitado') {
+				// Cargar la vista para el empleado
+				$this->load->view('incestudiante/cabecera');
+				$this->load->view('incestudiante/menu');
+				$this->load->view('incestudiante/menulateral');
+				$this->load->model('vercurso_model');
+				// $this->load->view('incestudiante/pie');
+				
+			}
+    
 
     // Obtener detalles del curso
     $data['curso'] = $this->vercurso_model->obtener_curso_por_id($id);
@@ -24,6 +49,7 @@ class Vercurso extends CI_Controller
         // Manejar el caso donde el curso no se encuentra
         $this->load->view('curso_no_encontrado');
     }
+    $this->load->view('incadmin/pie');
 }
 }
 ?>

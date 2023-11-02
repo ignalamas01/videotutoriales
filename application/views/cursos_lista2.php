@@ -1,4 +1,5 @@
 
+
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
@@ -6,13 +7,16 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Lista de cursos</h1>
+            <!-- <h1>Lista de cursos</h1> -->
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/base/index">Home</a></li>
-              <li class="breadcrumb-item active">DataTables</li>
-              <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/usuarios/logout">cerrar sesion</a></li>
+              <!-- <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/base/index">Home</a></li>
+              <li class="breadcrumb-item active">DataTables</li> -->
+              <!-- <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/cursos/agregar">agregar curso</a></li>
+              <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/cursos/deshabilitados">deshabilitados</a></li>
+              <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/suscripciones/agregarEstudiante">inscribir a un curso</a></li> -->
+              <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/usuarios/logout">Cerrar sesión</a></li>
             </ol>
           </div>
         </div>
@@ -32,13 +36,13 @@
 
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Cursos</h3>
+                <h3 class="card-title">CURSOS</h3>
               </div>
              <!--- <h1><?php
               //date_default_timezone_set('America/la_paz');
               // echo date('y/m/d H:i:s'); ?> hora actualizada   </h1>-->
               
-             
+              
               
               <!-- <h3> 
                 login:<?php  echo $this ->session->userdata('login');?><br>
@@ -52,6 +56,9 @@
 
  
            
+              <!-- /.card-header -->
+              <div class="card-body">
+
   <!-- /.content -->
   <div  class="container" >
     <div class="row" >
@@ -61,7 +68,8 @@
         ?>
             <div class="col-12 col-md-4 mb-4">
                 <div class="card h-100">
-                    <a href="shop-single.html">
+                
+                <a href="<?php echo base_url('index.php/vercurso/ver/' . $row->id); ?>">
                         <img src="./assets/img/feature_prod_01.jpg" class="card-img-top" alt="...">
                     </a>
                     <div class="card-body">
@@ -75,7 +83,8 @@
                             </li>
                             <li class="text-muted text-right"></li>
                         </ul>
-                        <a href="shop-single.html" class="h2 text-decoration-none text-dark"><?php echo $row->titulo; ?></a>
+                        <a href="<?php echo base_url('index.php/vercurso/ver/' . $row->id); ?>" class="h2 text-decoration-none text-dark"><?php echo $row->titulo; ?></a>
+                <p class="card-text">
                         <p class="card-text">
                             <?php echo $row->descripcion; ?>
                         </p>
@@ -96,7 +105,7 @@
                                 }
                               ?>
                         </p>
-                        <p class="text-muted">Reviews (24)</p>
+                        <p class="text-muted">Reviewsss (24)</p>
                     </div>
                 </div>
             </div>
@@ -106,7 +115,14 @@
     </div>
 </div>
 
-<section>
+
+
+
+
+
+
+    </section>
+    <!-- <section>
       <div class="row">
         <div class="col-4">
             <div class="form-group">
@@ -126,43 +142,8 @@
       </div>
       
                                     
-    </section>
-
-
-
-<body style="background-color: #919197 ;" >
+    </section> -->
     
-
-    <!-- Start Categories of The Month -->
-    <section class="container py-5">
-        <div class="row text-center pt-3">
-            <div class="col-lg-6 m-auto">
-                <h1 class="h1">Algunos de nuestros cursos</h1>
-                <!-- <p>
-                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                    deserunt mollit anim id est laborum.
-                </p> -->
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12 col-md-4 p-5 mt-3">
-                <a href="#"><img src="<?php echo base_url(); ?>img/large_IA.jpg" class="rounded-circle img-fluid border"></a>
-                <h5 class="text-center mt-3 mb-3">Inteligencia artificial</h5>
-                <p class="text-center"><a class="btn btn-success">ir al Curso</a></p>
-                
-            </div>
-            <div class="col-12 col-md-4 p-5 mt-3">
-                <a href="#"><img src="<?php echo base_url(); ?>img/diseno-3d.png" class="rounded-circle img-fluid border"></a>
-                <h2 class="h5 text-center mt-3 mb-3">Diseño 3</h2>
-                <p class="text-center"><a class="btn btn-success">ir al Curso</a></p>
-            </div>
-            <div class="col-12 col-md-4 p-5 mt-3">
-                <a href="#"><img src="<?php echo base_url(); ?>img/programacion_cero.jpeg" class="rounded-circle img-fluid border"></a>
-                <h2 class="h5 text-center mt-3 mb-3">Programación</h2>
-                <p class="text-center"><a class="btn btn-success">ir al Curso</a></p>
-            </div>
-        </div>
-    </section>
     <!-- End Categories of The Month -->
 
 
