@@ -39,8 +39,8 @@ class Certificados extends CI_Controller {
 
             // Si se encontró una evaluación aprobada, emitir el certificado
             if ($evaluacionAprobadaEncontrada) {
-                // $this->certificados_model->emitir_certificado($idCurso, $idEstudiante);
-                // $this->certificados_model->generar_certificado_pdf($idCurso, $idEstudiante);
+                $this->certificados_model->emitir_certificado($idCurso, $idEstudiante);
+                $this->certificados_model->generar_certificado_pdf($idCurso, $idEstudiante);
                 echo '¡Certificado emitido!';
             } else {
                 echo 'No cumples con los requisitos para obtener el certificado.';
@@ -49,6 +49,29 @@ class Certificados extends CI_Controller {
             echo 'No se encontró información del estudiante.';
         }
     }
+public function certificados_lista()
+	{
+		
+		if($this->session->userdata('login'))
+        {
+			//$lista=$this->empleado_model->listaempleados();
+			$lista = $this->cursos_model->listacursos();
 
+
+			$data['cursos'] = $lista;
+			$this->load->view('incestudiante/cabecera');
+			$this->load->view('incestudiante/menu');
+			$this->load->view('incestudiante/menulateral');
+			//$this->load->view('cursos_lista',$data);
+			$this->load->view('certificados_lista',$data);
+			$this->load->view('incestudiante/pie');
+        }
+        else
+        {
+            redirect('usuarios/index/2','refresh');
+        }
+		
+		
+	}
     
 }
