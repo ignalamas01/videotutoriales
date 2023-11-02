@@ -39,16 +39,19 @@ class Certificados extends CI_Controller {
 
             // Si se encontró una evaluación aprobada, emitir el certificado
             if ($evaluacionAprobadaEncontrada) {
+                $ultimoCertificado = $this->certificados_model->obtener_ultimo_certificado($idCurso, $idEstudiante);
+                if (!$ultimoCertificado || $ultimoCertificado->emitido == 0) { 
                 $this->certificados_model->emitir_certificado($idCurso, $idEstudiante);
                 $this->certificados_model->generar_certificado_pdf($idCurso, $idEstudiante);
                 echo '¡Certificado emitido!';
             } else {
-                echo 'No cumples con los requisitos para obtener el certificado.';
+                echo 'Ya se emitio un certificado anteriormente';
             }
         } else {
-            echo 'No se encontró información del estudiante.';
+            echo 'No cumples con los requisitos para obtener el certificado.';
         }
     }
+}
 public function certificados_lista()
 	{
 		
