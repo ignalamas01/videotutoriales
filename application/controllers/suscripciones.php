@@ -110,7 +110,7 @@ class Suscripciones extends CI_Controller
 				$this->load->view('inc/cabecera');
 				$this->load->view('inc/menu');
 				$this->load->view('inc/menulateral');
-				$this->load->view('cursos_lista',$data);
+				$this->load->view('suscritos_lista',$data);
 				$this->load->view('inc/pie');
 	
 			} 
@@ -119,7 +119,7 @@ class Suscripciones extends CI_Controller
 				$this->load->view('incestudiante/cabecera');
 				$this->load->view('incestudiante/menu');
 				$this->load->view('incestudiante/menulateral');
-				$this->load->view('cursos_lista',$data);
+				$this->load->view('suscritos_lista',$data);
 				$this->load->view('inc/pie');
 				
 				

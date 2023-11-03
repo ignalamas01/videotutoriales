@@ -203,7 +203,40 @@ private function calcular_puntaje_total($idEvaluacion, $idEstudiante)
     // En caso de que no haya resultados
     return 0;
 }
+public function lista()
+	{
+		
+		if($this->session->userdata('login'))
+        {
+			$idUsuarioActual = $this->session->userdata('idusuario');
+            $idEstudiante = $this->evaluaciones_estudiante_model->obtener_id_estudiante($idUsuarioActual);
+            $evaluaciones = $this->evaluaciones_estudiante_model->obtener_evaluaciones_por_estudiante($idEstudiante);
+			//  $lista = $this->inscripciones_model->listainscritos();
+            
+            //  $evaluaciones = $this->evaluaciones_estudiante_model->insertar_puntaje($idEvaluacion, $idEstudiante, $porcentajeObtenido, $idCurso); // Ajusta según tu modelo
+			 $tipo = $this->session->userdata('tipo');
 
+			$data['evaluaciones'] = $evaluaciones;
+			
+			
+			if ($tipo == 'invitado') {
+				// Cargar la vista para el empleado
+				$this->load->view('incestudiante/cabecera');
+				$this->load->view('incestudiante/menu');
+				$this->load->view('incestudiante/menulateral');
+				$this->load->view('evaluaciones_lista',$data);
+				$this->load->view('inc/pie');
+				
+				
+			}
+        }
+        else
+        {
+            redirect('usuarios/index/2','refresh');
+        }
+		
+		
+	}
 
 
 

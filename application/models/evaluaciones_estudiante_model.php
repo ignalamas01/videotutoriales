@@ -191,5 +191,13 @@ public function insertar_puntaje($idEvaluacion, $idEstudiante, $puntajeTotal, $i
     $this->db->insert('puntajesevaluacion', $data);
     return $this->db->insert_id(); // Devuelve el ID del puntaje recién insertado
 }
+public function obtener_evaluaciones_por_estudiante($idEstudiante) {
+    $this->db->select('*');
+    $this->db->from('puntajesevaluacion');
+    $this->db->where('idEstudiante', $idEstudiante);
+    $query = $this->db->get();
+
+    return $query->result();
+}
 
 }
