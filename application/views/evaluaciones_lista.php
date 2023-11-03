@@ -42,10 +42,17 @@
                         $indice = 1;
                         foreach ($evaluaciones as $row)
                         {
+                            $idCurso = $row->idCurso;
+                            if ($idCurso !== null) {
+                                $curso = $this->certificados_model->obtener_curso_por_id($idCurso);
+                                ($curso !== null) ? $curso->titulo : 'Sin título';
+                            } else {
+                                 'Sin curso asignado';
+                            }
                         ?>
                             <tr>
                                 <td> <?php echo $indice; ?> </td>
-                                <td><?php echo $row->idCurso; ?></td>
+                                <td><?php echo $curso->titulo; ?></td>
                                 <td><?php echo $row->idEstudiante; ?></td>
                                 <td><?php echo $row->puntajeTotal; ?></td>
                                 <td><?php
@@ -57,7 +64,8 @@
                                                              }
                                                     ?></td>
                                 <td><?php echo $row->fechaRegistro; ?></td>
-                                <td><?php echo 'Ver Evaluacion'; ?></td>
+                                <td style="text-decoration: underline;"><?php echo 'Ver Evaluacion'; ?></td>
+
                             </tr>
                             <?php
                         $indice++;
