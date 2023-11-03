@@ -27,7 +27,7 @@
                     <div class="col-12 col-md-4 mb-4">
                         <div class="card h-100">
                             <a href="<?php echo base_url('index.php/vercertificado/ver/' . $row->idCertificado); ?>">
-                                <img src="<?php echo base_url('uploads/certificados/') . $row->rutaImagen; ?>" class="card-img-top" alt="Certificado">
+                            <!-- <img src="<?php echo base_url('uploads/certificados/') . $row->rutaImagen; ?>" class="card-img-top" alt="Certificado"> -->
                             </a>
                             <div class="card-body">
                                 <ul class="list-unstyled d-flex justify-content-between">
@@ -38,7 +38,7 @@
                                         <i class="text-warning fa fa-star"></i>
                                         <i class="text-muted fa fa-star"></i>
                                     </li> -->
-                                    <li class="text-muted text-right"><?php echo $row->fechaEmision; ?></li>
+                                    
                                 </ul>
                                 <p>
                         <?php
@@ -51,12 +51,26 @@
                                 }
                               else
                                 {
+                                    $idCurso = $row->idCurso;
+                                $curso = $this->certificados_model->obtener_curso_por_id($idCurso);
+
+                         // Verificar si se obtuvo el curso antes de mostrar el título
+                                if ($curso) {
+                                // echo 'Curso: ' . $curso->titulo;
+                            }
                               ?>
                               <img width="300" src="<?php echo base_url('uploads/certificados/') . basename($row->rutaImagen); ?>">
+                              
                               <?php
                                 }
                               ?>
+                              
                         </p>
+                        <li class="text-muted text-left">Emitido el:  <?php echo $row->fechaEmision; ?></li>
+                        <li class="text-muted text-left">ID del certificado: <?php echo $row->codificacion; ?></li>
+                        <li class="text-muted text-left">Curso:  <?php echo $curso->titulo; ?></li>
+                        <!-- <a href="<?php echo base_url('uploads/certificados/'). basename($row->rutaPDF); ?>"class="btn btn-primary" target="_blank" download>Descargar Certificado</a> -->
+                        <a href="<?php echo base_url('uploads/certificados/') . basename($row->rutaPDF); ?>" target="_blank" download>Descargar Certificado</a>
                                 <!-- <a href="<?php echo base_url('index.php/vercertificado/ver/' . $row->idCertificado); ?>" class="h2 text-decoration-none text-dark"><?php echo $row->tituloCurso; ?></a> -->
                                 <!-- <p class="card-text"><?php echo $row->descripcionCurso; ?></p> -->
                             </div>

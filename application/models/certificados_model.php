@@ -227,4 +227,17 @@ echo 'Total de evaluaciones aprobadas: ' . $result->total_evaluaciones . '<br>';
             return false;
         }
     }
+    public function obtener_curso_por_id($idCurso) {
+        $this->db->select('titulo');
+        $this->db->from('cursos');
+        $this->db->where('id', $idCurso);
+        $query = $this->db->get();
+    
+        // Verificar si se obtuvo el curso
+        if ($query->num_rows() > 0) {
+            return $query->row();
+        } else {
+            return false;
+        }
+    }
 }

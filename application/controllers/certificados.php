@@ -70,6 +70,7 @@ public function certificados_lista()
             // Carga el modelo de certificados
             $this->load->model('certificados_model');
             $data['certificados'] = $this->certificados_model->obtener_certificados($idEstudiante);
+            $this->load->model('certificados_model');
             // var_dump($data['certificados']);
             $this->load->view('incestudiante/cabecera');
             $this->load->view('incestudiante/menu');
