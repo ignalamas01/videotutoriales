@@ -53,28 +53,48 @@ class Certificados extends CI_Controller {
     }
 }
 public function certificados_lista()
-	{
-		
-		if($this->session->userdata('login'))
-        {
-			//$lista=$this->empleado_model->listaempleados();
-			$lista = $this->cursos_model->listacursos();
+{
+    if ($this->session->userdata('login')) {
+        // Obtén el idUsuario desde la sesión
+        $idUsuario = $this->session->userdata('idusuario');
+        // echo "ID Estudiante: " . $idUsuario;
+        // var_dump($idUsuario);
+        // Carga el modelo de usuario para obtener más detalles
+        $this->load->model('certificados_model');
+        $estudiante = $this->certificados_model->obtener_id_estudiante_por_id_usuario($idUsuario);
+        // echo "ID Estudiante: " . $estudiante;
+        if ($estudiante) {
+            // Obtiene el idEstudiante del modelo de usuario
+            $idEstudiante = $estudiante;
+            // echo "ID Estudiante: " . $idEstudiante;
+            // Carga el modelo de certificados
+            $this->load->model('certificados_model');
+            $data['certificados'] = $this->certificados_model->obtener_certificados($idEstudiante);
+            // var_dump($data['certificados']);
+            $this->load->view('incestudiante/cabecera');
+            $this->load->view('incestudiante/menu');
+            $this->load->view('incestudiante/menulateral');
+            $this->load->view('certificados_lista', $data);
+            $this->load->view('incestudiante/pie');
+        } 
+    //     else {
+    //         // Maneja el caso donde no se encuentra el usuario
+    //         redirect('usuarios/index/2', 'refresh');
+    //     }
+    // } else {
+    //     redirect('usuarios/index/2', 'refresh');
+    // }
+}
 
-
-			$data['cursos'] = $lista;
-			$this->load->view('incestudiante/cabecera');
-			$this->load->view('incestudiante/menu');
-			$this->load->view('incestudiante/menulateral');
-			//$this->load->view('cursos_lista',$data);
-			$this->load->view('certificados_lista',$data);
-			$this->load->view('incestudiante/pie');
-        }
-        else
-        {
-            redirect('usuarios/index/2','refresh');
-        }
-		
-		
-	}
-    
+    // public function mostrar_certificados() {
+    //     // Cargar el modelo necesario
+    //     $this->load->model('certificados_model');
+        
+    //     // Obtener los certificados desde el modelo
+    //     $data['certificados'] = $this->certificados_model->obtener_certificados();  // Ajusta el nombre del método según tu modelo
+        
+    //     // Cargar la vista y pasar los datos
+    //     $this->load->view('certificados_lista', $data);
+    // }
+}
 }

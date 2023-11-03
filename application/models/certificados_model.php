@@ -112,12 +112,12 @@ echo 'Total de evaluaciones aprobadas: ' . $result->total_evaluaciones . '<br>';
     $pdfPath = 'C:\xampp\htdocs\videotutoriales\uploads\certificados\certificado' . $codificacion . '.pdf';
     $pdf->Output($pdfPath, 'F');
 
-    // /// Convertir el PDF a imagen y guardarla
-    // $imagick = new \Imagick();
-    // $imagick->readImage($pdfPath);
-    // $imagick->setImageFormat('jpeg');
-    // $imagePath = 'C:\xampp\htdocs\videotutoriales\uploads\certificados\imagen' . $codificacion . '.jpg';
-    // $imagick->writeImage($imagePath);
+    /// Convertir el PDF a imagen y guardarla
+    $imagick = new \Imagick();
+    $imagick->readImage($pdfPath);
+    $imagick->setImageFormat('jpeg');
+    $imagePath = 'C:\xampp\htdocs\videotutoriales\uploads\certificados\imagen' . $codificacion . '.jpg';
+    $imagick->writeImage($imagePath);
     // Guardar el PDF en un archivo o mostrarlo en el navegador
     $pdf->Output('certificado.pdf', 'D'); // Descargar el PDF
     ob_end_flush();
@@ -189,5 +189,42 @@ echo 'Total de evaluaciones aprobadas: ' . $result->total_evaluaciones . '<br>';
             return 'Apellidos Desconocidos';
         }
     }
+    public function obtener_certificados($idEstudiante) {
+        // Asegúrate de ajustar el nombre de la columna idEstudiante según tu base de datos
+        $this->db->where('idEstudiante', $idEstudiante);
+        $this->db->where('emitido', 1);
     
+        $query = $this->db->get('certificados');
+    
+        // Imprimir la consulta ejecutada
+        // echo $this->db->last_query();
+    
+        // Imprimir los resultados de la consulta
+        // var_dump($query->result());
+    
+        // Verificar si $query es un objeto de resultado de consulta
+        if (!$query instanceof CI_DB_result) {
+            // Si no es un objeto CI_DB_result, creemos uno vacío
+            $emptyResult = new CI_DB_result();
+            return $emptyResult;
+        }
+    
+        return $query;
+    }
+    
+    public function obtener_id_estudiante_por_id_usuario($idUsuario)
+    {
+        // Utiliza tu lógica para obtener el idEstudiante según el idUsuario
+        $this->db->select('id');
+        $this->db->where('idusuario', $idUsuario);
+        $query = $this->db->get('estudiante');
+        
+        // Verifica si se encontró un estudiante
+        if ($query->num_rows() > 0) {
+            $estudiante = $query->row();
+            return $estudiante->id;
+        } else {
+            return false;
+        }
+    }
 }
