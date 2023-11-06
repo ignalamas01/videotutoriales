@@ -100,6 +100,7 @@
     <div class="container">
         <?php if ($curso) : ?>
             <div class="curso-container">
+            <span>Avance: <?php echo $progreso; ?>%</span>
                 <h1 class="text-center"><?php echo $curso->titulo; ?></h1>
                 <p><?php echo $curso->descripcion; ?></p>
 

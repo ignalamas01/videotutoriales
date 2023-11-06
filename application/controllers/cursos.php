@@ -96,11 +96,19 @@ class Cursos extends CI_Controller
 		
 		if($this->session->userdata('login'))
         {
+			$idUsuario = $this->session->userdata('idusuario');
+$estudiante = $this->db->get_where('estudiante', array('idusuario' => $idUsuario))->row();
+$idEstudiante = $estudiante->id;
 			//$lista=$this->empleado_model->listaempleados();
-			$lista = $this->cursos_model->listacursos();
-
+			// $lista = $this->cursos_model->listacursos();
+			$lista = $this->cursos_model->obtener_cursos_suscritos($idEstudiante);
+		// 	echo '<pre>';
+        // var_dump($lista->result());
+        // echo '</pre>';
+		// echo $this->db->last_query();
 
 			$data['cursos'] = $lista;
+			
 			$this->load->view('incestudiante/cabecera');
 			$this->load->view('incestudiante/menu');
 			$this->load->view('incestudiante/menulateral');

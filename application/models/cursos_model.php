@@ -89,8 +89,19 @@ class cursos_model extends CI_Model
         return $query;
     }
 
-
-
+    public function obtener_cursos_suscritos($idEstudiante)
+    {
+        $this->db->select('cursos.*');
+        $this->db->from('suscripciones');
+        $this->db->join('cursos', 'cursos.id = suscripciones.idCurso');
+        $this->db->where('suscripciones.idEstudiante', $idEstudiante);
+        $this->db->where('suscripciones.estado', 'activo');
+        $this->db->where('suscripciones.estado_manual', 'activo');
+        $this->db->where('suscripciones.fechaInicio <=', date('Y-m-d'));
+        $this->db->where('suscripciones.fechaFin >=', date('Y-m-d'));
+    
+        return $this->db->get();  // Quita el método result() aquí
+    }
 }    
 
 
