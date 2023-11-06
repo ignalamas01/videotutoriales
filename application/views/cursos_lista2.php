@@ -65,22 +65,28 @@
       
         <?php
         foreach ($cursos->result() as $row) {
+            $progreso = $this->certificados_model->actualizar_progreso($row->id);
+        
         ?>
             <div class="col-12 col-md-4 mb-4">
                 <div class="card h-100">
                 
                 <a href="<?php echo base_url('index.php/vercurso/ver/' . $row->id); ?>">
-                        <img src="./assets/img/feature_prod_01.jpg" class="card-img-top" alt="...">
+                        <img src="./assets/img/feature_prod_01.jpg" class="card-img-top" alt="">
                     </a>
                     <div class="card-body">
                         <ul class="list-unstyled d-flex justify-content-between">
                             <li>
+                                <!-- <i class="text-warning fa fa-star"></i>
                                 <i class="text-warning fa fa-star"></i>
                                 <i class="text-warning fa fa-star"></i>
                                 <i class="text-warning fa fa-star"></i>
-                                <i class="text-warning fa fa-star"></i>
-                                <i class="text-muted fa fa-star"></i>
+                                <i class="text-muted fa fa-star"></i> -->
                             </li>
+                            <li class="text-muted text-center">
+                        <!-- Mostrar el porcentaje de completado -->
+                        <span>Avance : <?php echo $progreso; ?>%</span>
+                    </li>
                             <li class="text-muted text-right"></li>
                         </ul>
                         <a href="<?php echo base_url('index.php/vercurso/ver/' . $row->id); ?>" class="h2 text-decoration-none text-dark"><?php echo $row->titulo; ?></a>
@@ -105,7 +111,8 @@
                                 }
                               ?>
                         </p>
-                        <p class="text-muted">Reviewsss (24)</p>
+                        <!-- <p class="text-muted">Reviewsss (24)</p> -->
+                       
                     </div>
                 </div>
             </div>

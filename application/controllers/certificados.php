@@ -98,4 +98,37 @@ public function certificados_lista()
     //     $this->load->view('certificados_lista', $data);
     // }
 }
+public function actualizar_progreso() {
+    $idCurso = $this->input->post('idCurso');
+    
+    $idUsuario = $this->session->userdata('idusuario');
+    $estudiante = $this->db->get_where('estudiante', array('idUsuario' => $idUsuario))->row();
+
+    if ($estudiante) {
+        $idEstudiante = $estudiante->id;
+
+        // Obtener el número total de evaluaciones activas en el curso
+        $evaluacionesActivas = $this->certificados_model->obtener_evaluaciones_activas_curso($idCurso);
+
+        // Obtener el número de evaluaciones aprobadas por el estudiante
+        $evaluacionesAprobadas = $this->certificados_model->obtener_evaluaciones_aprobadas($idCurso, $idEstudiante);
+
+        // Calcular el porcentaje de progreso
+        $porcentajeProgreso = ($evaluacionesAprobadas / $evaluacionesActivas) * 100;
+
+        // Actualizar el porcentaje de progreso en la tabla correspondiente
+        $progresoActualizado = $this->certificados_model->actualizar_progreso($idEstudiante, $idCurso, $porcentajeProgreso);
+        // $progresoActualizado = $this->certificados_model->obtener_progreso_usuario($idEstudiante, $idCurso);
+
+        // Pasar el progreso a la vista
+        $data['progreso'] = $progresoActualizado;
+
+        // Cargar la vista con los datos
+        $this->load->view('cursos_lista2', $data);
+
+        echo '¡Progreso actualizado!';
+    } else {
+        echo 'No se encontró el estudiante.';
+    }
+}
 }

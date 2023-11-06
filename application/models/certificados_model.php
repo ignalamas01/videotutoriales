@@ -240,4 +240,80 @@ echo 'Total de evaluaciones aprobadas: ' . $result->total_evaluaciones . '<br>';
             return false;
         }
     }
+    public function obtener_cantidad_evaluaciones_curso($idCurso) {
+        $this->db->select('COUNT(*) as cantidad_evaluaciones');
+        $this->db->from('evaluaciones');
+        $this->db->where('idCurso', $idCurso);
+        $this->db->where('estado', 'activo');
+    
+        // Puedes agregar condiciones adicionales si es necesario
+        // Ejemplo: $this->db->where('estado', 'activo');
+    
+        $result = $this->db->get()->row();
+    
+        // Verificar si se obtuvo un resultado
+        if ($result !== null) {
+            return $result->cantidad_evaluaciones;
+        } else {
+            return 0; // o algún valor predeterminado si no hay evaluaciones para el curso
+        }
+    }
+    public function obtener_evaluaciones_aprobadas($idCurso, $idEstudiante) {
+        $this->db->select('COUNT(*) as total_evaluaciones');
+        $this->db->from('evaluaciones');
+        $this->db->where('idCurso', $idCurso);
+        $this->db->where('estado', 'activo');
+        $this->db->where('idEvaluacion IN (SELECT idEvaluacion FROM puntajesevaluacion WHERE idEstudiante = '.$idEstudiante.' AND puntajeTotal > 60)');
+    
+        $result = $this->db->get()->row();
+    
+        // Mostrar información para depuración
+        // echo 'Consulta SQL: ' . $this->db->last_query() . '<br>';
+        // echo 'Total de evaluaciones aprobadas: ' . $result->total_evaluaciones . '<br>';
+    
+        return $result->total_evaluaciones;
+    }
+    
+    public function actualizar_progreso($idCurso) {
+        // Aquí obtienes el idEstudiante y otros datos necesarios
+        $idUsuario = $this->session->userdata('idusuario');
+        $estudiante = $this->db->get_where('estudiante', array('idUsuario' => $idUsuario))->row();
+    
+        if ($estudiante) {
+            $idEstudiante = $estudiante->id;
+    
+            // Obtener el número total de evaluaciones activas en el curso
+            $evaluacionesActivas = $this->obtener_cantidad_evaluaciones_curso($idCurso);
+    
+            // Obtener el número de evaluaciones aprobadas por el estudiante
+            $evaluacionesAprobadas = $this->obtener_evaluaciones_aprobadas($idCurso, $idEstudiante);
+    
+            // Verificar si hay evaluaciones activas antes de realizar la operación de división
+            $porcentajeProgreso = ($evaluacionesActivas > 0) ? ($evaluacionesAprobadas / $evaluacionesActivas) * 100 : 0;
+    
+            // Verificar si ya existe una fila para este estudiante y curso
+            $this->db->where('idEstudiante', $idEstudiante);
+            $this->db->where('idCurso', $idCurso);
+            $existingRow = $this->db->get('progreso_usuario')->row();
+    
+            if ($existingRow) {
+                // Si ya existe, actualizar la fila existente
+                $this->db->where('idEstudiante', $idEstudiante);
+                $this->db->where('idCurso', $idCurso);
+                $this->db->update('progreso_usuario', array('porcentajeCompletado' => $porcentajeProgreso));
+            } else {
+                // Si no existe, insertar una nueva fila
+                $data = array(
+                    'idEstudiante' => $idEstudiante,
+                    'idCurso' => $idCurso,
+                    'porcentajeCompletado' => $porcentajeProgreso
+                );
+                $this->db->insert('progreso_usuario', $data);
+            }
+    
+            return $porcentajeProgreso;
+        } else {
+            return 0; // o algún valor predeterminado si no se encuentra el estudiante
+        }
+}
 }
