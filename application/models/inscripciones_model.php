@@ -5,15 +5,41 @@ class Inscripciones_model extends CI_Model {
     }
 
     // Método para insertar una inscripción en la base de datos
+    // public function insertar_inscripcion($data) {
+    //     $this->db->insert('suscripciones', $data);
+        
+    //     if ($this->db->affected_rows() > 0) {
+    //         return $this->db->insert_id();
+    //     } else {
+    //         return false;
+    //     }
+    // }
     public function insertar_inscripcion($data) {
+        // Start a database transaction
+        $this->db->trans_start();
+    
         $this->db->insert('suscripciones', $data);
         
         if ($this->db->affected_rows() > 0) {
-            return $this->db->insert_id();
+            // Commit the transaction if the insert was successful
+            $this->db->trans_complete();
+    
+            // Check if the transaction was successful
+            if ($this->db->trans_status() === FALSE) {
+                // If the transaction failed, return false
+                return false;
+            } else {
+                // If the transaction was successful, return the insert ID
+                return $this->db->insert_id();
+            }
         } else {
+            // Rollback the transaction if the insert failed
+            $this->db->trans_rollback();
             return false;
         }
     }
+    
+
 
     
     // Otros métodos relacionados con inscripciones, como obtener inscripciones, actualizar, eliminar, etc.

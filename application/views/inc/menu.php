@@ -53,7 +53,7 @@
                                     <!-- <li class="nav-item">
                                         <a class="nav-link active" aria-current="page" href="<?php echo base_url(); ?>index.php/foros/for">foros</a>
                                     </li> -->
-                                    <button><li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/foros/for"style="color: white;">FOROS</a></li></button>
+                                    <button><li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/foros/index"style="color: white;">FOROS</a></li></button>
                                     <!-- <li class="nav-item">
                                         <a class="nav-link active" aria-current="page" href="<?php echo base_url(); ?>index.php/suscripciones/lista">inscritos</a>
                                     </li> -->

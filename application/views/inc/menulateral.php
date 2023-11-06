@@ -305,7 +305,7 @@
             </a>
           </li> -->
           <li class="nav-item">
-            <a href="../gallery.html" class="nav-link">
+            <a href="<?php echo base_url(); ?>index.php/foros/index" class="nav-link">
               <!-- <i class="nav-icon far fa-image"></i> -->
               <i class="nav-icon fas fa-edit"></i>
               <p>

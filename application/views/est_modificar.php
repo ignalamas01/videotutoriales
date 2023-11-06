@@ -67,17 +67,17 @@
                                         <input type="text" name="segundoApellido" placeholder="escriba su segundo apellido" class="form-control" value="<?php echo $row->segundoApellido; ?>"><br>
                                     </div>
                                     <div class="row">
-                                        <div class="col-4">
-                                            <div class="form-group">
-                                                <label> CARRERA</label>
-                                                <select name="carrera" class="form-control select2" style="width: 100%;" value="<?php echo $row->carrera; ?>">
-                                                  
-                                                    <option value="sistemas informaticos">SISTEMAS INFORMATICOS</option>
-                                                    <option value="contabilidad">CONTABILIDAD</option>
-                                                    
-                                                </select>
-                                            </div>
-                                        </div>
+                                    <div class="col-4">
+    <div class="form-group">
+        <label>CARRERA</label>
+        <select name="carrera" class="form-control select2" style="width: 100%;" required>
+            <option value="" disabled selected>Seleccione su carrera</option>
+            <option value="sistemas informaticos">SISTEMAS INFORMATICOS</option>
+            <option value="contabilidad">CONTABILIDAD</option>
+        </select>
+    </div>
+</div>
+
 
                                         <!--FALTA CARGAR CALENDARIO-->
                                         <div class="col-4">

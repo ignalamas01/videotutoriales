@@ -167,14 +167,26 @@ class Estudiante extends CI_Controller
 		
 	}
 	
+	// public function agregar()
+	// {
+	// 	$this->load->view('incadmin/cabecera');
+	// 	$this->load->view('incadmin/menu');
+	// 	$this->load->view('incadmin/menulateral');
+	// 	$this->load->view('est_formulario');
+	// 	$this->load->view('incadmin/pie');
+	// }
 	public function agregar()
-	{
-		$this->load->view('incadmin/cabecera');
-		$this->load->view('incadmin/menu');
-		$this->load->view('incadmin/menulateral');
-		$this->load->view('est_formulario');
-		$this->load->view('incadmin/pie');
-	}
+{
+    
+        $this->load->view('incadmin/cabecera');
+        $this->load->view('incadmin/menu');
+        $this->load->view('incadmin/menulateral');
+        $this->load->view('est_formulario');
+        $this->load->view('incadmin/pie');
+   
+}
+
+
 	// public function agregarbd()
 	// {
 		// $data['nombre'] = $_POST['nombre'];

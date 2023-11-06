@@ -61,7 +61,7 @@
                                     
                                     <button><li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/certificados/certificados_lista"style="color: white;">MIS CERTIFICADOS</a></li></button>
                                     <!-- <button><li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/foros/index">Home</a></li></button> -->
-                                    <button><li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/foros/for"style="color: white;">FOROS</a></li></button>
+                                    <button><li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/foros/index"style="color: white;">FOROS</a></li></button>
 
                                 </ul>
                                 <!-- <form class="d-flex">

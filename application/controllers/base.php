@@ -251,6 +251,7 @@ class Base extends CI_Controller
 	
 	public function agregar()
 	{
+		
 		$this->load->view('incadmin/cabecera');
 		$this->load->view('incadmin/menu');
 		$this->load->view('incadmin/menulateral');

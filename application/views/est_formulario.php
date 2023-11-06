@@ -82,18 +82,17 @@
 
     <span id="error-correo" style="color: red;"></span>
     <div class="row">
-                                    <div class="col-4">
-                                        <div class="form-group">
-                                            <label> CARRERA</label>
-                                            <select name="carrera" class="form-control select2" style="width: 100%;">
-                                                
-                                                <option value="" disabled selected>Seleccione su carrera </option>
-                                                <option value="sistemas informaticos">SISTEMAS INFORMATICOS</option>
-                                                <option value="contabilidad">CONTABILIDAD</option>
-                                                
-                                            </select>
-                                        </div>
-                                    </div>
+    <div class="col-4">
+    <div class="form-group">
+        <label>CARRERA</label>
+        <select name="carrera" class="form-control select2" style="width: 100%;" required>
+            <option value="" disabled selected>Seleccione su carrera</option>
+            <option value="sistemas informaticos">SISTEMAS INFORMATICOS</option>
+            <option value="contabilidad">CONTABILIDAD</option>
+        </select>
+    </div>
+</div>
+
 </div>
 
 

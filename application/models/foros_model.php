@@ -30,6 +30,8 @@ class Foros_model extends CI_Model {
 
 
     }
+   
+    
     
     
 }

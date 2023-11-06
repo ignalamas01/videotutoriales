@@ -107,7 +107,7 @@
             </section>
         </div>
            
-
+                    
     </div>
     <!-- Resto del contenido de la vista -->
 
