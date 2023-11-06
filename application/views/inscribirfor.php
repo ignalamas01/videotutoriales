@@ -81,8 +81,8 @@
                             <div class="card-body">
                                
                                 <div class="form-group">
-                                  <label for="newEmail">Correo Electrónico</label>
-                                     <input type="email" id="destinatario" name="destinatario" placeholder="Escriba su correo electrónico" class="form-control"  onkeyup="verificarCorreoExistente()">
+                                  <!-- <label for="newEmail">Correo Electrónico</label>
+                                     <input type="email" id="destinatario" name="destinatario" placeholder="Escriba su correo electrónico" class="form-control"  onkeyup="verificarCorreoExistente()"> -->
 
                                         <span id="error-correo" style="color: red;"></span>
     

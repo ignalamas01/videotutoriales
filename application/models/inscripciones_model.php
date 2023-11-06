@@ -6,13 +6,33 @@ class Inscripciones_model extends CI_Model {
 
     // Método para insertar una inscripción en la base de datos
     public function insertar_inscripcion($data) {
+        // Verificar si ya existe una suscripción activa para el estudiante y el curso
+        $existing_subscription = $this->verificar_suscripcion_existente($data['idEstudiante'], $data['idCurso']);
+
+        if ($existing_subscription) {
+            // Si ya existe una suscripción activa, retornar un mensaje o valor indicando la duplicación
+            return 'Ya existe una suscripción activa para este estudiante y curso.';
+        }
+
+        // No existe una suscripción activa, proceder con la inserción
         $this->db->insert('suscripciones', $data);
-        
+
         if ($this->db->affected_rows() > 0) {
             return $this->db->insert_id();
         } else {
             return false;
         }
+    }
+    public function verificar_suscripcion_existente($idEstudiante, $idCurso) {
+        $this->db->select('*');
+        $this->db->from('suscripciones');
+        $this->db->where('idEstudiante', $idEstudiante);
+        $this->db->where('idCurso', $idCurso);
+        $this->db->where('estado', 'activo');
+        $this->db->where('estado_manual', 'activo');
+        $query = $this->db->get();
+
+        return ($query->num_rows() > 0) ? true : false;
     }
 
     

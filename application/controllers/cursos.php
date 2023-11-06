@@ -96,6 +96,10 @@ class Cursos extends CI_Controller
 		
 		if($this->session->userdata('login'))
         {
+			
+			$tipo = $this->session->userdata('tipo');
+
+        if ($tipo == 'invitado') {
 			$idUsuario = $this->session->userdata('idusuario');
 $estudiante = $this->db->get_where('estudiante', array('idusuario' => $idUsuario))->row();
 $idEstudiante = $estudiante->id;
@@ -109,12 +113,24 @@ $idEstudiante = $estudiante->id;
 
 			$data['cursos'] = $lista;
 			
-			$this->load->view('incestudiante/cabecera');
-			$this->load->view('incestudiante/menu');
-			$this->load->view('incestudiante/menulateral');
-			//$this->load->view('cursos_lista',$data);
-			$this->load->view('cursos_lista2',$data);
-			$this->load->view('incestudiante/pie');
+            // Cargar la vista para el invitado
+            $this->load->view('incestudiante/cabecera');
+            $this->load->view('incestudiante/menu');
+            $this->load->view('incestudiante/menulateral');
+            $this->load->view('cursos_lista2', $data);  // Utiliza la vista específica para invitados
+            $this->load->view('incestudiante/pie');
+        } else {
+            // Cargar el modelo listacursos() para no invitados
+            $lista = $this->cursos_model->listacursos();
+        $data['cursos'] = $lista;
+
+            // Utiliza la lógica que ya tienes implementada
+            $this->load->view('incestudiante/cabecera');
+            $this->load->view('incestudiante/menu');
+            $this->load->view('incestudiante/menulateral');
+            $this->load->view('cursos_lista2', $data);
+            $this->load->view('incestudiante/pie');
+        }
         }
         else
         {

@@ -316,4 +316,18 @@ echo 'Total de evaluaciones aprobadas: ' . $result->total_evaluaciones . '<br>';
             return 0; // o algún valor predeterminado si no se encuentra el estudiante
         }
 }
+public function obtener_curso_y_seccion_por_id($idCurso) {
+    $this->db->select('cursos.titulo as curso_titulo, secciones.nombre as seccion_nombre'); // Ajusta los nombres de las columnas según tu esquema de base de datos
+    $this->db->from('cursos');
+    $this->db->join('secciones', 'cursos.id = secciones.idCurso', 'left'); // Ajusta según tus relaciones de base de datos
+    $this->db->where('cursos.id', $idCurso);
+    $query = $this->db->get();
+
+    // Verificar si se obtuvo el curso y la sección
+    if ($query->num_rows() > 0) {
+        return $query->row();
+    } else {
+        return false;
+    }
+}
 }

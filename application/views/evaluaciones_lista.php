@@ -44,16 +44,22 @@
                         {
                             $idCurso = $row->idCurso;
                             if ($idCurso !== null) {
-                                $curso = $this->certificados_model->obtener_curso_por_id($idCurso);
-                                ($curso !== null) ? $curso->titulo : 'Sin título';
-                            } else {
-                                 'Sin curso asignado';
-                            }
+                                $cursoInfo = $this->certificados_model->obtener_curso_y_seccion_por_id($idCurso);
+
+    // Verificar si se obtuvo la información
+    if ($cursoInfo) {
+        $cursoTitulo = $cursoInfo->curso_titulo;
+        $seccionNombre = $cursoInfo->seccion_nombre;
+    } else {
+        $cursoTitulo = 'Sin título';
+        $seccionNombre = 'Sin sección asignada';
+    }
+    }
                         ?>
                             <tr>
                                 <td> <?php echo $indice; ?> </td>
-                                <td><?php echo $curso->titulo; ?></td>
-                                <td><?php echo $row->idEstudiante; ?></td>
+                                <td><?php echo $cursoInfo->curso_titulo; ?></td>
+                                <td><?php echo $cursoInfo->seccion_nombre; ?></td>
                                 <td><?php echo $row->puntajeTotal; ?></td>
                                 <td><?php
     // Agrega una condición para determinar si es Aprobado o Reprobado
@@ -65,8 +71,10 @@
                                                     ?></td>
                                 <td><?php echo $row->fechaRegistro; ?></td>
                                 <td style="text-decoration: underline;"><?php echo 'Ver Evaluacion'; ?></td>
-
-                            </tr>
+                                <!-- <td>
+    <button class="btn btn-ver-evaluacion" data-id-evaluacion="<?php echo $row->id; ?>">Ver Evaluación</button>
+</td>
+                            </tr> -->
                             <?php
                         $indice++;
                         }
@@ -79,7 +87,25 @@
         </div>
     </section>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // Maneja el clic en los botones con la clase 'btn-ver-evaluacion'
+        $('.btn-ver-evaluacion').on('click', function () {
+            // Obtiene el ID de la evaluación asociado al botón clicado
+            var idEvaluacion = $(this).data('id-evaluacion');
 
+            // Llama a la función que quieras ejecutar, pasando el ID de la evaluación
+            verEvaluacion(idEvaluacion);
+        });
+
+        // Agrega tu función específica para ver la evaluación
+        function verEvaluacion(idEvaluacion) {
+            // Aquí puedes agregar la lógica para ver la evaluación con el ID proporcionado
+            alert('Ver evaluación con ID: ' + idEvaluacion);
+        }
+    });
+</script>
 
 
 
