@@ -15,11 +15,17 @@ class Inscripciones_model extends CI_Model {
     //     }
     // }
     public function insertar_inscripcion($data) {
-        // Start a database transaction
-        $this->db->trans_start();
-    
+        // Verificar si ya existe una suscripción activa para el estudiante y el curso
+        $existing_subscription = $this->verificar_suscripcion_existente($data['idEstudiante'], $data['idCurso']);
+
+        if ($existing_subscription) {
+            // Si ya existe una suscripción activa, retornar un mensaje o valor indicando la duplicación
+            return 'Ya existe una suscripción activa para este estudiante y curso.';
+        }
+
+        // No existe una suscripción activa, proceder con la inserción
         $this->db->insert('suscripciones', $data);
-        
+
         if ($this->db->affected_rows() > 0) {
             // Commit the transaction if the insert was successful
             $this->db->trans_complete();
@@ -38,8 +44,17 @@ class Inscripciones_model extends CI_Model {
             return false;
         }
     }
-    
+    public function verificar_suscripcion_existente($idEstudiante, $idCurso) {
+        $this->db->select('*');
+        $this->db->from('suscripciones');
+        $this->db->where('idEstudiante', $idEstudiante);
+        $this->db->where('idCurso', $idCurso);
+        $this->db->where('estado', 'activo');
+        $this->db->where('estado_manual', 'activo');
+        $query = $this->db->get();
 
+        return ($query->num_rows() > 0) ? true : false;
+    }
 
     
     // Otros métodos relacionados con inscripciones, como obtener inscripciones, actualizar, eliminar, etc.

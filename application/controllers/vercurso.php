@@ -40,16 +40,28 @@ class Vercurso extends CI_Controller
     if ($data['curso']) {
         // Obtener secciones del curso
         $data['secciones'] = $this->vercurso_model->obtener_secciones_por_curso($data['curso']->id);
+		$idUsuario = $this->session->userdata('idusuario');
+            $estudiante = $this->db->get_where('estudiante', array('idUsuario' => $idUsuario))->row();
+
+            if ($estudiante) {
+                $idEstudiante = $estudiante->id;
+
+                // Obtener el progreso del usuario
+                $progreso = $this->certificados_model->actualizar_progreso($data['curso']->id, $idEstudiante);
+                $data['progreso'] = $progreso;
+
 
         // Puedes agregar más datos aquí según sea necesario
 
         // Cargar la vista detallada del curso
         $this->load->view('curso_detalle', $data);
     } else {
+		$data['progreso'] = "VISTA ADMINISTRADOR 0";
         // Manejar el caso donde el curso no se encuentra
-        $this->load->view('curso_no_encontrado');
+        $this->load->view('curso_detalle', $data);
     }
     $this->load->view('incadmin/pie');
+}
 }
 }
 ?>
