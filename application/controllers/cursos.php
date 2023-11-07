@@ -101,8 +101,8 @@ class Cursos extends CI_Controller
 
         if ($tipo == 'invitado') {
 			$idUsuario = $this->session->userdata('idusuario');
-$estudiante = $this->db->get_where('estudiante', array('idusuario' => $idUsuario))->row();
-$idEstudiante = $estudiante->id;
+			$estudiante = $this->db->get_where('estudiante', array('idusuario' => $idUsuario))->row();
+			$idEstudiante = $estudiante->id;
 			//$lista=$this->empleado_model->listaempleados();
 			// $lista = $this->cursos_model->listacursos();
 			$lista = $this->cursos_model->obtener_cursos_suscritos($idEstudiante);

@@ -86,7 +86,7 @@
             
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="<?php echo base_url(); ?>index.php/secciones/seccion" class="nav-link">
+                <a href="<?php echo base_url(); ?>index.php/reportes/reportes" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>curso de programacion</p>
                 </a>
