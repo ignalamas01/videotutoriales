@@ -45,10 +45,12 @@ class Certificados extends CI_Controller {
                 $this->certificados_model->generar_certificado_pdf($idCurso, $idEstudiante);
                 echo '¡Certificado emitido!';
             } else {
-                echo 'Ya se emitio un certificado anteriormente';
+                // echo 'Ya se emitio un certificado anteriormente';
+                redirect("certificados/certificados_lista","refresh");
             }
         } else {
-            echo 'No cumples con los requisitos para obtener el certificado.';
+            // echo 'No cumples con los requisitos para obtener el certificado.';
+            redirect("vercurso/ver/$idCurso","refresh");
         }
     }
 }

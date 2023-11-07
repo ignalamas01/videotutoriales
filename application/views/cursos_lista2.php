@@ -86,7 +86,7 @@
                             </li>
                             <li class="text-muted text-center">
                         <!-- Mostrar el porcentaje de completado -->
-                        <span>Avance : <?php echo $progreso; ?>%</span>
+                        <span>Avance: <?php echo number_format($progreso, 2); ?>%</span>
                     </li>
                             <li class="text-muted text-right"></li>
                         </ul>

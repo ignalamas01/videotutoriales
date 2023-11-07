@@ -88,13 +88,13 @@
               <li class="nav-item">
                 <a href="<?php echo base_url(); ?>index.php/reportes/reportes" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>curso de programacion</p>
+                  <p>Reporte 1</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="../layout/top-nav-sidebar.html" class="nav-link">
+              <a href="<?php echo base_url(); ?>index.php/graduados/lista" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>curso de albegra</p>
+                  <p>Reporte Graduados</p>
                 </a>
               </li>
               <li class="nav-item">
