@@ -3,19 +3,34 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class certificados_model extends CI_Model {
 
-    public function verificar_aprobacion_curso($idCurso, $idEstudiante) {
-        $this->db->select('COUNT(*) as total_evaluaciones');
-        $this->db->from('evaluaciones');
-        echo 'ID de Curso: ' . $idCurso . '<br>';
-        $this->db->where('idCurso', $idCurso);
-        $this->db->where('estado', 'activo'); // Ajusta según el valor que representa "activo" en tu base de datos
-        $this->db->where('idEvaluacion IN (SELECT idEvaluacion FROM puntajesevaluacion WHERE idEstudiante = '.$idEstudiante.' AND puntajeTotal > 60)');
+//     public function verificar_aprobacion_curso($idCurso, $idEstudiante) {
+//         $this->db->select('COUNT(*) as total_evaluaciones');
+//         $this->db->from('evaluaciones');
+//         echo 'ID de Curso: ' . $idCurso . '<br>';
+//         $this->db->where('idCurso', $idCurso);
+//         $this->db->where('estado', 'activo'); // Ajusta según el valor que representa "activo" en tu base de datos
+//         $this->db->where('idEvaluacion IN (SELECT idEvaluacion FROM puntajesevaluacion WHERE idEstudiante = '.$idEstudiante.' AND puntajeTotal > 60)');
     
-        $result = $this->db->get()->row();
-        echo 'Consulta SQL: ' . $this->db->last_query() . '<br>';
-echo 'Total de evaluaciones aprobadas: ' . $result->total_evaluaciones . '<br>';
-        return ($result && $result->total_evaluaciones > 0);
-    }
+//         $result = $this->db->get()->row();
+//         echo 'Consulta SQL: ' . $this->db->last_query() . '<br>';
+// echo 'Total de evaluaciones aprobadas: ' . $result->total_evaluaciones . '<br>';
+//         return ($result && $result->total_evaluaciones > 0);
+//     }
+public function verificar_aprobacion_curso($idCurso, $idEstudiante) {
+    $this->db->select('COUNT(DISTINCT idEvaluacion) as total_evaluaciones');
+    $this->db->from('puntajesevaluacion');
+    $this->db->where('idCurso', $idCurso);
+    $this->db->where('idEstudiante', $idEstudiante);
+    $this->db->where('puntajeTotal > 60');
+
+    $result = $this->db->get()->row();
+
+    // Obtener el número total de evaluaciones en el curso
+    $total_evaluaciones_curso = $this->certificados_model->obtener_cantidad_evaluaciones_curso($idCurso);
+
+    // Verificar si el estudiante ha aprobado todas las evaluaciones
+    return ($result && $result->total_evaluaciones === $total_evaluaciones_curso);
+}
     
 
     public function emitir_certificado($idCurso, $idEstudiante) {
