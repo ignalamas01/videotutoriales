@@ -88,7 +88,7 @@
               <li class="nav-item">
                 <a href="<?php echo base_url(); ?>index.php/reportes/reportes" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>dfsdfsdgsdts</p>
+                  <p>Estudiantes </p>
                 </a>
               </li>
               <li class="nav-item">

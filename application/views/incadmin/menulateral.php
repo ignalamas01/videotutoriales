@@ -86,9 +86,9 @@
             
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="<?php echo base_url(); ?>index.php/reportes/reportes" class="nav-link">
+                <a href="<?php echo base_url(); ?>index.php/reportes/estudiantes_cursos" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Reporte 1</p>
+                  <p>estudiantes inscritos en cierta cantiadad de cursos</p>
                 </a>
               </li>
               <li class="nav-item">
