@@ -62,7 +62,9 @@
                 <?php foreach ($pregunta['opciones'] as $opcionIndex => $opciones) : ?>
                     <label>
                         <input type="radio" name="respuestas[<?php echo $index; ?>]" value="<?php echo $opcionIndex; ?>" required>
+                        
                         <?php echo is_array($opciones) ? implode(', ', $opciones) : $opciones; ?>
+                        
                     </label>
                 <?php endforeach; ?>
 

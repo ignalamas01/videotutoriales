@@ -56,7 +56,8 @@ class Vercurso extends CI_Controller
         // Cargar la vista detallada del curso
         $this->load->view('curso_detalle', $data);
     } else {
-		$data['progreso'] = "VISTA ADMINISTRADOR 0";
+		$progreso =0;
+		$data['progreso'] = $progreso;
         // Manejar el caso donde el curso no se encuentra
         $this->load->view('curso_detalle', $data);
     }
