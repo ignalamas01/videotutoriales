@@ -115,6 +115,35 @@ class Evaluaciones_model extends CI_Model
     
         return ($result !== null);
     }
+    public function listaevaluaciones()
+    {
+        $this->db->select('*');
+        $this->db->from('evaluaciones');
+        $this->db->where('estado','activo');
+        return $this->db->get();
+    }
+    public function recuperarevaluaciones($idevaluaciones)
+    {
+        $this->db->select('*');
+        $this->db->from('evaluaciones');
+        $this->db->where('idEvaluacion', $idevaluaciones);
 
+        return $this->db->get();
+    }
+    public function recuperarPreguntas($idEvaluacion)
+    {
+        $this->db->where('idEvaluacion', $idEvaluacion);
+        $query = $this->db->get('preguntas');
+
+        return $query->result();
+    }
+
+    public function recuperarOpcionesRespuesta($idPregunta)
+    {
+        $this->db->where('idPregunta', $idPregunta);
+        $query = $this->db->get('opcionesrespuesta');
+
+        return $query->result();
+    }
 }
 

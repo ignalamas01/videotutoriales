@@ -16,13 +16,18 @@
         form {
             max-width: 600px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 18px;
             background-color: #f5f5f5;
             border-radius: 5px;
         }
+        .question p {
+    font-size: 20px; /* Ajusta el tamaño del texto según sea necesario */
+    font-weight: bold;
+    margin-bottom: 10px; /* Agrega espacio entre los enunciados y otros elementos */
+}
 
         label {
-            font-weight: bold;
+            /* font-weight: bold; */
             display: block; /* Agregamos esto para que cada opción esté en una nueva línea */
         }
 
@@ -57,14 +62,21 @@
         <div class="question">
             <p>Pregunta <?php echo $index + 1; ?>:</p>
             <p><?php echo $pregunta['enunciadoPregunta']; ?></p>
+            <!-- Mostrar imagen si existe -->
+        <?php if (!empty($pregunta['imagen'])) : ?>
+            <!-- <?php echo $pregunta['imagen']; ?> -->
+            <img src="<?php echo base_url($pregunta['imagen']); ?>"  style="max-width: 100%; display: block; margin: 0 auto;">
+           
+        <?php endif; ?>
             <p>(<?php echo $pregunta['puntajePregunta']; ?> Puntos)</p>
             <?php if (!empty($pregunta['opciones'])) : ?>
                 <?php foreach ($pregunta['opciones'] as $opcionIndex => $opciones) : ?>
                     <label>
                         <input type="radio" name="respuestas[<?php echo $index; ?>]" value="<?php echo $opcionIndex; ?>" required>
                         
-                        <?php echo is_array($opciones) ? implode(', ', $opciones) : $opciones; ?>
-                        
+                        <!-- <?php echo is_array($opciones) ? implode(', ', $opciones) : $opciones; ?> -->
+                        <!-- <?php echo implode(', ', array_slice($opciones, 1)); ?> -->
+                        <?php echo array_shift($opciones); ?>
                     </label>
                 <?php endforeach; ?>
 
