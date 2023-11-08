@@ -63,8 +63,9 @@
                     <label>
                         <input type="radio" name="respuestas[<?php echo $index; ?>]" value="<?php echo $opcionIndex; ?>" required>
                         
-                        <?php echo is_array($opciones) ? implode(', ', $opciones) : $opciones; ?>
-                        
+                        <!-- <?php echo is_array($opciones) ? implode(', ', $opciones) : $opciones; ?> -->
+                        <!-- <?php echo implode(', ', array_slice($opciones, 1)); ?> -->
+                        <?php echo array_shift($opciones); ?>
                     </label>
                 <?php endforeach; ?>
 
