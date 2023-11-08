@@ -125,7 +125,9 @@
         <label for="numeroIntentos">Número de Intentos Permitidos:</label>
 <input type="number" id="numeroIntentos" name="numeroIntentos" value="1" min="1" required><br><br>
 <label for="duracion">Duración de la Evaluación (HH:MM):</label>
-<input type="time" id="duracion" name="duracion"><br><br>
+<input type="time" id="duracion" name="duracion" required>
+<small>(Deja vacío o ingresa 00:00 para indicar sin límite de tiempo)</small><br><br>
+
 
 
 
