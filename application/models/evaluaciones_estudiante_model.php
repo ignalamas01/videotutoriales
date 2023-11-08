@@ -50,7 +50,7 @@ class Evaluaciones_estudiante_model extends CI_Model
 
     public function obtener_preguntas_evaluacion($idEvaluacion)
 {
-    $this->db->select('p.idPregunta, p.enunciadoPregunta, p.idEvaluacion, p.puntajePregunta, o.idOpcion as idOpcionCorrecta');
+    $this->db->select('p.idPregunta, p.enunciadoPregunta, p.idEvaluacion, p.puntajePregunta, p.imagen, o.idOpcion as idOpcionCorrecta');
     $this->db->from('preguntas p');
     $this->db->join('opcionesrespuesta o', 'p.idPregunta = o.idPregunta AND o.esCorrecta = 1', 'left');
     $this->db->where('p.idEvaluacion', $idEvaluacion);

@@ -50,6 +50,7 @@
                                         <a class="nav-link active" aria-current="page" href="<?php echo base_url(); ?>index.php/cursos/cursos">CURSOS</a>
                                     </li> -->
                                     <button><li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/cursos/cursos"style="color: white;">CURSOS</a></li></button>
+                                    <button><li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/evaluaciones/evaluaciones_enlista"style="color: white;">EVALUACIONES</a></li></button>
                                     <!-- <li class="nav-item">
                                         <a class="nav-link active" aria-current="page" href="<?php echo base_url(); ?>index.php/foros/for">foros</a>
                                     </li> -->

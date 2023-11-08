@@ -149,6 +149,86 @@ echo "ID de la Sección: $idSeccion";
     $idEmpleado = $this->empleado_model->obtener_id_empleado_por_usuario($idUsuario);
     return $idEmpleado;
 }
-   
+public function evaluaciones_enlista()
+{
+    if ($this->session->userdata('login')) {
+        $tipo = $this->session->userdata('tipo');
+
+        $lista = $this->evaluaciones_model->listaevaluaciones();
+        $data['cursos'] = $lista;
+
+      
+
+        if ($tipo == 'admin') {
+            // Cargar la vista para el administrador
+			$this->load->view('inc/cabecera');
+					$this->load->view('incadmin/menu');
+					$this->load->view('incadmin/menulateral');
+					$this->load->view('evaluaciones_lista_profe',$data);
+					$this->load->view('incadmin/pie');
+        } if ($tipo == 'empleado') {
+            // Cargar la vista para el empleado
+            $this->load->view('inc/cabecera');
+			$this->load->view('inc/menu');
+			$this->load->view('inc/menulateral');
+			$this->load->view('evaluaciones_lista_profe',$data);
+			$this->load->view('inc/pie');
+
+        } 
+		if ($tipo == 'invitado') {
+			// Cargar la vista para el empleado
+			$this->load->view('incestudiante/cabecera');
+			$this->load->view('incestudiante/menu');
+			$this->load->view('incestudiante/menulateral');
+			$this->load->view('evaluaciones_lista_profe',$data);
+			$this->load->view('incestudiante/pie');
+			
+			
+		}
+		// else {
+        //     // Rol no reconocido, puedes manejar esto según tus necesidades
+        //     echo "Rol no reconocido";
+        // }
+
+        
+    } else {
+        redirect('usuarios/index/2', 'refresh');
+    }
+}
+public function modificar()
+{
+    $idevaluaciones = $_POST['idevaluaciones'];
+    
+    // Recuperar información de la evaluación
+    $data['infocursos'] = $this->evaluaciones_model->recuperarevaluaciones($idevaluaciones);
+
+    // Recuperar preguntas y opciones de respuesta asociadas a la evaluación
+    $data['preguntas'] = $this->evaluaciones_model->recuperarPreguntas($idevaluaciones);
+
+    // Recuperar opciones de respuesta asociadas a cada pregunta
+    foreach ($data['preguntas'] as &$pregunta) {
+        $pregunta->opciones = $this->evaluaciones_model->recuperarOpcionesRespuesta($pregunta->idPregunta);
+    }
+
+    // Cargar vistas
+    $this->load->view('inc/cabecera');
+    $this->load->view('inc/menu');
+    $this->load->view('inc/menulateral');
+    $this->load->view('evaluaciones_modificar', $data);
+    $this->load->view('inc/pie');
+}
+    public function modificarbd()
+	{
+		$idevaluaciones = $_POST['idevaluaciones'];
+		$data['tituloEvaluacion'] = $_POST['tituloEvaluacion'];
+		$data['descripcionEvaluacion'] = $_POST['descripcionEvaluacion'];
+        $data['fechaInicio'] = $_POST['fechaInicio'];
+        $data['fechaFin'] = $_POST['fechaFin'];
+       
+		
+		$this->evaluaciones_model->modificarcursos($idcursos,$data);
+		redirect('cursos/cursos', 'refresh');
+	}
+
 }
 

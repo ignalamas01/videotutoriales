@@ -124,6 +124,10 @@
         <input type="text" id="totalScore" name="totalScore" readonly value="0"><br><br>
         <label for="numeroIntentos">Número de Intentos Permitidos:</label>
 <input type="number" id="numeroIntentos" name="numeroIntentos" value="1" min="1" required><br><br>
+<label for="duracion">Duración de la Evaluación (HH:MM):</label>
+<input type="time" id="duracion" name="duracion"><br><br>
+
+
 
 
         <input type="submit" value="Crear Evaluación">
