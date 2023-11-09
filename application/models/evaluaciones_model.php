@@ -145,5 +145,37 @@ class Evaluaciones_model extends CI_Model
 
         return $query->result();
     }
+    public function modificarEvaluacion($idEvaluacion, $data)
+    {
+        $this->db->where('idEvaluacion', $idEvaluacion);
+        $this->db->update('evaluaciones', $data);
+    }
+
+    // Función para modificar datos de una pregunta
+    public function modificarPregunta($idPregunta, $data)
+    {
+        $this->db->where('idPregunta', $idPregunta);
+        $this->db->update('preguntas', $data);
+        
+        // Obtener el ID de la pregunta después de la actualización
+        $updatedIdPregunta = $this->db->affected_rows() > 0 ? $idPregunta : NULL;
+    
+        return $updatedIdPregunta;
+    }
+
+    // Función para modificar datos de una opción de respuesta
+    public function modificarRespuesta($idOpcion, $idPregunta, $dataRespuesta) {
+        if ($idOpcion) {
+            // Actualizar respuesta existente
+            $this->db->where('idOpcion', $idOpcion);
+            $this->db->update('opcionesrespuesta', $dataRespuesta);
+            return $idOpcion;
+        } else {
+            // Insertar nueva respuesta
+            $dataRespuesta['idPregunta'] = $idPregunta; // Asegúrate de asignar idPregunta
+            $this->db->insert('opcionesrespuesta', $dataRespuesta);
+            return $this->db->insert_id();
+        }
+    }
 }
 

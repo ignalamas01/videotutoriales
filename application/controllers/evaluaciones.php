@@ -56,6 +56,7 @@ echo "ID de la Sección: $idSeccion";
         $data['fechaFin'] = $this->input->post('deadline');
         $data['fechaInicio'] = $this->input->post('startDate');
         $data['numeroIntentos'] = $this->input->post('numeroIntentos');
+        $data['duracion'] = $this->input->post('duracion');
         $idUsuario = $this->session->userdata('idusuario'); // Necesitarás implementar esta función
 
     // Obtener el idEmpleado usando el idUsuario
@@ -217,18 +218,54 @@ public function modificar()
     $this->load->view('evaluaciones_modificar', $data);
     $this->load->view('inc/pie');
 }
-    public function modificarbd()
-	{
-		$idevaluaciones = $_POST['idevaluaciones'];
-		$data['tituloEvaluacion'] = $_POST['tituloEvaluacion'];
-		$data['descripcionEvaluacion'] = $_POST['descripcionEvaluacion'];
-        $data['fechaInicio'] = $_POST['fechaInicio'];
-        $data['fechaFin'] = $_POST['fechaFin'];
-       
-		
-		$this->evaluaciones_model->modificarcursos($idcursos,$data);
-		redirect('cursos/cursos', 'refresh');
-	}
+public function modificarbd()
+{
+    $idEvaluacion = $this->input->post('idEvaluacion');
 
-}
+    // Datos generales de la evaluación
+    $data['tituloEvaluacion'] = $this->input->post('titulo');
+    $data['descripcionEvaluacion'] = $this->input->post('descripcion');
+    $data['fechaInicio'] = $this->input->post('startDate');
+    $data['fechaFin'] = $this->input->post('deadline');
+    $data['duracion'] = $this->input->post('duracion');
+
+    // Modificar datos generales de la evaluación
+    $this->evaluaciones_model->modificarEvaluacion($idEvaluacion, $data);
+
+    // Modificar preguntas y opciones de respuesta asociadas
+    $preguntas = $this->input->post('preguntas');
+    $respuestas = $this->input->post('respuestas');
+    
+
+    foreach ($preguntas as $idPregunta => $datosPregunta) {
+        $dataPregunta = array(
+            'enunciadoPregunta' => $datosPregunta['enunciado'],
+            'puntajePregunta' => $datosPregunta['puntaje'],
+        );
+    
+        $idPregunta = $this->evaluaciones_model->modificarPregunta($idPregunta, $dataPregunta);
+    
+        // Verificar si el índice "respuestas" existe y es un array
+        if (isset($datosPregunta['respuestas']) && is_array($datosPregunta['respuestas'])) {
+            foreach ($datosPregunta['respuestas'] as $respuesta) {
+                $dataRespuesta = array(
+                    'textoOpcion' => $respuesta['textoOpcion'],
+                    'esCorrecta' => isset($respuesta['esCorrecta']) ? (int) $respuesta['esCorrecta'] : 0,
+                );
+    
+                // Asegúrate de pasar el idOpcion y idPregunta
+                $idOpcion = isset($respuesta['idOpcion']) ? $respuesta['idOpcion'] : null;
+    
+                $this->evaluaciones_model->modificarRespuesta($idOpcion, $idPregunta, $dataRespuesta);
+            }
+        }
+    }
+            echo '<pre>';
+            print_r($_POST);
+            echo '</pre>';
+        }
+
+
+    }
+    
 
