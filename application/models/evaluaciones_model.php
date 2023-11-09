@@ -177,5 +177,16 @@ class Evaluaciones_model extends CI_Model
             return $this->db->insert_id();
         }
     }
+    public function deshabilitarEvaluacion($idEvaluacion) {
+        // Supongamos que 'evaluaciones' es el nombre de tu tabla en la base de datos
+        $this->db->where('idEvaluacion', $idEvaluacion);
+
+        // Actualizar el estado a "inactivo" (o el valor que estés usando para deshabilitado)
+        $data = array('estado' => 'inactivo');
+        $this->db->update('evaluaciones', $data);
+
+        // Verificar si la actualización fue exitosa
+        return $this->db->affected_rows() > 0;
+    }
 }
 

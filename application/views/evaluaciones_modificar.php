@@ -78,7 +78,8 @@
                     <option value="1" <?php echo ($opcion->esCorrecta == 1) ? 'selected' : ''; ?>>Correcta</option>
                     <option value="0" <?php echo ($opcion->esCorrecta == 0) ? 'selected' : ''; ?>>Incorrecta</option>
                 </select>
-                
+                <!-- Campo oculto para el idOpcion -->
+    <input type="hidden" name="preguntas[<?php echo $pregunta->idPregunta; ?>][respuestas][<?php echo $contadorRespuesta; ?>][idOpcion]" value="<?php echo $opcion->idOpcion; ?>">
                 <br><br>
                 <?php $contadorRespuesta++; ?>
             <?php endforeach; ?>

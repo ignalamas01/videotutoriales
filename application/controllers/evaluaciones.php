@@ -260,11 +260,35 @@ public function modificarbd()
             }
         }
     }
-            echo '<pre>';
-            print_r($_POST);
-            echo '</pre>';
+    redirect('evaluaciones/evaluaciones_enlista', 'refresh');
+            // echo '<pre>';
+            // print_r($_POST);
+            // echo '</pre>';
         }
+public function deshabilitarbd()
+{
+    $idEvaluacion = $this->input->post('idevaluaciones');
 
+    // Lógica para deshabilitar la evaluación con el ID proporcionado
+    // ...
+
+    // Por ejemplo, puedes llamar a la función deshabilitarEvaluacion en tu modelo
+    $this->load->model('evaluaciones_model');
+    $exito = $this->evaluaciones_model->deshabilitarEvaluacion($idEvaluacion);
+
+    if ($exito) {
+        // Éxito, redirigir o hacer cualquier otra cosa
+        redirect('evaluaciones/evaluaciones_enlista', 'refresh');
+        // echo "La evaluación ha sido deshabilitada con éxito.";
+    } else {
+        // Algo salió mal
+        // echo "Error al deshabilitar la evaluación.";
+        redirect('evaluaciones/evaluaciones_enlista', 'refresh');
+    }
+}
+        
+        
+        
 
     }
     

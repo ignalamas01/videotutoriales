@@ -160,7 +160,7 @@
                             <td>
 
                                 <?php
-                                echo form_open_multipart('cursos/eliminarbd')
+                                echo form_open_multipart('evaluaciones/deshabilitarbd')
                                 ?>
                                 <input type="hidden" name="idevaluaciones" value="<?php echo $row->idEvaluacion; ?> ">
                                 <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
@@ -171,7 +171,7 @@
                             <td>
 
                                 <?php
-                                echo form_open_multipart('cursos/deshabilitarbd')
+                                echo form_open_multipart('evaluaciones/deshabilitarbd')
                                 ?>
                                 <input type="hidden" name="idevaluaciones" value="<?php echo $row->idEvaluacion; ?> ">
                                 <button type="submit" class="btn btn-warning">DESHABILITAR</button>
