@@ -61,30 +61,39 @@ class Foros extends CI_Controller {
             // Obtener datos del formulario
             $titulo = $this->input->post('titulo');
             $descripcion = $this->input->post('descripcion');
-
+        
             // Autenticación y obtención del ID de usuario
             $idUsuario = $this->session->userdata('idusuario');
-    
+        
+            // Llamar al método del modelo para obtener el ID de empleado y estudiante
+            $idEmpleado = $this->empleado_model->obtener_id($idUsuario);
+            $idEstudiante = $this->estudiante_model->obtener_id($idUsuario);
+        
             // Llamar al método del modelo para crear el foro
-            $idForoCreado = $this->Foros_model->crearForo($idUsuario, $titulo, $descripcion);
-    
+            $idForoCreado = $this->Foros_model->crearForo($idUsuario, $titulo, $descripcion, $idEmpleado, $idEstudiante);
+           
+           
+            $data['idEmpleado'] = $idEmpleado;
+            $data['idEstudiante'] = $idEstudiante;
+        
             if ($idForoCreado) {
                 // Establecer un mensaje de éxito en flashdata
                 $this->session->set_flashdata('alerta', 'El foro se creó correctamente.');
-            
+        
                 // Redirigir a la página actual
-                //redirect(current_url());
-                //este tambien redirecciona a foros que esa vista no tomamos en cuenta solo por el boton
                 redirect('foros/index', 'refresh');
             } else {
-                // Mostrar un mensaje de error
+                // Mostrar un mensaje de error detallado o registrar el error
+                log_message('error', 'Error al crear el foro para el usuario ' . $idUsuario);
                 echo "Error al crear el foro.";
             }
         }
         
+        
     }
     public function index() {
-
+         
+        
         if($this->session->userdata('login'))
         {
         
@@ -94,6 +103,10 @@ class Foros extends CI_Controller {
         // Obtener la lista de foros desde el modelo
         $data['foros'] = $this->Foros_model->obtenerForos();
         $data['comentarios'] = $this->Comentarios_model->obtenerComentarios();
+        $data['estudiante'] = $this->estudiante_model->listaestudiante();
+        
+
+       
     
         //Cargar la vista y pasar los datos
         $this->load->view('inc/cabecera');

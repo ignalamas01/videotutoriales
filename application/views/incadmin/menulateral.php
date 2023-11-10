@@ -2,7 +2,7 @@
 <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: #093562 ;" >
     <!-- Brand Logo -->
-    <a href="<?php echo base_url(); ?>index.php/base/index" class="brand-link">
+    <a href="<?php echo base_url(); ?>index.php/admin/index" class="brand-link">
       <img src="<?php echo base_url(); ?>/adminlte/dist/img/logo_cepra.jpeg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">CEPRA</span>
     </a>
@@ -98,9 +98,9 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="../layout/boxed.html" class="nav-link">
+              <a href="<?php echo base_url(); ?>index.php/reportecursos/listacreados" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>curso de calculo</p>
+                  <p>Cursos creados por empleado</p>
                 </a>
               </li>
               <li class="nav-item">

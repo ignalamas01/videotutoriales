@@ -63,6 +63,7 @@ class Cursos extends CI_Controller
 					$this->load->view('incadmin/pie');
         } if ($tipo == 'empleado') {
             // Cargar la vista para el empleado
+			$tipo = $this->session->userdata('tipo');
             $this->load->view('inc/cabecera');
 			$this->load->view('inc/menu');
 			$this->load->view('inc/menulateral');
@@ -240,13 +241,22 @@ class Cursos extends CI_Controller
 	}
 	public function agregarbd()
 	{
+		
+		
         $idUsuario = $this->session->userdata('idusuario');
+		
+		$idEmpleado = $this->empleado_model->obtener_id_empleado_por_usuario($idUsuario); /// /////////////agregado para reportes
+		
 		$data['titulo'] = $_POST['titulo'];
 		$data['descripcion'] = $_POST['descripcion'];
 		$data['foto'] = $_POST['foto'];
 		$data['idUsuario'] = $idUsuario;
+		
+		$data['idEmpleado'] = $idEmpleado;////agregado para reportes///////////////////
 
 		$this->cursos_model->agregarcursos($data);
+		
+
 		$curso_id = $this->db->insert_id();
 		
 
@@ -632,11 +642,11 @@ $idCurso = $this->input->post('idCurso');
 	public function listadoc ()
 	{
         
-		$this->load->view('inc/cabecera');
-		// $this->load->view('inc/menu');
-		// $this->load->view('inc/menulateral');
-		   $this->load->view('lista_documentos');
-		// $this->load->view('inc/pie');
+		$this->load->view('incestudiante/cabecera');
+		$this->load->view('incestudiante/menu');
+		$this->load->view('incestudiante/menulateral');
+		$this->load->view('lista_documentos');
+		$this->load->view('incestudiante/pie');
 		
 	}
 	public function eliminardoc ()

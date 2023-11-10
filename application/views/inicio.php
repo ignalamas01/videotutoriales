@@ -25,7 +25,7 @@
     <div class="row featurette">
     <div class="col-md-7">
         <h2 class="featurette-heading" style="color: blue;">SISTEMA WEB DE VIDEOTUTORIALES DE APRENDIZAJE AUTODIDACTA PARA ESTUDIANTES <span class="text-muted"> ****</span></h2>
-        <p class="lead">****</p>
+        <p class="lead">Cepra</p>
 
     </div>
     <div class="col-md-5">
@@ -49,60 +49,61 @@
 
     <div id="myCarousel" class="carousel slide"  data-bs-ride="carousel" style="background-color: #093562 ;" >
         
-    <div class="carousel-indicators" >
+    <div class="carousel-indicators"   >
         
             <button type="button"  data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"  ></button>
             <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
             <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            
         </div>
         <div class="carousel-inner">
-            <div class="carousel-item active">
-            <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-            <!-- Cambia la ruta a la imagen que desees mostrar -->
-            <!-- <image x="0" y="0" width="100%" height="100%" href="<?php echo base_url(); ?>img/large_IA.jpg" /> -->
-            </svg>
+    <div class="carousel-item active">
+        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+            <image x="0" y="0" width="100%" height="100%" href="<?php echo base_url(); ?>img/large_IA.jpg" />
+        </svg>
 
-
-                <div class="container">
-                    <div class="carousel-caption text-start ">
-                    <p><h1 style="color: blue;">cursos</h1></p>
-                    
-                        
-                        <p><a class="btn btn-lg btn-primary" href="#">VER</a></p>
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item">
-            <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-            <!-- Cambia la ruta a la imagen que desees mostrar -->
-            <!-- <image x="0" y="0" width="100%" height="100%" href="<?php echo base_url(); ?>img/large_IA.jpg" /> -->
-            </svg>
+        <div class="container">
+            <div class="carousel-caption text-start ">
+                <!-- <p><h1 style="color: blue;">cursos</h1></p> -->
+                <!-- <p><a class="btn btn-lg btn-primary" href="#">VER</a></p> -->
                 
-
-                <div class="container">
-                    <div class="carousel-caption">
-                    <p><h1 style="color: blue;">agregar texto</h1></p>
-                        
-                        <p><a class="btn btn-lg btn-primary"  href="#">VER</a></p>
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item">
-            <svg class="bd-placeholder-img"   width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-            <!-- Cambia la ruta a la imagen que desees mostrar -->
-            <!-- <image x="0" y="0" width="100%" height="100%" href="<?php echo base_url(); ?>img/large_IA.jpg" /> -->
-            </svg>
-
-                <div class="container ">
-                    <div class="carousel-caption text-end ">
-                        <p><h1 style="color: blue;">agregar texto</h1></p>
-                        
-                        <p></p>
-                        <p><a class="btn btn-lg btn-primary" href="#">VER</a></p>
-                    </div>
-                </div>
             </div>
         </div>
+    </div>
+
+    <!-- Repeat the structure for other carousel items -->
+    
+    <div class="carousel-item">
+        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+            <image x="0" y="0" width="100%" height="100%" href="<?php echo base_url(); ?>img/ig5.jpg" />
+        </svg>
+
+        <div class="container">
+            <div class="carousel-caption">
+                <!-- <p><h1 style="color: blue;">agregar texto</h1></p> -->
+                <!-- <p><a class="btn btn-lg btn-primary"  href="#">VER</a></p> -->
+            </div>
+        </div>
+    </div>
+
+    <div class="carousel-item">
+    <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+        <image x="0" y="0" width="100%" height="100%" href="<?php echo base_url(); ?>img/ig10.jpg" />
+    </svg>
+    
+    
+
+    <div class="container ">
+        <div class="carousel-caption text-end ">
+            <!-- <p><h1 style="color: blue;">agregar texto</h1></p> -->
+            <!-- <p><a class="btn btn-lg btn-primary" href="#">VER</a></p> -->
+        </div>
+    </div>
+    
+</div>
+
+</div>
+
         <button  class="carousel-control-prev" type="button"  data-bs-target="#myCarousel" data-bs-slide="prev">
             
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -114,7 +115,9 @@
             <span class="visually-hidden">texto</span>
         </button>
         
-    </div><br><br>
+</div>
+    
+    <br><br>
 
     <div class="container marketing">
 
@@ -123,21 +126,22 @@
                 <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false">
                     <title>Placeholder</title>
                     <rect width="100%" height="100%" fill="#777" /><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text>
-                    <image href="<?php echo base_url(); ?>img/large_IA.jpg" width="240" height="140" />
+                    <image href="<?php echo base_url(); ?>img/ig15.jpg" width="240" height="140" />
                 </svg>
 
-                <h2>texto </h2>
+                <h2>Ciencia de datos.</h2>
                 <p></p>
-                <p><a class="btn btn-secondary" href="#"> ENLACE1</a></p>
+                <p><a class="btn btn-secondary" href="https://www.facebook.com/" target="_blank"> ENLACE</a></p>
+
             </div><!-- /.col-lg-4 -->
             <div class="col-lg-4">
                 <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false">
                     <title>Placeholder</title>
                     <rect width="100%" height="100%" fill="#777" /><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text>
-                    <image href="<?php echo base_url(); ?>img/large_IA.jpg" width="240" height="140" />
+                    <image href="<?php echo base_url(); ?>img/ig41.jpg" width="240" height="140" />
                 </svg>
 
-                <h2>texto</h2>
+                <h2>Desarrollo web</h2>
                 <p> </p>
                 <p><a class="btn btn-secondary" href="#">ENLACE</a></p>
             </div><!-- /.col-lg-4 -->
@@ -145,10 +149,10 @@
                 <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false">
                     <title>Placeholder</title>
                     <rect width="100%" height="100%" fill="#777" /><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text>
-                    <image href="<?php echo base_url(); ?>img/large_IA.jpg" width="240" height="140" />
+                    <image href="<?php echo base_url(); ?>img/ig35.jpg" width="240" height="140" />
                 </svg>
 
-                <h2>texto</h2>
+                <h2>Estadistica</h2>
                 <p></p>
                 <p><a class="btn btn-secondary" href="#">enlace</a></p>
             </div><!-- /.col-lg-4 -->
@@ -163,9 +167,20 @@
                 <title>Placeholder</title>
                 <rect width="100%" height="100%" fill="#777" /><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text>
                 <!-- Agregar la imagen aquí -->
-                <image href="<?php echo base_url(); ?>img/large_IA.jpg" width="240" height="140" />
+                <image href="<?php echo base_url(); ?>img/ig63.jpg" width="240" height="140" />
             </svg>
-            <h2>texto </h2>
+            <h2>Administración de redes. </h2>
+            <p></p>
+            <p><a class="btn btn-secondary" href="#">ENLACE1</a></p>
+        </div>
+        <div class="col-lg-4">
+            <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>Placeholder</title>
+                <rect width="100%" height="100%" fill="#777" /><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text>
+                <!-- Agregar la imagen aquí -->
+                <image href="<?php echo base_url(); ?>img/ig30.jpg" width="240" height="140" />
+            </svg>
+            <h2>Ciencia de datos. </h2>
             <p></p>
             <p><a class="btn btn-secondary" href="#">ENLACE1</a></p>
         </div>
@@ -176,18 +191,7 @@
                 <!-- Agregar la imagen aquí -->
                 <image href="<?php echo base_url(); ?>img/large_IA.jpg" width="240" height="140" />
             </svg>
-            <h2>texto </h2>
-            <p></p>
-            <p><a class="btn btn-secondary" href="#">ENLACE1</a></p>
-        </div>
-        <div class="col-lg-4">
-            <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false">
-                <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#777" /><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text>
-                <!-- Agregar la imagen aquí -->
-                <image href="<?php echo base_url(); ?>img/large_IA.jpg" width="240" height="140" />
-            </svg>
-            <h2>texto </h2>
+            <h2>Computación en la nube.</h2>
             <p></p>
             <p><a class="btn btn-secondary" href="#">ENLACE1</a></p>
         </div>

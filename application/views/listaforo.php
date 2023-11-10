@@ -60,7 +60,7 @@
             <?php
     echo form_open_multipart('foros/for', 'id="foroForm" style="display:none;"');
     ?>
-            <h2 class="featurette-heading">AGREGAR FOROS<span class="text-muted"></span></h2>
+            <h2 class="featurette-heading">AGREGAR FOROS <span class="text-muted"></span></h2>
             <div id="alerta" style="display: none;"></div>
 
             <input type="hidden" name="idUsuario" value="<?php echo $this->session->userdata('idusuario'); ?>">
@@ -100,10 +100,10 @@
            
 
     </div>
-<ul>
+<ul><br>
     <?php foreach ($foros as $foro): ?>
         
-      <?php echo $foro->idForo; ?>
+    <!-- <h1> <?php echo $foro->idForo; ?></h1> -->
     
     <section class="content">
       
@@ -119,6 +119,13 @@
               <div class="time-label">
                 <span class="bg-red"><?php echo $foro->fechaHora; ?></span>
               </div>
+              <div>     
+                <i class="fas fa-user bg-green"><?php echo $foro->idUsuario; ?></i>
+                <div class="timeline-item" >
+                  <span class="time"><i class="fas fa-clock"></i>Hora: <?php echo date("H:i", strtotime($foro->fechaHora)); ?></span>
+                  <h3 class="timeline-header no-border"><a href="#">Usuario:<?php echo $foro->idUsuario; ?></a> creo este foro publico</h3>
+                </div>
+              </div>
               <!-- /.timeline-label -->
               <!-- timeline item -->
               
@@ -126,9 +133,9 @@
                 <i class="fas fa-envelope bg-blue"></i>
                 
                 <div class="timeline-item">
-                  <span class="time"><i class="fas fa-clock"></i>Hora: <?php echo date("H:i", strtotime($foro->fechaHora)); ?></p></span>
                   
-                  <h3 class="timeline-header"><a href="#"><?php echo $foro->titulo; ?></a> Te envié un correo electrónico</h3>
+                  
+                  <h3 class="timeline-header"><?php echo $foro->idForo; ?>:<a href="#"><?php echo $foro->titulo; ?></a> Te envié un correo electrónico</h3>
 
                   <div class="timeline-body">
                     <?php echo $foro->descripcion; ?>
@@ -147,13 +154,7 @@
               </div>
               <!-- END timeline item -->
               <!-- timeline item -->
-              <div>
-                <i class="fas fa-user bg-green"><?php echo $foro->idUsuario; ?></i>
-                <div class="timeline-item" >
-                  <span class="time"><i class="fas fa-clock"></i> 5 mins ago</span>
-                  <h3 class="timeline-header no-border"><a href="#">NOMBRE DEL USUARIO</a> creo este foro publico</h3>
-                </div>
-              </div>
+              
             <ul>
 
               
@@ -278,7 +279,7 @@
                         <input type="hidden" name="idForo" value="<?php echo $foro->idForo; ?>">
                         <!-- Asegúrate de obtener el ID del usuario de la sesión o de otra manera -->
                         <input type="hidden" name="idUsuario" value="<?php echo $this->session->userdata('idusuario'); ?>">
-                        <input type="submit" value="Enviar Comentario">
+                        <input style="background-color: #0935 ;" type="submit"  value="Enviar Comentario">
                         <?php echo form_close(); ?>
                     </div>
                 </div>
@@ -337,6 +338,8 @@
 
     <?php endforeach; ?>
 </ul>
+
+
 
 
 

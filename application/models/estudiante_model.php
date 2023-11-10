@@ -71,4 +71,12 @@ class estudiante_model extends CI_Model
 
         return $query->num_rows() > 0;
     }
+    public function obtener_id($idUsuario) { ///agregado para reportes
+        $this->db->select('id');
+        $this->db->where('idUsuario', $idUsuario);
+        $query = $this->db->get('empleado');
+        $row = $query->row();
+
+        return ($row) ? $row->id : null;
+    }
 }
