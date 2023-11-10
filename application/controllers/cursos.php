@@ -245,6 +245,8 @@ class Cursos extends CI_Controller
 		$data['descripcion'] = $_POST['descripcion'];
 		$data['foto'] = $_POST['foto'];
 		$data['idUsuario'] = $idUsuario;
+		$data['fechaRegistro'] = date('Y-m-d H:i:s');
+    $data['fechaActualizacion'] = date('Y-m-d H:i:s');
 
 		$this->cursos_model->agregarcursos($data);
 		$curso_id = $this->db->insert_id();
@@ -346,6 +348,7 @@ public function modificarbd()
         'titulo' => $this->input->post('titulo'),
         'descripcion' => $this->input->post('descripcion'),
         'foto' => $this->input->post('foto'),
+		'fechaActualizacion' => date('Y-m-d H:i:s'),
     ];
 
     $nombre_seccion = $this->input->post('nombre_seccion');

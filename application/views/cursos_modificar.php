@@ -121,7 +121,7 @@
                         </div>
                         <!-- /.card -->
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-success">modificar</button>
+                            <button type="submit" class="btn btn-success">Modificar</button>
                             <button type="reset" class="btn btn-primary" onClick="history.go(-1);">Cancelar</button>
                         </div>
                         <!-- /.card-body -->
