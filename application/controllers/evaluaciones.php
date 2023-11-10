@@ -286,9 +286,27 @@ public function deshabilitarbd()
         redirect('evaluaciones/evaluaciones_enlista', 'refresh');
     }
 }
+public function deshabilitados()
+{
+    $lista = $this->evaluaciones_model->listaevaluacionesdes();
+    $data['evaluaciones'] = $lista;
+    $this->load->view('inc/cabecera');
+    $this->load->view('inc/menu');
+    $this->load->view('inc/menulateral');
+    $this->load->view('evaluaciones_listades',$data);
+    $this->load->view('inc/pie');
+}
         
-        
-        
+public function habilitarbd()
+{
+    $idevaluaciones = $_POST['idevaluaciones'];
+    $data['estado']='activo';
+
+
+    $this->evaluaciones_model->modificarevaluaciones($idevaluaciones,$data);
+    redirect('evaluaciones/deshabilitados', 'refresh');
+
+}   
 
     }
     

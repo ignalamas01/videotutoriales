@@ -188,5 +188,17 @@ class Evaluaciones_model extends CI_Model
         // Verificar si la actualización fue exitosa
         return $this->db->affected_rows() > 0;
     }
+    public function listaevaluacionesdes()
+    {
+        $this->db->select('*');
+        $this->db->from('evaluaciones');
+        $this->db->where('estado','inactivo');
+        return $this->db->get();
+    }
+    public function modificarevaluaciones($idevaluaciones, $data)
+    {
+        $this->db->where('idEvaluacion', $idevaluaciones);
+        $this->db->update('evaluaciones', $data);
+    }
 }
 
