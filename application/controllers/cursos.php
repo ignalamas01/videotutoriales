@@ -320,25 +320,58 @@ redirect('cursos/agregar', 'refresh');
 		
 	}
 	public function modificar()
-	{
-		$idcursos = $_POST['idcursos'];
-		$data['infocursos'] = $this->cursos_model->recuperarcursos($idcursos);
-		$this->load->view('inc/cabecera');
-		$this->load->view('inc/menu');
-		$this->load->view('inc/menulateral');
-		$this->load->view('cursos_modificar',$data);
-		$this->load->view('inc/pie');
-	}
-	public function modificarbd()
-	{
-		$idcursos = $_POST['idcursos'];
-		$data['titulo'] = $_POST['titulo'];
-		$data['descripcion'] = $_POST['descripcion'];
-		$data['foto'] = $_POST['foto'];
+{
+    $idcursos = $_POST['idcursos'];
+    $data['infocursos'] = $this->cursos_model->recuperarcursos($idcursos);
+    // Fetch additional data from other tables and pass it to the view
+    $data['infosecciones'] = $this->cursos_model->getSecciones($idcursos);
+	foreach ($data['infosecciones'] as $seccion) {
+        $seccion->videos = $this->cursos_model->getVideos($seccion->idSeccion);
+        $seccion->archivos = $this->cursos_model->getArchivos($seccion->idSeccion);
+    }
+
+    $this->load->view('inc/cabecera');
+    $this->load->view('inc/menu');
+    $this->load->view('inc/menulateral');
+    $this->load->view('cursos_modificar', $data);
+    $this->load->view('inc/pie');
+}
+
+public function modificarbd()
+{
+    $idCurso = $this->input->post('idcursos');
+	echo "ID del Curso: " . $idCurso . "<br>";
+    
+    $dataCursos = [
+        'titulo' => $this->input->post('titulo'),
+        'descripcion' => $this->input->post('descripcion'),
+        'foto' => $this->input->post('foto'),
+    ];
+
+    $nombre_seccion = $this->input->post('nombre_seccion');
+	
+	
+
+    // Obtener datos adicionales (videos y archivos) por cada sección
+    $secciones = [];
+    foreach ($nombre_seccion as $key => $nombre) {
+        $seccion = [
+			'idSeccion' => $this->input->post('idSeccion')[$key],  // Asegúrate de que esto esté presente en tu formulario
+            'nombre' => $nombre,
+        ];
+
+        $secciones[] = $seccion;
 		
-		$this->cursos_model->modificarcursos($idcursos,$data);
-		redirect('cursos/cursos', 'refresh');
-	}
+    }
+
+    // Llamar al modelo para actualizar cursos y secciones
+    $this->cursos_model->actualizarCursosYSecciones($idCurso, $dataCursos, $secciones);
+
+    // Redirigir a la página de cursos
+    // redirect('cursos/cursos', 'refresh');
+}
+
+
 
 
 	public function eliminarbd()
