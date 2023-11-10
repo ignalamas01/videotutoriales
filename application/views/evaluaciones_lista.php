@@ -33,7 +33,7 @@
                             <th>Puntuacion</th>
                             <th>Estado</th>
                             <th>Examen iniciado</th>
-                            <th>Vista</th>
+                            <!-- <th>Vista</th> -->
                         </tr>
                     </thead>
                     <tbody>
@@ -43,13 +43,14 @@
                         foreach ($evaluaciones as $row)
                         {
                             $idCurso = $row->idCurso;
+                            $idEvaluacion = $row->idEvaluacion; 
                             if ($idCurso !== null) {
-                                $cursoInfo = $this->certificados_model->obtener_curso_y_seccion_por_id($idCurso);
+                                $cursoInfo = $this->certificados_model->obtener_curso_y_seccion_por_id($idEvaluacion);
 
     // Verificar si se obtuvo la información
     if ($cursoInfo) {
-        $cursoTitulo = $cursoInfo->curso_titulo;
-        $seccionNombre = $cursoInfo->seccion_nombre;
+        $cursoTitulo = $cursoInfo['curso_titulo'];
+        $seccionNombre = $cursoInfo['seccion_nombre'] ?? 'Sin sección asignada';
     } else {
         $cursoTitulo = 'Sin título';
         $seccionNombre = 'Sin sección asignada';
@@ -58,8 +59,8 @@
                         ?>
                             <tr>
                                 <td> <?php echo $indice; ?> </td>
-                                <td><?php echo $cursoInfo->curso_titulo; ?></td>
-                                <td><?php echo $cursoInfo->seccion_nombre; ?></td>
+                                <td><?php echo $cursoInfo['curso_titulo']; ?></td>
+<td><?php echo ($cursoInfo['seccion_nombre'] !== null) ? $cursoInfo['seccion_nombre'] : 'PRUEBA GENERAL'; ?></td>                                
                                 <td><?php echo $row->puntajeTotal; ?></td>
                                 <td><?php
     // Agrega una condición para determinar si es Aprobado o Reprobado
@@ -70,7 +71,7 @@
                                                              }
                                                     ?></td>
                                 <td><?php echo $row->fechaRegistro; ?></td>
-                                <td style="text-decoration: underline;"><?php echo 'Ver Evaluacion'; ?></td>
+                                <!-- <td style="text-decoration: underline;"><?php echo 'Ver Evaluacion'; ?></td> -->
                                 <!-- <td>
     <button class="btn btn-ver-evaluacion" data-id-evaluacion="<?php echo $row->id; ?>">Ver Evaluación</button>
 </td>

@@ -331,18 +331,26 @@ public function verificar_aprobacion_curso($idCurso, $idEstudiante) {
             return 0; // o algún valor predeterminado si no se encuentra el estudiante
         }
 }
-public function obtener_curso_y_seccion_por_id($idCurso) {
-    $this->db->select('cursos.titulo as curso_titulo, secciones.nombre as seccion_nombre'); // Ajusta los nombres de las columnas según tu esquema de base de datos
-    $this->db->from('cursos');
-    $this->db->join('secciones', 'cursos.id = secciones.idCurso', 'left'); // Ajusta según tus relaciones de base de datos
-    $this->db->where('cursos.id', $idCurso);
+public function obtener_curso_y_seccion_por_id($idEvaluacion) {
+    $this->db->select('evaluaciones.idCurso, evaluaciones.idSeccion, cursos.titulo as curso_titulo, secciones.nombre as seccion_nombre');
+    $this->db->from('evaluaciones');
+    $this->db->join('cursos', 'evaluaciones.idCurso = cursos.id', 'left');
+    $this->db->join('secciones', 'evaluaciones.idSeccion = secciones.idSeccion', 'left');
+    $this->db->where('evaluaciones.idEvaluacion', $idEvaluacion);
     $query = $this->db->get();
 
     // Verificar si se obtuvo el curso y la sección
     if ($query->num_rows() > 0) {
-        return $query->row();
+        return $query->row_array();  // Cambiamos row() a row_array()
     } else {
-        return false;
+        // Devolver un array con valores predeterminados
+        return array('idCurso' => null, 'idSeccion' => null, 'curso_titulo' => 'Sin título', 'seccion_nombre' => 'Sin sección');
     }
 }
+
+
+
+
+
+
 }

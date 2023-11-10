@@ -1,43 +1,36 @@
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-  <!-- Content Header (Page header) -->
+    <!-- Content Header (Page header) -->
     <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>*</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/base/index">Home</a></li>
-              <li class="breadcrumb-item active">DataTables</li>
-            </ol>
-          </div>
-        </div>
-      </div><!-- /.container-fluid -->
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1></h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/base/index">Home</a></li>
+                        <!-- <li class="breadcrumb-item active">DataTables</li> -->
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
     </section>
 
     <!-- Main content -->
     <div class="row featurette">
-    <div class="col-md-7">
-        <br>
-        <h2 class="featurette-heading">MODIFICAR CURSOS<span class="text-muted"> ****</span></h2><br>
+        <div class="col-md-7">
+            <br>
+            <h2 class="featurette-heading">MODIFICAR CURSOS<span class="text-muted"></span></h2><br>
+        </div>
+        <div class="col-md-5">
+            <!-- <center><img src="<?php echo base_url(); ?>img/imgvt.png" width="120"></center> -->
+        </div>
 
-
-    </div>
-    <div class="col-md-5">
-        <center><img src="<?php echo base_url(); ?>img/imgvt.png" width="120"></center>
-
-    </div>
-
-    <!--<div col-md-12> -->
-
-    <?php
-    foreach ($infocursos->result() as  $row) {
-        echo form_open_multipart('cursos/modificarbd')
-    ?>
-
-
+        <?php
+        foreach ($infocursos->result() as $row) {
+            echo form_open_multipart('cursos/modificarbd')
+        ?>
 
         <section class="content">
             <div class="container-fluid">
@@ -66,75 +59,71 @@
                                         <label for="exampleInputPassword1">FOTO</label>
                                         <input type="text" name="foto" placeholder="escriba su segundo apellido" class="form-control" value="<?php echo $row->foto; ?>"><br>
                                     </div>
-                                    <!-- <div class="row">
-                                        <div class="col-4">
-                                            <div class="form-group">
-                                                <label> Departamento</label>
-                                                <select name="departamento" class="form-control select2" style="width: 100%;" value="<?php echo $row->departamento; ?>">
-                                                   
-                                                    <option value="Beni">Beni</option>
-                                                    <option value="Beni">cochabamba</option>
-                                                    <option value="Chuquisaca">Chuquisaca</option>
-                                                    <option value="La Paz">La Paz</option>
-                                                    <option value="Oruro">Oruro</option>
-                                                    <option value="Potosi">Potosi</option>
-                                                    <option value="Pando">Pando</option>
-                                                    <option value="Santa Cruz">Santa Cruz</option>
-                                                    <option value="Tarija">Tarija</option>
-                                                </select>
-                                            </div>
-                                        </div>
 
-                                      
-                                        <div class="col-4">
-                                            <div class="form-group">
-                                                <label>Fecha Nacimiento:</label>
-                                                <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                                                    <input type="date" name="fechaNac" class="form-control datetimepicker-input" data-target="#reservationdate" placeholder="AAAA-MM-DD" value="<?php echo $row->fechaNacimiento; ?>">
-                                                    <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
-                                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="form-group">
-                                                <label for="exampleInputPassword1">contacto</label>
-                                                <input type="text" class="form-control" name="telefono" placeholder="numero de celular" value="<?php echo $row->telefono; ?>">
-                                            </div>
+                                   <!-- Secciones -->
+<?php foreach ($infosecciones as $seccion) : ?>
+    <?php if ($seccion->idCurso == $row->id) : ?>
+    <div class="card card-info">
+        <div class="card-header">
+            <h3 class="card-title">Datos de la Sección</h3>
+        </div>
+        <div class="card-body">
+            <input type="hidden" name="idSeccion[]" class="form-control" value="<?php echo $seccion->idSeccion; ?>">
+            <label for="exampleInputPassword1">Nombre de la Sección</label>
+            <input type="text" name="nombre_seccion[]" class="form-control" value="<?php echo $seccion->nombre; ?>"><br>
 
-                                        </div>
+            <!-- Videos -->
+            <?php foreach ($seccion->videos as $video) : ?>
+                <?php if ($video->idSeccion == $seccion->idSeccion) : ?>
+                    <div class="card card-warning">
+                        <div class="card-header">
+                            <h3 class="card-title">Datos del Video</h3>
+                        </div>
+                        <div class="card-body">
+                            <input type="hidden" name="idVideo[]" class="form-control" value="<?php echo $video->idVideo; ?>">
+                            <label for="exampleInputPassword1">Título del Video</label>
+                            <input type="text" name="titulo_video[]" class="form-control" value="<?php echo $video->tituloVideo; ?>"><br>
+                            <label for="exampleInputPassword1">Descripción del Video</label>
+                            <input type="text" name="descripcion_video[]" class="form-control" value="<?php echo $video->descripcionVideo; ?>"><br>
+                            <label for="exampleInputPassword1">Enlace del Video</label>
+                            <input type="text" name="enlace_video[]" class="form-control" value="<?php echo $video->enlaceVideo; ?>"><br>
+                            <!-- Agrega otros campos de video según sea necesario -->
+                        </div>
+                    </div>
+                <?php endif; ?>
+            <?php endforeach; ?>
 
+            <!-- Archivos -->
+            <?php foreach ($seccion->archivos as $archivo) : ?>
+                <?php if ($archivo->idSeccion == $seccion->idSeccion) : ?>
+                    <div class="card card-danger">
+                        <div class="card-header">
+                            <h3 class="card-title">Datos del Archivo</h3>
+                        </div>
+                        <div class="card-body">
+                            <input type="hidden" name="idArchivo[]" class="form-control" value="<?php echo $archivo->idArchivo; ?>">
+                            <label for="exampleInputPassword1">Nombre del Archivo</label>
+                            <input type="text" name="nombre_archivo[]" class="form-control" value="<?php echo $archivo->nombreArchivo; ?>"><br>
+                            <label for="exampleInputPassword1">Ruta del Archivo</label>
+                            <input type="text" name="ruta_archivo[]" class="form-control" value="<?php echo $archivo->rutaArchivo; ?>"><br>
+                            <!-- Agrega otros campos de archivo según sea necesario -->
+                        </div>
+                    </div>
+                <?php endif; ?>
+            <?php endforeach; ?>
 
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-4">
-                                            <div class="form-group">
-                                                <label for="municipio">direccion</label>
-                                                <input type="text" class="form-control" name="direccion" placeholder="direccion" value="<?php echo $row->direccion; ?>">
-                                            </div>
-                                        </div>
-
-                                    </div> -->
-
-
-
-
-
+        </div>
+    </div>
+    <?php endif; ?>
+<?php endforeach; ?>
                                 </div>
-                                <!-- /.card-body -->
-
-
                             </form>
                         </div>
                         <!-- /.card -->
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-success ">modificar</button>
-
+                            <button type="submit" class="btn btn-success">Modificar</button>
                             <button type="reset" class="btn btn-primary" onClick="history.go(-1);">Cancelar</button>
                         </div>
-
                         <!-- /.card-body -->
                     </div>
                     <!-- /.card -->
@@ -142,25 +131,15 @@
                 <!--/.col (right) -->
             </div>
             <!-- /.row -->
-
         </section>
-</div><!-- /.container-fluid -->
-
-
-<?php
+    </div><!-- /.container-fluid -->
+    <?php
         echo form_close();
     }
-?>
-
-
-
-<!--        </form>*/ -->
-
-
+    ?>
+    <!--        </form>*/ -->
 </div>
-
-
 </div>
-  <!-- /.content -->
+<!-- /.content -->
 </div>
 <!-- /.content-wrapper -->

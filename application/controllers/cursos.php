@@ -251,10 +251,13 @@ class Cursos extends CI_Controller
 		$data['descripcion'] = $_POST['descripcion'];
 		$data['foto'] = $_POST['foto'];
 		$data['idUsuario'] = $idUsuario;
+		$data['fechaRegistro'] = date('Y-m-d H:i:s');
+    	$data['fechaActualizacion'] = date('Y-m-d H:i:s');
 		
-		$data['idEmpleado'] = $idEmpleado;////agregado para reportes///////////////////
+		$data['idEmpleado'] = $idEmpleado;////agregado para reportes
 
 		$this->cursos_model->agregarcursos($data);
+
 		
 
 		$curso_id = $this->db->insert_id();
@@ -330,25 +333,59 @@ redirect('cursos/agregar', 'refresh');
 		
 	}
 	public function modificar()
-	{
-		$idcursos = $_POST['idcursos'];
-		$data['infocursos'] = $this->cursos_model->recuperarcursos($idcursos);
-		$this->load->view('inc/cabecera');
-		$this->load->view('inc/menu');
-		$this->load->view('inc/menulateral');
-		$this->load->view('cursos_modificar',$data);
-		$this->load->view('inc/pie');
-	}
-	public function modificarbd()
-	{
-		$idcursos = $_POST['idcursos'];
-		$data['titulo'] = $_POST['titulo'];
-		$data['descripcion'] = $_POST['descripcion'];
-		$data['foto'] = $_POST['foto'];
+{
+    $idcursos = $_POST['idcursos'];
+    $data['infocursos'] = $this->cursos_model->recuperarcursos($idcursos);
+    // Fetch additional data from other tables and pass it to the view
+    $data['infosecciones'] = $this->cursos_model->getSecciones($idcursos);
+	foreach ($data['infosecciones'] as $seccion) {
+        $seccion->videos = $this->cursos_model->getVideos($seccion->idSeccion);
+        $seccion->archivos = $this->cursos_model->getArchivos($seccion->idSeccion);
+    }
+
+    $this->load->view('inc/cabecera');
+    $this->load->view('inc/menu');
+    $this->load->view('inc/menulateral');
+    $this->load->view('cursos_modificar', $data);
+    $this->load->view('inc/pie');
+}
+
+public function modificarbd()
+{
+    $idCurso = $this->input->post('idcursos');
+	echo "ID del Curso: " . $idCurso . "<br>";
+    
+    $dataCursos = [
+        'titulo' => $this->input->post('titulo'),
+        'descripcion' => $this->input->post('descripcion'),
+        'foto' => $this->input->post('foto'),
+		'fechaActualizacion' => date('Y-m-d H:i:s'),
+    ];
+
+    $nombre_seccion = $this->input->post('nombre_seccion');
+	
+	
+
+    // Obtener datos adicionales (videos y archivos) por cada sección
+    $secciones = [];
+    foreach ($nombre_seccion as $key => $nombre) {
+        $seccion = [
+			'idSeccion' => $this->input->post('idSeccion')[$key],  // Asegúrate de que esto esté presente en tu formulario
+            'nombre' => $nombre,
+        ];
+
+        $secciones[] = $seccion;
 		
-		$this->cursos_model->modificarcursos($idcursos,$data);
-		redirect('cursos/cursos', 'refresh');
-	}
+    }
+
+    // Llamar al modelo para actualizar cursos y secciones
+    $this->cursos_model->actualizarCursosYSecciones($idCurso, $dataCursos, $secciones);
+
+    // Redirigir a la página de cursos
+    // redirect('cursos/cursos', 'refresh');
+}
+
+
 
 
 	public function eliminarbd()
@@ -567,6 +604,7 @@ $idCurso = $this->input->post('idCurso');
         $data['descripcionEvaluacion'] = $evaluacion['descripcionEvaluacion'];
 		$data['puntajeTotal'] = $evaluacion['puntajeTotal'];
 		$data['idCurso'] = $evaluacion['idCurso'];
+		$data['duracion'] = $evaluacion['duracion'];
         // Otros datos necesarios para la vista
         // $data['idEstudiante'] = obtener_id_estudiante(); // Reemplaza esto con la lógica real
         // $data['puntajeObtenido'] = obtener_puntaje_obtenido(); // Reemplaza esto con la lógica real

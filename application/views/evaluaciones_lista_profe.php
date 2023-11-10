@@ -13,7 +13,7 @@
               <!-- <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/base/index">Home</a></li>
               <li class="breadcrumb-item active">DataTables</li> -->
               <!-- <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/cursos/agregar">agregar curso</a></li> -->
-              <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/cursos/deshabilitados">Deshabilitados</a></li>
+              <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/evaluaciones/deshabilitados">Deshabilitados</a></li>
               <!-- <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/suscripciones/agregarEstudiante">inscribir a un curso</a></li> -->
               <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/usuarios/logout">Cerrar sesión</a></li>
             </ol>
@@ -160,7 +160,7 @@
                             <td>
 
                                 <?php
-                                echo form_open_multipart('cursos/eliminarbd')
+                                echo form_open_multipart('evaluaciones/deshabilitarbd')
                                 ?>
                                 <input type="hidden" name="idevaluaciones" value="<?php echo $row->idEvaluacion; ?> ">
                                 <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
@@ -171,7 +171,7 @@
                             <td>
 
                                 <?php
-                                echo form_open_multipart('cursos/deshabilitarbd')
+                                echo form_open_multipart('evaluaciones/deshabilitarbd')
                                 ?>
                                 <input type="hidden" name="idevaluaciones" value="<?php echo $row->idEvaluacion; ?> ">
                                 <button type="submit" class="btn btn-warning">DESHABILITAR</button>

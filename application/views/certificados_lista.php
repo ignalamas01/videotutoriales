@@ -29,6 +29,7 @@
                             <a href="<?php echo base_url('index.php/vercertificado/ver/' . $row->idCertificado); ?>">
                             <!-- <img src="<?php echo base_url('uploads/certificados/') . $row->rutaImagen; ?>" class="card-img-top" alt="Certificado"> -->
                             </a>
+                           
                             <div class="card-body">
                                 <ul class="list-unstyled d-flex justify-content-between">
                                     <!-- <li>
@@ -71,7 +72,10 @@
                         <li class="text-muted text-left">Curso:  <?php echo $curso->titulo; ?></li>
                         <!-- <a href="<?php echo base_url('uploads/certificados/'). basename($row->rutaPDF); ?>"class="btn btn-primary" target="_blank" download>Descargar Certificado</a> -->
                         <a href="<?php echo base_url('uploads/certificados/') . basename($row->rutaPDF); ?>" target="_blank" download>Descargar Certificado</a>
-                                <!-- <a href="<?php echo base_url('index.php/vercertificado/ver/' . $row->idCertificado); ?>" class="h2 text-decoration-none text-dark"><?php echo $row->tituloCurso; ?></a> -->
+                        <button class="btn btn-primary btn-share" data-url="<?php echo base_url('index.php/vercertificado/ver/' . $row->idCertificado); ?>">
+        Compartir Logro
+    </button>
+                        <!-- <a href="<?php echo base_url('index.php/vercertificado/ver/' . $row->idCertificado); ?>" class="h2 text-decoration-none text-dark"><?php echo $row->tituloCurso; ?></a> -->
                                 <!-- <p class="card-text"><?php echo $row->descripcionCurso; ?></p> -->
                             </div>
                         </div>
@@ -89,9 +93,20 @@
     <script src="<?php echo base_url(); ?>adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="<?php echo base_url(); ?>adminlte/plugins/templatemo.js"></script>
     <script src="<?php echo base_url(); ?>adminlte/plugins/custom.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- End Script -->
-</body>
 
+
+</body>
+<script>
+    $(document).ready(function() {
+        $(".btn-share").on("click", function() {
+            var certificadoUrl = $(this).data("url");
+            // Abrir enlace en Facebook
+            window.open("https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(certificadoUrl), "_blank");
+        });
+    });
+</script>
 <!-- jQuery -->
 <script src="<?php echo base_url(); ?>adminlte/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->

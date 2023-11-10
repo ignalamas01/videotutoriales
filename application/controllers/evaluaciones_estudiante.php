@@ -23,7 +23,7 @@ $idSeccion = 1; // Reemplaza con el valor deseado
         // Obtener el título y la descripción de la evaluación
         $data['tituloEvaluacion'] = $evaluacion['tituloEvaluacion'];
         $data['descripcionEvaluacion'] = $evaluacion['descripcionEvaluacion'];
-
+        $data['duracion'] = $evaluacion['duracion'];
         // Otros datos necesarios para la vista
         $data['idEstudiante'] = obtener_id_estudiante(); // Reemplaza esto con la lógica real
         $data['puntajeObtenido'] = obtener_puntaje_obtenido(); // Reemplaza esto con la lógica real

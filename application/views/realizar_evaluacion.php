@@ -50,7 +50,7 @@
     </style>
 </head>
 <body>
-
+<p>Tiempo Restante: <span id="countdownTimer"></span></p>
 <h1><?php echo $tituloEvaluacion; ?></h1>
 <p><?php echo $descripcionEvaluacion; ?></p>
 <p>Puntaje Total: <?php echo $puntajeTotal; ?></p>
@@ -102,6 +102,54 @@
 <input type="submit" value="Enviar Respuestas">
 <?php echo form_close(); ?>
 <input type="hidden" name="idEstudiante" value="<?php echo isset($idEstudiante) ? $idEstudiante : ''; ?>">
+
+<script>
+  // Función para iniciar el cronómetro
+  function startCountdown(duration) {
+    if (!duration || duration === '00:00') {
+      document.getElementById('countdownTimer').innerText = 'Sin tiempo límite';
+      return;
+    }
+
+    const [hours, minutes] = duration.split(':');
+    let timeRemaining = parseInt(hours) * 3600 + parseInt(minutes) * 60;
+
+    // Función para actualizar y mostrar el tiempo restante
+    function updateTimer() {
+      const displayHours = Math.floor(timeRemaining / 3600);
+      const displayMinutes = Math.floor((timeRemaining % 3600) / 60);
+      const displaySeconds = timeRemaining % 60;
+
+      // Formatear el tiempo como HH:MM:SS
+      const formattedTime = `${displayHours.toString().padStart(2, '0')}:${displayMinutes.toString().padStart(2, '0')}:${displaySeconds.toString().padStart(2, '0')}`;
+
+      // Mostrar el tiempo en algún elemento HTML
+      document.getElementById('countdownTimer').innerText = formattedTime;
+
+      // Verificar si el tiempo restante es 0
+      if (timeRemaining === 0) {
+        document.getElementById('countdownMessage').innerText = 'Examen terminado';
+      }
+
+      // Reducir el tiempo restante
+      timeRemaining--;
+
+      // Si el tiempo restante es mayor que cero, programar la próxima actualización
+      if (timeRemaining >= 0) {
+        setTimeout(updateTimer, 1000); // Actualizar cada 1 segundo
+      }
+    }
+
+    // Iniciar el cronómetro
+    updateTimer();
+  }
+
+  // Iniciar el cronómetro cuando la página esté completamente cargada
+  document.addEventListener('DOMContentLoaded', function () {
+    const duracion = "<?php echo $duracion; ?>"; // Obtener la duración desde PHP
+    startCountdown(duracion);
+  });
+</script>
 
 
 
