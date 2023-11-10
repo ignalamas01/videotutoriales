@@ -69,7 +69,7 @@
             <?php
     echo form_open_multipart('foros/for', 'id="foroForm" style="display:none;"');
     ?>
-            <h2 class="featurette-heading">AGREGAR FOROS mal direccionado<span class="text-muted"></span></h2>
+            <h2 class="featurette-heading">AGREGAR FOROS mal<span class="text-muted"></span></h2>
             <div id="alerta" style="display: none;"></div>
 
             <input type="hidden" name="idUsuario" value="<?php echo $this->session->userdata('idusuario'); ?>">
