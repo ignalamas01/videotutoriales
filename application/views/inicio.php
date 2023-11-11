@@ -24,7 +24,7 @@
     <!-- Main content -->
     <div class="row featurette">
     <div class="col-md-7">
-        <h2 class="featurette-heading" style="color: blue;">SISTEMA WEB DE VIDEOTUTORIALES DE APRENDIZAJE AUTODIDACTA PARA ESTUDIANTES <span class="text-muted"> ****</span></h2>
+        <h2 class="featurette-heading" style="color: blue;">SISTEMA WEB DE VIDEOTUTORIALES DE APRENDIZAJE AUTODIDACTA PARA ESTUDIANTES <span class="text-muted"></span></h2>
         <p class="lead">Cepra</p>
 
     </div>
@@ -131,7 +131,7 @@
 
                 <h2>Ciencia de datos.</h2>
                 <p></p>
-                <p><a class="btn btn-secondary" href="https://www.facebook.com/" target="_blank"> ENLACE</a></p>
+                <p><a class="btn btn-secondary" href="https://www.facebook.com/" target="_blank">CONTACTANOS</a></p>
 
             </div><!-- /.col-lg-4 -->
             <div class="col-lg-4">
@@ -143,7 +143,7 @@
 
                 <h2>Desarrollo web</h2>
                 <p> </p>
-                <p><a class="btn btn-secondary" href="#">ENLACE</a></p>
+                <p><a class="btn btn-secondary" href="#">CONTACTANOS</a></p>
             </div><!-- /.col-lg-4 -->
             <div class="col-lg-4">
                 <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false">
@@ -154,7 +154,7 @@
 
                 <h2>Estadistica</h2>
                 <p></p>
-                <p><a class="btn btn-secondary" href="#">enlace</a></p>
+                <p><a class="btn btn-secondary" href="#">CONTACTANOS</a></p>
             </div><!-- /.col-lg-4 -->
         </div><!-- /.row -->
 
@@ -171,7 +171,7 @@
             </svg>
             <h2>Administración de redes. </h2>
             <p></p>
-            <p><a class="btn btn-secondary" href="#">ENLACE1</a></p>
+            <p><a class="btn btn-secondary" href="#">CONTACTANOS</a></p>
         </div>
         <div class="col-lg-4">
             <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false">
@@ -182,7 +182,7 @@
             </svg>
             <h2>Ciencia de datos. </h2>
             <p></p>
-            <p><a class="btn btn-secondary" href="#">ENLACE1</a></p>
+            <p><a class="btn btn-secondary" href="#">CONTACTANOS</a></p>
         </div>
         <div class="col-lg-4">
             <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false">
@@ -193,7 +193,7 @@
             </svg>
             <h2>Computación en la nube.</h2>
             <p></p>
-            <p><a class="btn btn-secondary" href="#">ENLACE1</a></p>
+            <p><a class="btn btn-secondary" href="#">CONTACTANOS</a></p>
         </div>
         <!-- /.col-lg-4 -->
         <!-- ... (otros elementos similares) ... -->

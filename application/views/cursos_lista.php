@@ -12,10 +12,10 @@
             <ol class="breadcrumb float-sm-right">
               <!-- <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/base/index">Home</a></li>
               <li class="breadcrumb-item active">DataTables</li> -->
-              <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/cursos/agregar">agregar curso</a></li>
-              <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/cursos/deshabilitados">deshabilitados</a></li>
-              <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/suscripciones/agregarEstudiante">inscribir a un curso</a></li>
-              <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/usuarios/logout">Cerrar sesión</a></li>
+              <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/cursos/agregar">Agregar Curso</a></li>
+              <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/cursos/deshabilitados">Deshabilitados</a></li>
+              <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/suscripciones/agregarEstudiante">Inscribir a un Curso</a></li>
+              <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/usuarios/logout">Cerrar Sesión</a></li>
             </ol>
           </div>
         </div>
@@ -46,7 +46,7 @@
                 <a href="<?php echo base_url(); ?>index.php/cursos/deshabilitados"> <button type="button" class="btn btn-primary">Lista de cursos deshabilitados</button> </a> -->
                 <a href="<?php echo base_url(); ?>index.php/cursos/subir_video"> <button type="button" class="btn btn-danger">Videos</button> </a>
                 <!-- <a href="<?php echo base_url(); ?>index.php/cursos/subir_archivos"> <button type="button" class="btn btn-danger">Archivos</button> </a> -->
-                <a href="<?php echo base_url(); ?>index.php/cursos/crear_evaluacion"><button type="button" class="btn btn-warning">Crear evaluacion</button>  </a>
+                <!-- <a href="<?php echo base_url(); ?>index.php/cursos/crear_evaluacion"><button type="button" class="btn btn-warning">Crear evaluacion</button>  </a> -->
                 <!-- <a href="<?php echo base_url(); ?>index.php/cursos/realizar_evaluacion"><button type="button" class="btn btn-warning">Realizar evaluacion</button>  </a> -->
                 
                 <!-- <a href="<?php echo base_url(); ?>index.php/suscripciones/agregarEstudiante"><button type="button" class="btn btn-danger">inscribir estudiante a un curso</button>  </a> -->
@@ -93,7 +93,7 @@
                       <td>MODIFICAR</td>
                       <td>ELIMINAR</td>
                       <td>DESHABILITAR</td>
-                      <td>FOTO</td>
+                      <!-- <td>FOTO</td> -->
                               
                     </tr>
                   </thead>
@@ -174,7 +174,7 @@
                                 <?php
                                 echo form_close();
                                 ?>
-                            </td>
+                            <!-- </td>
 
                             
                             <td>
@@ -191,7 +191,7 @@
                                 echo form_close();
                                 
                               ?>  
-                            </td>
+                            </td> -->
                         </tr>
 
                     <?php
@@ -212,7 +212,7 @@
                   <td>MODIFICAR</td>
                   <td>ELIMINAR</td>
                   <td>DESHABILITAR</td>
-                  <td>SUBIR VIDEO/FOTO</td>
+                  <!-- <td>SUBIR VIDEO/FOTO</td> -->
                   </tr>
                   </tfoot>
                 </table>

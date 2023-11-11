@@ -77,15 +77,15 @@ if ($alerta) {
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">TITULO</label>
-                                    <input type="text" name="titulo" placeholder="escriba el titulo del curso" class="form-control" required><br>
+                                    <input type="text" name="titulo" placeholder="Escriba el titulo del curso" class="form-control" required><br>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">DESCRIPCION</label>
-                                    <input type="text" name="descripcion" placeholder="escriba la descripcion del video" class="form-control" required><br>
+                                    <input type="text" name="descripcion" placeholder="Escriba la descripción del curso" class="form-control" required><br>
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">LINK DE PORTADA DE CURSO</label>
-                                    <input type="text" name="foto" placeholder="subir" class="form-control"><br>
+                                    <label for="exampleInputPassword1">OBSERVACIONES</label>
+                                    <input type="text" name="foto" placeholder="Puede dejarlo vacio en caso de ninguna observación" class="form-control"><br>
                                 </div>
                                 
                                 <!-- <div class="row">
