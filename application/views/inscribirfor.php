@@ -6,7 +6,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>*</h1>
+            <h1></h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -22,7 +22,7 @@
     <div class="row featurette">
     <div class="col-md-7">
         <br>
-        <h2 class="featurette-heading">INSCRIBIR ESTUDIANTE A UN CURSO<span class="text-muted"> ****</span></h2>
+        <h2 class="featurette-heading">INSCRIBIR ESTUDIANTE A UN CURSO<span class="text-muted"></span></h2>
 
 
     </div>
@@ -175,7 +175,7 @@
                     </div>
                     <!-- /.card -->
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-success " data-toggle="modal" data-target="#mensajeModal">agregar</button>
+                        <button type="submit" class="btn btn-success " data-toggle="modal" data-target="#mensajeModal">Agregar</button>
                         
 
                         <button type="reset" class="btn btn-success " onClick="history.go(-1);">Cancelar</button>

@@ -6,7 +6,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>*</h1>
+            <h1></h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -22,21 +22,12 @@
     <div class="row">
         <div class="col-md-12">
             <h3 class="pb-4 mb-4 fst-italic border-bottom">
-                objetivos del proyecto
+                CEPRA
             </h3>
 
             <article class="blog-post">
 
-                <p> incentivar el aprendizaje autodidacta de estudiantes </p>
-                <p>Los videos tutoriales tienen el objetivo de
-                    llegar a quien se educa con temáticas de
-                    diferentes asignaturas recibiendo paso a
-                    paso las instrucciones que el tutor desea
-                    transmitir para el logro académico del fin
-                    propuesto que es la mejora y la agilización
-                    del proceso de aprendizaje convirtiéndolo en
-                    un recurso utilizado para enseñar diferentes
-                    asignaturas.
+               
                 <p>Actualmente los videos tutoriales son de
                     gran difusión gracias a la masificación del
                     Internet, grabados estos se pueden colgar en
@@ -112,18 +103,7 @@
                     cumplen el objetivo de ser instrumentos de
                     apoyo en el proceso de aprendizaje.
                 </p>
-                <ul>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                </ul>
-
-                <ol>
-                    <li></li>
-                    <li> </li>
-                    <li></li>
-                    <li></li>
-                </ol>
+          
             </article>
         </div>  
     </div> 

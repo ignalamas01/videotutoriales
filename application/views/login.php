@@ -132,7 +132,7 @@ echo form_close();
 
 
       <div class="social-auth-links text-center mb-3">
-        <p>- OR -</p>
+        <!-- <p>- OR -</p> -->
         <!-- <a href="#" class="btn btn-block btn-primary"> -->
           <!-- <i class="fab fa-facebook mr-2"></i>entrar usando Facebook -->
         <!-- </a> -->
@@ -146,7 +146,7 @@ echo form_close();
         <a href="<?php echo base_url(); ?>index.php/usuarios/recuperarcontra">Recuperar contraseña</a>
       </p>
       <p class="mb-0">
-        <a href="#" class="text-center">Registrar nuevo usuario</a>
+        <!-- <a href="#" class="text-center">Registrar nuevo usuario</a> -->
       </p>
     </div>
     <!-- /.login-card-body -->

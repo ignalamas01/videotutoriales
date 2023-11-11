@@ -6,7 +6,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>*</h1>
+            <h1></h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -22,7 +22,7 @@
     <div class="row featurette">
     <div class="col-md-7">
         <br>
-        <h2 class="featurette-heading">AGREGAR EMPLEADO<span class="text-muted"> ****</span></h2>
+        <h2 class="featurette-heading">AGREGAR EMPLEADO<span class="text-muted"></span></h2>
 
 
     </div>
@@ -119,7 +119,7 @@
                                     <div class="col-4">
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">CONTACTO</label>
-                                            <input type="text" class="form-control" name="telefono" placeholder="numero de celular">
+                                            <input type="text" class="form-control" name="telefono" placeholder="Número de celular">
                                         </div>
 
                                     </div>
@@ -131,7 +131,7 @@
                                     <div class="col-4">
                                         <div class="form-group">
                                             <label for="municipio">DIRECCION</label>
-                                            <input type="text" class="form-control" name="direccion" placeholder="direccion">
+                                            <input type="text" class="form-control" name="direccion" placeholder="Dirección">
                                         </div>
                                     </div>
 
@@ -149,7 +149,7 @@
                     </div>
                     <!-- /.card -->
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-success ">agregar</button>
+                        <button type="submit" class="btn btn-success ">Agregar</button>
 
                         <button type="reset" class="btn btn-success " onClick="history.go(-1);">Cancelar</button>
                     </div>
