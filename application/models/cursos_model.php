@@ -144,6 +144,7 @@ class cursos_model extends CI_Model
 }
 
 
+
 public function actualizarDatosArchivos($idArchivos, $nombres, $rutas)
 {
     // Asumiendo que 'archivos' es el nombre de la tabla de archivos
@@ -159,7 +160,7 @@ public function actualizarDatosArchivos($idArchivos, $nombres, $rutas)
 }
 public function modificarcursos($idCurso, $data)
 {
-    echo "ID del Curso en el modelo: " . $idcursos . "<br>";
+    echo "ID del Curso en el modelo: " . $idCurso . "<br>";  // Corregir la variable aquí
     // Actualizar datos generales de cursos
     $this->db->where('id', $idCurso);
     $this->db->update('cursos', $data);
@@ -187,6 +188,7 @@ public function modificarcursos($idCurso, $data)
         }
     }
 }
+
 public function actualizarCursos($idcursos, $dataCursos)
 {
     $this->db->where('id', $idcursos);
