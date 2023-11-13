@@ -63,20 +63,18 @@
     <div class="form-group">
         <label for="cursoSelect<?php echo $indice; ?>"></label>
         <select style="background-color: #0935;" class="form-control cursoSelect" id="cursoSelect<?php echo $indice; ?>">
-    <option value="">Ver cursos</option>
-    <?php
-    // Convertir la cadena de cursos en un array
-    $cursos_inscritos = explode(',', $datos_estudiante['titulos_cursos']);
+            <option value="">Ver cursos</option>
+            <?php
+            // Convertir la cadena de cursos en un array
+            $cursos_inscritos = explode(',', $datos_estudiante['titulos_cursos']);
 
-    foreach ($cursos_inscritos as $curso) {
-    ?>
-        <option value="<?php echo $curso; ?>"><?php echo $curso; ?></option>
-    <?php
-    }
-    ?>
-</select>
+            // Mostrar los cursos separados por ":"
+            echo '<option value="' . implode(':', $cursos_inscritos) . '">' . implode(' : ', $cursos_inscritos) . '</option>';
+            ?>
+        </select>
     </div>
 </td>
+
 
 
 

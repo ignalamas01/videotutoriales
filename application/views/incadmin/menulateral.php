@@ -104,28 +104,29 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="../layout/fixed-sidebar.html" class="nav-link">
+                <a href="<?php echo base_url(); ?>index.php/nograduados/lista" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>curso de redes</p>
+                  <p>estudiantes que no completaron los cursos</p>
                 </a>
               </li>
               
               <li class="nav-item">
-                <a href="../layout/fixed-sidebar-custom.html" class="nav-link">
+                <a href="<?php echo base_url(); ?>index.php/estudiante/deshabilitados" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Fixed <small>+ Custom Area</small></p>
+                  <p>Estudiantes deshabilitados </p> 
+                  <!-- <p>Estudiantes deshabilitados <small>+ Custom Area</small></p> -->
                 </a>
               </li>
               <li class="nav-item">
-                <a href="../layout/fixed-topnav.html" class="nav-link">
+                <a href="<?php echo base_url(); ?>index.php/base/deshabilitados" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Fixed Navbar</p>
+                  <p>Empleados deshabiltados</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="../layout/fixed-footer.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Fixed Footer</p>
+                  <p>LISTA USUARIO </p>
                 </a>
               </li>
               <li class="nav-item">

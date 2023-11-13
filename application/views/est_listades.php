@@ -1,16 +1,17 @@
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
-    <section class="content-header">
+  <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>*</h1>
+            <h1>   LISTA DE ESTUDIANTES DESHABILITADOS     </h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">DataTables</li>
+              <li class="breadcrumb-item active">Estudiantes deshabilitados</li>
+              <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/base/index">inicio</a></li>
+              
             </ol>
           </div>
         </div>
@@ -21,13 +22,13 @@
     <div class="row featurette">
     <div class="col-md-7">
         <br>
-        <h2 class="featurette-heading">LISTA DE ESTUDIANTES<span class="text-muted"> ****</span></h2><br>
+        <!-- <h2 class="featurette-heading">LISTA DE ESTUDIANTES<span class="text-muted"> ****</span></h2><br> -->
         
-        <a href="<?php echo base_url(); ?>index.php/estudiante/deshabilitados"> <button type="button" class="btn btn-info">VER LISTA DE ESTUDIANTES DESHABILITADOS</button> </a>
+        <!-- <a href="<?php echo base_url(); ?>index.php/estudiante/deshabilitados"> <button type="button" class="btn btn-info">VER LISTA DE ESTUDIANTES DESHABILITADOS</button> </a> -->
     
     </div>
     <div class="col-md-5">
-        <center><img src="<?php echo base_url(); ?>img/imgvt.png" width="120"></center>
+        <!-- <center><img src="<?php echo base_url(); ?>img/imgvt.png" width="120"></center> -->
 
     </div>
 
