@@ -15,7 +15,7 @@
           <!-- <img src="<?php echo base_url(); ?>/adminlte/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image"> -->
         </div>
         <div class="info">
-          <a href="#" class="d-block">SISTEMA</a>
+          <a href="#" class="d-block">ADMINISTRADOR</a>
         </div>
       </div>
 
