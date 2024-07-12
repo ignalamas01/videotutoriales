@@ -139,65 +139,15 @@ class Suscripciones extends CI_Controller
 
 	
 	
-// 	public function listaxls()
-//  {
-//  $lista=$this->Inscripciones_model->listainscri();
-//  $lista=$lista->result();
-
-//  header('Content-Type: application/vnd.ms-excel');
-//  header('Content-Disposition: attachment;filename="inscritos.xlsx"');
-//  $spreadsheet = new Spreadsheet();
-//  $sheet = $spreadsheet->getActiveSheet();
-//  $sheet->setCellValue('A1', 'ID');
-//  $sheet->setCellValue('B1', 'Nombre');
-//  $sheet->setCellValue('C1', 'Primer apellido');
-//  $sheet->setCellValue('D1', 'Segundo apellido');
-//  $sheet->setCellValue('E1', 'carrera');
-//  $sn=2;
-//  foreach ($lista as $row) {
-//  $sheet->setCellValue('A'.$sn,$row->id);
-//  $sheet->setCellValue('B'.$sn,$row->nombre);
-//  $sheet->setCellValue('C'.$sn,$row->primerApellido);
-//  $sheet->setCellValue('D'.$sn,$row->segundoApellido);
-//  $sheet->setCellValue('E'.$sn,$row->carrera);
-//  $sn++;
-//  }
-//  $writer = new Xlsx($spreadsheet);
-//  $writer->save("php://output");
-//  }
 
 
-// 	public function listapdf()
-// 	{
-// 		if($this->session->userdata('login'))
-//         {
-			
-// 			$lista = $this->estudiante_model->listaestudiante();
-// 			$lista =$lista->result();
 
-// 			$this->pdf=new pdf();
-// 			$this->pdf->AddPage();
-// 			$this->pdf->AliasNbPages();
-// 			$this->pdf->SetTitle("lista de estudiantes");
-			
-// 			$this->pdf->SetLeftMargin(15);
-// 			$this->pdf->SetRightMargin(15);
-// 			$this->pdf->SetFillColor(210,210,210);//RGB
-// 			$this->pdf->SetFont('Arial','B',11);
 
-// 			$this->pdf->Ln(5);
-// 			$this->pdf->Cell(30);
-// 			$this->pdf->Cell(120,10,'LISTA DE ESTUDIANTES',0,0,'C',1);
-
-// 			//ANCHO,ALTO,TEXT,BORDE GENERACION DE LA SIQUIENTE CELDA
-// 			//0 DERECHA ,1 SIGUIENTE LINESA, 2 DEBAJO
-// 			//ALINEACION LCR , FILL 0 1
 
 
 
 // 			$this->pdf->Ln(15);
 // 			$this->pdf->SetFont('Arial','',9);
-
 
 // 			$this->pdf->Cell(3);
 // 			$this->pdf->Cell(7,5,'No','TBLR',0,'L',0);
