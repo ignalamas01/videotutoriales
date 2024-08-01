@@ -6,9 +6,7 @@ public function actualizar_ultima_visita($idEstudiante, $idCurso) {
     $this->load->model('visita_model');
     $this->visita_model->actualizar_ultima_visita($idEstudiante, $idCurso);
     
-    // Otras operaciones si es necesario
-
-    // Redirigir o mostrar una respuesta
+   
 }
 }
 ?>

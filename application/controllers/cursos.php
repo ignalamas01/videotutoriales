@@ -61,7 +61,7 @@ class Cursos extends CI_Controller
 			
 			
 		}
-		git a
+		
 
         
     } else {
