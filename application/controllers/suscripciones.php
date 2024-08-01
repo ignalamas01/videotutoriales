@@ -146,30 +146,7 @@ class Suscripciones extends CI_Controller
 
 
 
-// 			$this->pdf->Ln(15);
-// 			$this->pdf->SetFont('Arial','',9);
-
-// 			$this->pdf->Cell(3);
-// 			$this->pdf->Cell(7,5,'No','TBLR',0,'L',0);
-// 			$this->pdf->Cell(50,5,'NOMBRE','TBLR',0,'L',0);
-// 			$this->pdf->Cell(30,5,'PRIMER APELLIDO','TBLR',0,'L',0);
-// 			$this->pdf->Cell(35,5,'SEGUNDO APELLIDO','TBLR',0,'L',0);
-// 			$this->pdf->Cell(30,5,'CARRERA','TBLR',0,'L',0);
-// 			$this->pdf->Cell(35,5,'FECHA DE NACIMIENTO','TBLR',0,'L',0);
-// 			$this->pdf->Cell(30,5,'DIRECCION','TBLR',0,'L',0);
-// 			//$this->pdf->Cell(30,5,'DIRECCION','TBLR',0,'L',0);
-// 			$this->pdf->Ln(5);
-
-// 			$num=1;
-// 			foreach($lista as $row)
-// 			{
-				
-// 				$nombre=$row->nombre;
-// 				$primerApellido=$row->primerApellido;
-// 				$segundoApellido=$row->segundoApellido;
-// 				$carrera=$row->carrera;
-// 				$fechaNacimiento=$row->fechaNacimiento;
-// 				$direccion=$row->direccion;
+// 			
 				
 
 
