@@ -20,27 +20,7 @@ class Cursos extends CI_Controller
 		
 	}
 	
-	// public function cursos()
-	// {
-		
-	// 	if($this->session->userdata('login'))
-    //     {
-	// 		//$lista=$this->empleado_model->listaempleados();
-	// 		$lista = $this->cursos_model->listacursos();
-
-
-	// 		$data['cursos'] = $lista;
-	// 		$this->load->view('inc/cabecera');
-	// 		$this->load->view('inc/menu');
-	// 		$this->load->view('inc/menulateral');
-	// 		$this->load->view('cursos_lista',$data);
-			
-	// 		$this->load->view('inc/pie');
-    //     }
-    //     else
-    //     {
-    //         redirect('usuarios/index/2','refresh');
-    //     }
+	
 		
 		
 	// }
@@ -81,10 +61,7 @@ class Cursos extends CI_Controller
 			
 			
 		}
-		// else {
-        //     // Rol no reconocido, puedes manejar esto según tus necesidades
-        //     echo "Rol no reconocido";
-        // }
+		git a
 
         
     } else {
