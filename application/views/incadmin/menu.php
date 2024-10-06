@@ -54,11 +54,11 @@
                                         <a class="nav-link active" aria-current="page" href="<?php echo base_url(); ?>index.php/foros/for">foros</a>
                                     </li> -->
                                     <button><li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/evaluaciones/evaluaciones_enlista"style="color: white;">EVALUACIONES</a></li></button>
-                                    <button><li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/foros/index"style="color: white;">FOROS</a></li></button>
+                                    
                                     <!-- <li class="nav-item">
                                         <a class="nav-link active" aria-current="page" href="<?php echo base_url(); ?>index.php/suscripciones/lista">inscritos</a>
                                     </li> -->
-                                    
+                                    <!-- <button><li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/foros/index"style="color: white;">FOROS</a></li></button> -->
                                     <button><li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/suscripciones/lista"style="color: white;">INSCRITOS</a></li></button>
                                     <!-- <button><li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/foros/index">Home</a></li></button> -->
                                     
