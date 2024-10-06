@@ -79,4 +79,18 @@ class estudiante_model extends CI_Model
 
         return ($row) ? $row->id : null;
     }
+    
+
+
+    
+    public function obtener_estudiante_por_usuario($idUsuario) {
+        // Seleccionar los datos del estudiante
+        $this->db->select('nombre, primerApellido, segundoApellido');
+        $this->db->where('idUsuario', $idUsuario);
+        $query = $this->db->get('estudiante');
+        
+        // Si se encuentra un resultado, devolverlo
+        return $query->row();
+    }
+
 }

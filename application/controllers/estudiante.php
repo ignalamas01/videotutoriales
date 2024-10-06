@@ -9,23 +9,42 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class Estudiante extends CI_Controller
 {
-	public function index()
-	{
-		if($this->session->userdata('login'))
-        {
-			$this->load->view('incestudiante/cabecera');
-			$this->load->view('incestudiante/menu');
-			$this->load->view('incestudiante/menulateral');
-			$this->load->view('inicio');
-			$this->load->view('incestudiante/pie');
-        }
-        else
-        {
-            redirect('usuarios/index/2','refresh');
-        }
+	// public function index()
+	// {
+	// 	if($this->session->userdata('login'))
+    //     {
+	// 		$this->load->view('incestudiante/cabecera');
+	// 		$this->load->view('incestudiante/menu');
+	// 		$this->load->view('incestudiante/menulateral');
+	// 		$this->load->view('inicio');
+	// 		$this->load->view('incestudiante/pie');
+    //     }
+    //     else
+    //     {
+    //         redirect('usuarios/index/2','refresh');
+    //     }
 		
-	}
-	
+	// }
+	public function index()
+{
+    if ($this->session->userdata('login')) {
+        // Obtener idUsuario de la sesión, si está disponible
+        $idUsuario = $this->session->userdata('idUsuario');
+
+        // Consultar los datos del estudiante
+        $data['estudiante'] = $this->Estudiante_model->getEstudianteByUsuario($idUsuario);
+
+        // Cargar las vistas
+        $this->load->view('incestudiante/cabecera');
+        $this->load->view('incestudiante/menu');
+        $this->load->view('incestudiante/menulateral', $data); // Pasar los datos del estudiante aquí
+        $this->load->view('inicio');
+        $this->load->view('incestudiante/pie');
+    } else {
+        // redirect('usuarios/index/2', 'refresh');
+    }
+}
+
 	
 	public function est()
 	{
@@ -419,26 +438,44 @@ class Estudiante extends CI_Controller
 	}
 
 	
-	public function invitado()
-	{
+	// public function invitado()
+	// {
 		
 
-		if($this->session->userdata('login'))
-		{
-			$this->load->view('incestudiante/cabecera');
-			// $this->load->view('incestudiante/menu');
-			$this->load->view('incestudiante/menu');
-			$this->load->view('incestudiante/menulateral');
-			$this->load->view('est_invitado');
-			$this->load->view('incestudiante/pie');
-		}
-		else
-		{
+	// 	if($this->session->userdata('login'))
+	// 	{
+	// 		$this->load->view('incestudiante/cabecera');
+	// 		// $this->load->view('incestudiante/menu');
+	// 		$this->load->view('incestudiante/menu');
+	// 		$this->load->view('incestudiante/menulateral');
+	// 		$this->load->view('est_invitado');
+	// 		$this->load->view('incestudiante/pie');
+	// 	}
+	// 	else
+	// 	{
+	// 		redirect('usuarios/index/2', 'refresh');
+	// 	}
+		
+		
+	// }
+	public function invitado() {
+		if($this->session->userdata('login')) {
+			$idUsuario = $this->session->userdata('idusuario');
+			// echo "ID Usuario: " . $idUsuario; 
+			// Obtener los datos del estudiante basado en idUsuario
+			$data['estudiante'] = $this->estudiante_model->obtener_estudiante_por_usuario($idUsuario);
+			
+			$this->load->view('incestudiante/cabecera', $data);
+			$this->load->view('incestudiante/menu', $data);
+			$this->load->view('incestudiante/menulateral', $data);
+			$this->load->view('inicio', $data);
+			$this->load->view('incestudiante/pie', $data);
+		} else {
 			redirect('usuarios/index/2', 'refresh');
 		}
-		
-		
 	}
+
+
 	public function subirfoto()
 	{
 		$data['id']=$_POST['idestudiante'];
@@ -484,7 +521,20 @@ class Estudiante extends CI_Controller
 
 
 	}
-	
+	// public function index2() {
+    //     // Cargar el modelo si aún no lo has hecho
+    //     $this->load->model('Estudiante_model');
+
+    //     // Obtener los datos del estudiante (supongamos que está basado en el idUsuario)
+    //     $idUsuario = $this->session->userdata('idUsuario'); // O cualquier forma en que obtengas el idUsuario
+    //     $estudiante = $this->Estudiante_model->getEstudianteByIdUsuario($idUsuario);
+
+    //     // Pasar los datos a la vista
+    //     $data['estudiante'] = $estudiante;
+
+    //     // Cargar la vista y pasar los datos
+    //     $this->load->view('incestudiante/menulateral', $data);
+    // }
 
 	
 
