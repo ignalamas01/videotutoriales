@@ -53,25 +53,28 @@
 <div  class="login-box" >
   
   <!-- /.login-logo -->
-  <div class="card" >
-    <div class="card-body login-card-body" style="background-color: #d5d4d6;">
+  <div class="card" style="border-radius: 15px">
+    <div class="card p-4 text-light bg-dark mb-6" style="background-color: #d5d4d6;border-radius: 15px;">
     <div class="login-logo" >
-    <a href="#"><b>CEPRA</b><!--PRUEBA --></a> 
+    <a href="#" style="color: white; font-weight: 700;"><b>CEPRA</b><!--PRUEBA --></a>
+
+
   </div>
+  
 <?php
 switch($msg) 
 {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
   case '1':
-    $mensaje="error de ingreso";
+    $mensaje="ERROR DE INGRESO";
     $clase="primary";
     break;
     case '2':
-    $mensaje="acceso  no valido";
+    $mensaje="ACCESO NO VALIDO";
     $clase="danger";
     break;
     case '3':
-    $mensaje="Ingrese sus datos";
-    $clase="danger";
+    $mensaje="INGRESE SUS DATOS";
+    $clase="primary";
     break;
     default:
     $mensaje="Ingrese su usuario y clave para iniciar sesion";
@@ -93,36 +96,58 @@ echo $msg;
   echo form_open_multipart('usuarios/validarusuario', array('id'=>'form1', 'class'=>'needs-validation', 'method'=>'post'));
 ?>    
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="login" name="login">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-envelope"></span>
-            </div>
-          </div>
+    <input type="text" class="form-control" placeholder="Usuario" name="login">
+    <div class="input-group-append">
+        <div class="input-group-text">
+            <span class="fas fa-envelope"></span>
         </div>
-        <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password" name="password">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
-            </div>
-          </div>
+    </div>
+</div>
+
+<div class="input-group mb-3">
+    <input type="password" class="form-control" placeholder="Contraseña" name="password" id="passwordField">
+    <div class="input-group-append">
+        <div class="input-group-text">
+            <span class="fas fa-lock"></span>
         </div>
-        <div class="row">
-          <div class="col-8">
-            <div class="icheck-primary">
-              <input type="checkbox" id="remember">
-              <label for="remember">
-               Recordar contraseña
-              </label>
-            </div>
-          </div>
-          <!-- /.col -->
-          <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">Ingresar</button>
-          </div>
-          <!-- /.col -->
-        </div>
+    </div>
+</div>
+
+<!-- Checkbox para mostrar/ocultar la contraseña -->
+<div class="input-group mb-3">
+    <input type="checkbox" id="showPassword" onclick="togglePassword()">
+    <label for="showPassword">
+       Mostrar contraseña</label>
+</div>
+
+<div class="row">
+      <div class="col-8">
+        <!-- <div class="icheck-primary">
+            <input type="checkbox" id="remember">
+            <label for="remember">
+                Recordar contraseña
+            </label>
+        </div> -->
+     </div>
+     <!-- /.col -->
+     <div class="col-12 d-flex justify-content-center">
+        <button type="submit" class="btn btn-primary">INICIAR SESIÓN</button>
+    </div>
+    <!-- /.col -->
+</div>
+
+<!-- Script para mostrar/ocultar contraseña -->
+<script>
+function togglePassword() {
+    var passwordField = document.getElementById("passwordField");
+    if (passwordField.type === "password") {
+        passwordField.type = "text";
+    } else {
+        passwordField.type = "password";
+    }
+}
+</script>
+
       
 <?php 
 echo form_close();
@@ -143,7 +168,7 @@ echo form_close();
       <!-- /.social-auth-links -->
 
       <p class="mb-1">
-        <a href="<?php echo base_url(); ?>index.php/usuarios/recuperarcontra">Recuperar contraseña</a>
+        <a href="<?php echo base_url(); ?>index.php/usuarios/recuperarcontrasena">¿Olvidaste tu Contraseña?</a>
       </p>
       <p class="mb-0">
         <!-- <a href="#" class="text-center">Registrar nuevo usuario</a> -->

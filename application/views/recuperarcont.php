@@ -120,14 +120,7 @@
 </li>
 </ul>
 </div>
-<ul class="breadcrumb hidden-xs">
-<li>
-<i aria-hidden="true" class="glyphicon glyphicon-home"></i>
-				&nbsp;
-			<a href="https://repositorio.autonoma.edu.pe/">Repositorio </a>
-</li>
-<li class="active">Has olvidado tu contraseña</li>
-</ul>
+
 </div>
 </div>
 </div>
@@ -206,20 +199,20 @@ Dirección de correo electrónico:&nbsp;</label><input id="aspect_eperson_StartF
 <div class="ds-option-set" id="ds-search-option">
 <form method="post" class="" id="ds-search-form" action="https://repositorio.autonoma.edu.pe/discover">
 <fieldset>
-<div class="input-group">
+<!-- <div class="input-group">
 <input placeholder="buscar" type="text" class="ds-text-field form-control" name="query"><span class="input-group-btn"><button title="Go" class="ds-button-field btn btn-primary"><span aria-hidden="true" class="glyphicon glyphicon-search"></span></button></span>
-</div>
+</div> -->
 </fieldset>
 </form>
 </div>
-<h2 class="ds-option-set-head page-header  h6">Navegar</h2>
+<!-- <h2 class="ds-option-set-head page-header  h6">Navegar</h2>
 <div id="aspect_viewArtifacts_Navigation_list_browse" class="list-group"  >
 <a style="background-color: #080911 ;" class="list-group-item active"><span class="h5 list-group-item-heading  h5" >todo</span></a><a href="https://repositorio.autonoma.edu.pe/community-list" class="list-group-item ds-option" >Communities &amp; colecciones</a><a href="https://repositorio.autonoma.edu.pe/browse?type=dateissued" class="list-group-item ds-option">Por fecha de emisión</a><a href="https://repositorio.autonoma.edu.pe/browse?type=author" class="list-group-item ds-option">Autores</a><a href="https://repositorio.autonoma.edu.pe/browse?type=title" class="list-group-item ds-option">Titulo</a><a href="https://repositorio.autonoma.edu.pe/browse?type=subject" class="list-group-item ds-option">sujetos</a>
 </div>
-<h2 class="ds-option-set-head page-header  h6">Mi cuenta</h2>
-<div id="aspect_viewArtifacts_Navigation_list_account" class="list-group">
+<h2 class="ds-option-set-head page-header  h6">Mi cuenta</h2> -->
+<!-- <div id="aspect_viewArtifacts_Navigation_list_account" class="list-group">
 <a href="https://repositorio.autonoma.edu.pe/login" class="list-group-item ds-option">Usuario</a><a href="https://repositorio.autonoma.edu.pe/register" class="list-group-item ds-option">Registrarse</a>
-</div>
+</div> -->
 <div id="aspect_viewArtifacts_Navigation_list_context" class="list-group"></div>
 <div id="aspect_viewArtifacts_Navigation_list_administrative" class="list-group"></div>
 <div id="aspect_discovery_Navigation_list_discovery" class="list-group"></div>
@@ -234,7 +227,7 @@ Dirección de correo electrónico:&nbsp;</label><input id="aspect_eperson_StartF
 <div class="col-sm-4">
 <p style="margin-top: 70px">
 						Contacto:&nbsp;
-						<a href="mailto:repositorio@autonoma.pe">repositorio@gmail.com</a>
+						<a href="cepra@gmail.com">cepra@gmail.com</a>
 </p>
 </div>
 <div class="col-sm-4">

@@ -71,145 +71,81 @@ class Usuarios extends CI_Controller
         $this->session->sess_destroy();
         redirect('usuarios/index/3','refresh');
     }
-	public function recuperarcontra()
+	public function recuperarcontrasena()
 	{
 		//$this->load->view('inc/cabecera');
 		//$this->load->view('inc/menu');
 		//$this->load->view('inc/menulateral');
-		$this->load->view('recuperarcont');
+		$this->load->view('reset_password');
 		//$this->load->view('inc/pie');
 	}
 
 
+	public function process_reset() 
+	{
+        $email = $this->input->post('email'); // Obtener el correo del formulario
 
+        // Cargar el modelo de usuarios (donde verificas los datos)
+        // $this->load->model('usuario_model');
+		
+        // Verificar si el correo existe en la base de datos
+        $user=$this->usuario_model->get_user_by_email($email);
+
+        if ($user) {
+            // Si existe, envía el correo con instrucciones
+            $this->send_reset_email($email);
+            $this->session->set_flashdata('success', 'Correo enviado con las instrucciones para restablecer la contraseña.');
+        } else {
+            // Si no existe, muestra un error
+            $this->session->set_flashdata('error', 'El correo electrónico no está registrado.');
+        }
+
+        // Redirige de vuelta a la página de restablecimiento
+        redirect('usuarios/index/2','refresh');
+    }
+
+    // Método para enviar el correo
+    public function send_reset_email($email) {
+        // Cargar la librería PHPMailer
+        $this->load->library('phpmailer_lib');
+        $mail = $this->phpmailer_lib->load();
+
+        try {
+            // Configuración del correo
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com'; // Cambia esto por el servidor SMTP
+            $mail->SMTPAuth = true;
+            $mail->Username = 'bikeracealvaro@gmail.com'; // Cambia esto por tu email
+            $mail->Password = 'gzncuwbkwelnxwys'; // Cambia esto por tu contraseña
+            $mail->SMTPSecure = 'tls';
+            $mail->Port = 587;
+
+            // Remitente
+            $mail->setFrom('tuemail@dominio.com', 'Soporte CEPRA');
+            // Destinatario
+            $mail->addAddress($email);
+
+            // Asunto
+            $mail->Subject = 'Instrucciones para restablecer la contraseña';
+
+            // Contenido del correo
+            $mailContent = "<h1>Restablecer Contraseña</h1>
+                            <p>Haga clic en el siguiente enlace para restablecer su contraseña:</p>
+                            <p><a href='".base_url()."auth/reset_password_confirm/".$this->generate_token($email)."'>Restablecer Contraseña</a></p>";
+            $mail->Body = $mailContent;
+
+            // Enviar correo
+            $mail->send();
+        } catch (Exception $e) {
+            log_message('error', "Error al enviar correo: " . $mail->ErrorInfo);
+        }
+    }
+
+    // Método para generar un token (puedes almacenarlo en la base de datos)
+    private function generate_token($email) {
+        return hash('sha256', $email . time());
+    }
 
 	
-	// public function res()
-	// {
-	// 	$this->load->view('inc/cabecera');
-	// 	$this->load->view('inc/menu');
-	// 	$this->load->view('inc/menulateral');
-	// 	$this->load->view('resumen');
-	// 	$this->load->view('inc/pie');
-	// }
-	// public function obj()
-	// {
-	// 	$this->load->view('inc/cabecera');
-	// 	$this->load->view('inc/menu');
-	// 	$this->load->view('inc/menulateral');
-	// 	$this->load->view('objetivos');
-	// 	$this->load->view('inc/pie');
-	// }
-	// public function salu()
-	// {
-	// 	$this->load->view('inc/cabecera');
-	// 	$this->load->view('inc/menu');
-	// 	$this->load->view('inc/menulateral');
-	// 	$this->load->view('saludo');
-	// 	$this->load->view('inc/pie');
-	// }
-	// public function emple()
-	// {
-	// 	//$lista=$this->empleado_model->listaempleados();
-	// 	$lista = $this->empleado_model->listaempleados();
-	// 	$data['empleado'] = $lista;
-	// 	$this->load->view('inc/cabecera');
-	// 	$this->load->view('inc/menu');
-	// 	$this->load->view('inc/menulateral');
-	// 	$this->load->view('emple_lista', $data);
-	// 	$this->load->view('inc/pie');
-	// }
-	// public function agregar()
-	// {
-	// 	$this->load->view('inc/cabecera');
-	// 	$this->load->view('inc/menu');
-	// 	$this->load->view('inc/menulateral');
-	// 	$this->load->view('emple_formulario');
-	// 	$this->load->view('inc/pie');
-	// }
-	// public function agregarbd()
-	// {
-	// 	$data['nombre'] = $_POST['nombre'];
-	// 	$data['primerApellido'] = $_POST['primerApellido'];
-	// 	$data['segundoApellido'] = $_POST['segundoApellido'];
-	// 	$data['departamento'] = $_POST['departamento'];
-	// 	$data['fechaNacimiento'] = $_POST['fechaNac'];
-	// 	$data['telefono'] = $_POST['telefono'];
-	// 	$data['direccion'] = $_POST['direccion'];
-
-	// 	$this->empleado_model->agregarempleado($data);
-	// 	redirect('base/emple', 'refresh');
-	// }
-	// public function modificar()
-	// {
-	// 	$idempleado = $_POST['idempleado'];
-	// 	$data['infoempleado'] = $this->empleado_model->recuperarempleado($idempleado);
-	// 	$this->load->view('inc/cabecera');
-	// 	$this->load->view('inc/menu');
-	// 	$this->load->view('inc/menulateral');
-	// 	$this->load->view('emple_modificar', $data);
-	// 	$this->load->view('inc/pie');
-	// }
-	// public function modificarbd()
-	// {
-	// 	$idempleado = $_POST['idempleado'];
-	// 	$data['nombre'] = $_POST['nombre'];
-	// 	$data['primerApellido'] = $_POST['primerApellido'];
-	// 	$data['segundoApellido'] = $_POST['segundoApellido'];
-	// 	$data['departamento'] = $_POST['departamento'];
-	// 	$data['fechaNacimiento'] = $_POST['fechaNac'];
-	// 	$data['telefono'] = $_POST['telefono'];
-	// 	$data['direccion'] = $_POST['direccion'];
-	// 	$this->empleado_model->modificarempleado($idempleado, $data);
-	// 	redirect('base/emple', 'refresh');
-	// }
-
-
-	// public function eliminarbd()
-	// {
-	// 	$idempleado = $_POST['idempleado'];
-	// 	$this->empleado_model->eliminarempleado($idempleado);
-	// 	redirect('base/emple', 'refresh');
-	// }
-	// public function deshabilitarbd()
-	// {
-	// 	$idempleado = $_POST['idempleado'];
-	// 	$data['estado']='0';
-
-
-	// 	$this->empleado_model->modificarempleado($idempleado, $data);
-	// 	redirect('base/emple', 'refresh');
-
-	// }
-	// public function habilitarbd()
-	// {
-	// 	$idempleado = $_POST['idempleado'];
-	// 	$data['estado']='1';
-
-
-	// 	$this->empleado_model->modificarempleado($idempleado, $data);
-	// 	redirect('base/deshabilitados', 'refresh');
-
-	// }
-	// public function deshabilitados()
-	// {
-	// 	$lista = $this->empleado_model->listaempleadosdes();
-	// 	$data['empleado'] = $lista;
-	// 	$this->load->view('inc/cabecera');
-	// 	$this->load->view('inc/menu');
-	// 	$this->load->view('inc/menulateral');
-	// 	$this->load->view('emple_listades', $data);
-	// 	$this->load->view('inc/pie');
-	// }
-
-
-
-	/* PRUEBA DE CONEXION DE BASE DE DATOS///
-	public function pruebabd()
-	{
-		$query = $this->db->get('empleado');
-		$execonsulta = $query->result();
-		print_r($execonsulta);
-	}
-*/
+	
 }
