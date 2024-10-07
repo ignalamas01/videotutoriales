@@ -6,7 +6,7 @@ class Foros extends CI_Controller {
         
         $this->load->model('Foros_model');
         $this->load->model('Comentarios_model');
-        
+        $this->load->library('MenuLateral');
         
         $this->load->helper('form');
         
@@ -109,9 +109,9 @@ class Foros extends CI_Controller {
        
     
         //Cargar la vista y pasar los datos
-        $this->load->view('inc/cabecera');
-        $this->load->view('inc/menu');
-        $this->load->view('inc/menulateral');
+        $this->load->view('incestudiante/cabecera');
+        $this->load->view('incestudiante/menu');
+        $this->menulateral->cargar_menu_lateral();
         $this->load->view('listaforo', $data);
         $this->load->view('inc/pie');
 

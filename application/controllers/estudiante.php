@@ -459,21 +459,31 @@ class Estudiante extends CI_Controller
 		
 	// }
 	public function invitado() {
-		if($this->session->userdata('login')) {
+		if ($this->session->userdata('login')) {
 			$idUsuario = $this->session->userdata('idusuario');
-			// echo "ID Usuario: " . $idUsuario; 
+			
 			// Obtener los datos del estudiante basado en idUsuario
 			$data['estudiante'] = $this->estudiante_model->obtener_estudiante_por_usuario($idUsuario);
 			
+			// Cargar vistas comunes
 			$this->load->view('incestudiante/cabecera', $data);
 			$this->load->view('incestudiante/menu', $data);
 			$this->load->view('incestudiante/menulateral', $data);
-			$this->load->view('inicio', $data);
+			
+			// Verificar si debes cargar la vista de "objetivos" o "inicio"
+			if ($this->uri->segment(3) == 'objetivos') {
+				$this->load->view('objetivos', $data);
+			} else {
+				$this->load->view('inicio', $data);
+			}
+			
+			// Cargar el pie de página
 			$this->load->view('incestudiante/pie', $data);
 		} else {
 			redirect('usuarios/index/2', 'refresh');
 		}
 	}
+	
 
 
 	public function subirfoto()
@@ -521,6 +531,43 @@ class Estudiante extends CI_Controller
 
 
 	}
+	// public function cargar_menu_lateral() {
+	// 	$idUsuario = $this->session->userdata('idusuario');
+		
+	// 	// Obtener los datos del empleado o estudiante según sea necesario
+		
+	// 	// Si necesitas cargar datos de estudiante también
+	// 	$data['estudiante'] = $this->estudiante_model->obtener_estudiante_por_usuario($idUsuario);
+		
+	// 	// Cargar solo la vista del menú lateral con los datos obtenidos
+	// 	$this->load->view('incestudiante/menulateral', $data);
+	// }
+	public function cargar_menu_lateral() {
+		if ($this->session->userdata('login')) {
+			$idUsuario = $this->session->userdata('idusuario');
+			
+			// Obtener los datos del estudiante basado en idUsuario
+			$data['estudiante'] = $this->estudiante_model->obtener_estudiante_por_usuario($idUsuario);
+			
+			// Cargar vistas comunes
+			$this->load->view('incestudiante/cabecera', $data);
+			$this->load->view('incestudiante/menu', $data);
+			$this->load->view('incestudiante/menulateral', $data);
+			
+			// Verificar si debes cargar la vista de "objetivos" o "inicio"
+			if ($this->uri->segment(3) == 'objetivos') {
+				$this->load->view('objetivos', $data);
+			} else {
+				$this->load->view('inicio', $data);
+			}
+			
+			// Cargar el pie de página
+			$this->load->view('incestudiante/pie', $data);
+		} else {
+			redirect('usuarios/index/2', 'refresh');
+		}
+	}
+	
 	// public function index2() {
     //     // Cargar el modelo si aún no lo has hecho
     //     $this->load->model('Estudiante_model');

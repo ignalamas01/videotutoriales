@@ -7,6 +7,7 @@ class Certificados extends CI_Controller {
         parent::__construct();
         // Cargar modelos necesarios
         $this->load->model('certificados_model');
+        $this->load->library('MenuLateral');
     }
 
     public function emitir_certificado() {
@@ -76,7 +77,7 @@ public function certificados_lista()
             // var_dump($data['certificados']);
             $this->load->view('incestudiante/cabecera');
             $this->load->view('incestudiante/menu');
-            $this->load->view('incestudiante/menulateral');
+            $this->menulateral->cargar_menu_lateral();
             $this->load->view('certificados_lista', $data);
             $this->load->view('incestudiante/pie');
         } 

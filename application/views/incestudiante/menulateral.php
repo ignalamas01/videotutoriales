@@ -16,7 +16,10 @@
         </div>
         <div class="info">
         <?php if (isset($estudiante)): ?>
-    <a href="#" class="d-block"><?php echo $estudiante->nombre . ' ' . $estudiante->primerApellido . ' ' . $estudiante->segundoApellido; ?></a>
+          <span style="color: white;"><strong>ESTUDIANTE:</strong></span>
+    <a href="#" class="d-block">
+        <?php echo strtoupper($estudiante->nombre . ' ' . $estudiante->primerApellido . ' ' . $estudiante->segundoApellido); ?>
+    </a>
 <?php else: ?>
     <a href="#" class="d-block">No se encontró el estudiante</a>
 <?php endif; ?>

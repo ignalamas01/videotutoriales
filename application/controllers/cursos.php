@@ -3,6 +3,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Cursos extends CI_Controller
 {
+	public function __construct() {
+        parent::__construct();
+        // Cargar la librería MenuLateral
+        $this->load->library('MenuLateral');
+    }
 	public function index()
 	{
 		if($this->session->userdata('login'))
@@ -94,7 +99,7 @@ class Cursos extends CI_Controller
             // Cargar la vista para el invitado
             $this->load->view('incestudiante/cabecera');
             $this->load->view('incestudiante/menu');
-            $this->load->view('incestudiante/menulateral');
+			$this->menulateral->cargar_menu_lateral();
             $this->load->view('cursos_lista2', $data);  // Utiliza la vista específica para invitados
             $this->load->view('incestudiante/pie');
         } else {
@@ -105,7 +110,7 @@ class Cursos extends CI_Controller
             // Utiliza la lógica que ya tienes implementada
             $this->load->view('incestudiante/cabecera');
             $this->load->view('incestudiante/menu');
-            $this->load->view('incestudiante/menulateral');
+            $this->menulateral->cargar_menu_lateral();
             $this->load->view('cursos_lista2', $data);
             $this->load->view('incestudiante/pie');
         }

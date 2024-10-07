@@ -8,6 +8,7 @@ class Evaluaciones_estudiante extends CI_Controller
         parent::__construct();
         // Cargar el modelo necesario para interactuar con la base de datos
         $this->load->model('evaluaciones_estudiante_model');
+        $this->load->library('MenuLateral');
     }
 
     public function ejecutar_ultima_evaluacion()
@@ -224,7 +225,7 @@ public function lista()
 				// Cargar la vista para el empleado
 				$this->load->view('incestudiante/cabecera');
 				$this->load->view('incestudiante/menu');
-				$this->load->view('incestudiante/menulateral');
+				$this->menulateral->cargar_menu_lateral();
 				$this->load->view('evaluaciones_lista',$data);
 				$this->load->view('inc/pie');
 				
@@ -238,7 +239,7 @@ public function lista()
 		
 		
 	}
-
+ 
 
 
 }

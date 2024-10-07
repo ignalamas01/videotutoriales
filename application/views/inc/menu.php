@@ -26,7 +26,7 @@
     
       <div class="collapse navbar-collapse" id="navbarCollapse">
                                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                                <button><li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/base/index"style="color: white;">INICIO</a></li></button>
+                                <button><li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/base/index2"style="color: white;">INICIO</a></li></button>
                                     <!-- <li class="nav-item">
                                         <a class="nav-link active" aria-current="page" href="<?php echo base_url(); ?>index.php/base/res">RESUMEN</a>
                                     </li> -->

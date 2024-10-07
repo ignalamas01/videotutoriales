@@ -9,6 +9,11 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class Base extends CI_Controller
 {
+	public function __construct() {
+        parent::__construct();
+        // Cargar la librería MenuLateral
+        $this->load->library('MenuLateral');
+    }
 	public function index()
 	{
 		if($this->session->userdata('login'))
@@ -558,7 +563,22 @@ class Base extends CI_Controller
 
 
 	}
-	
+	public function index2() {
+		if($this->session->userdata('login')) {
+			$idUsuario = $this->session->userdata('idusuario');
+			// echo "ID Usuario: " . $idUsuario; 
+			// Obtener los datos del estudiante basado en idUsuario
+			$data['empleado'] = $this->empleado_model->obtener_empleado_por_usuario($idUsuario);
+			// echo "idusus" . $idUsuario;
+			$this->load->view('inc/cabecera', $data);
+			$this->load->view('inc/menu', $data);
+			$this->menulateral->cargar_menu_lateral_profe();
+			$this->load->view('inicio', $data);
+			$this->load->view('inc/pie', $data);
+		} else {
+			redirect('base/index', 'refresh');
+		}
+	}
 
 	
 
