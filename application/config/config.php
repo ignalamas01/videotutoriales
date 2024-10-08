@@ -28,6 +28,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 $config['base_url'] = "http://" . $_SERVER['HTTP_HOST'];      ///DIRECCION AUTOMATICA
 $config['base_url'] .= preg_replace('@/+$@', '', dirname($_SERVER['SCRIPT_NAME'])) . '/';
 
+
 /*
 |--------------------------------------------------------------------------
 | Index File

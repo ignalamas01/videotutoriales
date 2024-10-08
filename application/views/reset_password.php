@@ -67,7 +67,52 @@
         .cancel:hover {
             background-color: #c44845;
         }
+
+        #message {
+            margin-top: 20px;
+            color: red; /* Personaliza el color aquí */
+        }
     </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        var ajaxUrl = "<?php echo base_url('index.php/usuarios/process_reset'); ?>"; // Almacena la URL en una variable
+
+        $(document).ready(function() {
+            $('#form1').on('submit', function(event) {
+                event.preventDefault(); // Evitar el envío normal del formulario
+
+                var formData = $(this).serialize(); // Serializar los datos del formulario
+
+                console.log("Enviando datos:", formData); // Debugging
+
+                $.ajax({
+                    url: ajaxUrl, // Usa la variable que contiene la URL
+                    type: "POST",
+                    data: formData,
+                    success: function(response) {
+                        console.log("Respuesta del servidor:", response); // Debugging
+                        // Mostrar mensaje de éxito o error
+                        $('#message').html(response).fadeIn();
+
+                        // Ocultar el mensaje después de 3 segundos
+                        setTimeout(function() {
+                            $('#message').fadeOut();
+                        }, 3000);
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        // En caso de error en la petición AJAX
+                        console.error("Error en AJAX:", textStatus, errorThrown); // Debugging
+                        $('#message').html("Ocurrió un error, por favor intente de nuevo.").fadeIn();
+
+                        // Ocultar el mensaje después de 3 segundos
+                        setTimeout(function() {
+                            $('#message').fadeOut();
+                        }, 3000);
+                    }
+                });
+            });
+        });
+    </script>
 </head>
 <body>
 
@@ -75,20 +120,21 @@
     <h2>¿Ha olvidado su contraseña?</h2>
     <p>Usted va a recibir un mensaje de correo electrónico con instrucciones para restablecer su contraseña.</p>
 
-    <!-- Actualizar la ruta del formulario -->
+    <!-- Mantén el formulario como está -->
     <?php
-  echo form_open_multipart('usuarios/process_reset', array('id'=>'form1', 'class'=>'needs-validation', 'method'=>'post'));
-?>  
+      echo form_open('usuarios/process_reset', array('id'=>'form1', 'class'=>'needs-validation', 'method'=>'post'));
+    ?>  
         <label for="email">Dirección de correo electrónico *</label>
         <input type="email" id="email" name="email" placeholder="Correo electrónico" required>
 
         <div>
             <button type="submit">ENVIAR</button>
-            <button type="button" class="cancel" onclick="window.location.href='http://localhost/videotutoriales/index.php/usuarios/index/3'">ANULAR</button>
+            <button type="button" class="cancel" onclick="window.location.href='http://localhost/videotutoriales/index.php/usuarios/index/3'">VOLVER</button>
         </div>
-        <?php 
-echo form_close();
-?>
+    <?php echo form_close(); ?>
+
+    <!-- Aquí aparecerán los mensajes de éxito o error -->
+    <div id="message" style="display: none;"></div>
 </div>
 
 </body>
