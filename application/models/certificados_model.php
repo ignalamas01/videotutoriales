@@ -1,6 +1,14 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+// use Endroid\QrCode\QrCode;
+// use Endroid\QrCode\Writer\PngWriter;
+// use SimpleSoftwareIO\QrCode\Facades\QrCode;
+require 'vendor/autoload.php'; // Asegúrate de que esta ruta sea correcta
 
+use BaconQrCode\Renderer\ImageRenderer; // Esta línea está correcta
+use BaconQrCode\Renderer\Image\ImagickImageBackEnd; // Esta línea está correcta
+use BaconQrCode\Renderer\RendererStyle\RendererStyle; // Esta línea está correcta
+use BaconQrCode\Writer; // Esta línea está correcta
 class certificados_model extends CI_Model {
 
 //     public function verificar_aprobacion_curso($idCurso, $idEstudiante) {
@@ -83,60 +91,117 @@ public function verificar_aprobacion_curso($idCurso, $idEstudiante) {
         return 0; // Otra opción es devolver un valor predeterminado si no se encuentra el puntaje
     }
     public function generar_certificado_pdf($idCurso, $idEstudiante) {
+    
         ob_start();
-    // Configura el encabezado y pie de página si es necesario
-    $pdf = new FPDF();
-    $pdf->AddPage('L'); // 'L' para orientación horizontal
-    $pdf->SetFont('Arial', 'B', 18);
+        
+        // Definir un tamaño personalizado para la página
+        $pdf = new FPDF('L', 'mm', array(297, 210)); // Ancho = 297mm, Altura = 210mm (A4 horizontal)
+        $pdf->AddPage(); 
+    
+        // Agregar la imagen de fondo
+        $pdf->Image('C:\xampp\htdocs\videotutoriales\adminlte\dist\img\fondo_certificado.jpeg', 0, 0, $pdf->GetPageWidth(), $pdf->GetPageHeight());
+    
+        // Agregar logo
+        $pdf->Image('C:\xampp\htdocs\videotutoriales\adminlte\dist\img\logo_cepra.jpeg', 20, 10, 40);
+    
+        // Título del certificado
+        $pdf->SetFont('Arial', 'B', 28);
+        $pdf->Ln(30); 
+        $pdf->Cell(0, 10, 'CERTIFICADO DE LOGRO', 0, 1, 'C');
+    
+        // Texto de otorgamiento
+        $pdf->SetFont('Arial', 'I', 16);
+        $pdf->Cell(0, 10, 'Este certificado se otorga a', 0, 1, 'C');
+    
+        // Nombre del estudiante
+        $nombreEstudiante = $this->obtenerNombreEstudiante($idEstudiante);
+        $apellidosEstudiante = $this->obtenerApellidosEstudiante($idEstudiante); 
+        $pdf->SetFont('Arial', 'B', 24);
+        $pdf->Cell(0, 10, utf8_decode($nombreEstudiante) . ' ' . utf8_decode($apellidosEstudiante), 0, 1, 'C');
+    
+        // Detalles del curso
+        $nombreCurso = $this->obtenerNombreCurso($idCurso);
+        $pdf->SetFont('Arial', 'I', 16);
+        $pdf->Cell(0, 10, 'Por completar satisfactoriamente el curso de:', 0, 1, 'C');
+        $pdf->SetFont('Arial', 'B', 22);
+        $pdf->Cell(0, 10, utf8_decode($nombreCurso), 0, 1, 'C');
+    
+        // Fecha de emisión
+        $pdf->SetFont('Arial', 'I', 14);
+        $pdf->Cell(0, 10, utf8_decode('Fecha de emisión: ') . date('Y-m-d'), 0, 1, 'C');
+    
+        // Espacio para las firmas
+        $pdf->Ln(20);
+    
+        // Firma 1 - Franz Callisaya Ortega
+        $pdf->SetFont('Arial', '', 14);
+        $pdf->Image('C:\xampp\htdocs\videotutoriales\uploads\empleados\firma_franz.png', 90, 110, 50, 20); // Firma como PNG
+        $pdf->SetXY(50, 125); // Posicionar texto debajo de la firma
+        $pdf->Cell(130, 10, '_____________________________', 0, 1, 'C');
+        $pdf->Cell(215, 10, 'Alberto Chambi', 0, 1, 'C');
+        $pdf->Cell(215, 10, 'Instructor del Curso', 0, 1, 'C');
+    
+        // Firma 2 - Alberto Chambi
+        $pdf->Image('C:\xampp\htdocs\videotutoriales\uploads\empleados\firma_alberto.png', 200, 110, 50, 20); // Firma como PNG
+        $pdf->SetXY(160, 125); // Posicionar texto debajo de la firma
+        $pdf->Cell(130, 10, '_____________________________', 0, 1, 'C');
+        $pdf->Cell(440, 10, 'Franz Callisaya Ortega', 0, 1, 'C');
+        $pdf->Cell(440, 10, utf8_decode('Director Académico'), 0, 1, 'C');
+    
+        // Generar la codificación del certificado
+        $codificacion = 'Cepra' . $idEstudiante . $idCurso . rand(100, 999);
+    
+        // Generar la URL de verificación
+        $urlVerificacion = "https://tusitio.com/verificar-certificado?codigo=" . $codificacion;
+    
+        // Generar el código QR usando BaconQrCode
+        // Crear el renderer
+        $renderer = new BaconQrCode\Renderer\ImageRenderer(
+            new BaconQrCode\Renderer\RendererStyle\RendererStyle(300), // Ajusta el tamaño del QR
+            new BaconQrCode\Renderer\Image\ImagickImageBackEnd()
+        );
+        $writer = new BaconQrCode\Writer($renderer);
+        
+        // Generar y guardar el código QR
+        $tempQrPath = 'C:/xampp/htdocs/videotutoriales/uploads/certificados/qr_temp.png';
+        $writer->writeFile($urlVerificacion, $tempQrPath); // Guardar el QR generado en un archivo temporal
+        
+        // Usar Imagick para convertir la imagen a 8 bits
+        $imagick = new \Imagick($tempQrPath);
+        $imagick->setImageDepth(8); // Convertir a 8 bits
+        $qrPath = 'C:/xampp/htdocs/videotutoriales/uploads/certificados/qr' . $codificacion . '.png';
+        $imagick->writeImage($qrPath); // Guardar en la ubicación final
+        
+        // Limpiar archivo temporal
+        unlink($tempQrPath); // Eliminar el archivo temporal
+    
+        // Agregar el código QR al PDF en la parte inferior izquierda
+$pdf->Image($qrPath, 20, 135, 40, 40); // Ajusta las coordenadas y tamaño según lo necesites
 
-    // Agregar la línea o franja de color rojo
-    $pdf->SetFillColor(255, 0, 0); // Rojo
-    $pdf->Rect(0, 0, $pdf->GetPageWidth(), 10, 'F');
+// Mostrar la codificación debajo del QR
+$pdf->SetXY(20, 175); // Ajustar las coordenadas
+$pdf->SetFont('Arial', '', 12);
+$pdf->Cell(25, 10, utf8_decode('Codificación: '), 0, 0, 'C'); // Muestra la etiqueta
+$pdf->Cell(15, 10, utf8_decode($codificacion), 0, 1, 'L'); // Muestra el código en la misma línea
 
-    // Agregar la imagen (ajusta la ruta y las dimensiones según tus necesidades)
-    $pdf->Image('C:\xampp\htdocs\videotutoriales\adminlte\dist\img\logo_cepra.jpeg', 14, 14, 40);
-
-    // Agregar el título del certificado
-    $pdf->Ln(40); // Añadir espacio antes del título
-    $pdf->SetFont('Arial', 'B', 24); // Aumentar el tamaño del título
-    $pdf->Cell(0, 10, 'CERTIFICADO', 0, 1, 'C');
-
-    // Agregar detalles del estudiante (nombre y apellidos)
-    $nombreEstudiante = $this->obtenerNombreEstudiante($idEstudiante);
-    $apellidosEstudiante = $this->obtenerApellidosEstudiante($idEstudiante); // Agregar función para obtener apellidos
-    $pdf->SetFont('Arial', 'I', 16);
-    $pdf->Cell(0, 10, 'Se otorga a', 0, 1, 'C');
-    $pdf->SetFont('Arial', 'B', 18);
-    $pdf->Cell(0, 10, utf8_decode($nombreEstudiante) . ' ' . utf8_decode($apellidosEstudiante), 0, 1, 'C');
-
-    // Agregar detalles del curso
-    $nombreCurso = $this->obtenerNombreCurso($idCurso);
-    $pdf->SetFont('Arial', 'I', 14);
-    $pdf->Cell(0, 10, 'Por completar el curso de', 0, 1, 'C');
-    $pdf->SetFont('Arial', 'B', 22);
-    $pdf->Cell(0, 10, utf8_decode($nombreCurso), 0, 1, 'C');
-
-    // Agregar la fecha de emisión
-    $pdf->SetFont('Arial', 'I', 14);
-    $pdf->Cell(0, 10, 'Fecha de Emision: ' . date('Y-m-d'), 0, 1, 'C');
-     // Calcular la posición vertical centrada
-     $yPos = ($pdf->GetPageHeight() - $pdf->GetY()) / 2;
-     $pdf->SetY($pdf->GetY() + $yPos);
-    // Guardar el PDF en un archivo
-    $codificacion = 'Cepra' . $idEstudiante . $idCurso;
-    $pdfPath = 'C:\xampp\htdocs\videotutoriales\uploads\certificados\certificado' . $codificacion . '.pdf';
-    $pdf->Output($pdfPath, 'F');
-
-    /// Convertir el PDF a imagen y guardarla
-    $imagick = new \Imagick();
-    $imagick->readImage($pdfPath);
-    $imagick->setImageFormat('jpeg');
-    $imagePath = 'C:\xampp\htdocs\videotutoriales\uploads\certificados\imagen' . $codificacion . '.jpg';
-    $imagick->writeImage($imagePath);
-    // Guardar el PDF en un archivo o mostrarlo en el navegador
-    $pdf->Output('certificado.pdf', 'D'); // Descargar el PDF
-    ob_end_flush();
+    
+        // Guardar el PDF en un archivo
+        $pdfPath = 'C:\xampp\htdocs\videotutoriales\uploads\certificados\certificado' . $codificacion . '.pdf';
+        $pdf->Output($pdfPath, 'F');
+    
+        // Convertir el PDF a imagen y guardarla
+        $imagick->clear(); // Limpiar Imagick
+        $imagick->readImage($pdfPath);
+        $imagick->setImageFormat('jpeg');
+        $imagePath = 'C:\xampp\htdocs\videotutoriales\uploads\certificados\imagen' . $codificacion . '.jpg';
+        $imagick->writeImage($imagePath);
+    
+        // Descargar el PDF
+        $pdf->Output('certificado.pdf', 'D'); 
+        ob_end_flush();
     }
+    
+
     
     // Obtener el nombre del estudiante desde la base de datos
     public function obtenerNombreEstudiante($idEstudiante) {
