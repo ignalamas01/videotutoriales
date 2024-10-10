@@ -134,4 +134,50 @@ public function actualizar_progreso() {
         echo 'No se encontró el estudiante.';
     }
 }
+// En tu controlador de Certificados
+public function verificar_certificado() {
+    $this->load->view('verificar_certificado');
+}
+public function verificar_codigo() {
+    // Obtener el código ingresado
+    $codigo = $this->input->post('codigo');
+    
+    // Consulta para obtener los detalles del certificado, el estudiante y el curso
+    $this->db->select('certificados.codificacion, estudiante.nombre, estudiante.primerApellido, estudiante.segundoApellido, cursos.titulo, certificados.fechaEmision');
+    $this->db->from('certificados');
+    $this->db->join('estudiante', 'certificados.idEstudiante = estudiante.id');
+    $this->db->join('cursos', 'certificados.idCurso = cursos.id');
+    $this->db->where('certificados.codificacion', $codigo);
+    $certificado = $this->db->get()->row();
+
+    // Verificar si se encontró el certificado
+    if ($certificado) {
+        // Pasar los detalles a la vista
+        $this->load->view('certificado_verificado', array('certificado' => $certificado));
+    } else {
+        // Mostrar mensaje de error si no existe
+        $this->load->view('certificado_no_encontrado');
+    }
+}
+
+
+public function verificar_por_qr() {
+    $codigo = $this->input->get('codigo');
+    
+    // Mismo procedimiento de consulta
+    $this->db->select('certificados.codificacion, estudiante.nombre, estudiante.primerApellido, estudiante.segundoApellido, cursos.titulo, certificados.fechaEmision');
+    $this->db->from('certificados');
+    $this->db->join('estudiante', 'certificados.idEstudiante = estudiante.id');
+    $this->db->join('cursos', 'certificados.idCurso = cursos.id');
+    $this->db->where('certificados.codificacion', $codigo);
+    $certificado = $this->db->get()->row();
+
+    if ($certificado) {
+        $this->load->view('certificado_verificado', array('certificado' => $certificado));
+    } else {
+        $this->load->view('certificado_no_encontrado');
+    }
+}
+
+
 }

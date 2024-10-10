@@ -44,7 +44,8 @@ public function verificar_aprobacion_curso($idCurso, $idEstudiante) {
     public function emitir_certificado($idCurso, $idEstudiante) {
         // Lógica para emitir el certificado (puedes almacenar en la base de datos, generar un archivo PDF, etc.)
         // Aquí puedes agregar acciones específicas según tus necesidades
-        $codificacion = 'Cepra' . $idEstudiante . $idCurso;
+        $fecha = date('Ymd'); // Obtiene la fecha actual en formato YYYYMMDD
+        $codificacion = 'CEPRA' . $idEstudiante . $idCurso . $fecha;
         $data = array(
             'idEstudiante' => $idEstudiante,
             'idCurso' => $idCurso,
@@ -103,6 +104,8 @@ public function verificar_aprobacion_curso($idCurso, $idEstudiante) {
     
         // Agregar logo
         $pdf->Image('C:\xampp\htdocs\videotutoriales\adminlte\dist\img\logo_cepra.jpeg', 20, 10, 40);
+        $pdf->Image('C:\xampp\htdocs\videotutoriales\adminlte\dist\img\logo_cepra3.png', 140, 130, 45, 45); // Aquí 40 es el ancho y 30 es la altura.
+
     
         // Título del certificado
         $pdf->SetFont('Arial', 'B', 28);
@@ -149,10 +152,11 @@ public function verificar_aprobacion_curso($idCurso, $idEstudiante) {
         $pdf->Cell(440, 10, utf8_decode('Director Académico'), 0, 1, 'C');
     
         // Generar la codificación del certificado
-        $codificacion = 'Cepra' . $idEstudiante . $idCurso . rand(100, 999);
+        $fecha = date('Ymd'); // Obtiene la fecha actual en formato YYYYMMDD
+        $codificacion = 'CEPRA' . $idEstudiante . $idCurso . $fecha;
     
         // Generar la URL de verificación
-        $urlVerificacion = "https://tusitio.com/verificar-certificado?codigo=" . $codificacion;
+        $urlVerificacion = "http://localhost/videotutoriales/index.php/certificados/verificar_por_qr?codigo=" . $codificacion;
     
         // Generar el código QR usando BaconQrCode
         // Crear el renderer
@@ -181,7 +185,7 @@ $pdf->Image($qrPath, 20, 135, 40, 40); // Ajusta las coordenadas y tamaño segú
 // Mostrar la codificación debajo del QR
 $pdf->SetXY(20, 175); // Ajustar las coordenadas
 $pdf->SetFont('Arial', '', 12);
-$pdf->Cell(25, 10, utf8_decode('Codificación: '), 0, 0, 'C'); // Muestra la etiqueta
+$pdf->Cell(25, 10, utf8_decode('ID Certificado: '), 0, 0, 'C'); // Muestra la etiqueta
 $pdf->Cell(15, 10, utf8_decode($codificacion), 0, 1, 'L'); // Muestra el código en la misma línea
 
     
