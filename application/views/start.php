@@ -71,7 +71,7 @@
                             <a class="breadcrumb-item" href="<?php echo base_url(); ?>index.php/base/index">/Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="breadcrumb-item" href="about.html">estadistica</a>
+                            <a class="breadcrumb-item" href="about.html">estadistica2</a>
                         </li>
                         <li class="nav-item">
                             <a class="breadcrumb-item" href="<?php echo base_url(); ?>index.php/usuarios/logout">Registrarse</a>

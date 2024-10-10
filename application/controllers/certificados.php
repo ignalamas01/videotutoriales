@@ -141,7 +141,7 @@ public function verificar_certificado() {
 public function verificar_codigo() {
     // Obtener el código ingresado
     $codigo = $this->input->post('codigo');
-    
+
     // Consulta para obtener los detalles del certificado, el estudiante y el curso
     $this->db->select('certificados.codificacion, estudiante.nombre, estudiante.primerApellido, estudiante.segundoApellido, cursos.titulo, certificados.fechaEmision');
     $this->db->from('certificados');
@@ -153,10 +153,10 @@ public function verificar_codigo() {
     // Verificar si se encontró el certificado
     if ($certificado) {
         // Pasar los detalles a la vista
-        $this->load->view('certificado_verificado', array('certificado' => $certificado));
+        $this->load->view('verificar_certificado', array('certificado' => $certificado));
     } else {
         // Mostrar mensaje de error si no existe
-        $this->load->view('certificado_no_encontrado');
+        $this->load->view('verificar_certificado', array('error' => true));
     }
 }
 
@@ -172,10 +172,13 @@ public function verificar_por_qr() {
     $this->db->where('certificados.codificacion', $codigo);
     $certificado = $this->db->get()->row();
 
+    // Verificar si se encontró el certificado
     if ($certificado) {
-        $this->load->view('certificado_verificado', array('certificado' => $certificado));
+        // Cargar la vista de certificado verificado con los datos
+        $this->load->view('verificar_certificado', array('certificado' => $certificado));
     } else {
-        $this->load->view('certificado_no_encontrado');
+        // Cargar la vista de no encontrado
+        $this->load->view('verificar_certificado', array('error' => true));
     }
 }
 
