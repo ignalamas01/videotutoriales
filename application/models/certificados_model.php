@@ -137,18 +137,36 @@ public function verificar_aprobacion_curso($idCurso, $idEstudiante) {
         $pdf->Ln(20);
     
         // Firma 1 - Franz Callisaya Ortega
-        $pdf->SetFont('Arial', '', 14);
-        $pdf->Image('C:\xampp\htdocs\videotutoriales\uploads\empleados\firma_franz.png', 90, 110, 50, 20); // Firma como PNG
-        $pdf->SetXY(50, 125); // Posicionar texto debajo de la firma
-        $pdf->Cell(130, 10, '_____________________________', 0, 1, 'C');
-        $pdf->Cell(215, 10, 'Alberto Chambi', 0, 1, 'C');
-        $pdf->Cell(215, 10, 'Instructor del Curso', 0, 1, 'C');
+       // Obtener los datos del instructor
+       $instructor = $this->certificados_model->obtenerInstructorPorCurso($idCurso);
+       if ($instructor) {
+           // Verifica si el instructor tiene un seudónimo y la firma
+           $seudonimoInstructor = !empty($instructor->seudonimo) ? $instructor->seudonimo : ''; // Si tiene seudónimo, úsalo
+           $nombreInstructor = $instructor->nombre . ' ' . $instructor->primerApellido; // Nombre completo del instructor
+           $firmaInstructor = $instructor->firma; // Ruta de la firma
+       } else {
+           // En caso de que no se encuentre el instructor
+           $seudonimoInstructor = '';
+           $nombreInstructor = 'Instructor no encontrado';
+           $firmaInstructor = ''; // Si no hay firma, no se agrega
+       }
+
+    //    Código para agregar la firma del instructor y los datos en el PDF
+       if (!empty($firmaInstructor)) {
+           $pdf->Image($firmaInstructor, 90, 110, 50, 20); // Agrega la firma si existe
+       }
+    // $pruebaFirma = 'C:/xampp/htdocs/videotutoriales/uploads/empleados/firma_alberto.png';
+    // $pdf->Image($pruebaFirma, 90, 110, 50, 20); 
+       $pdf->SetXY(50, 125); // Ajustar la posición del texto debajo de la firma
+       $pdf->Cell(130, 10, '_____________________________', 0, 1, 'C');
+       $pdf->Cell(215, 10, utf8_decode($seudonimoInstructor . ' ' . $nombreInstructor), 0, 1, 'C'); // Agrega el seudónimo y nombre
+       $pdf->Cell(215, 10, utf8_decode('Instructor del Curso'), 0, 1, 'C');
     
         // Firma 2 - Alberto Chambi
         $pdf->Image('C:\xampp\htdocs\videotutoriales\uploads\empleados\firma_alberto.png', 200, 110, 50, 20); // Firma como PNG
         $pdf->SetXY(160, 125); // Posicionar texto debajo de la firma
         $pdf->Cell(130, 10, '_____________________________', 0, 1, 'C');
-        $pdf->Cell(440, 10, 'Franz Callisaya Ortega', 0, 1, 'C');
+        $pdf->Cell(440, 10, 'Ing. Franz Callisaya Ortega', 0, 1, 'C');
         $pdf->Cell(440, 10, utf8_decode('Director Académico'), 0, 1, 'C');
     
         // Generar la codificación del certificado
@@ -205,7 +223,14 @@ $pdf->Cell(15, 10, utf8_decode($codificacion), 0, 1, 'L'); // Muestra el código
         ob_end_flush();
     }
     
-
+    public function obtenerInstructorPorCurso($idCurso) {
+        $this->db->select('empleado.nombre, empleado.primerApellido, empleado.seudonimo, empleado.firma');
+        $this->db->from('cursos');
+        $this->db->join('empleado', 'empleado.id = cursos.idEmpleado'); // Relaciona el empleado con el curso
+        $this->db->where('cursos.id', $idCurso); // Filtra por el id del curso
+        $resultado = $this->db->get()->row(); // Devuelve una fila de resultado
+        return $resultado; // Retorna el instructor encontrado
+    }
     
     // Obtener el nombre del estudiante desde la base de datos
     public function obtenerNombreEstudiante($idEstudiante) {
