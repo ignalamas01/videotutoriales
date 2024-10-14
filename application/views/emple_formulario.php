@@ -27,7 +27,7 @@
 
     </div>
     <div class="col-md-5">
-        <center><img src="<?php echo base_url(); ?>img/imgvt.png" width="120"></center>
+        <!-- <center><img src="<?php echo base_url(); ?>img/imgvt.png" width="120"></center> -->
 
     </div>
 
@@ -66,18 +66,33 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">NOMBRES</label>
-                                    <input type="text" name="nombre" placeholder="escriba su nombre" class="form-control" required><br>
+                                    <input type="text" name="nombre" placeholder="Escriba su nombre" class="form-control" required><br>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">PRIMER APELLIDO</label>
-                                    <input type="text" name="primerApellido" placeholder="escriba su primer apellido" class="form-control" required><br>
+                                    <input type="text" name="primerApellido" placeholder="Escriba su primer apellido" class="form-control" required><br>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">SEGUNDO APELLIDO</label>
-                                    <input type="text" name="segundoApellido" placeholder="escriba su segundo apellido" class="form-control"><br>
+                                    <input type="text" name="segundoApellido" placeholder="Escriba su segundo apellido" class="form-control"><br>
                                 </div>
                                 <div class="form-group">
-    <label for="newEmail">Correo Electrónico</label>
+    <label for="seudonimo">TÍTULO</label>
+    <select name="seudonimo" class="form-control select2" style="width: 20%;" required>
+        <option value="" disabled selected>Seleccione...</option>
+        <option value="Mr.">Mr.</option>
+        <option value="Ing.">Ing.</option>
+        <option value="Lic.">Lic.</option>
+        <option value="Dr.">Dr.</option>
+        <option value="Ms.">Ms.</option>
+        <option value="Sr.">Sr.</option>
+        <option value="Sra.">Sra.</option>
+        <option value="Srta.">Srta.</option> <!-- Opción añadida para Señorita -->
+        <option value="Prof.">Prof.</option>
+    </select>
+</div>
+                                <div class="form-group">
+    <label for="newEmail">CORREO ELECTRÓNICO</label>
     <input type="email" id="destinatario" name="destinatario" placeholder="Escriba su correo electrónico" class="form-control" required onkeyup="verificarCorreoExistente()">
 
     <span id="error-correo" style="color: red;"></span>
@@ -137,7 +152,11 @@
 
                                 </div>
 
-
+                                <div class="form-group">
+    <label for="firma">Firma del Instructor (Para la emisión de certificados de los cursos realizados)</label>
+    <input type="file" name="firma" class="form-control" required>
+    <small class="form-text text-muted">Sube la imagen de la firma (formatos permitidos:.jpeg .jpg, .png).</small>
+</div>
 
 
 
@@ -173,49 +192,9 @@
 <script>
 var csrf_token = '<?php echo $this->security->get_csrf_hash(); ?>';
 
-// Función para verificar si el correo ya existe
-// function verificarCorreoExistente() {
-//     console.log('Función llamada'); 
-//     var destinatario = document.getElementById('destinatario').value;
 
-//     // Realiza una solicitud AJAX para verificar el correo en el servidor
-//     // Debes crear una ruta en tu controlador para manejar esta solicitud
-//     // Aquí se muestra un ejemplo básico
-//     $.ajax({
 //         url: '<?php echo base_url('base/verificar_correo_existente'); ?>',
-//         type: 'POST',
-//         data: { destinatario: destinatario },
-//         success: function(response) {
-//             if (response == 'existe') {
-//                 // El correo ya existe, muestra un mensaje de error
-//                 document.getElementById('error-correo').innerHTML = 'El correo ya existe';
-//             } else {
-//                 // El correo no existe, limpia el mensaje de error si lo hay
-//                 document.getElementById('error-correo').innerHTML = '';
-//             }
-//         },
-//         error: function(xhr, status, error) {
-//             console.error('Error en la solicitud AJAX:', error);
-//         }
-//     });
-// }
 
-// Manejar el evento de envío del formulario
-// $(document).ready(function() {
-//     $('#miFormulario').submit(function(event) {
-//         // Evitar el envío predeterminado del formulario
-//         event.preventDefault();
-        
-//         // Realizar la verificación antes de enviar los datos al servidor
-//         verificarCorreoExistente();
-
-//         // Aquí puedes agregar lógica adicional antes de enviar el formulario al servidor
-//         // Por ejemplo, podrías verificar otros campos o realizar otras validaciones.
-
-//         // Finalmente, si todo está bien, puedes enviar el formulario al servidor
-//         this.submit();
-//     });
-// });
 </script>
 
 <?php

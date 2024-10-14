@@ -103,4 +103,9 @@ class empleado_model extends CI_Model
         // Si se encuentra un resultado, devolverlo
         return $query->row();
     }
+    public function actualizarFirmaEmpleado($idEmpleado, $filePath)
+    {
+        $this->db->where('id', $idEmpleado);
+        $this->db->update('empleado', array('firma' => $filePath)); // 'firma' es el nombre de la columna en la tabla 'empleado' donde se almacena la ruta de la firma
+    }
 }

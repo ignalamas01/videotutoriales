@@ -263,158 +263,173 @@ class Base extends CI_Controller
 		$this->load->view('emple_formulario');
 		$this->load->view('incadmin/pie');
 	}
+	
 	public function agregarbd()
-	{
-		$correo = $this->input->post("destinatario");
+{
+    $correo = $this->input->post("destinatario");
 
     // Verificar si el correo ya existe en la base de datos
     if ($this->empleado_model->correoExiste($correo)) {
-        // Mostrar mensaje de error o redirigir a una página de error
-        // echo "El correo electrónico ya existe en la base de datos";
-		$this->session->set_flashdata('error_correo', 'El correo electrónico ya está registrado en la base de datos');
+        $this->session->set_flashdata('error_correo', 'El correo electrónico ya está registrado en la base de datos');
         redirect('base/agregar', 'refresh');
-		return;
+        return;
     }
-		// redirect('base/emple', 'refresh');
-		// $this->load->view('success_message');
-	
 
-    // Crear datos para la tabla 'usuario'
+    // Generar datos para la tabla 'usuario'
+    try {
+        // Función para generar usuario aleatorio
+        function generarUsuarioAleatorio() {
+            $usuario = 'usuariocepra' . rand(1000, 9999);
+            return $usuario;
+        }
+
+        // Función para generar una contraseña aleatoria de 8 dígitos
+        function generarContrasenaAleatoria() {
+            $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ@#$%&*';
+            $contrasena = substr(str_shuffle($caracteres), 0, 8);
+            return $contrasena;
+        }
+
+        // Generar usuario y contraseña
+        $usuario = generarUsuarioAleatorio();
+        $contrasena = generarContrasenaAleatoria();
+        $contrasena_cifrada = md5($contrasena); // Encriptación
+
+        // Lógica para enviar el correo con las credenciales
+        require 'vendor/autoload.php';
+        $mail = new PHPMailer(true);
+        $mail->SMTPOptions = [
+            'ssl' => [
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+                'allow_self_signed' => true,
+            ],
+        ];
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->Port = 587;
+        $mail->SMTPSecure = 'tls';
+        $mail->SMTPAuth = true;
+
+        // Credenciales de Gmail
+        $email = 'bikeracealvaro@gmail.com';
+        $mail->Username = $email;
+        $mail->Password = 'gzncuwbkwelnxwys';
+
+        // Configurar remitente y destinatario
+        $mail->setFrom($email, 'Roberto Orozco');
+        $mail->addAddress($correo);
+
+        // Asunto y cuerpo del correo
+        $mail->Subject = 'Credenciales de acceso';
+        $mail->IsHTML(true);
+        $mail->CharSet = 'UTF-8';
+        $mail->Body = sprintf('<h1>Bienvenido</h1><p>Su cuenta de usuario es: %s</p><p>Su contraseña es: %s</p>', $usuario, $contrasena);
+
+        // Enviar el correo
+        if (!$mail->send()) {
+            throw new Exception($mail->ErrorInfo);
+        }
+
+        // Crear datos para la tabla 'usuario'
+        $usuarioData = array(
+            'login' => $usuario,
+            'password' => $contrasena_cifrada,
+            'tipo' => 'empleado',
+            'estado' => 1,
+            'fechaRegistro' => date('Y-m-d H:i:s'),
+            'fechaActualizacion' => date('Y-m-d H:i:s'),
+            'email' => $correo,
+        );
+
+        // Insertar usuario en la base de datos
+        $this->empleado_model->agregarUsuario($usuarioData);
+        $idUsuario = $this->db->insert_id(); // Obtener el ID del nuevo usuario insertado
+
+        // Crear datos para la tabla 'empleado'
+        $data = array(
+            'nombre' => $this->input->post("nombre"),
+            'primerApellido' => $this->input->post("primerApellido"),
+            'segundoApellido' => $this->input->post("segundoApellido"),
+            'departamento' => $this->input->post("departamento"),
+            'fechaNacimiento' => $this->input->post("fechaNac"),
+            'telefono' => $this->input->post("telefono"),
+            'direccion' => $this->input->post("direccion"),
+			'seudonimo' => $this->input->post("seudonimo"),
+            'idUsuario' => $idUsuario
+        );
+
+        // Insertar empleado en la base de datos
+        $this->empleado_model->agregarempleado($data);
+        $idEmpleado = $this->db->insert_id(); // Obtener el ID del nuevo empleado
+
+        // Manejar la subida de la foto de la firma
+        // $uploadPath = 'C:\xampp\htdocs\videotutoriales\uploads\firmas\\';
+        // $config['upload_path']   = $uploadPath;
+        // $config['allowed_types'] = 'jpg|jpeg|png';
+        // $config['max_size']      = 2048; // Tamaño máximo del archivo (2MB por ejemplo)
+        // $config['file_name']     = $idUsuario . $idEmpleado . '.jpeg'; // Renombrar con el ID combinado
+
+        // $this->load->library('upload', $config);
+
+        // if ($this->upload->do_upload('firma')) { // 'firma' es el nombre del campo input file en tu formulario
+        //     $fileData = $this->upload->data();
+        //     $filePath = $uploadPath . $fileData['file_name'];
+
+        //     // Actualizar la tabla 'empleado' con la ruta de la firma
+        //     $this->empleado_model->actualizarFirmaEmpleado($idEmpleado, $filePath);
+
+        //     $this->session->set_flashdata('success', 'Empleado agregado exitosamente.');
+        // } else {
+        //     $this->session->set_flashdata('error', $this->upload->display_errors());
+        // }
+
+        // redirect('base/emple', 'refresh');
+		// Establecer la ruta de carga
+// Establecer la ruta de carga
+$uploadPath = 'C:/xampp/htdocs/videotutoriales/uploads/firmas/'; // Usar barras inclinadas hacia adelante
+$config['upload_path']   = $uploadPath;
+$config['allowed_types'] = 'jpg|jpeg|png';
+$config['max_size']      = 2048; // Tamaño máximo del archivo (2MB)
+$config['file_name']     = $idUsuario . $idEmpleado; // Nombre base del archivo
+
+// Inicializar la librería de carga
+$this->load->library('upload', $config);
+
+// Intentar subir el archivo
+if ($this->upload->do_upload('firma')) { // 'firma' es el nombre del campo input file en tu formulario
+    $fileData = $this->upload->data();
     
-		try {
-			function generarUsuarioAleatorio() {
-				// Generar un usuario aleatorio (personaliza esta lógica según tus necesidades)
-				$usuario = 'usuariocepra' . rand(1000, 9999);
-				return $usuario;
-			}
-		
-			// Función para generar una contraseña aleatoria de 8 dígitos
-			function generarContrasenaAleatoria() {
-				$caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ@#$%&*';
-    $contrasena = substr(str_shuffle($caracteres), 0, 8);
-    return $contrasena;
-			}
-		
-			// Generar la cuenta de usuario y la contraseña
-			$usuario = generarUsuarioAleatorio();
-			$contrasena = generarContrasenaAleatoria();
-			$contrasena_cifrada = md5($contrasena);
-		
-			// Resto del código para configurar y enviar el correo electrónico
-			// ...
-		
-			// Incluir la cuenta de usuario y la contraseña en el cuerpo del correo
-			
-		
-			// Resto del código para enviar el correo electrónico
-			// ...
+    // Obtener la extensión del archivo subido
+    $fileExt = $fileData['file_ext']; // .jpg, .jpeg o .png
 
+    // Renombrar el archivo con el ID combinado y la extensión correcta
+    $newFileName = $idUsuario . $idEmpleado . $fileExt; // Combina ID y extensión
+    $newFilePath = $uploadPath . $newFileName; // Nueva ruta completa
 
-					// Contenido del correo
-					// print("Esta parte se está ejecutando.");
-					$asunto    = $this->input->post("asunto");
-					// $data['asunto'] = $_POST['asunto'];
-					// $data['contenido'] = $_POST['contenido'];
-					// $data['destinatario'] = $_POST['destinatario'];
-					$contenido = $this->input->post("contenido");
-					$para      = $this->input->post("destinatario");
-			
-					if (!filter_var($para, FILTER_VALIDATE_EMAIL)) {
-						throw new Exception('Dirección de correo electrónico no válida.');
-					}
-					// error_log("La función post_gmail se está ejecutando.");
-					// Cargar la librería PHPMailer
-					// $this->load->library('phpmailer_lib');
-					require 'vendor/autoload.php';
-					$mail                = new PHPMailer(true);
-			        $mail->SMTPOptions = [
-						'ssl' => [
-							'verify_peer' => false,
-							'verify_peer_name' => false,
-							'allow_self_signed' => true,
-						],
-					];
-					// Crear una instancia de PHPMailer
-					// $mail = $this->phpmailer_lib->load();
-					// error_log("La función post_gmail se está ejecutando.");
-					// Configurar el servidor SMTP
-					// $mail->SMTPDebug = SMTP::DEBUG_SERVER;
-					$mail->isSMTP();
-					$mail->Host = 'smtp.gmail.com';
-					$mail->Port = 587; // o 465 si prefieres SSL
-					$mail->SMTPSecure = 'tls'; // o 'ssl' para SSL
-					$mail->SMTPAuth = true;
-			
-					// Credenciales de la cuenta de Gmail
-					$email = 'bikeracealvaro@gmail.com';
-					$mail->Username = $email;
-					$mail->Password = 'gzncuwbkwelnxwys';
-			
-					// Configurar el remitente y destinatario
-					$mail->setFrom($email, 'Roberto Orozco');
-					$mail->addReplyTo('replyto@panchos.com', 'Pancho Doe');
-					$mail->addAddress($para, 'John Doe');
-			
-					// Asunto del correo
-					$mail->Subject = $asunto;
-			
-					// Contenido HTML del correo
-					$mail->IsHTML(true);
-					$mail->CharSet = 'UTF-8';
-					// $mail->Body = sprintf('<h1>El mensaje es:</h1><br><p>%s</p>', $contenido);
-					$mail->Body = sprintf('<h1>El mensaje es:</h1><br><p>%s</p><p>Cuenta de usuario: %s</p><p>Contraseña: %s</p>', $contenido, $usuario, $contrasena);
-			
-					// Texto alternativo
-					$mail->AltBody = 'No olvides suscribirte a nuestro canal.';
-			
-					// Enviar el correo
-					if (!$mail->send()) {
-						throw new Exception($mail->ErrorInfo);
-					}
-			
-					// Redireccionar con un mensaje de éxito
-					$this->session->set_flashdata('success', 'Mensaje enviado con éxito a ' . $para);
-					// redirect('base/emple', 'refresh'); // Cambia 'base/index' a la URL deseada después del envío exitoso
-			
-				} catch (Exception $e) {
-					// Manejar errores y redireccionar con un mensaje de error
-					$this->session->set_flashdata('error', $e->getMessage());
-					// redirect('base/index');
-					// redirect('base/emple', 'refresh'); // Cambia 'base/index' a la URL deseada en caso de error
-				}
+    // Renombrar el archivo en el sistema de archivos
+    rename($fileData['full_path'], $newFilePath);
 
+    // Actualizar la tabla 'empleado' con la ruta completa de la firma
+    $this->empleado_model->actualizarFirmaEmpleado($idEmpleado, $newFilePath); // Guardar la ruta completa
 
-			$usuarioData = array(
-				'login' => $usuario, // Puedes personalizar la lógica aquí
-				'password' => $contrasena_cifrada,// Cambia 'contrasena' por la contraseña deseada
-				'tipo' => 'empleado',
-				'estado' => 1, // Puedes personalizar según tu lógica de activación
-				'fechaRegistro' => date('Y-m-d H:i:s'),
-				'fechaActualizacion' => date('Y-m-d H:i:s'),
-				'email' => $_POST['destinatario'], // Usar el correo proporcionado en el formulario
-				// 'idUsuario' => $idEmpleado, // Asignar el ID del empleado como ID de usuario
-			);
-		
-			// Agregar usuario
-			$this->empleado_model->agregarUsuario($usuarioData);
-			$idUsuario = $this->db->insert_id();
-			$data['nombre'] = $_POST['nombre'];
-		$data['primerApellido'] = $_POST['primerApellido'];
-		$data['segundoApellido'] = $_POST['segundoApellido'];
-		$data['departamento'] = $_POST['departamento'];
-		$data['fechaNacimiento'] = $_POST['fechaNac'];
-		$data['telefono'] = $_POST['telefono'];
-		
-		
-		$data['direccion'] = $_POST['direccion'];
-		$data['idUsuario'] = $idUsuario;
-		
+    // Mensaje de éxito
+    $this->session->set_flashdata('success', 'Empleado agregado exitosamente.');
+} else {
+    // Manejo de errores
+    $this->session->set_flashdata('error', $this->upload->display_errors());
+}
 
-		$this->empleado_model->agregarempleado($data);
-			redirect('base/emple', 'refresh');
-			
-		
-	}
+// Redireccionar a la vista deseada
+redirect('base/emple', 'refresh');
+
+    } catch (Exception $e) {
+        // Manejo de errores
+        $this->session->set_flashdata('error', $e->getMessage());
+        redirect('base/agregar', 'refresh');
+    }
+}
+
 	public function modificar()
 	{
 		$idempleado = $_POST['idempleado'];
