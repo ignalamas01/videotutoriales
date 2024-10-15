@@ -5,7 +5,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>*</h1>
+            <!-- <h1>*</h1> -->
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -21,12 +21,12 @@
     <div class="row featurette">
     <div class="col-md-7">
         <br>
-        <h2 class="featurette-heading">MODIFICAR <span class="text-muted"> ****</span></h2><br>
+        <h2 class="featurette-heading"> MODIFICAR <span class="text-muted"> </span></h2><br>
 
 
     </div>
     <div class="col-md-5">
-        <center><img src="<?php echo base_url(); ?>img/imgvt.png" width="120"></center>
+        <!-- <center><img src="<?php echo base_url(); ?>img/imgvt.png" width="120"></center> -->
 
     </div>
 
@@ -66,6 +66,21 @@
                                         <label for="exampleInputPassword1">Segundo Apellido</label>
                                         <input type="text" name="segundoApellido" placeholder="escriba su segundo apellido" class="form-control" value="<?php echo $row->segundoApellido; ?>"><br>
                                     </div>
+                                    <div class="form-group">
+     <label for="seudonimo">TÍTULO</label>
+     <select name="seudonimo" class="form-control select2" style="width: 20%;" value="<?php echo $row->seudonimo; ?>">>
+        <!-- <option value="" disabled selected>Seleccione...</option> -->
+        <option value="Mr.">Mr.</option>
+        <option value="Ing.">Ing.</option>
+        <option value="Lic.">Lic.</option>
+        <option value="Dr.">Dr.</option>
+        <option value="Ms.">Ms.</option>
+        <option value="Sr.">Sr.</option>
+        <option value="Sra.">Sra.</option>
+        <option value="Srta.">Srta.</option> <!-- Opción añadida para Señorita -->
+        <option value="Prof.">Prof.</option>
+    </select>
+</div>
                                     <div class="row">
                                         <div class="col-4">
                                             <div class="form-group">
@@ -124,13 +139,28 @@
 
                                 </div>
                                 <!-- /.card-body -->
+                                <div class="form-group">
+    <label for="firma">Subir Firma</label>
+    <input type="file" class="form-control-file" name="firma" accept=".jpg, .jpeg, .png">
+
+    <?php if (!empty($row->firma)): ?>
+        <?php
+            // Si en la base de datos ya está almacenada la ruta completa, 
+            // entonces reemplaza la parte "C:/xampp/htdocs/videotutoriales/" con base_url().
+            // Si solo almacenas la parte relativa, entonces base_url() es suficiente.
+            $firmaUrl = str_replace("C:/xampp/htdocs/videotutoriales/", base_url(), $row->firma);
+        ?>
+        <p>Firma actual: <img src="<?php echo $firmaUrl; ?>" alt="Firma" style="width:100px;"></p>
+    <?php endif; ?>
+</div>
+
 
 
                             </form>
                         </div>
                         <!-- /.card -->
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-success ">modificar</button>
+                            <button type="submit" class="btn btn-success ">Modificar</button>
 
                             <button type="reset" class="btn btn-primary" onClick="history.go(-1);">Cancelar</button>
                         </div>

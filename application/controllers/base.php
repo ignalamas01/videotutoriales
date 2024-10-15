@@ -363,29 +363,7 @@ class Base extends CI_Controller
         $this->empleado_model->agregarempleado($data);
         $idEmpleado = $this->db->insert_id(); // Obtener el ID del nuevo empleado
 
-        // Manejar la subida de la foto de la firma
-        // $uploadPath = 'C:\xampp\htdocs\videotutoriales\uploads\firmas\\';
-        // $config['upload_path']   = $uploadPath;
-        // $config['allowed_types'] = 'jpg|jpeg|png';
-        // $config['max_size']      = 2048; // Tamaño máximo del archivo (2MB por ejemplo)
-        // $config['file_name']     = $idUsuario . $idEmpleado . '.jpeg'; // Renombrar con el ID combinado
-
-        // $this->load->library('upload', $config);
-
-        // if ($this->upload->do_upload('firma')) { // 'firma' es el nombre del campo input file en tu formulario
-        //     $fileData = $this->upload->data();
-        //     $filePath = $uploadPath . $fileData['file_name'];
-
-        //     // Actualizar la tabla 'empleado' con la ruta de la firma
-        //     $this->empleado_model->actualizarFirmaEmpleado($idEmpleado, $filePath);
-
-        //     $this->session->set_flashdata('success', 'Empleado agregado exitosamente.');
-        // } else {
-        //     $this->session->set_flashdata('error', $this->upload->display_errors());
-        // }
-
-        // redirect('base/emple', 'refresh');
-		// Establecer la ruta de carga
+        
 // Establecer la ruta de carga
 $uploadPath = 'C:/xampp/htdocs/videotutoriales/uploads/firmas/'; // Usar barras inclinadas hacia adelante
 $config['upload_path']   = $uploadPath;
@@ -450,6 +428,7 @@ redirect('base/emple', 'refresh');
 		$data['fechaNacimiento'] = $_POST['fechaNac'];
 		$data['telefono'] = $_POST['telefono'];
 		$data['direccion'] = $_POST['direccion'];
+		$data['seudonimo'] = $_POST['seudonimo'];
 		$this->empleado_model->modificarempleado($idempleado,$data);
 		redirect('base/emple', 'refresh');
 	}

@@ -77,8 +77,8 @@
                                     <input type="text" name="segundoApellido" placeholder="Escriba su segundo apellido" class="form-control"><br>
                                 </div>
                                 <div class="form-group">
-    <label for="seudonimo">TÍTULO</label>
-    <select name="seudonimo" class="form-control select2" style="width: 20%;" required>
+     <label for="seudonimo">TÍTULO</label>
+     <select name="seudonimo" class="form-control select2" style="width: 20%;" required>
         <option value="" disabled selected>Seleccione...</option>
         <option value="Mr.">Mr.</option>
         <option value="Ing.">Ing.</option>
