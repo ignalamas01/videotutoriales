@@ -21,14 +21,26 @@ class empleado_model extends CI_Model
         $this->db->insert('empleado', $data);
     }
 
+    // public function recuperarempleado($idempleado)
+    // {
+    //     $this->db->select('*');
+    //     $this->db->from('empleado');
+    //     $this->db->where('id', $idempleado);
+
+    //     return $this->db->get();
+    // }
     public function recuperarempleado($idempleado)
     {
-        $this->db->select('*');
+        $this->db->select('empleado.*, usuario.email');
         $this->db->from('empleado');
-        $this->db->where('id', $idempleado);
-
-        return $this->db->get();
+        $this->db->join('usuario', 'empleado.idUsuario = usuario.idUsuario');
+        $this->db->where('empleado.id', $idempleado);
+        
+        return $this->db->get();  // Devuelve el objeto de consulta completo
     }
+    
+    
+
     public function modificarempleado($idempleado, $data)
     {
         $this->db->where('id', $idempleado);
@@ -108,4 +120,10 @@ class empleado_model extends CI_Model
         $this->db->where('id', $idEmpleado);
         $this->db->update('empleado', array('firma' => $filePath)); // 'firma' es el nombre de la columna en la tabla 'empleado' donde se almacena la ruta de la firma
     }
+    public function modificarUsuario($idUsuario, $data)
+{
+    $this->db->where('idUsuario', $idUsuario);
+    return $this->db->update('usuario', $data); // Actualiza la tabla 'usuario'
+}
+
 }

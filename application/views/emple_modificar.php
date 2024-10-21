@@ -64,7 +64,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">Segundo Apellido</label>
-                                        <input type="text" name="segundoApellido" placeholder="escriba su segundo apellido" class="form-control" value="<?php echo $row->segundoApellido; ?>"><br>
+                                        <input type="text" name="segundoApellido" placeholder="Escriba su segundo apellido" class="form-control" value="<?php echo $row->segundoApellido; ?>"><br>
                                     </div>
                                     <div class="form-group">
      <label for="seudonimo">TÍTULO</label>
@@ -81,6 +81,10 @@
         <option value="Prof.">Prof.</option>
     </select>
 </div>
+<div class="form-group">
+                                        <label for="exampleInputPassword1">Correo</label>
+                                        <input type="text" name="correo" placeholder="escriba su segundo apellido" class="form-control" value="<?php echo $row->email; ?>"><br>
+                                    </div>
                                     <div class="row">
                                         <div class="col-4">
                                             <div class="form-group">
@@ -119,6 +123,7 @@
                                             </div>
 
                                         </div>
+                                        <input type="hidden" name="idUsuario" value="<?php echo $row->idUsuario; ?>">
 
 
                                     </div>

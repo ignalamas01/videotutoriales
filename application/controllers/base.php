@@ -418,20 +418,109 @@ redirect('base/emple', 'refresh');
 		$this->load->view('emple_modificar',$data);
 		$this->load->view('incadmin/pie');
 	}
+	// public function modificarbd()
+	// {
+	// 	$idempleado = $_POST['idempleado'];
+	// 	$data['nombre'] = $_POST['nombre'];
+	// 	$data['primerApellido'] = $_POST['primerApellido'];
+	// 	$data['segundoApellido'] = $_POST['segundoApellido'];
+	// 	$data['departamento'] = $_POST['departamento'];
+	// 	$data['fechaNacimiento'] = $_POST['fechaNac'];
+	// 	$data['telefono'] = $_POST['telefono'];
+	// 	$data['direccion'] = $_POST['direccion'];
+	// 	$data['seudonimo'] = $_POST['seudonimo'];
+	// 	$this->empleado_model->modificarempleado($idempleado,$data);
+	// 	redirect('base/emple', 'refresh');
+	// }
 	public function modificarbd()
-	{
-		$idempleado = $_POST['idempleado'];
-		$data['nombre'] = $_POST['nombre'];
-		$data['primerApellido'] = $_POST['primerApellido'];
-		$data['segundoApellido'] = $_POST['segundoApellido'];
-		$data['departamento'] = $_POST['departamento'];
-		$data['fechaNacimiento'] = $_POST['fechaNac'];
-		$data['telefono'] = $_POST['telefono'];
-		$data['direccion'] = $_POST['direccion'];
-		$data['seudonimo'] = $_POST['seudonimo'];
-		$this->empleado_model->modificarempleado($idempleado,$data);
-		redirect('base/emple', 'refresh');
-	}
+{
+    // Recibir datos del formulario
+	$idUsuario = $this->input->post('idUsuario');
+    $idempleado = $_POST['idempleado'];
+    $data = array(
+        'nombre' => $_POST['nombre'],
+        'primerApellido' => $_POST['primerApellido'],
+        'segundoApellido' => $_POST['segundoApellido'],
+        'departamento' => $_POST['departamento'],
+        'fechaNacimiento' => $_POST['fechaNac'],
+        'telefono' => $_POST['telefono'],
+        'direccion' => $_POST['direccion'],
+        'seudonimo' => $_POST['seudonimo'],
+		'fechaActualizacion' => date('Y-m-d H:i:s') // Actualizar la fecha a la actual
+		
+    );
+
+
+	 // Configuración para la subida de la firma
+	 $uploadPath = 'C:/xampp/htdocs/videotutoriales/uploads/firmas/';
+	 $config['upload_path'] = $uploadPath;
+	 $config['allowed_types'] = 'jpg|jpeg|png';
+	 $config['max_size'] = 2048; // Tamaño máximo del archivo (2MB)
+	 
+	 // Inicializar la librería de carga
+	 $this->load->library('upload', $config);
+ 
+	 // Si se subió un nuevo archivo de firma
+	 if (!empty($_FILES['firma']['name'])) {
+		 // Intentar subir el archivo
+		 if ($this->upload->do_upload('firma')) {
+			 $fileData = $this->upload->data();
+			 $fileExt = $fileData['file_ext']; // .jpg, .jpeg o .png
+			 $newFileName = $idUsuario . $idempleado . $fileExt; // Usar el ID del empleado para el nombre
+			 $newFilePath = $uploadPath . $newFileName; // Nueva ruta completa
+ 
+			 // Renombrar el archivo en el sistema de archivos
+			 rename($fileData['full_path'], $newFilePath);
+ 
+			 // Actualizar la ruta de la firma en los datos
+			 $data['firma'] = $newFilePath; // Asumiendo que hay un campo 'firma' en la tabla empleado
+		 } else {
+			 // Manejo de errores si la subida falla
+			 $this->session->set_flashdata('error', $this->upload->display_errors());
+			 redirect('base/modificar/' . $idempleado, 'refresh'); // Redirigir a la vista de modificación
+			 return;
+		 }
+	 }
+    // Actualizar la tabla 'empleado'
+    $this->empleado_model->modificarempleado($idempleado, $data);
+
+    // Obtener el 'idUsuario' relacionado al 'idempleado'
+    $resultado = $this->empleado_model->recuperarempleado($idempleado);
+    
+    // Obtener la primera fila del resultado
+    $empleado = $resultado->row(); // Aquí obtenemos el objeto de la fila
+    
+    // Verificar si se obtuvo el empleado correctamente
+    if (!$empleado) {
+        show_error('Empleado no encontrado', 404);
+        return;
+    }
+
+    // Ahora podemos acceder a idUsuario y email
+    $idUsuario = $empleado->idUsuario; // Asegúrate de que 'idUsuario' esté disponible en el resultado
+
+    // Modificar el correo en la tabla 'usuario'
+    $newEmail = $_POST['correo']; // Asegúrate de que el campo de correo se llama 'correo'
+    
+    // Validar que el nuevo correo no esté vacío
+    if (empty($newEmail)) {
+        show_error('El correo electrónico no puede estar vacío.');
+        return;
+    }
+
+    $usuarioData = array(
+        'email' => $newEmail,
+        'fechaActualizacion' => date('Y-m-d H:i:s') // Actualizamos también la fecha de actualización
+    );
+    
+	
+    // Llamar al modelo para actualizar el correo en la tabla 'usuario'
+    $this->empleado_model->modificarUsuario($idUsuario, $usuarioData);
+
+    // Redireccionar después de la actualización
+    redirect('base/emple', 'refresh');
+}
+
 
 
 	public function eliminarbd()

@@ -93,7 +93,7 @@
 </div>
                                 <div class="form-group">
     <label for="newEmail">CORREO ELECTRÓNICO</label>
-    <input type="email" id="destinatario" name="destinatario" placeholder="Escriba su correo electrónico" class="form-control" required onkeyup="verificarCorreoExistente()">
+    <input type="email" id="destinatario" name="destinatario" placeholder="Escriba su email" class="form-control" required onkeyup="verificarCorreoExistente()">
 
     <span id="error-correo" style="color: red;"></span>
 </div>

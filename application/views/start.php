@@ -25,6 +25,36 @@
     https://templatemo.com/tm-559-zay-shop
 
     -->
+
+<style>
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.navbar a {
+    text-decoration: none;
+    padding: 8px 16px;
+    color: #cccccc; /* Color gris claro inicial */
+    transition: color 0.3s ease;
+    font-size: 18px; /* Aumenta el tamaño de la fuente */
+}
+
+.navbar a:hover {
+    color: #ffffff; /* Color blanco al pasar el ratón */
+}
+
+.navbar .nav-item {
+    margin-right: 15px;
+}
+
+.navbar .nav-item:last-child {
+    margin-right: 0;
+}
+</style>
+
 </head>
 
 <body style="background-color: #919197 ;" >
@@ -68,14 +98,14 @@
                    
                 <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
                         <li class="nav-item" >
-                            <a class="breadcrumb-item" href="<?php echo base_url(); ?>index.php/base/index">/Home</a>
+                            <a class="breadcrumb-item" href="<?php echo base_url(); ?>index.php/base/index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="breadcrumb-item" href="about.html">estadistica2</a>
+                            <a class="breadcrumb-item" href="about.html">Verificación</a>
                         </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a class="breadcrumb-item" href="<?php echo base_url(); ?>index.php/usuarios/logout">Registrarse</a>
-                        </li>
+                        </li> -->
                         <li class="nav-item">
                             <a class="breadcrumb-item" href="<?php echo base_url(); ?>index.php/usuarios/logout">Iniciar sesión</a>
                         </li>
@@ -99,14 +129,14 @@
                     <a class="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal" data-bs-target="#templatemo_search">
                         <i class="fa fa-fw fa-search text-dark mr-2"></i>
                     </a>
-                    <a class="nav-icon position-relative text-decoration-none" href="#">
+                    <!-- <a class="nav-icon position-relative text-decoration-none" href="#">
                         <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
                         <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">7</span>
-                    </a>
-                    <a class="nav-icon position-relative text-decoration-none" href="#">
+                    </a> -->
+                    <!-- <a class="nav-icon position-relative text-decoration-none" href="#">
                         <i class="fa fa-fw fa-user text-dark mr-3"></i>
                         <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">+99</span>
-                    </a>
+                    </a> -->
                 </div>
             </div>
 
@@ -429,10 +459,9 @@
     <!-- End Footer -->
 
     <!-- Start Script -->
-    <script src="<?php echo base_url(); ?>adminlte/plugins/jquery-1.11.0.min.js"></script>
-    <script src="<?php echo base_url(); ?>adminlte/plugins/jquery-migrate-1.2.1.min.js"></script>
+        <script src="<?php echo base_url(); ?>adminlte/plugins/jquery-migrate-1.2.1.min.js"></script>
     <!-- <script src="<?php echo base_url(); ?>adminlte/plugins/bootstrapTEMP.bundle.min.js"></script> -->
-    <!-- <script src="assets/js/bootstrap.bundle.min.js"></script> -->
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
     <script src="<?php echo base_url(); ?>adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="<?php echo base_url(); ?>adminlte/plugins/templatemo.js"></script>
     <script src="<?php echo base_url(); ?>adminlte/plugins/custom.js"></script>
