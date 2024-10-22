@@ -55,6 +55,22 @@
 }
 </style>
 
+
+<style>
+body, html {
+    height: 100%; /* Asegura que el cuerpo de la página use todo el alto */
+    overflow-x: hidden; /* Evita el scroll horizontal innecesario */
+}
+
+.carousel, .carousel-item {
+    min-height: 100vh; /* Asegura que el carousel ocupe toda la altura de la pantalla */
+}
+
+section {
+    min-height: 100vh; /* Cada sección debe ocupar al menos el alto de la ventana */
+}
+</style>
+
 </head>
 
 <body style="background-color: #919197 ;" >
@@ -85,7 +101,7 @@
     <div class="container d-flex justify-content-between align-items-center"  >
     <a href="<?php echo base_url(); ?>index.php/system/index" class="navbar-brand" style="color: red;">
     <img  src="<?php echo base_url(); ?>/adminlte/dist/img/logo_cepra.jpeg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8; width: 65px; display: inline-block; vertical-align: middle; margin-left: 10px;">
-        <a class="navbar-brand" href="<?php echo base_url(); ?>index.php/system/index" style="color: skyblue;">CEPRA</a>
+        <!-- <a class="navbar-brand" href="<?php echo base_url(); ?>index.php/system/index" style="color: skyblue;">CEPRA</a> -->
     </a>
     <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -98,16 +114,16 @@
                    
                 <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
                         <li class="nav-item" >
-                            <a class="breadcrumb-item" href="<?php echo base_url(); ?>index.php/base/index">Home</a>
+                            <a class="breadcrumb-item" href="<?php echo base_url(); ?>index.php/base/index">CEPRA</a>
                         </li>
                         <li class="nav-item">
-                            <a class="breadcrumb-item" href="about.html">Verificación</a>
+                            <a class="breadcrumb-item" href="<?php echo base_url(); ?>index.php/certificados/verificar_certificado">VERIFICACIÓN</a>
                         </li>
                         <!-- <li class="nav-item">
                             <a class="breadcrumb-item" href="<?php echo base_url(); ?>index.php/usuarios/logout">Registrarse</a>
                         </li> -->
                         <li class="nav-item">
-                            <a class="breadcrumb-item" href="<?php echo base_url(); ?>index.php/usuarios/logout">Iniciar sesión</a>
+                            <a class="breadcrumb-item" href="<?php echo base_url(); ?>index.php/usuarios/logout">INICIAR SESIÓN</a>
                         </li>
                         
         <!-- <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/base/index">Home</a></li>
