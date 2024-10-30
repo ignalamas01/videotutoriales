@@ -95,7 +95,7 @@
 <body>
 
 <!-- Barra de navegación similar a la página principal -->
-<nav class="navbar">
+<!-- <nav class="navbar">
     <div class="nav-item">
         <a href="#">CEPRA</a>
     </div>
@@ -105,7 +105,7 @@
     <div class="nav-item">
         <a href="#">Iniciar sesión</a>
     </div>
-</nav>
+</nav> -->
 
 <div class="container">
     <h2>Verificación de Certificado</h2>

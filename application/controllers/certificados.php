@@ -136,9 +136,14 @@ public function actualizar_progreso() {
 }
 // En tu controlador de Certificados
 public function verificar_certificado() {
+    $this->load->view('inc/cabecera');
+    $this->load->view('inicio/navbar');
     $this->load->view('verificar_certificado');
+   
 }
 public function verificar_codigo() {
+    $this->load->view('inc/cabecera');
+    $this->load->view('inicio/navbar');
     // Obtener el código ingresado
     $codigo = $this->input->post('codigo');
 

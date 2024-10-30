@@ -60,6 +60,7 @@
 body, html {
     height: 100%; /* Asegura que el cuerpo de la página use todo el alto */
     overflow-x: hidden; /* Evita el scroll horizontal innecesario */
+    padding-top: 60px; /* Ajusta esto según la altura de tu navbar */
 }
 
 .carousel, .carousel-item {
@@ -74,93 +75,7 @@ section {
 </head>
 
 <body style="background-color: #919197 ;" >
-    <!-- Start Top Nav -->
-    <nav class="navbar navbar-expand-lg bg-dark navbar-light d-none d-lg-block" id="templatemo_nav_top">
-        <div class="container text-light">
-            <div class="w-100 d-flex justify-content-between">
-                <div>
-                    <i class="fa fa-envelope mx-2"></i>
-                    <a class="navbar-sm-brand text-light text-decoration-none" href="mailto:info@cepra.com">info@cepra.com</a>
-                    <i class="fa fa-phone mx-2"></i>
-                    <a class="navbar-sm-brand text-light text-decoration-none" href="tel:79988432">79988432</a>
-                </div>
-                <div>
-                    <a class="text-light" href="https://www.facebook.com/CentrodePreparacionAcademica.CepraCbba" target="_blank" rel="sponsored"><i class="fab fa-facebook-f fa-sm fa-fw me-2"></i></a>
-                    <a class="text-light" href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram fa-sm fa-fw me-2"></i></a>
-                    <a class="text-light" href="https://twitter.com/" target="_blank"><i class="fab fa-twitter fa-sm fa-fw me-2"></i></a>
-                    <a class="text-light" href="https://www.linkedin.com/" target="_blank"><i class="fab fa-linkedin fa-sm fa-fw"></i></a>
-                </div>
-            </div>
-        </div>
-    </nav>
-    <!-- Close Top Nav -->
-
-
-    <!-- Header -->
-    <nav class="navbar navbar-expand-lg navbar-light shadow" style="background-color: #093562 ;" >
-    <div class="container d-flex justify-content-between align-items-center"  >
-    <a href="<?php echo base_url(); ?>index.php/system/index" class="navbar-brand" style="color: red;">
-    <img  src="<?php echo base_url(); ?>/adminlte/dist/img/logo_cepra.jpeg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8; width: 65px; display: inline-block; vertical-align: middle; margin-left: 10px;">
-        <!-- <a class="navbar-brand" href="<?php echo base_url(); ?>index.php/system/index" style="color: skyblue;">CEPRA</a> -->
-    </a>
-    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-
-
-            <div class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between" id="templatemo_main_nav" >
-                <div class="flex-fill">
-                   
-                <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
-                        <li class="nav-item" >
-                            <a class="breadcrumb-item" href="<?php echo base_url(); ?>index.php/base/index">CEPRA</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="breadcrumb-item" href="<?php echo base_url(); ?>index.php/certificados/verificar_certificado">VERIFICACIÓN</a>
-                        </li>
-                        <!-- <li class="nav-item">
-                            <a class="breadcrumb-item" href="<?php echo base_url(); ?>index.php/usuarios/logout">Registrarse</a>
-                        </li> -->
-                        <li class="nav-item">
-                            <a class="breadcrumb-item" href="<?php echo base_url(); ?>index.php/usuarios/logout">INICIAR SESIÓN</a>
-                        </li>
-                        
-        <!-- <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/base/index">Home</a></li>
-        <li class="breadcrumb-item active">DataTables</li>
-        <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/usuarios/logout">Registrate</a></li>
-        <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/usuarios/logout">Iniciar sesion</a></li>
-        <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/registro/registrar">Registrate</a></li> -->
-                    </ul>
-                </div>
-                <div class="navbar align-self-center d-flex" >
-                    <div class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3" >
-                        <div class="input-group"  >
-                            <input type="text" class="form-control" id="inputMobileSearch" placeholder="Search ..." >
-                            <div class="input-group-text" >
-                                <i class="fa fa-fw fa-search"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <a class="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal" data-bs-target="#templatemo_search">
-                        <i class="fa fa-fw fa-search text-dark mr-2"></i>
-                    </a>
-                    <!-- <a class="nav-icon position-relative text-decoration-none" href="#">
-                        <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
-                        <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">7</span>
-                    </a> -->
-                    <!-- <a class="nav-icon position-relative text-decoration-none" href="#">
-                        <i class="fa fa-fw fa-user text-dark mr-3"></i>
-                        <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">+99</span>
-                    </a> -->
-                </div>
-            </div>
-
-        </div>
-    </nav>
-    <!-- Close Header -->
-
-    <!-- Modal -->
+ 
     <div class="modal fade bg-white" id="templatemo_search" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="w-100 pt-1 mb-5 text-right">
@@ -473,7 +388,8 @@ section {
 
     </footer>
     <!-- End Footer -->
-
+<!-- jQuery -->
+<script src="<?php echo base_url(); ?>adminlte/plugins/jquery/jquery.min.js"></script>
     <!-- Start Script -->
         <script src="<?php echo base_url(); ?>adminlte/plugins/jquery-migrate-1.2.1.min.js"></script>
     <!-- <script src="<?php echo base_url(); ?>adminlte/plugins/bootstrapTEMP.bundle.min.js"></script> -->
@@ -490,8 +406,7 @@ section {
 
 
 
-<!-- jQuery -->
-<script src="<?php echo base_url(); ?>adminlte/plugins/jquery/jquery.min.js"></script>
+
 <!-- Bootstrap 4 -->
 <script src="<?php echo base_url(); ?>adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
