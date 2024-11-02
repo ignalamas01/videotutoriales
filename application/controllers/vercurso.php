@@ -24,10 +24,17 @@ class Vercurso extends CI_Controller
 				// $this->load->view('inc/pie');
 			}
 			if ($tipo == 'invitado') {
+				$idUsuario = $this->session->userdata('idusuario');
+			
+			// Obtener los datos del estudiante basado en idUsuario
+			$data['estudiante'] = $this->estudiante_model->obtener_estudiante_por_usuario($idUsuario);
+				
 				// Cargar la vista para el empleado
 				$this->load->view('incestudiante/cabecera');
 				$this->load->view('incestudiante/menu');
-				$this->load->view('incestudiante/menulateral');
+				// $this->load->view('incestudiante/menulateral');
+				// $this->menulateral->cargar_menu_lateral();
+				$this->load->view('incestudiante/menulateral', $data);
 				$this->load->model('vercurso_model');
 				// $this->load->view('incestudiante/pie');
 				

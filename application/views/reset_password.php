@@ -14,6 +14,7 @@
             align-items: center;
             height: 100vh;
             margin: 0;
+            
         }
 
         .container {
@@ -23,6 +24,7 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             width: 400px;
             text-align: center;
+            margin-top: 80px; /* Ajusta este valor según la altura del encabezado */
         }
 
         h2 {

@@ -24,10 +24,24 @@
     <!-- Main content -->
     <div class="row featurette">
     <div class="col-md-7">
-        <h2 class="featurette-heading" style="color: blue;">SISTEMA WEB DE VIDEOTUTORIALES DE APRENDIZAJE AUTODIDACTA PARA ESTUDIANTES <span class="text-muted"></span></h2>
-        <p class="lead">Cepra</p>
-
-    </div>
+    <h2 class="featurette-heading" style="
+        color: #0056b3; /* Un azul más oscuro */
+        font-size: 2.5rem;
+        font-weight: 700;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Sombra de texto sutil */
+        margin-bottom: 15px;
+    ">
+        SISTEMA WEB DE VIDEOTUTORIALES
+    </h2>
+    <p class="lead" style="
+        font-size: 1.25rem;
+        color: #666;
+        font-weight: 600;
+        margin-top: 10px;
+    ">
+        CEPRA
+    </p>
+</div>
     <div class="col-md-5">
         <center><img src="<?php echo base_url(); ?>img/im2.jpg"  width="400"></center>
         

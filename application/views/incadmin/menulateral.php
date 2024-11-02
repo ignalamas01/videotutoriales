@@ -305,16 +305,7 @@
               </p>
             </a>
           </li> -->
-          <li class="nav-item">
-            <a href="<?php echo base_url(); ?>index.php/foros/index" class="nav-link">
-              <!-- <i class="nav-icon far fa-image"></i> -->
-              <i class="nav-icon fas fa-edit"></i>
-              <p>
-                Foros
-                
-              </p>
-            </a>
-          </li>
+         
           <!-- <li class="nav-item">
             <a href="../kanban.html" class="nav-link">
               <i class="nav-icon fas fa-columns"></i>

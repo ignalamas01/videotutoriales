@@ -27,7 +27,7 @@
         <div class="card" style="border-radius: 15px">
           <div class="card p-4 text-light bg-dark mb-6" style="background-color: #d5d4d6;border-radius: 15px;">
             <div class="login-logo">
-              <a href="#" style="color: white; font-weight: 700;"><b>CEPRA</b></a>
+              <a href="http://localhost/videotutoriales/index.php" style="color: white; font-weight: 700;"><b>CEPRA</b></a>
             </div>
 
             <?php

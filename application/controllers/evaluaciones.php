@@ -168,10 +168,14 @@ public function evaluaciones_enlista()
 					$this->load->view('evaluaciones_lista_profe',$data);
 					$this->load->view('incadmin/pie');
         } if ($tipo == 'empleado') {
+            $idUsuario = $this->session->userdata('idusuario');
+			// echo "ID Usuario: " . $idUsuario; 
+			// Obtener los datos del estudiante basado en idUsuario
+			$data['empleado'] = $this->empleado_model->obtener_empleado_por_usuario($idUsuario);
             // Cargar la vista para el empleado
-            $this->load->view('inc/cabecera');
-			$this->load->view('inc/menu');
-			$this->load->view('inc/menulateral');
+            $this->load->view('inc/cabecera',$data);
+			$this->load->view('inc/menu',$data);
+			$this->load->view('inc/menulateral',$data);
 			$this->load->view('evaluaciones_lista_profe',$data);
 			$this->load->view('inc/pie');
 

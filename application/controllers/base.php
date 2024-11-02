@@ -65,11 +65,7 @@ class Base extends CI_Controller
 	}
 	public function obj()
 	{
-		// $this->load->view('inc/cabecera');
-		// $this->load->view('inc/menu');
-		// $this->load->view('inc/menulateral');
-		// $this->load->view('objetivos');
-		// $this->load->view('inc/pie');
+		
 		$tipo = $this->session->userdata('tipo');
 			if ($tipo == 'admin') {
 				// Cargar la vista para el administrador
@@ -79,12 +75,17 @@ class Base extends CI_Controller
 						$this->load->view('objetivos');
 						$this->load->view('incadmin/pie');
 			} if ($tipo == 'empleado') {
+				$idUsuario = $this->session->userdata('idusuario');
+			// echo "ID Usuario: " . $idUsuario; 
+			// Obtener los datos del estudiante basado en idUsuario
+			$data['empleado'] = $this->empleado_model->obtener_empleado_por_usuario($idUsuario);
 				// Cargar la vista para el empleado
-				$this->load->view('inc/cabecera');
-				$this->load->view('inc/menu');
-				$this->load->view('inc/menulateral');
-				$this->load->view('objetivos');
-				$this->load->view('inc/pie');
+				$this->load->view('inc/cabecera',$data);
+				$this->load->view('inc/menu',$data);
+				$this->load->view('inc/menulateral',$data);
+				$this->load->view('objetivos',$data);
+				$this->load->view('inc/pie',$data);
+				
 			}
 			if ($tipo == 'invitado') {
 				// Cargar la vista para el empleado

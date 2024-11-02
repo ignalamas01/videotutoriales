@@ -83,6 +83,7 @@
         <option value="Mr.">Mr.</option>
         <option value="Ing.">Ing.</option>
         <option value="Lic.">Lic.</option>
+        <option value="Lic.">Mgr.</option>
         <option value="Dr.">Dr.</option>
         <option value="Ms.">Ms.</option>
         <option value="Sr.">Sr.</option>

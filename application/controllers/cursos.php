@@ -49,11 +49,15 @@ class Cursos extends CI_Controller
         } if ($tipo == 'empleado') {
             // Cargar la vista para el empleado
 			$tipo = $this->session->userdata('tipo');
-            $this->load->view('inc/cabecera');
-			$this->load->view('inc/menu');
-			$this->load->view('inc/menulateral');
+			$idUsuario = $this->session->userdata('idusuario');
+			// echo "ID Usuario: " . $idUsuario; 
+			// Obtener los datos del estudiante basado en idUsuario
+			$data['empleado'] = $this->empleado_model->obtener_empleado_por_usuario($idUsuario);
+            $this->load->view('inc/cabecera',$data);
+			$this->load->view('inc/menu',$data);
+			$this->load->view('inc/menulateral',$data);
 			$this->load->view('cursos_lista',$data);
-			$this->load->view('inc/pie');
+			$this->load->view('inc/pie',$data);
 
         } 
 		if ($tipo == 'invitado') {

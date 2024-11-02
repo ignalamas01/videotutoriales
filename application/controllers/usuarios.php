@@ -86,6 +86,8 @@ class Usuarios extends CI_Controller
 		//$this->load->view('inc/cabecera');
 		//$this->load->view('inc/menu');
 		//$this->load->view('inc/menulateral');
+        $this->load->view('inc/cabecera');
+    $this->load->view('inicio/navbar');
 		$this->load->view('reset_password');
 		//$this->load->view('inc/pie');
 	}

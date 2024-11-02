@@ -31,7 +31,7 @@
                             <a class="nav-link text-dark" href="<?php echo base_url('index.php/certificados/verificar_certificado'); ?>">Verificación</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" href="<?php echo base_url('contact'); ?>">Contacto</a>
+                            <a class="nav-link text-dark" href="<?php echo base_url('index.php/usuarios/recuperarcontrasena'); ?>">Recuperar Contraseña</a>
                         </li>
 
                         <?php if (!empty($categorias)): ?>
