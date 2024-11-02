@@ -2,13 +2,28 @@
 <?php
 class cursos_model extends CI_Model
 {
-    public function listacursos()
-    {
-        $this->db->select('*');
-        $this->db->from('cursos');
-        $this->db->where('estado','1');
-        return $this->db->get();
+    // public function listacursos()
+    // {
+    //     $this->db->select('*');
+    //     $this->db->from('cursos');
+    //     $this->db->where('estado','1');
+    //     return $this->db->get();
+    // }
+   public function listacursos($idUsuario = null)
+{
+    $this->db->select('cursos.*, empleado.nombre AS nombre_instructor, empleado.primerApellido AS apellido_instructor');
+    $this->db->from('cursos');
+    $this->db->join('empleado', 'empleado.id = cursos.idEmpleado', 'left');
+    $this->db->where('cursos.estado', '1');
+
+    if ($idUsuario !== null) {
+        $this->db->where('cursos.idUsuario', $idUsuario);
     }
+
+    return $this->db->get(); // Asegúrate de llamar a result() aquí
+}
+
+
    
     public function listacursosdes()
     {

@@ -115,13 +115,24 @@ class Evaluaciones_model extends CI_Model
     
         return ($result !== null);
     }
-    public function listaevaluaciones()
-    {
-        $this->db->select('*');
-        $this->db->from('evaluaciones');
-        $this->db->where('estado','activo');
-        return $this->db->get();
+   public function listaevaluaciones($idEmpleado = null)
+{
+    $this->db->select('evaluaciones.*, cursos.titulo AS nombre_curso'); // Selecciona todas las columnas de evaluaciones y el título del curso
+    $this->db->from('evaluaciones');
+    $this->db->join('cursos', 'cursos.id = evaluaciones.idCurso', 'left'); // Realiza la unión con la tabla cursos
+
+    // Filtra por estado activo
+    $this->db->where('evaluaciones.estado', 'activo');
+
+    // Si se proporciona un idEmpleado, filtra por idEmpleado
+    if ($idEmpleado !== null) {
+        $this->db->where('evaluaciones.idEmpleado', $idEmpleado);
     }
+
+    return $this->db->get(); // Asegúrate de llamar a result() para obtener los resultados como un array de objetos
+}
+
+
     public function recuperarevaluaciones($idevaluaciones)
     {
         $this->db->select('*');
@@ -200,5 +211,6 @@ class Evaluaciones_model extends CI_Model
         $this->db->where('idEvaluacion', $idevaluaciones);
         $this->db->update('evaluaciones', $data);
     }
+    
 }
 

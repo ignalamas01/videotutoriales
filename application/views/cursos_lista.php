@@ -27,6 +27,7 @@
 
     <!-- Main content -->
     <section class="content">
+    <!-- <table id="example1"  class="table table-bordered table-striped"> -->
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">
@@ -70,7 +71,7 @@
               <!-- /.card-header -->
               <div class="card-body">
             
-                <table id="example"  class="table table-bordered table-striped">
+              <table id="example1"  class="table table-bordered table-striped">
                 <!--comentado no me acuerdo we <?php
                 foreach($cursos as $curso){
                   ?>
@@ -87,6 +88,7 @@
                       <td>TITULO</td>
                   
                       <td>DESCRIPCION</td>
+                      <td>INSTRUCTOR</td>
                       <td>FOTO</td>
                       <td>FECHA DE REGISTRO</td>
                       
@@ -108,7 +110,8 @@
                             <td> <?php echo $indice; ?> </td>
                             <td> <?php echo $row->titulo; ?> </td>
                             <td> <?php echo $row->descripcion; ?> </td>
-                            <td> 
+                            <td><?php echo $row->nombre_instructor . ' ' . $row->apellido_instructor; ?></td>
+                            <td>
 
                             <?php
                               $foto=$row->foto;
@@ -206,6 +209,7 @@
                   <td>TITULO</td>
                   
                   <td>DESCRIPCION</td>
+                  <td>INSTRUCTOR</td>
                   <td>FOTO</td>
 
                   <td>FECHA DE REGISTRO</td>

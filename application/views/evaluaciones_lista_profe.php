@@ -70,15 +70,16 @@
               <!-- /.card-header -->
               <div class="card-body">
             
-                <table id="example"  class="table table-bordered table-striped">
-                <!--comentado no me acuerdo we <?php
-                foreach($cursos as $curso){
-                  ?>
-                    
+            <table id="example1"  class="table table-bordered table-striped">
+              <!--comentado no me acuerdo we <?php
+              foreach($cursos as $curso){
+                ?>
+                  
 
-                  <?php
-                }
-              ?>   -->
+                <?php
+              }
+            ?>   -->
+
 
 
                 <thead>
@@ -103,43 +104,16 @@
                  
                     <?php
                       $indice = 1;
-                      foreach ($cursos->result() as  $row) 
+                      foreach ($evaluaciones->result() as  $row) 
                       {
                     ?>
                         <tr>
                             <td> <?php echo $indice; ?> </td>
                             <td> <?php echo $row->tituloEvaluacion; ?> </td>
                             <td> <?php echo $row->descripcionEvaluacion; ?> </td>
-                            <td> <?php echo $row->idCurso; ?> </td>
+                            <td> <?php echo $row->nombre_curso; ?> </td>
                             <td> <?php echo $row->idSeccion; ?> </td>
-                            <!-- <td> 
-
-                            <?php
-                              $foto=$row->foto;
-                              if($foto=="")
-                                {
-                              ?>
-                              <img width="100" src="<?php echo base_url(); ?>uploads/cursos/per.jpg">
-                              <?php
-                                }
-                              else
-                                {
-                              ?>
-                              <img width="100" src="<?php echo base_url(); ?>uploads/cursos/<?php echo $foto; ?>">
-                              <?php
-                                }
-                              ?> 
-                              <?php
-                                echo form_open_multipart('cursos/subirfoto')
-                                ?>
-                                <input type="hidden" name="idcursos" value="<?php echo $row->id; ?>">
-                                <button type="submit" class="btn btn-primary">SUBIR</button>
-                                <?php
-                                
-                                echo form_close();
-                                
-                              ?>  
-                            </td> -->
+                           
 
                             </td>
                              <td> <?php echo formatearFecha($row->fechaRegistro); ?> </td> 
@@ -181,21 +155,7 @@
                             </td>
 
                             
-                            <td>
                             
-                              
-                              
-                              <?php
-                                echo form_open_multipart('cursos/subir_video')
-                                ?>
-                                <!-- <input type="hidden" name="idcursos" value="<?php echo $row->id; ?>">
-                                <button type="submit" class="btn btn-danger">SUBIRvideo</button> -->
-                                <?php
-                                
-                                echo form_close();
-                                
-                              ?>  
-                            </td>
                         </tr>
 
                     <?php
@@ -282,7 +242,7 @@
                         <select name="id" class="form-control form-select form-select-lg required" style="width: 100%">
                         <option value="" disabled selected>Seleccione un curso</option>
                         <?php
-                          foreach ($cursos->result() as $row) {
+                          foreach ($evaluaciones->result() as $row) {
                           echo '<option value="' . $row->id . '">' . $row->titulo . '</option>';
                       }
                           ?>
@@ -376,7 +336,7 @@
                             <tbody>
 <?php
 $indice = 1;
-foreach ($cursos->result() as  $row) {
+foreach ($evaluaciones->result() as  $row) {
 ?>
     <tr>
         <td> <?php echo $indice; ?> </td>

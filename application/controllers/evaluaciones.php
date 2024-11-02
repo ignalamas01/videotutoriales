@@ -154,52 +154,50 @@ public function evaluaciones_enlista()
 {
     if ($this->session->userdata('login')) {
         $tipo = $this->session->userdata('tipo');
-
-        $lista = $this->evaluaciones_model->listaevaluaciones();
-        $data['cursos'] = $lista;
-
-      
+        $idUsuario = $this->session->userdata('idusuario');
 
         if ($tipo == 'admin') {
-            // Cargar la vista para el administrador
-			$this->load->view('inc/cabecera');
-					$this->load->view('incadmin/menu');
-					$this->load->view('incadmin/menulateral');
-					$this->load->view('evaluaciones_lista_profe',$data);
-					$this->load->view('incadmin/pie');
-        } if ($tipo == 'empleado') {
-            $idUsuario = $this->session->userdata('idusuario');
-			// echo "ID Usuario: " . $idUsuario; 
-			// Obtener los datos del estudiante basado en idUsuario
-			$data['empleado'] = $this->empleado_model->obtener_empleado_por_usuario($idUsuario);
-            // Cargar la vista para el empleado
-            $this->load->view('inc/cabecera',$data);
-			$this->load->view('inc/menu',$data);
-			$this->load->view('inc/menulateral',$data);
-			$this->load->view('evaluaciones_lista_profe',$data);
-			$this->load->view('inc/pie');
+            // Lista completa para el rol de administrador
+            $lista = $this->evaluaciones_model->listaevaluaciones();
+        } elseif ($tipo == 'empleado') {
+            // Obtener el idEmpleado del usuario actual
+            $empleado = $this->empleado_model->obtener_empleado_por_usuario($idUsuario);
+            $idEmpleado = $empleado->id; // Asegúrate que 'id' es el campo correcto
+            // Filtrar evaluaciones por idEmpleado
+            $lista = $this->evaluaciones_model->listaevaluaciones($idEmpleado);
+        } elseif ($tipo == 'invitado') {
+            // Para otros roles como 'invitado'
+            $lista = $this->evaluaciones_model->listaevaluaciones();
+        }
 
-        } 
-		if ($tipo == 'invitado') {
-			// Cargar la vista para el empleado
-			$this->load->view('incestudiante/cabecera');
-			$this->load->view('incestudiante/menu');
-			$this->load->view('incestudiante/menulateral');
-			$this->load->view('evaluaciones_lista_profe',$data);
-			$this->load->view('incestudiante/pie');
-			
-			
-		}
-		// else {
-        //     // Rol no reconocido, puedes manejar esto según tus necesidades
-        //     echo "Rol no reconocido";
-        // }
+        $data['evaluaciones'] = $lista;
 
-        
+        // Cargar la vista según el rol
+        if ($tipo == 'admin') {
+            $this->load->view('inc/cabecera');
+            $this->load->view('incadmin/menu');
+            $this->load->view('incadmin/menulateral');
+            $this->load->view('evaluaciones_lista_profe', $data);
+            $this->load->view('incadmin/pie');
+        } elseif ($tipo == 'empleado') {
+            $data['empleado'] = $empleado; // Pasar datos del empleado
+            $this->load->view('inc/cabecera', $data);
+            $this->load->view('inc/menu', $data);
+            $this->load->view('inc/menulateral', $data);
+            $this->load->view('evaluaciones_lista_profe', $data);
+            $this->load->view('inc/pie');
+        } elseif ($tipo == 'invitado') {
+            $this->load->view('incestudiante/cabecera');
+            $this->load->view('incestudiante/menu');
+            $this->load->view('incestudiante/menulateral');
+            $this->load->view('evaluaciones_lista_profe', $data);
+            $this->load->view('incestudiante/pie');
+        }
     } else {
         redirect('usuarios/index/2', 'refresh');
     }
 }
+
 public function modificar()
 {
     $idevaluaciones = $_POST['idevaluaciones'];

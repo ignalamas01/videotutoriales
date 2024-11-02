@@ -108,7 +108,7 @@ class empleado_model extends CI_Model
     }
     public function obtener_empleado_por_usuario($idUsuario) {
         // Seleccionar los datos del estudiante
-        $this->db->select('nombre, primerApellido, segundoApellido');
+        $this->db->select('id,nombre, primerApellido, segundoApellido');
         $this->db->where('idUsuario', $idUsuario);
         $query = $this->db->get('empleado');
         
@@ -125,5 +125,10 @@ class empleado_model extends CI_Model
     $this->db->where('idUsuario', $idUsuario);
     return $this->db->update('usuario', $data); // Actualiza la tabla 'usuario'
 }
-
+public function obtener_empleado_por_id($idEmpleado)
+{
+    $this->db->where('id', $idEmpleado);
+    $query = $this->db->get('empleado');
+    return $query->row();
+}
 }

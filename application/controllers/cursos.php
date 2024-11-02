@@ -33,50 +33,51 @@ class Cursos extends CI_Controller
 {
     if ($this->session->userdata('login')) {
         $tipo = $this->session->userdata('tipo');
-
-        $lista = $this->cursos_model->listacursos();
-        $data['cursos'] = $lista;
-
-      
+        $idUsuario = $this->session->userdata('idusuario');
 
         if ($tipo == 'admin') {
-            // Cargar la vista para el administrador
-			$this->load->view('inc/cabecera');
-					$this->load->view('incadmin/menu');
-					$this->load->view('incadmin/menulateral');
-					$this->load->view('cursos_lista',$data);
-					$this->load->view('incadmin/pie');
-        } if ($tipo == 'empleado') {
-            // Cargar la vista para el empleado
-			$tipo = $this->session->userdata('tipo');
+            // Lista completa para el rol de administrador
+            $lista = $this->cursos_model->listacursos();
+        } elseif ($tipo == 'empleado') {
+            // Filtrar cursos por idUsuario para empleados
+            $lista = $this->cursos_model->listacursos($idUsuario);
+        } else {
+            // Para otros roles como 'invitado'
+            $lista = $this->cursos_model->listacursos();
+        }
+
+        $data['cursos'] = $lista;
+
+        // Cargar la vista según el rol
+        if ($tipo == 'admin') {
+            $this->load->view('inc/cabecera');
+            $this->load->view('incadmin/menu');
+            $this->load->view('incadmin/menulateral');
+            $this->load->view('cursos_lista', $data);
+            $this->load->view('incadmin/pie');
+        } elseif ($tipo == 'empleado') {
 			$idUsuario = $this->session->userdata('idusuario');
 			// echo "ID Usuario: " . $idUsuario; 
 			// Obtener los datos del estudiante basado en idUsuario
 			$data['empleado'] = $this->empleado_model->obtener_empleado_por_usuario($idUsuario);
-            $this->load->view('inc/cabecera',$data);
-			$this->load->view('inc/menu',$data);
-			$this->load->view('inc/menulateral',$data);
-			$this->load->view('cursos_lista',$data);
-			$this->load->view('inc/pie',$data);
-
-        } 
-		if ($tipo == 'invitado') {
-			// Cargar la vista para el empleado
-			$this->load->view('incestudiante/cabecera');
-			$this->load->view('incestudiante/menu');
-			$this->load->view('incestudiante/menulateral');
-			$this->load->view('cursos_lista',$data);
-			$this->load->view('incestudiante/pie');
-			
-			
-		}
-		
-
-        
+            $this->load->view('inc/cabecera', $data);
+            $this->load->view('inc/menu', $data);
+            $this->load->view('inc/menulateral', $data);
+            $this->load->view('cursos_lista', $data);
+            $this->load->view('inc/pie', $data);
+        } elseif ($tipo == 'invitado') {
+            $this->load->view('incestudiante/cabecera');
+            $this->load->view('incestudiante/menu');
+            $this->load->view('incestudiante/menulateral');
+            $this->load->view('cursos_lista', $data);
+            $this->load->view('incestudiante/pie');
+        }
     } else {
         redirect('usuarios/index/2', 'refresh');
     }
 }
+
+	
 
 	public function cursos2()
 	{
