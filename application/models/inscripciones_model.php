@@ -14,36 +14,66 @@ class Inscripciones_model extends CI_Model {
     //         return false;
     //     }
     // }
+    // public function insertar_inscripcion($data) {
+    //     // Verificar si ya existe una suscripción activa para el estudiante y el curso
+    //     $existing_subscription = $this->verificar_suscripcion_existente($data['idEstudiante'], $data['idCurso']);
+
+    //     if ($existing_subscription) {
+    //         // Si ya existe una suscripción activa, retornar un mensaje o valor indicando la duplicación
+    //         return 'Ya existe una suscripción activa para este estudiante y curso.';
+    //     }
+
+    //     // No existe una suscripción activa, proceder con la inserción
+    //     $this->db->insert('suscripciones', $data);
+
+    //     if ($this->db->affected_rows() > 0) {
+    //         // Commit the transaction if the insert was successful
+    //         $this->db->trans_complete();
+    
+    //         // Check if the transaction was successful
+    //         if ($this->db->trans_status() === FALSE) {
+    //             // If the transaction failed, return false
+    //             return false;
+    //         } else {
+    //             // If the transaction was successful, return the insert ID
+    //             return $this->db->insert_id();
+    //         }
+    //     } else {
+    //         // Rollback the transaction if the insert failed
+    //         $this->db->trans_rollback();
+    //         return false;
+    //     }
+    // }
     public function insertar_inscripcion($data) {
         // Verificar si ya existe una suscripción activa para el estudiante y el curso
         $existing_subscription = $this->verificar_suscripcion_existente($data['idEstudiante'], $data['idCurso']);
-
+    
         if ($existing_subscription) {
             // Si ya existe una suscripción activa, retornar un mensaje o valor indicando la duplicación
             return 'Ya existe una suscripción activa para este estudiante y curso.';
         }
-
-        // No existe una suscripción activa, proceder con la inserción
-        $this->db->insert('suscripciones', $data);
-
-        if ($this->db->affected_rows() > 0) {
-            // Commit the transaction if the insert was successful
-            $this->db->trans_complete();
     
-            // Check if the transaction was successful
-            if ($this->db->trans_status() === FALSE) {
-                // If the transaction failed, return false
-                return false;
-            } else {
-                // If the transaction was successful, return the insert ID
-                return $this->db->insert_id();
-            }
+        // Determinar el estado de la suscripción en función de las fechas
+        $fechaActual = date("Y-m-d");
+    
+        if ($fechaActual < $data['fechaInicio']) {
+            $data['estado'] = 'pendiente';
+        } elseif ($fechaActual >= $data['fechaInicio'] && $fechaActual <= $data['fechaFin']) {
+            $data['estado'] = 'activo';
         } else {
-            // Rollback the transaction if the insert failed
-            $this->db->trans_rollback();
+            $data['estado'] = 'finalizado';
+        }
+    
+        // Insertar los datos en la base de datos
+        $this->db->insert('suscripciones', $data);
+    
+        if ($this->db->affected_rows() > 0) {
+            return $this->db->insert_id();
+        } else {
             return false;
         }
     }
+    
     public function verificar_suscripcion_existente($idEstudiante, $idCurso) {
         $this->db->select('*');
         $this->db->from('suscripciones');
