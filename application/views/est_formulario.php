@@ -11,7 +11,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/base/index">Home</a></li>
-              <li class="breadcrumb-item active">DataTables</li>
+              <!-- <li class="breadcrumb-item active">DataTables</li> -->
             </ol>
           </div>
         </div>
@@ -22,12 +22,13 @@
     <div class="row featurette">
     <div class="col-md-7">
         <br>
-        <h2 class="featurette-heading">AGREGAR ESTUDIANTE<span class="text-muted"></span></h2>
+        <h2 class="featurette-heading"><strong>AGREGAR ESTUDIANTE</strong><span class="text-muted"></span></h2>
+
 
 
     </div>
     <div class="col-md-5">
-        <center><img src="<?php echo base_url(); ?>img/imgvt.png" width="120"></center>
+        <center><img src="<?php echo base_url(); ?>img/Estudiante.jpeg" width="150"></center>
 
     </div>
 
@@ -65,11 +66,11 @@
                         <form>
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">NOMBRES</label>
+                                    <label for="exampleInputEmail1">NOMBRES<span style="color: red;">*</span></label>
                                     <input type="text" name="nombre" placeholder="escriba su nombre" class="form-control" required><br>
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">PRIMER APELLIDO</label>
+                                    <label for="exampleInputPassword1">PRIMER APELLIDO<span style="color: red;">*</span></label>
                                     <input type="text" name="primerApellido" placeholder="escriba su primer apellido" class="form-control" required><br>
                                 </div>
                                 <div class="form-group">
@@ -77,18 +78,26 @@
                                     <input type="text" name="segundoApellido" placeholder="escriba su segundo apellido" class="form-control"><br>
                                 </div>
                                 <div class="form-group">
-    <label for="newEmail">Correo Electrónico</label>
+    <label for="newEmail">CORREO ELECTRÓNICO<span style="color: red;">*</span></label>
     <input type="email" id="destinatario" name="destinatario" placeholder="Escriba su correo electrónico" class="form-control" required onkeyup="verificarCorreoExistente()">
 
     <span id="error-correo" style="color: red;"></span>
     <div class="row">
     <div class="col-4">
     <div class="form-group">
-        <label>CARRERA</label>
-        <select name="carrera" class="form-control select2" style="width: 100%;" required>
-            <option value="" disabled selected>Seleccione su carrera</option>
-            <option value="sistemas informaticos">SISTEMAS INFORMATICOS</option>
-            <option value="contabilidad">CONTABILIDAD</option>
+        <label>CARRERA (En caso de estudiar alguna actualmente)</label>
+        <select name="carrera" class="form-control select2" style="width: 100%;">
+        <option value="NINGUNA" selected>Seleccione su carrera</option>
+            <option value="SISTEMAS INFORMATICOS">SISTEMAS INFORMATICOS</option>
+            <option value="CONTABILIDAD">CONTABILIDAD</option>
+            <option value="MERCADOTECNIA">MERCADOTECNIA</option>
+            <option value="INGENIERÍA MECÁNICA">INGENIERÍA MECÁNICA</option>
+            <option value="INGENIERÍA ELECTROMECÁNICA">INGENIERÍA ELECTROMECÁNICA</option>
+            <option value="INGENIERÍA CIVIL">INGENIERÍA CIVIL</option>
+            <option value="INGENIERÍA QUIMÍCA">INGENIERÍA QUIMÍCA</option>
+            <option value="INGENIERÍA DE ALIMENTOS">INGENIERÍA DE ALIMENTOS</option>
+            <option value="INGENIERÍA MECATRÓNICA">INGENIERÍA MECATRÓNICA</option>
+            
         </select>
     </div>
 </div>
@@ -99,11 +108,11 @@
                                 <div class="row">
                                     <div class="col-4">
                                         <div class="form-group">
-                                            <label>DEPARTAMENTO</label>
+                                            <label>DEPARTAMENTO<span style="color: red;">*</span></label>
                                             <select name="departamento" class="form-control select2" style="width: 100%;">
                                                 <option value="" disabled selected>Seleccione... </option>
                                                 <option value="Beni">Beni</option>
-                                                <option value="Cochabamba">cochabamba</option>
+                                                <option value="Cochabamba">Cochabamba</option>
                                                 <option value="Chuquisaca">Chuquisaca</option>
                                                 <option value="La Paz">La Paz</option>
                                                 <option value="Oruro">Oruro</option>
@@ -118,9 +127,9 @@
                                     <!--FALTA CARGAR CALENDARIO-->
                                     <div class="col-4">
                                         <div class="form-group">
-                                            <label>FECHA DE NACIMIENTO:</label>
+                                            <label>FECHA DE NACIMIENTO:<span style="color: red;">*</span></label>
                                             <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                                                <input type="date" name="fechaNac" class="form-control datetimepicker-input" data-target="#reservationdate"  />
+                                            <input type="date" name="fechaNac" class="form-control datetimepicker-input" data-target="#reservationdate" id="fechaNac" required/>
                                                 <!-- para calendario de admin -->
                                                 <!-- <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
                                                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>
@@ -165,7 +174,8 @@
 
                         <button type="reset" class="btn btn-success " onClick="history.go(-1);">Cancelar</button>
                     </div>
-
+<!-- Nota al final del formulario -->
+<p style="color: red; font-size: 0.9em; margin-top: 10px;">* Campos obligatorios</p>
                     <!-- /.card-body -->
                 </div>
                 <!-- /.card -->
@@ -228,6 +238,18 @@ var csrf_token = '<?php echo $this->security->get_csrf_hash(); ?>';
 //         this.submit();
 //     });
 // });
+// Establecer la fecha máxima al día de hoy
+document.addEventListener('DOMContentLoaded', function() {
+        var today = new Date();
+        var day = String(today.getDate()).padStart(2, '0');
+        var month = String(today.getMonth() + 1).padStart(2, '0'); // Los meses son 0-indexed
+        var year = today.getFullYear();
+
+        // Formato de fecha: YYYY-MM-DD
+        today = year + '-' + month + '-' + day;
+
+        document.getElementById('fechaNac').setAttribute('max', today);
+    });
 </script>
 
 <?php

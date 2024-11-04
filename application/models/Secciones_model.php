@@ -57,17 +57,37 @@ class Secciones_model extends CI_Model
         // Verificar si la eliminación fue exitosa
         return $this->db->affected_rows() > 0;
     }
-    public function obtener_secciones_por_curso($idCurso = null)
-    {
-        $this->db->select('secciones.*, cursos.titulo as tituloCurso');
-        $this->db->from('secciones');
-        $this->db->join('cursos', 'secciones.idCurso = cursos.id', 'left');
+    // public function obtener_secciones_por_curso($idCurso = null)
+    // {
+    //     $this->db->select('secciones.*, cursos.titulo as tituloCurso');
+    //     $this->db->from('secciones');
+    //     $this->db->join('cursos', 'secciones.idCurso = cursos.id', 'left');
     
-        // Si se proporciona un $idCurso, filtramos por ese curso
-        if ($idCurso !== null) {
-            $this->db->where('secciones.idCurso', $idCurso);
-        }
+    //     // Si se proporciona un $idCurso, filtramos por ese curso
+    //     if ($idCurso !== null) {
+    //         $this->db->where('secciones.idCurso', $idCurso);
+    //     }
     
-        return $this->db->get()->result();
+    //     return $this->db->get()->result();
+    // }
+    public function obtener_secciones_por_curso($idCurso = null, $idUsuario = null)
+{
+    $this->db->select('secciones.*, cursos.titulo as tituloCurso');
+    $this->db->from('secciones');
+    $this->db->join('cursos', 'secciones.idCurso = cursos.id', 'left');
+    
+    // Filtrar por curso si se proporciona un idCurso
+    if ($idCurso !== null) {
+        $this->db->where('secciones.idCurso', $idCurso);
     }
+    
+    // Filtrar por el usuario (instructor) si se proporciona un idUsuario
+    if ($idUsuario !== null) {
+        $this->db->where('cursos.idUsuario', $idUsuario);
+    }
+
+    return $this->db->get()->result();
+}
+
+
 }
