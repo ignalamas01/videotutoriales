@@ -220,9 +220,13 @@ class Cursos extends CI_Controller
 
 	public function agregar()
 	{
-		$this->load->view('inc/cabecera');
-		$this->load->view('inc/menu');
-		$this->load->view('inc/menulateral');
+		$idUsuario = $this->session->userdata('idusuario');
+			// echo "ID Usuario: " . $idUsuario; 
+			// Obtener los datos del estudiante basado en idUsuario
+			$data['empleado'] = $this->empleado_model->obtener_empleado_por_usuario($idUsuario);
+		$this->load->view('inc/cabecera',$data);
+		$this->load->view('inc/menu',$data);
+		$this->load->view('inc/menulateral',$data);
 		$this->load->view('cursos_formulario');
 		$this->load->view('inc/pie');
 	}
@@ -276,7 +280,7 @@ class Cursos extends CI_Controller
 		
 		$data_archivo = array(
 			'nombreArchivo' => $this->input->post("titulo_archivo_{$i}_{$j}"),
-            'rutaArchivo' => $this->input->post("ruta_archivo_{$i}_{$j}"),
+            'rutaArchivo' => $this->extraerIdGoogleDrive($this->input->post("ruta_archivo_{$i}_{$j}")),
 			'idSeccion' => $seccion_id,
 		);
 		$this->cursos_model->agregarArchivo($data_archivo);
@@ -287,7 +291,7 @@ class Cursos extends CI_Controller
     	$data_video = array(
 		'tituloVideo' => $this->input->post("titulo_video_{$i}_{$k}"),
 		'descripcionVideo' => $this->input->post("descripcion_video_{$i}_{$k}"),
-		'enlaceVideo' => $this->input->post("ruta_video_{$i}_{$k}"),
+		'enlaceVideo' =>$this->convertirEnlaceYoutube($this->input->post("ruta_video_{$i}_{$k}")),
         'idSeccion' => $seccion_id,
     	);
     	$this->cursos_model->agregarVideo($data_video);
@@ -712,10 +716,33 @@ $idCurso = $this->input->post('idCurso');
 		print_r($execonsulta);
 	}
 */
+private function convertirEnlaceYoutube($url) {
+    // Verificar si el enlace contiene "watch?v="
+    if (strpos($url, 'watch?v=') !== false) {
+        // Extraer el ID del video
+        parse_str(parse_url($url, PHP_URL_QUERY), $query);
+        $video_id = $query['v'] ?? null;
+
+        if ($video_id) {
+            // Retornar el enlace en formato embed
+            return "https://www.youtube.com/embed/" . $video_id;
+        }
+    }
+    // Retornar el enlace original si no cumple con el formato esperado
+    return $url;
+}
 
 
-
-
+private function extraerIdGoogleDrive($url) {
+	// Verificar si la URL contiene "/d/"
+	if (strpos($url, '/d/') !== false) {
+		// Extraer el ID del archivo usando expresiones regulares
+		preg_match('/\/d\/([a-zA-Z0-9_-]+)/', $url, $matches);
+		return $matches[1] ?? null; // Retornar el ID si se encontró, o null si no
+	}
+	// Retornar la URL original si no cumple con el formato esperado
+	return $url;
+}
 
 
 
