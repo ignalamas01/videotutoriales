@@ -32,6 +32,10 @@
                             <th>Título del Curso</th>
                             <th>Fecha de Inicio</th>
                             <th>Fecha de Fin</th>
+                            <th>MODIFICAR</th>
+                            <th>ELIMINAR</th>
+                            <th>DESHABILITAR</th>
+
                         </tr>
                     </thead>
                     <tbody>
@@ -47,6 +51,28 @@
                                 <td><?php echo $row->titulo_curso; ?></td>
                                 <td><?php echo $row->fechaInicio; ?></td>
                                 <td><?php echo $row->fechaFin; ?></td>
+                                <td>
+    <?php echo form_open('suscripciones/editar/' . $row->idSuscripcion); ?>
+        <button type="submit" class="btn btn-success" title="Editar">
+            <i class="fas fa-pencil-alt"></i>
+        </button>
+    <?php echo form_close(); ?>
+</td>
+
+<td>
+    <?php echo form_open('suscripciones/eliminar/' . $row->idSuscripcion, array('onsubmit' => 'return confirm("¿Estás seguro de eliminar esta suscripción?");')); ?>
+        <button type="submit" class="btn btn-danger" title="Eliminar">
+            <i class="fas fa-trash"></i>
+        </button>
+    <?php echo form_close(); ?>
+</td>
+
+<td>
+    <?php echo form_open('suscripciones/inhabilitar/' . $row->idSuscripcion); ?>
+        <button type="submit" class="btn btn-warning" title="Deshabilitar">DESHABILITAR</button>
+    <?php echo form_close(); ?>
+</td>
+
                             </tr>
                             <?php
                         $indice++;

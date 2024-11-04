@@ -80,7 +80,18 @@ class usuario_model extends CI_Model
     }
     
     
-   
+    public function verificar_existencia_correo($email) {
+        // Consultar la base de datos para verificar si el correo existe
+        $this->db->where('email', $email);
+        $query = $this->db->get('usuario');
+
+        if ($query->num_rows() > 0) {
+            return $query->row(); // Retorna los datos del usuario si existe
+        } else {
+            return false; // Retorna falso si no existe
+        }
+    }
+    
     
    
 }

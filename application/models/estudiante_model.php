@@ -23,12 +23,14 @@ class estudiante_model extends CI_Model
 
     public function recuperarestudiante($idestudiante)
     {
-        $this->db->select('*');
+        $this->db->select('estudiante.*, usuario.email');
         $this->db->from('estudiante');
-        $this->db->where('id', $idestudiante);
+        $this->db->join('usuario', 'estudiante.idUsuario = usuario.idUsuario');
+        $this->db->where('estudiante.id', $idestudiante);
 
         return $this->db->get();
     }
+    
     public function modificarestudiante($idestudiante, $data)
     {
         $this->db->where('id', $idestudiante);
@@ -92,5 +94,10 @@ class estudiante_model extends CI_Model
         // Si se encuentra un resultado, devolverlo
         return $query->row();
     }
+    public function modificarUsuario($idUsuario, $data)
+{
+    $this->db->where('idUsuario', $idUsuario);
+    return $this->db->update('usuario', $data); // Actualiza la tabla 'usuario'
+}
 
 }

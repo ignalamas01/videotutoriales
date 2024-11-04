@@ -387,15 +387,57 @@ class Estudiante extends CI_Controller
 	}
 	public function modificarbd()
 	{
-		$idestudiante = $_POST['idestudiante'];
-        $data['nombre'] = $_POST['nombre'];
-		$data['primerApellido'] = $_POST['primerApellido'];
-		$data['segundoApellido'] = $_POST['segundoApellido'];
-		$data['carrera'] = $_POST['carrera'];
-		$data['fechaNacimiento'] = $_POST['fechaNac'];
-		$data['direccion'] = $_POST['direccion'];
+		$idUsuario = $this->input->post('idUsuario');
+    $idestudiante = $_POST['idestudiante'];
+    $data = array(
+        'nombre' => $_POST['nombre'],
+        'primerApellido' => $_POST['primerApellido'],
+        'segundoApellido' => $_POST['segundoApellido'],
+        'departamento' => $_POST['departamento'],
+        'fechaNacimiento' => $_POST['fechaNac'],
+        // 'telefono' => $_POST['telefono'],
+        'direccion' => $_POST['direccion'],
+        
+		'fechaActualizacion' => date('Y-m-d H:i:s') // Actualizar la fecha a la actual
+		
+    );
 
-		$this->estudiante_model->modificarestudiante($idestudiante,$data);
+	 // Actualizar la tabla 'empleado'
+	 $this->estudiante_model->modificarestudiante($idestudiante, $data);
+
+	 // Obtener el 'idUsuario' relacionado al 'idempleado'
+	 $resultado = $this->estudiante_model->recuperarestudiante($idestudiante);
+	 
+	 // Obtener la primera fila del resultado
+	 $estudiante = $resultado->row(); // Aquí obtenemos el objeto de la fila
+	 
+	 // Verificar si se obtuvo el empleado correctamente
+	 if (!$estudiante) {
+		 show_error('Estudiante no encontrado', 404);
+		 return;
+	 }
+ 
+	 // Ahora podemos acceder a idUsuario y email
+	 $idUsuario = $estudiante->idUsuario; // Asegúrate de que 'idUsuario' esté disponible en el resultado
+ 
+	 // Modificar el correo en la tabla 'usuario'
+	 $newEmail = $_POST['correo']; // Asegúrate de que el campo de correo se llama 'correo'
+	 
+	 // Validar que el nuevo correo no esté vacío
+	 if (empty($newEmail)) {
+		 show_error('El correo electrónico no puede estar vacío.');
+		 return;
+	 }
+ 
+	 $usuarioData = array(
+		 'email' => $newEmail,
+		 'fechaActualizacion' => date('Y-m-d H:i:s') // Actualizamos también la fecha de actualización
+	 );
+	 
+	 
+	 // Llamar al modelo para actualizar el correo en la tabla 'usuario'
+	 $this->estudiante_model->modificarUsuario($idUsuario, $usuarioData);
+ 
 		redirect('estudiante/est', 'refresh');
 	}
 

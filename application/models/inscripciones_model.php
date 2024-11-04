@@ -121,7 +121,8 @@ class Inscripciones_model extends CI_Model {
         $this->db->from('suscripciones');
         $this->db->join('estudiante', 'estudiante.id = suscripciones.idEstudiante');
         $this->db->join('cursos', 'cursos.id = suscripciones.idCurso');
-        
+        // Filtrar solo las suscripciones activas
+    $this->db->where('suscripciones.estado_manual', 'activo');
         // Agregar una condición para filtrar por curso si se proporciona un ID de curso.
         if ($curso_id !== null) {
             $this->db->where('cursos.id', $curso_id);
@@ -132,8 +133,34 @@ class Inscripciones_model extends CI_Model {
         return $this->db->get();
     }
     
+    public function obtener_inscripcion($idSuscripcion) {
+        $this->db->select('suscripciones.*, estudiante.nombre AS nombre_estudiante, cursos.titulo AS titulo_curso');
+        $this->db->from('suscripciones');
+        $this->db->join('estudiante', 'estudiante.id = suscripciones.idEstudiante');
+        $this->db->join('cursos', 'cursos.id = suscripciones.idCurso');
+        $this->db->where('idSuscripcion', $idSuscripcion);
+        return $this->db->get()->row(); // Asegúrate de devolver un solo registro
+    }
     
+    public function actualizar_inscripcion($id, $data) {
+        $this->db->where('idSuscripcion', $id);
+        $this->db->update('suscripciones', $data);
+    }
     
+    public function eliminar_inscripcion($id) {
+        $this->db->where('idSuscripcion', $id);
+        $this->db->delete('suscripciones');
+    }
+    // En Inscripciones_model.php
+public function inhabilitar_inscripcion($idSuscripcion) {
+    $data = array(
+        'estado_manual' => 'inactivo' // Cambia el estado a 'inactivo'
+    );
+
+    $this->db->where('idSuscripcion', $idSuscripcion); // Asegúrate de usar el campo correcto
+    return $this->db->update('suscripciones', $data); // Retorna true o false según el resultado
+}
+
 }
 
 

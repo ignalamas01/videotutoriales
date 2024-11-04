@@ -5,15 +5,21 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Suscripciones extends CI_Controller
 {
 	
+    public function __construct() {
+        parent::__construct();
+        // Cargar el modelo
+        $this->load->model('Inscripciones_model');
+    }
+	
 	public function agregarEstudiante()
 	{
 		
 		if($this->session->userdata('login'))
         {
 			
-			$this->load->view('inc/cabecera');
-			$this->load->view('inc/menu');
-			$this->load->view('inc/menulateral');
+			$this->load->view('incadmin/cabecera');
+			$this->load->view('incadmin/menu');
+			$this->load->view('incadmin/menulateral');
 			// Consulta los datos de la tabla "otra_tabla"
     		$data['cursos'] = $this->cursos_model->listacursos(); // Asumiendo que tienes un método en tu modelo para obtener los datos
 
@@ -132,9 +138,84 @@ class Suscripciones extends CI_Controller
 		
 		
 	}
+	public function listar_inscritos($curso_id = null) {
+        $data['inscripciones'] = $this->Inscripciones_model->listainscritos($curso_id);
+        $this->load->view('tu_vista_lista_inscritos', $data);
+    }
+	public function ver_inscripcion($idSuscripcion) {
+        $data['suscripcion'] = $this->Inscripciones_model->obtener_inscripcion($idSuscripcion);
+        $this->load->view('tu_vista_ver_inscripcion', $data);
+    }
+	public function editar($idSuscripcion) {
+		if ($this->session->userdata('login')) {
+			$data['suscripcion'] = $this->Inscripciones_model->obtener_inscripcion($idSuscripcion);
+			$data['cursos'] = $this->cursos_model->listacursos();
+			$data['estudiantes'] = $this->estudiante_model->listaestudiante();
+			
+			$this->load->view('incadmin/cabecera');
+			$this->load->view('incadmin/menu');
+			$this->load->view('incadmin/menulateral');
+			$this->load->view('editar_suscripcion', $data);
+			$this->load->view('incadmin/pie');
+		} else {
+			redirect('usuarios/index/2', 'refresh');
+		}
+	}
+	
+	public function actualizar() {
+		$idSuscripcion = $this->input->post('idSuscripcion');
+		if ($this->session->userdata('login')) {
+			// Obtener los datos del formulario
+			$fechaInicio = $this->input->post('fechaInicio');
+			$fechaFin = $this->input->post('fechaFin');
+	
+			$data = array(
+				'fechaInicio' => $fechaInicio,
+				'fechaFin' => $fechaFin,
+			);
+	
+			// Actualizar la suscripción
+			if ($this->inscripciones_model->actualizar_inscripcion($idSuscripcion, $data)) {
+				// Redirigir o cargar vista de éxito
+				redirect('suscripciones/lista', 'refresh');
+			} 
+			else {
+				// Manejo de error, puedes redirigir a una página de error o mostrar un mensaje
+				// Para simplicidad, aquí redirigimos a la misma página
+				redirect('suscripciones/lista', 'refresh');
+			}
+		 } 
+		//  else {
+		// 	redirect('usuarios/index/2', 'refresh');
+		// }
+	}
 	
 	
 	
+	public function eliminar($id) {
+		$this->load->model('Inscripciones_model');
+		$this->Inscripciones_model->eliminar_inscripcion($id);
+		$this->session->set_flashdata('mensaje', 'Suscripción eliminada correctamente.');
+		redirect('suscripciones/lista');
+	}
+	// En Suscripciones.php
+public function inhabilitar($idSuscripcion) {
+    if ($this->session->userdata('login')) {
+        // Llama al modelo para inhabilitar la suscripción
+        if ($this->Inscripciones_model->inhabilitar_inscripcion($idSuscripcion)) {
+            // Redirige a la lista de suscripciones con un mensaje de éxito
+            $this->session->set_flashdata('success', 'Suscripción inhabilitada correctamente.');
+            redirect('suscripciones/lista', 'refresh');
+        } else {
+            // Manejo de error si no se pudo inhabilitar
+            $this->session->set_flashdata('error', 'No se pudo inhabilitar la suscripción. Intente de nuevo.');
+            redirect('suscripciones/lista', 'refresh');
+        }
+    } else {
+        redirect('usuarios/index/2', 'refresh');
+    }
+}
+
 	
 
 	

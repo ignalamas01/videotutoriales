@@ -51,6 +51,7 @@
     echo $this->session->flashdata('error_correo');
     ?>
 </span>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <section class="content">
         <div class="container-fluid">
             <div class="row">
@@ -78,9 +79,8 @@
                                     <input type="text" name="segundoApellido" placeholder="escriba su segundo apellido" class="form-control"><br>
                                 </div>
                                 <div class="form-group">
-    <label for="newEmail">CORREO ELECTRÓNICO<span style="color: red;">*</span></label>
-    <input type="email" id="destinatario" name="destinatario" placeholder="Escriba su correo electrónico" class="form-control" required onkeyup="verificarCorreoExistente()">
-
+    <label for="destinatario">CORREO ELECTRÓNICO<span style="color: red;">*</span></label>
+    <input type="email" id="destinatario" name="destinatario" placeholder="Escriba su correo electrónico" class="form-control" required>
     <span id="error-correo" style="color: red;"></span>
     <div class="row">
     <div class="col-4">
@@ -250,6 +250,41 @@ document.addEventListener('DOMContentLoaded', function() {
 
         document.getElementById('fechaNac').setAttribute('max', today);
     });
+    $(document).ready(function() {
+    $('#destinatario').on('input', function() {
+        var email = $(this).val();
+        
+        if (email) {
+            var ajaxUrl = "<?php echo base_url('index.php/usuarios/verificar_correo'); ?>";
+
+            $.ajax({
+                url: ajaxUrl,
+                type: "POST",
+                data: { destinatario: email },
+                success: function(response) {
+                    var data = JSON.parse(response);
+                    console.log("Respuesta del servidor:", data);
+
+                    if (data.status === 'exists') {
+                        $('#error-correo').text(data.message).fadeIn();
+                    } else if (data.status === 'not_exists') {
+                        $('#error-correo').text(data.message).fadeIn();
+                    } else {
+                        $('#error-correo').text('Respuesta inesperada del servidor.').fadeIn();
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.error("Error en AJAX:", textStatus, errorThrown);
+                    $('#error-correo').text("Ocurrió un error, por favor intente de nuevo.").fadeIn();
+                }
+            });
+        } else {
+            $('#error-correo').text('Por favor, ingrese un correo electrónico.').fadeOut();
+        }
+    });
+});
+
+
 </script>
 
 <?php

@@ -50,6 +50,7 @@
     echo $this->session->flashdata('error_correo');
     ?>
 </span>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <section class="content">
         <div class="container-fluid">
             <div class="row">
@@ -65,11 +66,11 @@
                         <form>
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">NOMBRES</label>
+                                    <label for="exampleInputEmail1">NOMBRES<span style="color: red;">*</span></label>
                                     <input type="text" name="nombre" placeholder="Escriba su nombre" class="form-control" required><br>
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">PRIMER APELLIDO</label>
+                                    <label for="exampleInputPassword1">PRIMER APELLIDO<span style="color: red;">*</span></label>
                                     <input type="text" name="primerApellido" placeholder="Escriba su primer apellido" class="form-control" required><br>
                                 </div>
                                 <div class="form-group">
@@ -93,7 +94,7 @@
     </select>
 </div>
                                 <div class="form-group">
-    <label for="newEmail">CORREO ELECTRÓNICO</label>
+    <label for="newEmail">CORREO ELECTRÓNICO<span style="color: red;">*</span></label>
     <input type="email" id="destinatario" name="destinatario" placeholder="Escriba su email" class="form-control" required onkeyup="verificarCorreoExistente()">
 
     <span id="error-correo" style="color: red;"></span>
@@ -103,7 +104,7 @@
                                 <div class="row">
                                     <div class="col-4">
                                         <div class="form-group">
-                                            <label>DEPARTAMENTO</label>
+                                            <label>DEPARTAMENTO<span style="color: red;">*</span></label>
                                             <select name="departamento" class="form-control select2" style="width: 100%;">
                                             <option value="" disabled selected>Seleccione... </option>
                                                 <option value="Beni">Beni</option>
@@ -154,7 +155,7 @@
                                 </div>
 
                                 <div class="form-group">
-    <label for="firma">Firma del Instructor (Para la emisión de certificados de los cursos realizados)</label>
+    <label for="firma">Firma del Instructor (Para la emisión de certificados de los cursos realizados)<span style="color: red;">*</span></label>
     <input type="file" name="firma" class="form-control" required>
     <small class="form-text text-muted">Sube la imagen de la firma (formatos permitidos:.jpeg .jpg, .png).</small>
 </div>
@@ -173,7 +174,7 @@
 
                         <button type="reset" class="btn btn-success " onClick="history.go(-1);">Cancelar</button>
                     </div>
-
+                    <p style="color: red; font-size: 0.9em; margin-top: 10px;">* Campos obligatorios</p>
                     <!-- /.card-body -->
                 </div>
                 <!-- /.card -->
@@ -195,6 +196,39 @@ var csrf_token = '<?php echo $this->security->get_csrf_hash(); ?>';
 
 
 //         url: '<?php echo base_url('base/verificar_correo_existente'); ?>',
+$(document).ready(function() {
+    $('#destinatario').on('input', function() {
+        var email = $(this).val();
+        
+        if (email) {
+            var ajaxUrl = "<?php echo base_url('index.php/usuarios/verificar_correo'); ?>";
+
+            $.ajax({
+                url: ajaxUrl,
+                type: "POST",
+                data: { destinatario: email },
+                success: function(response) {
+                    var data = JSON.parse(response);
+                    console.log("Respuesta del servidor:", data);
+
+                    if (data.status === 'exists') {
+                        $('#error-correo').text(data.message).fadeIn();
+                    } else if (data.status === 'not_exists') {
+                        $('#error-correo').text(data.message).fadeIn();
+                    } else {
+                        $('#error-correo').text('Respuesta inesperada del servidor.').fadeIn();
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.error("Error en AJAX:", textStatus, errorThrown);
+                    $('#error-correo').text("Ocurrió un error, por favor intente de nuevo.").fadeIn();
+                }
+            });
+        } else {
+            $('#error-correo').text('Por favor, ingrese un correo electrónico.').fadeOut();
+        }
+    });
+});
 
 </script>
 

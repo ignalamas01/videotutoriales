@@ -109,29 +109,30 @@
             
         </div>
         <div class="col-4">
-                                        <div class="form-group">
-                                            <label>FECHA DE INICIO:</label>
-                                            <div class="input-group date" id="reservationdate" data-target-input="nearest" >
-                                                <input type="date" name="fechaInicio" class="form-control datetimepicker-input" data-target="#reservationdate" required />
-                                                <!-- para calendario de admin -->
-                                                <!-- <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
-                                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                </div> -->
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="form-group">
-                                            <label>FECHA DE FIN:</label>
-                                            <div class="input-group date" id="reservationdate" data-target-input="nearest" >
-                                                <input type="date" name="fechaFin" class="form-control datetimepicker-input" data-target="#reservationdate" required />
-                                                <!-- para calendario de admin -->
-                                                <!-- <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
-                                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                </div> -->
-                                            </div>
-                                        </div>
-                                    </div>
+    <div class="form-group">
+        <label>FECHA DE INICIO:</label>
+        <div class="input-group date" id="reservationdate" data-target-input="nearest">
+            <input type="date" name="fechaInicio" class="form-control datetimepicker-input" data-target="#reservationdate" required min="<?php echo date('Y-m-d'); ?>" />
+            <!-- para calendario de admin -->
+            <!-- <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+            </div> -->
+        </div>
+    </div>
+</div>
+<div class="col-4">
+    <div class="form-group">
+        <label>FECHA DE FIN:</label>
+        <div class="input-group date" id="reservationdate" data-target-input="nearest">
+            <input type="date" name="fechaFin" class="form-control datetimepicker-input" data-target="#reservationdate" required min="<?php echo date('Y-m-d'); ?>" />
+            <!-- para calendario de admin -->
+            <!-- <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+            </div> -->
+        </div>
+    </div>
+</div>
+
 
                                         
       </div>

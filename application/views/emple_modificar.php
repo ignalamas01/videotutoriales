@@ -81,7 +81,7 @@
         <option value="Prof.">Prof.</option>
     </select>
 </div>
-<div class="form-group">
+                                <div class="form-group">
                                         <label for="exampleInputPassword1">Correo</label>
                                         <input type="text" name="correo" placeholder="escriba su segundo apellido" class="form-control" value="<?php echo $row->email; ?>"><br>
                                     </div>

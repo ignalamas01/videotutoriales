@@ -54,6 +54,7 @@
                             <form>
                                 <div class="card-body">
                                     <div class="form-group">
+                                        
                                         <input type="hidden" name="idestudiante" class="form-control" value="<?php echo $row->id; ?>">
                                         <label for="exampleInputEmail1">NOMBRES</label>
                                         <input type="text" name="nombre" placeholder="escriba su nombre" class="form-control" value="<?php echo $row->nombre; ?>"><br>
@@ -66,16 +67,44 @@
                                         <label for="exampleInputPassword1">SEGUNDO APELLIDO</label>
                                         <input type="text" name="segundoApellido" placeholder="escriba su segundo apellido" class="form-control" value="<?php echo $row->segundoApellido; ?>"><br>
                                     </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Correo</label>
+                                        <input type="text" name="correo" placeholder="escriba su segundo apellido" class="form-control" value="<?php echo $row->email; ?>"><br>
+                                    </div>
                                     <div class="row">
                                     <div class="col-4">
     <div class="form-group">
         <label>CARRERA</label>
         <select name="carrera" class="form-control select2" style="width: 100%;" required>
-            <option value="" disabled selected>Seleccione su carrera</option>
-            <option value="sistemas informaticos">SISTEMAS INFORMATICOS</option>
-            <option value="contabilidad">CONTABILIDAD</option>
+           
+            <option value="SISTEMAS INFORMATICOS">SISTEMAS INFORMATICOS</option>
+            <option value="CONTABILIDAD">CONTABILIDAD</option>
+            <option value="MERCADOTECNIA">MERCADOTECNIA</option>
+            <option value="INGENIERÍA MECÁNICA">INGENIERÍA MECÁNICA</option>
+            <option value="INGENIERÍA ELECTROMECÁNICA">INGENIERÍA ELECTROMECÁNICA</option>
+            <option value="INGENIERÍA CIVIL">INGENIERÍA CIVIL</option>
+            <option value="INGENIERÍA QUIMÍCA">INGENIERÍA QUIMÍCA</option>
+            <option value="INGENIERÍA DE ALIMENTOS">INGENIERÍA DE ALIMENTOS</option>
+            <option value="INGENIERÍA MECATRÓNICA">INGENIERÍA MECATRÓNICA</option>
         </select>
     </div>
+    <div class="col-4">
+                                            <div class="form-group">
+                                                <label> Departamento</label>
+                                                <select name="departamento" class="form-control select2" style="width: 100%;" value="<?php echo $row->departamento; ?>">
+                                                   
+                                                    <option value="Beni">Beni</option>
+                                                    <option value="Beni">Cochabamba</option>
+                                                    <option value="Chuquisaca">Chuquisaca</option>
+                                                    <option value="La Paz">La Paz</option>
+                                                    <option value="Oruro">Oruro</option>
+                                                    <option value="Potosi">Potosi</option>
+                                                    <option value="Pando">Pando</option>
+                                                    <option value="Santa Cruz">Santa Cruz</option>
+                                                    <option value="Tarija">Tarija</option>
+                                                </select>
+                                            </div>
+                                        </div>
 </div>
 
 
@@ -115,7 +144,8 @@
                         </div>
                         <!-- /.card -->
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-success ">modificar</button>
+                            <button type="submit" class="btn btn-success ">Modificar</button>
+                            <button type="reset" class="btn btn-primary" onClick="history.go(-1);">Cancelar</button>
 
                             <!-- <button type="reset" class="btn btn-primary" onClick="history.go(-1);">Cancelar</button> -->
                         </div>

@@ -250,8 +250,33 @@ class Usuarios extends CI_Controller
     }
     
     
+    public function verificar_correo() {
+        $this->load->model('usuario_model');
+    
+        // Obtener el correo del POST
+        $email = $this->input->post('destinatario');
+        
+        // Log para depurar
+        log_message('debug', 'Correo recibido: ' . $email);
+    
+        // Verificar si el correo ya existe
+        $user = $this->usuario_model->verificar_existencia_correo($email);
+        
+        // Preparar la respuesta en formato JSON
+        $response = array();
+        if ($user) {
+            $response['status'] = 'exists';
+            $response['message'] = 'Este correo ya está registrado.';
+        } else {
+            $response['status'] = 'not_exists';
+            $response['message'] = 'El correo está disponible.';
+        }
+    
+        // Enviar respuesta en formato JSON
+        echo json_encode($response);
+    }
     
     
-	
+    
 	
 }
