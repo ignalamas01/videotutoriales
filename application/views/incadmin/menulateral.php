@@ -88,7 +88,7 @@
               <li class="nav-item">
                 <a href="<?php echo base_url(); ?>index.php/reportes/estudiantes_cursos" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>estudiantes inscritos en cierta cantiadad de cursos</p>
+                  <p>Estudiantes inscritos en cierta cantiadad de cursos</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -106,7 +106,7 @@
               <li class="nav-item">
                 <a href="<?php echo base_url(); ?>index.php/nograduados/lista" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>estudiantes que no completaron los cursos</p>
+                  <p>Estudiantes que no completaron los cursos</p>
                 </a>
               </li>
               

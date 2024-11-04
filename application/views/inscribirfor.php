@@ -69,7 +69,7 @@
                                 </div>
                             <?php } elseif (empty($this->session->flashdata('mensaje')) && empty($this->session->flashdata('error'))) { ?>
                                 <div class="alert alert-danger" role="alert">
-                                    inscribir estudiante a un curso.
+                                    Inscribir estudiante a un curso.
                                 </div>
                             <?php } ?>
                         </div> 
@@ -95,13 +95,13 @@
       <div class="row">
         <div class="col-4">
             <div class="form-group">
-                 <label>lista de estudiantes</label>
+                 <label>Lista de estudiantes</label>
                                             
                         <select name="id_estudiante" class="form-control form-select form-select-lg required" style="width: 100%">
                         <option value="" disabled selected>Seleccione al estudiante </option>
                         <?php
                           foreach ($estudiante->result() as $row) {
-                          echo '<option value="' . $row->id . '">' . $row->nombre . '</option>';
+                            echo '<option value="' . $row->id . '">' . $row->nombre . ' ' . $row->primerApellido . '</option>';
                       }
                           ?>
                       </select>
@@ -144,7 +144,7 @@
       <div class="row">
         <div class="col-4">
             <div class="form-group">
-                 <label>cursos</label>
+                 <label>Cursos</label>
                                             
                         <select name="id_curso" class="form-control form-select form-select-lg required" style="width: 100%" required>
                         <option value="" disabled selected>Seleccione un curso</option>
@@ -280,7 +280,7 @@ echo form_close();
                         <option value="" disabled selected>Seleccione al estudiante </option>
                         <?php
                           foreach ($estudiante->result() as $row) {
-                          echo '<option value="' . $row->id . '">' . $row->nombre . '</option>';
+                            echo '<option value="' . $row->id . '">' . $row->nombre . ' ' . $row->primerApellido . '</option>';
                       }
                           ?>
                       </select>

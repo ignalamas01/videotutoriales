@@ -68,15 +68,15 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">NOMBRES<span style="color: red;">*</span></label>
-                                    <input type="text" name="nombre" placeholder="escriba su nombre" class="form-control" required><br>
+                                    <input type="text" name="nombre" placeholder="Escriba su nombre" class="form-control" required><br>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">PRIMER APELLIDO<span style="color: red;">*</span></label>
-                                    <input type="text" name="primerApellido" placeholder="escriba su primer apellido" class="form-control" required><br>
+                                    <input type="text" name="primerApellido" placeholder="Escriba su primer apellido" class="form-control" required><br>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">SEGUNDO APELLIDO</label>
-                                    <input type="text" name="segundoApellido" placeholder="escriba su segundo apellido" class="form-control"><br>
+                                    <input type="text" name="segundoApellido" placeholder="Escriba su segundo apellido" class="form-control"><br>
                                 </div>
                                 <div class="form-group">
     <label for="destinatario">CORREO ELECTRÓNICO<span style="color: red;">*</span></label>

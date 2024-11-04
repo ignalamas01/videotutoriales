@@ -29,7 +29,7 @@ public function verificar_aprobacion_curso($idCurso, $idEstudiante) {
     $this->db->from('puntajesevaluacion');
     $this->db->where('idCurso', $idCurso);
     $this->db->where('idEstudiante', $idEstudiante);
-    $this->db->where('puntajeTotal > 60');
+    $this->db->where('puntajeTotal > 59');
 
     $result = $this->db->get()->row();
 

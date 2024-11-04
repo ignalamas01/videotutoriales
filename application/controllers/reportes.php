@@ -8,26 +8,34 @@ class Reportes extends CI_Controller {
         $this->load->model('Reportes_model');
     }
 
-   public function estudiantes_cursos() {
-    // Llama al método del modelo para obtener los datos de estudiantes y cursos
-    $estudiantes_cursos = $this->Reportes_model->obtener_estudiantes_cursos();
+    public function estudiantes_cursos() {
+        // Obtener datos de estudiantes y cursos
+        $estudiantes_cursos = $this->Reportes_model->obtener_estudiantes_cursos();
+        
+        // Inicializar arrays para los títulos de cursos y cantidades
+        $data['titulos_cursos'] = [];
+        $data['cantidad_inscritos'] = [];
+        
+        // Asegúrate de que $estudiantes_cursos tenga las propiedades correctas
+        foreach ($estudiantes_cursos as $curso) {
+            if (isset($curso->nombre_curso) && isset($curso->cantidad_inscritos)) {
+                $data['titulos_cursos'][] = $curso->nombre_curso; // Nombre del curso
+                $data['cantidad_inscritos'][] = (int)$curso->cantidad_inscritos; // Cantidad de inscritos (convertir a int)
+            }
+        }
+        
+        // Pasar los datos a la vista
+        $data['estudiantes_cursos'] = $estudiantes_cursos;
+        
+        // Cargar las vistas
+        $this->load->view('incadmin/cabecera');
+        $this->load->view('incadmin/menu');
+        $this->load->view('incadmin/menulateral');
+        $this->load->view('estudiantes_cursos_view', $data);
+        $this->load->view('incadmin/pie');
+    }
     
-    // Llama al método del modelo para obtener los títulos de cursos activos
-    $cursos_activos = $this->Reportes_model->obtener_cursos_activos();
-    $data['cursos'] = $this->cursos_model->listacursos(); // Asumiendo que tienes un método en tu modelo para obtener los datos
-
-    		// Consulta los datos de la tabla "estudiante"
-    		
-    // Puedes pasar los datos a una vista para mostrarlos
-    $data['estudiantes_cursos'] = $estudiantes_cursos;
-    $data['cursos_activos'] = $cursos_activos;
     
-    $this->load->view('incadmin/cabecera');
-    $this->load->view('incadmin/menu');
-    $this->load->view('incadmin/menulateral');
-    $this->load->view('estudiantes_cursos_view', $data);
-    $this->load->view('incadmin/pie');
-}
 
     
 }
