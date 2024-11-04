@@ -538,13 +538,15 @@ public function modificarbd()
 	
 	public function crear_evaluacion()
 {
+	
+	
     $this->load->model('evaluaciones_model');
     $this->load->model('cursos_model');
     $this->load->model('Secciones_model');
 
     // Obtener el ID del usuario actual (instructor)
     $idUsuario = $this->session->userdata('idusuario');
-
+	$data['empleado'] = $this->empleado_model->obtener_empleado_por_usuario($idUsuario);
     // Obtener solo los cursos creados por el usuario actual
     $data['cursos'] = $this->cursos_model->listacursos($idUsuario)->result();
 
@@ -555,10 +557,11 @@ public function modificarbd()
     $data['secciones'] = $this->Secciones_model->obtener_secciones_por_curso($idCursoSeleccionado, $idUsuario);
 
     // Cargar la vista con los datos
-	//$this->load->view('inc/cabecera');
-		// $this->load->view('inc/menu');
-		// $this->load->view('inc/menulateral');
+	$this->load->view('inc/cabecera', $data);
+	$this->load->view('inc/menu', $data);
+	$this->load->view('inc/menulateral', $data);
     $this->load->view('crear_evaluacion', $data);
+	
 }
 
 public function realizar_evaluacion()
