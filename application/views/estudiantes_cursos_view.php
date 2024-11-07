@@ -3,15 +3,43 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Estudiantes inscritos en cursos</h1>
+                <h1 class="text-primary font-weight-bold">
+                    <i class="fas fa-file-alt"></i> Reporte de estudiantes inscritos a cursos
+                </h1>
                 </div>
+                
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item active">Lista de Suscritos</li>
                         <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/usuarios/logout">Cerrar sesión</a></li>
                     </ol>
                 </div>
+                
             </div>
+            <div class="card shadow-sm p-4">
+                <h3 class="text-center text-success mb-4">
+                    <i class="fas fa-chart-line"></i> Filtro de Reporte de estudiantes
+                </h3>
+                <form action="<?= base_url('index.php/reportes/reporte_ventas') ?>" method="post" class="form-inline justify-content-center mb-4">
+                    <div class="form-group mb-2">
+                        <label for="fecha_inicio" class="mr-2">Fecha Inicio:</label>
+                        <input type="date" class="form-control" name="fecha_inicio" required>
+                    </div>
+                    <div class="form-group mx-sm-3 mb-2">
+                        <label for="fecha_fin" class="mr-2">Fecha Fin:</label>
+                        <input type="date" class="form-control" name="fecha_fin" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary mb-2 ml-2" title="Buscar ventas por fechas">
+                        <i class="fas fa-search"></i> Buscar
+                    </button>
+
+                    
+                </form>
+                <div class="text-center">
+                    <a href="<?= base_url('assets/fpdf/PruebaV.php'); ?>"class="btn btn-success"><i class="fas fa-file-pdf"></i> Generar reportes</a>
+                <i class="fas fa-file-pdf"></i>
+                </div>
+                <div>
         </div>
     </section>
     
@@ -61,12 +89,12 @@
     </section>
 
     <!-- Sección para el gráfico de torta -->
-    <section class="content">
+    <!-- <section class="content">
         <div class="container-fluid">
             <h2>Distribución de Inscripción en Cursos</h2>
             <canvas id="chartCursos" width="400" height="400"></canvas>
         </div>
-    </section>
+    </section> -->
 </div>
 
 <!-- Incluir la biblioteca Chart.js -->

@@ -1441,7 +1441,7 @@ DataTable.ext.buttons.pdfHtml5 = {
 
 	exportOptions: {},
 
-	orientation: 'portrait',
+	orientation: 'landscape',
 
 	pageSize: 'A4',
 

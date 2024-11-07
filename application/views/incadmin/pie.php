@@ -43,8 +43,37 @@
 <script>
   $(function () {
     $("#example1").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+      "responsive": true,
+      "lengthChange": false,
+      "autoWidth": false,
+      "buttons": [
+        "copy", 
+        "csv", 
+        "excel", 
+        {
+          extend: 'pdfHtml5',
+          text: 'Generar PDF', // Cambiar el texto del botón a otro idioma
+        },
+        "imprimir", 
+        "colvis"
+      ],
+      "language": {
+        "buttons": {
+          "copy": "Copiar",
+          // "csv": "Exportar CSV",
+          "excel": "Exportar Excel",
+          "pdf": "Generar PDF",
+          "print": "Imprimir",
+          "colvis": "Ver columnas"
+        },
+        "decimal": ",",
+        "thousands": ".",
+        "search": "Buscar:",
+        "lengthMenu": "Mostrar _MENU_ registros por página",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
+        "infoEmpty": "No hay registros disponibles",
+        "infoFiltered": "(filtrado de _MAX_ registros totales)"
+      }
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     $('#example2').DataTable({
       "paging": true,
