@@ -30,7 +30,7 @@
                         <input type="date" class="form-control" name="fecha_fin" required>
                     </div>
                     <button type="submit" class="btn btn-primary mb-2 ml-2" title="Buscar ventas por fechas">
-                        <i class="fas fa-search"></i> Buscar
+                        <i class="fas fa-search"></i> Filtrar
                     </button>
 
                     
