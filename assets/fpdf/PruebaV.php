@@ -1,112 +1,89 @@
 <?php
+// Incluir el framework de CodeIgniter
+include_once __DIR__ . '/../../index.php'; // Ajusta la ruta en función de la ubicación
 
+// Obtener una instancia de CodeIgniter y cargar el modelo
+$CI =& get_instance();
+$CI->load->model('Reportes_model');
+
+// Incluir FPDF
 require('./fpdf.php');
 
 class PDF extends FPDF
 {
+    function Header() {
+        $this->Image('logo_cepra.jpeg', 185, 5, 20);
+        $this->SetFont('Arial', 'B', 19);
+        $this->Cell(45);
+        $this->SetTextColor(0, 0, 0);
+        $this->Cell(110, 15, utf8_decode('CEPRA'), 1, 1, 'C', 0);
+        $this->Ln(3);
+        $this->SetTextColor(103);
 
-   // Cabecera de página
-   function Header()
-   {
-      //include '../../recursos/Recurso_conexion_bd.php';//llamamos a la conexion BD
+        /* Información de contacto */
+        $this->Cell(110);
+        $this->SetFont('Arial', 'B', 10);
+        $this->Cell(96, 10, utf8_decode("Ubicación: Parque la Torre N°434"), 0, 0, '', 0);
+        $this->Ln(5);
+        $this->Cell(110);
+        $this->Cell(59, 10, utf8_decode("Teléfono: 79988432"), 0, 0, '', 0);
+        $this->Ln(5);
+        $this->Cell(110);
+        $this->Cell(85, 10, utf8_decode("Correo: CEPRA_instituto@cepra.com"), 0, 0, '', 0);
+        $this->Ln(5);
+        $this->Cell(110);
+        $this->Cell(85, 10, utf8_decode("Sucursal: Pacata baja calle Beni, N°524"), 0, 0, '', 0);
+        $this->Ln(10);
 
-      //$consulta_info = $conexion->query(" select *from hotel ");//traemos datos de la empresa desde BD
-      //$dato_info = $consulta_info->fetch_object();
-      $this->Image('logo_cepra.jpeg', 185, 5, 20); //logo de la empresa,moverDerecha,moverAbajo,tamañoIMG
-      $this->SetFont('Arial', 'B', 19); //tipo fuente, negrita(B-I-U-BIU), tamañoTexto
-      $this->Cell(45); // Movernos a la derecha
-      $this->SetTextColor(0, 0, 0); //color
-      //creamos una celda o fila
-      $this->Cell(110, 15, utf8_decode('CEPRA'), 1, 1, 'C', 0); // AnchoCelda,AltoCelda,titulo,borde(1-0),saltoLinea(1-0),posicion(L-C-R),ColorFondo(1-0)
-      $this->Ln(3); // Salto de línea
-      $this->SetTextColor(103); //color
+        /* Título */
+        $this->SetTextColor(228, 100, 0);
+        $this->Cell(50);
+        $this->SetFont('Arial', 'B', 15);
+        $this->Cell(100, 10, utf8_decode("REPORTE DE ESTUDIANTES INSCRITOS A CURSOS"), 0, 1, 'C', 0);
+        $this->Ln(7);
 
-      /* UBICACION */
-      $this->Cell(110);  // mover a la derecha
-      $this->SetFont('Arial', 'B', 10);
-      $this->Cell(96, 10, utf8_decode("Ubicación : Parque la Torre N°434 "), 0, 0, '', 0);
-      $this->Ln(5);
+        /* Encabezado de tabla */
+        $this->SetFillColor(228, 100, 0);
+        $this->SetTextColor(255, 255, 255);
+        $this->SetDrawColor(163, 163, 163);
+        $this->SetFont('Arial', 'B', 11);
+        $this->Cell(10, 10, 'N°', 1, 0, 'C', 1);
+        $this->Cell(70, 10, 'Nombre Estudiante', 1, 0, 'C', 1);
+        $this->Cell(30, 10, 'Cantidad Cursos', 1, 0, 'C', 1);
+        $this->Cell(80, 10, 'Cursos Inscritos', 1, 1, 'C', 1);
+    }
 
-      /* TELEFONO */
-      $this->Cell(110);  // mover a la derecha
-      $this->SetFont('Arial', 'B', 10);
-      $this->Cell(59, 10, utf8_decode("Teléfono : 79988432 "), 0, 0, '', 0);
-      $this->Ln(5);
-
-      /* COREEO */
-      $this->Cell(110);  // mover a la derecha
-      $this->SetFont('Arial', 'B', 10);
-      $this->Cell(85, 10, utf8_decode("Correo : CEPRA_instituto@cepra.com"), 0, 0, '', 0);
-      $this->Ln(5);
-
-      /* TELEFONO */
-      $this->Cell(110);  // mover a la derecha
-      $this->SetFont('Arial', 'B', 10);
-      $this->Cell(85, 10, utf8_decode("Sucursal : Pacata baja calle Beni, N°524"), 0, 0, '', 0);
-      $this->Ln(10);
-
-      /* TITULO DE LA TABLA */
-      //color
-      $this->SetTextColor(228, 100, 0);
-      $this->Cell(50); // mover a la derecha
-      $this->SetFont('Arial', 'B', 15);
-      $this->Cell(100, 10, utf8_decode("REPORTE DE ESTUDIANTES INSCRITOS A CURSOS "), 0, 1, 'C', 0);
-      $this->Ln(7);
-
-      /* CAMPOS DE LA TABLA */
-      //color
-      $this->SetFillColor(228, 100, 0); //colorFondo
-      $this->SetTextColor(255, 255, 255); //colorTexto
-      $this->SetDrawColor(163, 163, 163); //colorBorde
-      $this->SetFont('Arial', 'B', 11);
-      $this->Cell(18, 10, utf8_decode('N°'), 1, 0, 'C', 1);
-      $this->Cell(20, 10, utf8_decode('NÚMERO'), 1, 0, 'C', 1);
-      $this->Cell(30, 10, utf8_decode('TIPO'), 1, 0, 'C', 1);
-      $this->Cell(25, 10, utf8_decode('PRECIO'), 1, 0, 'C', 1);
-      $this->Cell(70, 10, utf8_decode('CARACTERÍSTICAS'), 1, 0, 'C', 1);
-      $this->Cell(25, 10, utf8_decode('ESTADO'), 1, 1, 'C', 1);
-   }
-
-   // Pie de página
-   function Footer()
-   {
-      $this->SetY(-15); // Posición: a 1,5 cm del final
-      $this->SetFont('Arial', 'I', 8); //tipo fuente, negrita(B-I-U-BIU), tamañoTexto
-      $this->Cell(0, 10, utf8_decode('Página ') . $this->PageNo() . '/{nb}', 0, 0, 'C'); //pie de pagina(numero de pagina)
-
-      $this->SetY(-15); // Posición: a 1,5 cm del final
-      $this->SetFont('Arial', 'I', 8); //tipo fuente, cursiva, tamañoTexto
-      $hoy = date('d/m/Y');
-      $this->Cell(355, 10, utf8_decode($hoy), 0, 0, 'C'); // pie de pagina(fecha de pagina)
-   }
+    function Footer() {
+        $this->SetY(-15);
+        $this->SetFont('Arial', 'I', 8);
+        $this->Cell(0, 10, 'Página '.$this->PageNo().'/{nb}', 0, 0, 'C');
+        $this->SetY(-15);
+        $this->Cell(355, 10, date('d/m/Y'), 0, 0, 'C');
+    }
 }
 
-//include '../../recursos/Recurso_conexion_bd.php';
-//require '../../funciones/CortarCadena.php';
-/* CONSULTA INFORMACION DEL HOSPEDAJE */
-//$consulta_info = $conexion->query(" select *from hotel ");
-//$dato_info = $consulta_info->fetch_object();
-
+// Crear una instancia de PDF y configurar el documento
 $pdf = new PDF();
-$pdf->AddPage(); /* aqui entran dos para parametros (horientazion,tamaño)V->portrait H->landscape tamaño (A3.A4.A5.letter.legal) */
-$pdf->AliasNbPages(); //muestra la pagina / y total de paginas
-
-$i = 0;
+$pdf->AddPage();
+$pdf->AliasNbPages();
 $pdf->SetFont('Arial', '', 12);
-$pdf->SetDrawColor(163, 163, 163); //colorBorde
+$pdf->SetDrawColor(163, 163, 163);
 
-/*$consulta_reporte_alquiler = $conexion->query("  ");*/
+// Obtener datos de estudiantes inscritos a cursos usando el modelo cargado
+$fecha_inicio = null; // Coloca las fechas que necesitas
+$fecha_fin = null;    // Coloca las fechas que necesitas
+$estudiantes_cursos = $CI->Reportes_model->obtener_estudiantes_cursos($fecha_inicio, $fecha_fin);
 
-/*while ($datos_reporte = $consulta_reporte_alquiler->fetch_object()) {      
-   }*/
-$i = $i + 1;
-/* TABLA */
-$pdf->Cell(18, 10, utf8_decode("N°"), 1, 0, 'C', 0);
-$pdf->Cell(20, 10, utf8_decode("numero"), 1, 0, 'C', 0);
-$pdf->Cell(30, 10, utf8_decode("nombre"), 1, 0, 'C', 0);
-$pdf->Cell(25, 10, utf8_decode("precio"), 1, 0, 'C', 0);
-$pdf->Cell(70, 10, utf8_decode("info"), 1, 0, 'C', 0);
-$pdf->Cell(25, 10, utf8_decode("total"), 1, 1, 'C', 0);
+// Imprimir datos en el PDF
+$i = 1;
+foreach ($estudiantes_cursos as $estudiante) {
+    $pdf->Cell(10, 10, $i, 1, 0, 'C');
+    $pdf->Cell(70, 10, utf8_decode($estudiante->nombre_estudiante), 1, 0, 'C');
+    $pdf->Cell(30, 10, $estudiante->cantidad_cursos, 1, 0, 'C');
+    $pdf->Cell(80, 10, utf8_decode($estudiante->titulos_cursos), 1, 1, 'C');
+    $i++;
+}
 
-
-$pdf->Output('Prueba.pdf', 'I');//nombreDescarga, Visor(I->visualizar - D->descargar)
+// Salida del archivo PDF
+$pdf->Output('reporte_estudiantes.pdf', 'I');
+?>

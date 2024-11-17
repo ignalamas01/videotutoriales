@@ -6,7 +6,23 @@ class Reportes_model extends CI_Model {
 
     
     
-    public function obtener_estudiantes_cursos() {
+    // public function obtener_estudiantes_cursos() {
+    //     $this->db->select('CONCAT(e.nombre, " ", e.primerApellido, " ", e.segundoApellido) AS nombre_estudiante, 
+    //                       COUNT(DISTINCT s.idSuscripcion) AS cantidad_cursos, 
+    //                       GROUP_CONCAT(DISTINCT c.titulo) AS titulos_cursos', FALSE);
+    //     $this->db->from('estudiante e');
+    //     $this->db->join('suscripciones s', 'e.id = s.idEstudiante');
+    //     $this->db->join('cursos c', 's.idCurso = c.id');
+    //     $this->db->where('s.estado', 'activo');
+    //     $this->db->where('s.estado_manual', 'activo');
+    //     $this->db->group_by('e.id, e.nombre, e.primerApellido, e.segundoApellido');
+    //     $this->db->having('COUNT(DISTINCT s.idSuscripcion) > 0', NULL, FALSE);
+    
+    //     $query = $this->db->get();
+    
+    //     return $query->result();
+    // }
+    public function obtener_estudiantes_cursos($fecha_inicio = null, $fecha_fin = null) {
         $this->db->select('CONCAT(e.nombre, " ", e.primerApellido, " ", e.segundoApellido) AS nombre_estudiante, 
                           COUNT(DISTINCT s.idSuscripcion) AS cantidad_cursos, 
                           GROUP_CONCAT(DISTINCT c.titulo) AS titulos_cursos', FALSE);
@@ -15,11 +31,17 @@ class Reportes_model extends CI_Model {
         $this->db->join('cursos c', 's.idCurso = c.id');
         $this->db->where('s.estado', 'activo');
         $this->db->where('s.estado_manual', 'activo');
+    
+        // Filtrar por fecha si se proporcionan
+        if (!empty($fecha_inicio) && !empty($fecha_fin)) {
+            $this->db->where('s.fechaRegistro >=', $fecha_inicio);
+            $this->db->where('s.fechaRegistro <=', $fecha_fin);
+        }
+    
         $this->db->group_by('e.id, e.nombre, e.primerApellido, e.segundoApellido');
         $this->db->having('COUNT(DISTINCT s.idSuscripcion) > 0', NULL, FALSE);
     
         $query = $this->db->get();
-    
         return $query->result();
     }
    public function obtener_cursos_activos()   {
