@@ -97,8 +97,8 @@
             <div class="form-group">
                  <label>Lista de estudiantes</label>
                                             
-                        <select name="id_estudiante" class="form-control form-select form-select-lg required" style="width: 100%">
-                        <option value="" disabled selected>Seleccione al estudiante </option>
+                 <select id="buscadorEstudiantes" name="id_estudiante" class="form-control form-select-lg required" style="width: 100%">
+                 <option value="" disabled selected>Seleccione al estudiante</option>
                         <?php
                           foreach ($estudiante->result() as $row) {
                             echo '<option value="' . $row->id . '">' . $row->nombre . ' ' . $row->primerApellido . '</option>';
@@ -199,53 +199,44 @@
 
 
 <!-- ... (código posterior) ... -->
-
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
 var csrf_token = '<?php echo $this->security->get_csrf_hash(); ?>';
 
-// Función para verificar si el correo ya existe
-// function verificarCorreoExistente() {
-//     console.log('Función llamada'); 
-//     var destinatario = document.getElementById('destinatario').value;
 
-//     // Realiza una solicitud AJAX para verificar el correo en el servidor
-//     // Debes crear una ruta en tu controlador para manejar esta solicitud
-//     // Aquí se muestra un ejemplo básico
-//     $.ajax({
-//         url: '<?php echo base_url('base/verificar_correo_existente'); ?>',
-//         type: 'POST',
-//         data: { destinatario: destinatario },
-//         success: function(response) {
-//             if (response == 'existe') {
-//                 // El correo ya existe, muestra un mensaje de error
-//                 document.getElementById('error-correo').innerHTML = 'El correo ya existe';
-//             } else {
-//                 // El correo no existe, limpia el mensaje de error si lo hay
-//                 document.getElementById('error-correo').innerHTML = '';
-//             }
-//         },
-//         error: function(xhr, status, error) {
-//             console.error('Error en la solicitud AJAX:', error);
-//         }
-//     });
-// }
+$(document).ready(function () {
+    // Forzar el funcionamiento correcto de Select2
+    $.fn.modal.Constructor.prototype.enforceFocus = function () {};
+});
+$(document).ready(function() {
+        // Inicializar Select2 para estudiantes y cursos
+        $('#buscadorEstudiantes, #id_curso').select2({
+            placeholder: "Seleccione una opción", // Texto inicial
+            allowClear: true, // Permite limpiar selección
+            width: 'resolve', // Adapta el ancho al contenedor
+            language: {
+                noResults: function () {
+                    return "No se encontraron resultados";
+                }
+            }
+        });
 
-// Manejar el evento de envío del formulario
-// $(document).ready(function() {
-//     $('#miFormulario').submit(function(event) {
-//         // Evitar el envío predeterminado del formulario
-//         event.preventDefault();
-        
-//         // Realizar la verificación antes de enviar los datos al servidor
-//         verificarCorreoExistente();
+        // Resolver el problema de búsqueda lenta o bloqueada
+        $('#buscadorEstudiantes, #id_curso').on('select2:open', function() {
+            let searchField = document.querySelector('.select2-search__field');
+            if (searchField) {
+                searchField.focus();
+            }
+        });
 
-//         // Aquí puedes agregar lógica adicional antes de enviar el formulario al servidor
-//         // Por ejemplo, podrías verificar otros campos o realizar otras validaciones.
-
-//         // Finalmente, si todo está bien, puedes enviar el formulario al servidor
-//         this.submit();
-//     });
-// });
+        // Prevenir conflictos con otros scripts
+        $(document).on('select2:selecting', function(e) {
+            if ($(e.target).hasClass('select2-hidden-accessible')) {
+                e.stopPropagation();
+            }
+        });
+    });
 </script>
 
 <?php
@@ -263,60 +254,6 @@ echo form_close();
 
 </div>
 
-
-<!-- /.content-wrapper -->
-
-<!-- <div class="row featurette">
-    <div class="col-md-7">
-        <br>
-        <h2 class="featurette-heading">AGREGAR ESTUDIANTE<span class="text-muted"> ****</span></h2>
-        <section>
-      <div class="row">
-        <div class="col-4">
-            <div class="form-group">
-                 <label>lista de estudiantes</label>
-                                            
-                        <select name="id" class="form-control form-select form-select-lg required" style="width: 100%">
-                        <option value="" disabled selected>Seleccione al estudiante </option>
-                        <?php
-                          foreach ($estudiante->result() as $row) {
-                            echo '<option value="' . $row->id . '">' . $row->nombre . ' ' . $row->primerApellido . '</option>';
-                      }
-                          ?>
-                      </select>
-            </div>
-        </div>
-                                        
-      </div>
-      
-                                    
-    </section>
-
-        <section>
-      <div class="row">
-        <div class="col-4">
-            <div class="form-group">
-                 <label>CURSOS</label>
-                                            
-                        <select name="id" class="form-control form-select form-select-lg required" style="width: 100%">
-                        <option value="" disabled selected>Seleccione un curso</option>
-                        <?php
-                          foreach ($cursos->result() as $row) {
-                          echo '<option value="' . $row->id . '">' . $row->titulo . '</option>';
-                      }
-                          ?>
-                      </select>
-            </div>
-        </div>
-                                        
-      </div>
-      
-                                    
-    </section>
-    
-    
-</div> -->
-<!-- Agregar esto a tu página HTML, generalmente dentro de un <script> al final de la vista -->
 
 
     
