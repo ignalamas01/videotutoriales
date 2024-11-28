@@ -15,6 +15,27 @@
                     </ol>
                 </div>
             </div>
+            <div class="card shadow-sm p-4">
+                <h3 class="text-center text-success mb-4">
+                    <i class="fas fa-chart-line"></i> Filtro de Estudiantes graduados
+                </h3>
+                <form action="<?= base_url('index.php/graduados/lista') ?>" method="post" class="form-inline justify-content-center mb-4">
+                <div class="form-group mb-2">
+        <label for="fecha_inicio" class="mr-2">Fecha Inicio:</label>
+        <input type="date" class="form-control" name="fecha_inicio" value="<?= isset($fecha_inicio) ? $fecha_inicio : '' ?>" required>
+    </div>
+    <div class="form-group mx-sm-3 mb-2">
+        <label for="fecha_fin" class="mr-2">Fecha Fin:</label>
+        <input type="date" class="form-control" name="fecha_fin" value="<?= isset($fecha_fin) ? $fecha_fin : '' ?>" required>
+    </div>
+    <button type="submit" class="btn btn-primary mb-2 ml-2" title="Buscar suscripciones por fechas">
+        <i class="fas fa-search"></i> Filtrar
+    </button>
+    </form>
+                <div class="text-center">
+                <a href="<?= base_url('/index.php/graduados/generar_pdf?fecha_inicio=' . urlencode($fecha_inicio) . '&fecha_fin=' . urlencode($fecha_fin)); ?>" class="btn btn-success"><i class="fas fa-file-pdf"></i> Generar reportes</a>
+                <i class="fas fa-file-pdf"></i>
+                </div>
         </div>
     </section>
 
