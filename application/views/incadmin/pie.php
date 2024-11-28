@@ -16,11 +16,12 @@
   <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
-
+<script src="<?php echo base_url(); ?>boostrap/js/jquery-3.7.1.min.js"></script>
 <!-- jQuery -->
 <script src="<?php echo base_url(); ?>/adminlte/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="<?php echo base_url(); ?>/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="adminlte/plugins/select2/js/select2.min.js"></script> <!-- Select2 -->
 <!-- DataTables  & Plugins -->
 <script src="<?php echo base_url(); ?>/adminlte/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url(); ?>/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>

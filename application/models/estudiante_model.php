@@ -99,5 +99,15 @@ class estudiante_model extends CI_Model
     $this->db->where('idUsuario', $idUsuario);
     return $this->db->update('usuario', $data); // Actualiza la tabla 'usuario'
 }
+public function buscarEstudiantes($searchTerm)
+{
+    $this->db->select('id, nombre, primerApellido');
+    $this->db->from('estudiante');
+    $this->db->like('nombre', $searchTerm);  // O usa otro campo si es necesario
+    $this->db->or_like('primerApellido', $searchTerm);
+    $this->db->where('estado', '1');
+    
+    return $this->db->get();
+}
 
 }

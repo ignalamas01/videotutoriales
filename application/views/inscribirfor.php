@@ -1,278 +1,145 @@
-
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-  <!-- Content Header (Page header) -->
+    <!-- Content Header (Page header) -->
     <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1></h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/base/index">Home</a></li>
-              <li class="breadcrumb-item active">DataTables</li>
-            </ol>
-          </div>
-        </div>
-      </div><!-- /.container-fluid -->
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>INSCRIBIR ESTUDIANTE A UN CURSO</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/base/index">Home</a></li>
+                        <li class="breadcrumb-item active">Inscripción</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
     </section>
 
     <!-- Main content -->
     <div class="row featurette">
-    <div class="col-md-7">
-        <br>
-        <h2 class="featurette-heading">INSCRIBIR ESTUDIANTE A UN CURSO<span class="text-muted"></span></h2>
-
-
-    </div>
-    <!-- <div class="col-md-5">
-        <center><img src="<?php echo base_url(); ?>img/imgvt.png" width="120"></center>
-
-    </div> -->
-
-    <!--<div col-md-12> -->
-
-
-
-    <?php
-    /*  lo mismo que multipart  y form
-                <form action="<?php echo base_url(); ?>index.php/estudiante/agregarbd" method="POST">
-                */ ?>
-    <?php
-    echo form_open_multipart('suscripciones/inscribirbd')
-    ?>
-
-
-<span id="error-correo" style="color: red;">
-    <?php
-    // Muestra mensajes de error específicos desde la sesión aquí
-    echo $this->session->flashdata('error_correo');
-    ?>
-</span>
-    <section class="content">
-        <div class="container-fluid">
-            <div class="row">
-                <!-- left column -->
-                <div class="col-md-9">
-                    <!-- general form elements -->
-                    <div class="card card-primary">
-                        <div class="card-header">
-                            <h3 class="card-title">Datos</h3>
-                        </div>
-
-
-                        <div id="alert-container">
-                            <?php if ($this->session->flashdata('mensaje')) { ?>
-                                <div class="alert alert-success" role="alert">
-                                    <?php echo $this->session->flashdata('mensaje'); ?>
-                                </div>
-                            <?php } elseif (empty($this->session->flashdata('mensaje')) && empty($this->session->flashdata('error'))) { ?>
-                                <div class="alert alert-danger" role="alert">
-                                    Inscribir estudiante a un curso.
-                                </div>
-                            <?php } ?>
-                        </div> 
-
-
-<!-- /.card-header -->
-                        <!-- form start -->
-                        <form>
-                            <div class="card-body">
-                               
-                                <div class="form-group">
-                                  <!-- <label for="newEmail">Correo Electrónico</label>
-                                     <input type="email" id="destinatario" name="destinatario" placeholder="Escriba su correo electrónico" class="form-control"  onkeyup="verificarCorreoExistente()"> -->
-
-                                        <span id="error-correo" style="color: red;"></span>
-    
-
-
-                                
-
-                                
-                                <section>
-      <div class="row">
-        <div class="col-4">
-            <div class="form-group">
-                 <label>Lista de estudiantes</label>
-                                            
-                 <select id="buscadorEstudiantes" name="id_estudiante" class="form-control form-select-lg required" style="width: 100%">
-                 <option value="" disabled selected>Seleccione al estudiante</option>
-                        <?php
-                          foreach ($estudiante->result() as $row) {
-                            echo '<option value="' . $row->id . '">' . $row->nombre . ' ' . $row->primerApellido . '</option>';
-                      }
-                          ?>
-                      </select>
-            </div>
-            
+        <div class="col-md-7">
+            <br>
+            <h2 class="featurette-heading">INSCRIBIR ESTUDIANTE A UN CURSO<span class="text-muted"></span></h2>
         </div>
-        <div class="col-4">
-    <div class="form-group">
-        <label>FECHA DE INICIO:</label>
-        <div class="input-group date" id="reservationdate" data-target-input="nearest">
-            <input type="date" name="fechaInicio" class="form-control datetimepicker-input" data-target="#reservationdate" required min="<?php echo date('Y-m-d'); ?>" />
-            <!-- para calendario de admin -->
-            <!-- <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
-                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-            </div> -->
-        </div>
-    </div>
-</div>
-<div class="col-4">
-    <div class="form-group">
-        <label>FECHA DE FIN:</label>
-        <div class="input-group date" id="reservationdate" data-target-input="nearest">
-            <input type="date" name="fechaFin" class="form-control datetimepicker-input" data-target="#reservationdate" required min="<?php echo date('Y-m-d'); ?>" />
-            <!-- para calendario de admin -->
-            <!-- <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
-                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-            </div> -->
-        </div>
-    </div>
-</div>
 
+        <!-- Formulario de Inscripción -->
+        <?php echo form_open_multipart('suscripciones/inscribirbd'); ?>
+        
+        <span id="error-correo" style="color: red;">
+            <?php echo $this->session->flashdata('error_correo'); ?>
+        </span>
 
-                                        
-      </div>
-      
-                                    
-    </section>
-
-        <section>
-      <div class="row">
-        <div class="col-4">
-            <div class="form-group">
-                 <label>Cursos</label>
-                                            
-                        <select name="id_curso" class="form-control form-select form-select-lg required" style="width: 100%" required>
-                        <option value="" disabled selected>Seleccione un curso</option>
-                        <?php
-                          foreach ($cursos->result() as $row) {
-                          echo '<option value="' . $row->id . '">' . $row->titulo . '</option>';
-                      }
-                          ?>
-                      </select>
-            </div>
-            
-        </div>
-                                        
-      </div>
-      
-                                    
-    </section>
-                               
-
-
-
-
-
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- left column -->
+                    <div class="col-md-9">
+                        <!-- general form elements -->
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">Datos</h3>
                             </div>
-                            <!-- /.card-body -->
 
+                            <div id="alert-container">
+                                <?php if ($this->session->flashdata('mensaje')) { ?>
+                                    <div class="alert alert-success" role="alert">
+                                        <?php echo $this->session->flashdata('mensaje'); ?>
+                                    </div>
+                                <?php } elseif (empty($this->session->flashdata('mensaje')) && empty($this->session->flashdata('error'))) { ?>
+                                    <div class="alert alert-danger" role="alert">
+                                        Inscribir estudiante a un curso.
+                                    </div>
+                                <?php } ?>
+                            </div> 
 
-                        </form>
+                            <div class="card-body">
+                                <!-- Campo de búsqueda de estudiantes -->
+                                <div class="form-group">
+                                    <label>Lista de estudiantes</label>
+                                    <select id="buscadorEstudiantes" name="id_estudiante" class="form-control form-select-lg required" style="width: 100%">
+                                        <!-- Las opciones están cargadas dinámicamente -->
+                                    </select>
+                                </div>
+
+                                <!-- Fecha de inicio y fin -->
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label>FECHA DE INICIO:</label>
+                                            <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                                                <input type="date" name="fechaInicio" class="form-control datetimepicker-input" data-target="#reservationdate" required min="<?php echo date('Y-m-d'); ?>" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label>FECHA DE FIN:</label>
+                                            <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                                                <input type="date" name="fechaFin" class="form-control datetimepicker-input" data-target="#reservationdate" required min="<?php echo date('Y-m-d'); ?>" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Campo de selección de curso -->
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label>Cursos</label>
+                                            <select name="id_curso" class="form-control form-select form-select-lg required" style="width: 100%" required>
+                                                <option value="" disabled selected>Seleccione un curso</option>
+                                                <?php foreach ($cursos->result() as $row) { ?>
+                                                    <option value="<?php echo $row->id; ?>"><?php echo $row->titulo; ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Botón de submit -->
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary">Inscribir</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <!-- /.card -->
-                    <div class="card-footer">
-                        <button type="submit" class="btn btn-success " data-toggle="modal" data-target="#mensajeModal">Agregar</button>
-                        
-
-                        <button type="reset" class="btn btn-success " onClick="history.go(-1);">Cancelar</button>
-                    </div>
-
-                    <!-- /.card-body -->
                 </div>
-                <!-- /.card -->
             </div>
-            <!--/.col (right) -->
-        </div>
-        <!-- /.row -->
+        </section>
 
-    </section>
-    
-    
-</div><!-- /.container-fluid -->
-<!-- ... (código anterior) ... -->
+        <?php echo form_close(); ?>
+    </div><!-- /.container-fluid -->
+</div>
+
+<!-- Scripts -->
 
 
+<!-- JS de Select2 -->
+<!-- Cargar jQuery -->
+<!-- Cargar jQuery -->
+<script src="boostrap/js/jquery-3.7.1.min.js"></script>
 
-<!-- ... (código posterior) ... -->
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<!-- Cargar Select2 -->
+<script src="adminlte/plugins/select2/js/select2.min.js"></script>
+
 <script>
-var csrf_token = '<?php echo $this->security->get_csrf_hash(); ?>';
+  $(document).ready(function() {
+      // Verifica si select2 está disponible
+      console.log($.fn.select2);
 
-
-$(document).ready(function () {
-    // Forzar el funcionamiento correcto de Select2
-    $.fn.modal.Constructor.prototype.enforceFocus = function () {};
-});
-$(document).ready(function() {
-        // Inicializar Select2 para estudiantes y cursos
-        $('#buscadorEstudiantes, #id_curso').select2({
-            placeholder: "Seleccione una opción", // Texto inicial
-            allowClear: true, // Permite limpiar selección
-            width: 'resolve', // Adapta el ancho al contenedor
-            language: {
-                noResults: function () {
-                    return "No se encontraron resultados";
-                }
-            }
-        });
-
-        // Resolver el problema de búsqueda lenta o bloqueada
-        $('#buscadorEstudiantes, #id_curso').on('select2:open', function() {
-            let searchField = document.querySelector('.select2-search__field');
-            if (searchField) {
-                searchField.focus();
-            }
-        });
-
-        // Prevenir conflictos con otros scripts
-        $(document).on('select2:selecting', function(e) {
-            if ($(e.target).hasClass('select2-hidden-accessible')) {
-                e.stopPropagation();
-            }
-        });
-    });
+      // Inicializa select2
+      $('#buscadorEstudiantes').select2({
+          placeholder: "Seleccione al estudiante",
+          allowClear: true,
+          minimumInputLength: 2,  // Mínimo 2 caracteres para comenzar a buscar
+          data: <?php echo $estudiantes_json; ?>, // Los datos JSON se pasan directamente desde el controlador
+      });
+  });
 </script>
 
-<?php
-echo form_close();
-?>
-
-
-
-<!--        </form>*/ -->
-
-
-
-
-
-
-</div>
-
-
-
-    
-</div>
-
-<!-- Agregar esto a tu página HTML en la vista agregarEstudiante -->
-<script type="text/javascript">
-    $(document).ready(function () {
-        // Este script se ejecutará cuando la página se cargue
-        $('#mensajeModal').modal('show'); // Muestra el modal automáticamente
-    });
+<script>
+    console.log(<?php echo $estudiantes_json; ?>);  // Para ver cómo llega el JSON a la vista
 </script>
-<script type="text/javascript">
-    // Cierra la alerta cuando se hace clic en el botón de cierre (×)
-    $('.alert').on('click', '.close', function () {
-        $(this).parent().hide();
-    });
-</script>
-
-
-
-

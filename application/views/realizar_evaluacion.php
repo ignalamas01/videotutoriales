@@ -35,18 +35,24 @@
             margin-right: 5px;
         }
 
-        button {
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 3px;
-            cursor: pointer;
-        }
+       /* Estilos para botones de tipo <button> */
+button,
+input[type="submit"] {
+    background-color: #007bff; /* Color de fondo */
+    color: #fff; /* Color del texto */
+    border: none; /* Sin bordes */
+    padding: 10px 20px; /* Espaciado interno */
+    border-radius: 3px; /* Bordes redondeados */
+    cursor: pointer; /* Cambiar cursor al pasar */
+    font-size: 16px; /* Tamaño de fuente */
+    transition: background-color 0.3s ease; /* Animación de transición */
+}
 
-        button:hover {
-            background-color: #0056b3;
-        }
+button:hover,
+input[type="submit"]:hover {
+    background-color: #0056b3; /* Color más oscuro al pasar el mouse */
+}
+
     </style>
 </head>
 <body>

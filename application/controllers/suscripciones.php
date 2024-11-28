@@ -11,32 +11,40 @@ class Suscripciones extends CI_Controller
         $this->load->model('Inscripciones_model');
     }
 	
-	public function agregarEstudiante()
-	{
-		
-		if($this->session->userdata('login'))
-        {
-			
-			$this->load->view('incadmin/cabecera');
-			$this->load->view('incadmin/menu');
-			$this->load->view('incadmin/menulateral');
-			// Consulta los datos de la tabla "otra_tabla"
-    		$data['cursos'] = $this->cursos_model->listacursos(); // Asumiendo que tienes un método en tu modelo para obtener los datos
+	public function agregarEstudiante() 
+{
+    if ($this->session->userdata('login')) {
 
-    		// Consulta los datos de la tabla "estudiante"
-    		$data['estudiante'] = $this->estudiante_model->listaestudiante(); // Asumiendo que tienes un método en tu modelo para obtener los estudiantes
+        $this->load->view('incadmin/cabecera');
+        $this->load->view('incadmin/menu');
+        $this->load->view('incadmin/menulateral');
 
-    		// Carga la vista con los datos
-    		$this->load->view('inscribirfor', $data);
-			$this->load->view('inc/pie');
+        // Consulta los datos de los cursos
+        $data['cursos'] = $this->cursos_model->listacursos();
+
+        // Obtener los estudiantes
+        $estudiantes = $this->estudiante_model->listaestudiante();
+
+        // Convertir los estudiantes a formato JSON para el select2
+        $estudiantesArray = array();
+        foreach ($estudiantes->result() as $row) {
+            $estudiantesArray[] = array(
+                'id' => $row->id,
+                'text' => $row->nombre . ' ' . $row->primerApellido
+            );
         }
-        else
-        {
-            redirect('usuarios/index/2','refresh');
-        }
-		
-		
-	} 
+
+        // Agregar el array de estudiantes en el formato adecuado a los datos
+        $data['estudiantes_json'] = json_encode(array('results' => $estudiantesArray));
+
+        // Cargar la vista con los datos
+        $this->load->view('inscribirfor', $data);
+        $this->load->view('inc/pie');
+    } else {
+        redirect('usuarios/index/2', 'refresh');
+    }
+}
+
 	public function inscribirbd() {
 		$this->load->model('Inscripciones_model');
 
@@ -216,7 +224,31 @@ public function inhabilitar($idSuscripcion) {
     }
 }
 
-	
+public function buscarEstudiantes()
+{
+    // Verifica si el usuario está logueado
+    if ($this->session->userdata('login')) {
+        // Obtén el término de búsqueda (por ejemplo, 'search')
+        $search = $this->input->get('search'); // o $this->input->post('search');
+
+        // Realiza la búsqueda en la base de datos usando el término de búsqueda
+        $resultados = $this->estudiante_model->buscarEstudiantes($search); // Modifica según tu modelo
+
+        // Prepara los resultados en el formato que Select2 espera
+        $response = [];
+        foreach ($resultados as $estudiante) {
+            $response[] = [
+                'id' => $estudiante->id, // El ID de tu estudiante
+                'text' => $estudiante->nombre . ' ' . $estudiante->primerApellido // El texto a mostrar en el campo
+            ];
+        }
+
+        // Devuelve la respuesta en formato JSON
+        echo json_encode(['results' => $response]);
+    } else {
+        redirect('usuarios/index/2', 'refresh');
+    }
+}
 
 	
 	
