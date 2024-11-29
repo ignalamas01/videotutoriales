@@ -1,3 +1,25 @@
+<head>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+    }
+
+    /* Contenedor que envuelve la tabla */
+    .dataTables_wrapper {
+      overflow-x: auto; /* Habilita el desplazamiento horizontal */
+      -webkit-overflow-scrolling: touch; /* Mejora el desplazamiento en dispositivos móviles */
+    }
+
+    /* Asegúrate de que la tabla tenga un ancho mayor al contenedor */
+    table {
+      min-width: 800px; /* Ajusta esto al tamaño de tu tabla */
+    }
+  </style>
+</head>
+
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
