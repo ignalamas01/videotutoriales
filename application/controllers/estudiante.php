@@ -370,7 +370,7 @@ class Estudiante extends CI_Controller
 		
 
 		$this->estudiante_model->agregarestudiante($data);
-			redirect('estudiante/est', 'refresh');
+			redirect('suscripciones/agregarEstudiante', 'refresh');
 			
 		
 	}

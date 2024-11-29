@@ -9,8 +9,8 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/base/index">Home</a></li>
-                        <li class="breadcrumb-item active">Inscripción</li>
+                        <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/base/index">Inicio</a></li>
+                        <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>index.php/estudiante/agregar">Agregar Estudiante</a></li>
                     </ol>
                 </div>
             </div>
@@ -21,7 +21,7 @@
     <div class="row featurette">
         <div class="col-md-7">
             <br>
-            <h2 class="featurette-heading">INSCRIBIR ESTUDIANTE A UN CURSO<span class="text-muted"></span></h2>
+            <!-- <h2 class="featurette-heading">INSCRIBIR ESTUDIANTE A UN CURSO<span class="text-muted"></span></h2> -->
         </div>
 
         <!-- Formulario de Inscripción -->
@@ -120,24 +120,20 @@
 <!-- JS de Select2 -->
 <!-- Cargar jQuery -->
 <!-- Cargar jQuery -->
-<script src="boostrap/js/jquery-3.7.1.min.js"></script>
+<script src="<?php echo base_url('boostrap/js/jquery-3.7.1.min.js'); ?>"></script>
 
 <!-- Cargar Select2 -->
-<script src="adminlte/plugins/select2/js/select2.min.js"></script>
-
+<script src="<?php echo base_url('adminlte/plugins/select2/js/select2.min.js'); ?>"></script>
 <script>
-  $(document).ready(function() {
-      // Verifica si select2 está disponible
-      console.log($.fn.select2);
-
-      // Inicializa select2
-      $('#buscadorEstudiantes').select2({
-          placeholder: "Seleccione al estudiante",
-          allowClear: true,
-          minimumInputLength: 2,  // Mínimo 2 caracteres para comenzar a buscar
-          data: <?php echo $estudiantes_json; ?>, // Los datos JSON se pasan directamente desde el controlador
-      });
-  });
+  var $j = jQuery.noConflict();
+$j(document).ready(function() {
+    $j('#buscadorEstudiantes').select2({
+        placeholder: "Seleccione al estudiante",
+        allowClear: true,
+        minimumInputLength: 2,
+        data: <?php echo $estudiantes_json; ?>.results,
+    });
+});
 </script>
 
 <script>
