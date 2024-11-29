@@ -30,7 +30,7 @@ class Suscripciones extends CI_Controller
         foreach ($estudiantes->result() as $row) {
             $estudiantesArray[] = array(
                 'id' => $row->id,
-                'text' => $row->nombre . ' ' . $row->primerApellido
+                'text' => $row->nombre . ' ' . $row->primerApellido . ' ' . $row->segundoApellido
             );
         }
 
